@@ -281,6 +281,14 @@ def page(*, title: str, description: str, body: str, path: str) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EWSWCE7MTD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {{ dataLayer.push(arguments); }}
+    gtag('js', new Date());
+    gtag('config', 'G-EWSWCE7MTD');
+  </script>
   <title>{esc(title)}</title>
   <meta name="description" content="{esc(description)}">
   <meta property="og:type" content="website">
