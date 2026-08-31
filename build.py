@@ -360,11 +360,11 @@ def hero() -> str:
   </div>
   <div class="wrap duality-panel">
     <div class="d-card d-card-comp">
-      <h2><span class="d-dir" aria-hidden="true">→</span> Computing for AI</h2>
+      <h2><span class="d-dir" aria-hidden="true">→</span> Module 1: Computing for AI</h2>
       <p>Profile, serve, schedule, map, accelerate, and make reliable emerging LLM, agentic, physical, and compositional AI workloads.</p>
     </div>
     <div class="d-card d-card-ai">
-      <h2><span class="d-dir" aria-hidden="true">←</span> AI for Computing</h2>
+      <h2><span class="d-dir" aria-hidden="true">←</span> Module 2: AI for Computing</h2>
       <p>Use agents to design, optimize, and verify software, compilers, architectures, SoCs, RTL, EDA flows, and chips.</p>
     </div>
     <div class="d-shared">
@@ -623,10 +623,10 @@ def week_article(w: dict) -> str:
         body.append(f'<p class="p-label">Instructor-selected background · no student presentation</p><ol class="papers">{lis}</ol>')
 
     if w.get("optional"):
-        opts = " · ".join(optional_entry(o) for o in w["optional"])
+        opts = "\n".join(f"<li>{optional_entry(o)}</li>" for o in w["optional"])
         body.append(
             f'<details class="optional"><summary>Optional readings <span class="opt-count">({len(w["optional"])})</span></summary>'
-            f'<p class="opt-body">{opts}</p></details>'
+            f'<ul class="optional-list">{opts}</ul></details>'
         )
 
     if w.get("deadlines"):
@@ -930,7 +930,8 @@ def papers_body() -> str:
         lis = "\n".join(paper_li(p, "req") for p in (req or []))
         opt = ""
         if w.get("optional"):
-            opt = f'<p class="p-label">Optional</p><p class="opt-body">{" · ".join(optional_entry(o) for o in w["optional"])}</p>'
+            optional_items = "\n".join(f"<li>{optional_entry(o)}</li>" for o in w["optional"])
+            opt = f'<p class="p-label">Optional</p><ul class="optional-list papers-optional">{optional_items}</ul>'
         blocks.append(
             f"""<article class="papers-week {MODULE_CLASS.get(w["module"], "m-span")}">
   <div class="week-tags"><span class="chip chip-mod">{esc(w["module"])}</span></div>
@@ -1095,7 +1096,7 @@ def syllabus_markdown() -> str:
         "",
         "## Weekly schedule and readings",
         "",
-        "Required readings appear first. Optional readings are included as a compact follow-up list. "
+        "Required readings appear first. Optional readings are listed separately, one paper per line. "
         "Guest-speaker details remain tentative until announced.",
         "",
     ])
@@ -1135,7 +1136,8 @@ def syllabus_markdown() -> str:
                     optional_links.append(md_link(item["title"], item.get("url")))
                 else:
                     optional_links.append(str(item))
-            lines.extend(["", "**Optional:** " + "; ".join(optional_links)])
+            lines.extend(["", "**Optional readings**", ""])
+            lines.extend(f"- {item}" for item in optional_links)
         if week.get("deadlines"):
             lines.extend(["", "**Deadlines**", ""])
             lines.extend(f"- {deadline}" for deadline in week["deadlines"])
@@ -1184,7 +1186,7 @@ def main() -> None:
             "for AI workloads, and AI agents for designing computing systems. Fridays 10:10-12:00.")
     pages = {
         "index.html": ("COMS 6998 · AI-Native Computing · Fall 2026", desc,
-                       "\n".join([hero(), now_html(), learn_html(), prereq_html(), glance_html()])),
+                       "\n".join([hero(), learn_html(), prereq_html(), now_html(), glance_html()])),
         "schedule.html": ("Schedule · COMS 6998 AI-Native Computing",
                           "Weekly schedule with required and optional readings for COMS 6998 (Fall 2026).",
                           schedule_body()),

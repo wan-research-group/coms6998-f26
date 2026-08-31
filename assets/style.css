@@ -641,8 +641,14 @@ time { font-variant-numeric: tabular-nums; }
 .optional[open] summary::before { transform: rotate(90deg); }
 .optional summary:hover { color: var(--text); }
 .opt-count { font-weight: 450; }
-.opt-body { margin: 6px 0 0; font-size: 0.86rem; color: var(--muted); line-height: 1.7; }
-.optional .opt-body { padding-left: 18px; }
+.optional-list {
+  margin: 8px 0 0; padding-left: 34px;
+  font-size: 0.86rem; color: var(--muted); line-height: 1.55;
+}
+.optional-list li { padding: 3px 0; }
+.optional-list a { color: var(--muted); }
+.optional-list a:hover { color: var(--text); }
+.papers-optional { margin: 2px 0 16px; padding-left: 22px; }
 
 .deadlines { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .deadlines li {

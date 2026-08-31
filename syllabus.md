@@ -141,7 +141,7 @@ An eight- to ten-page conference-style paper (excluding references and appendice
 
 ## Weekly schedule and readings
 
-Required readings appear first. Optional readings are included as a compact follow-up list. Guest-speaker details remain tentative until announced.
+Required readings appear first. Optional readings are listed separately, one paper per line. Guest-speaker details remain tentative until announced.
 
 ### Week 01 · Friday, September 11, 2026
 
@@ -153,7 +153,10 @@ Required readings appear first. Optional readings are included as a compact foll
 - [A New Golden Age for Computer Architecture](https://doi.org/10.1145/3282307) — CACM 2019
 - [GenAI for Systems: Recurring Challenges and Design Principles from Software to Silicon](https://arxiv.org/abs/2602.15241) — arXiv 2026
 
-**Optional:** [Sutton, The Bitter Lesson (2019)](http://www.incompleteideas.net/IncIdeas/BitterLesson.html); [Architecture 2.0: Why Computer Architects Need a Data-Centric AI Gymnasium (IEEE CAL 2023)](https://www.sigarch.org/architecture-2-0-why-computer-architects-need-a-data-centric-ai-gymnasium/)
+**Optional readings**
+
+- [The Bitter Lesson (2019)](http://www.incompleteideas.net/IncIdeas/BitterLesson.html)
+- [Architecture 2.0: Why Computer Architects Need a Data-Centric AI Gymnasium (IEEE CAL 2023)](https://www.sigarch.org/architecture-2-0-why-computer-architects-need-a-data-centric-ai-gymnasium/)
 
 **Deadlines**
 
@@ -170,7 +173,10 @@ Required readings appear first. Optional readings are included as a compact foll
 - [The Tail at Scale](https://research.google/pubs/the-tail-at-scale/) — CACM 2013
 - [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135) — NeurIPS 2022
 
-**Optional:** [MLPerf Inference Benchmark (ISCA 2020)](https://arxiv.org/abs/1911.02549); [Efficient Processing of Deep Neural Networks (Proc. IEEE 2017)](https://arxiv.org/abs/1703.09039)
+**Optional readings**
+
+- [MLPerf Inference Benchmark (ISCA 2020)](https://arxiv.org/abs/1911.02549)
+- [Efficient Processing of Deep Neural Networks: A Tutorial and Survey (Proceedings of the IEEE 2017)](https://arxiv.org/abs/1703.09039)
 
 **Deadlines**
 
@@ -189,7 +195,17 @@ Required readings appear first. Optional readings are included as a compact foll
 - [Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180) — SOSP 2023; focus: KV-cache virtualization, fragmentation, batching, vLLM
 - [SGLang: Efficient Execution of Structured Language Model Programs](https://arxiv.org/abs/2312.07104) — NeurIPS 2024; focus: RadixAttention, KV reuse across program structure
 
-**Optional:** [Splitwise (ISCA 2024)](https://arxiv.org/abs/2311.18677); [Agentix (NSDI 2026, formerly Autellix)](https://arxiv.org/abs/2502.13965); [DyServe (arXiv 2026)](https://arxiv.org/abs/2607.02942); [DistServe (OSDI 2024)](https://arxiv.org/abs/2401.09670); [Mooncake (FAST 2025)](https://arxiv.org/abs/2407.00079); [Parrot (OSDI 2024)](https://arxiv.org/abs/2405.19888); [Speculative Decoding (ICML 2023)](https://arxiv.org/abs/2211.17192); [Sarathi-Serve (OSDI 2024)](https://arxiv.org/abs/2403.02310); [MemGPT (2023)](https://arxiv.org/abs/2310.08560)
+**Optional readings**
+
+- [Splitwise: Efficient Generative LLM Inference Using Phase Splitting (ISCA 2024)](https://arxiv.org/abs/2311.18677)
+- [Agentix: An Efficient Serving Engine for LLM Agents as General Programs (NSDI 2026)](https://www.usenix.org/conference/nsdi26/presentation/luo)
+- [A Workflow-Aware Serving Layer for Agentic Applications (DyServe, arXiv 2026)](https://arxiv.org/abs/2607.02942)
+- [DistServe: Disaggregating Prefill and Decoding for Goodput-Optimized Large Language Model Serving (OSDI 2024)](https://arxiv.org/abs/2401.09670)
+- [Mooncake: A KVCache-Centric Disaggregated Architecture for LLM Serving (FAST 2025)](https://arxiv.org/abs/2407.00079)
+- [Parrot: Efficient Serving of LLM-Based Applications with Semantic Variable (OSDI 2024)](https://arxiv.org/abs/2405.19888)
+- [Fast Inference from Transformers via Speculative Decoding (ICML 2023)](https://arxiv.org/abs/2211.17192)
+- [Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve (OSDI 2024)](https://arxiv.org/abs/2403.02310)
+- [MemGPT: Towards LLMs as Operating Systems (2023)](https://arxiv.org/abs/2310.08560)
 
 **Deadlines**
 
@@ -206,7 +222,15 @@ Required readings appear first. Optional readings are included as a compact foll
 - [In-Datacenter Performance Analysis of a Tensor Processing Unit](https://doi.org/10.1145/3079856.3080246) — ISCA 2017; focus: read as a ten-year retrospective
 - [Agile SoC Development with Open ESP](https://arxiv.org/abs/2009.01178) — ICCAD 2020; focus: Columbia's open-source heterogeneous SoC platform; available for course projects; [project site](https://www.esp.cs.columbia.edu/)
 
-**Optional:** [Gemmini (DAC 2021)](https://arxiv.org/abs/1911.09925); [TPU v4 (ISCA 2023)](https://arxiv.org/abs/2304.01433); [Eyeriss (ISCA 2016)](https://dl.acm.org/doi/10.1145/3007787.3001177); [MAESTRO (MICRO 2019)](https://arxiv.org/abs/1805.02566); [Timeloop (ISPASS 2019)](https://doi.org/10.1109/ISPASS.2019.00042); NVIDIA Hopper/Blackwell whitepapers *(link pending)*
+**Optional readings**
+
+- [Gemmini: Enabling Systematic Deep-Learning Architecture Evaluation via Full-Stack Integration (DAC 2021)](https://arxiv.org/abs/1911.09925)
+- [TPU v4: An Optically Reconfigurable Supercomputer for Machine Learning with Hardware Support for Embeddings (ISCA 2023)](https://arxiv.org/abs/2304.01433)
+- [Eyeriss: An Energy-Efficient Reconfigurable Accelerator for Deep Convolutional Neural Networks (ISCA 2016)](https://dl.acm.org/doi/10.1145/3007787.3001177)
+- [Understanding Reuse, Performance, and Hardware Cost of DNN Dataflows: A Data-Centric Approach Using MAESTRO (MICRO 2019)](https://arxiv.org/abs/1805.02566)
+- [Timeloop: A Systematic Approach to DNN Accelerator Evaluation (ISPASS 2019)](https://doi.org/10.1109/ISPASS.2019.00042)
+- NVIDIA H100 Tensor Core GPU Architecture (Whitepaper, 2022) *(link pending)*
+- NVIDIA Blackwell Architecture Technical Brief (2024) *(link pending)*
 
 **Deadlines**
 
@@ -223,7 +247,14 @@ Required readings appear first. Optional readings are included as a compact foll
 - [VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference](https://arxiv.org/abs/2512.01031) — arXiv 2025; focus: overlapping inference with action execution; latency hiding
 - [How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf](https://arxiv.org/abs/2602.18397) — arXiv 2026; focus: analytical performance model; device/edge/cloud placement
 
-**Optional:** [π0 (RSS 2025)](https://arxiv.org/abs/2410.24164); [OpenVLA (CoRL 2024)](https://arxiv.org/abs/2406.09246); [DeeR-VLA (NeurIPS 2024)](https://arxiv.org/abs/2411.02359); [RT-2 (CoRL 2023)](https://arxiv.org/abs/2307.15818); [GR00T N1 (2025)](https://arxiv.org/abs/2503.14734); [Generative AI in Embodied Systems (ISPASS 2025)](https://arxiv.org/abs/2504.18945)
+**Optional readings**
+
+- [π0: A Vision-Language-Action Flow Model for General Robot Control (RSS 2025)](https://arxiv.org/abs/2410.24164)
+- [OpenVLA: An Open-Source Vision-Language-Action Model (CoRL 2024)](https://arxiv.org/abs/2406.09246)
+- [DeeR-VLA: Dynamic Inference of Multimodal Large Language Models for Efficient Robot Execution (NeurIPS 2024)](https://arxiv.org/abs/2411.02359)
+- [RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control (CoRL 2023)](https://arxiv.org/abs/2307.15818)
+- [GR00T N1: An Open Foundation Model for Generalist Humanoid Robots (2025)](https://arxiv.org/abs/2503.14734)
+- [Generative AI in Embodied Systems: System-Level Analysis of Performance, Efficiency and Scalability (ISPASS 2025)](https://arxiv.org/abs/2504.18945)
 
 ### Week 06 · Friday, October 16, 2026
 
@@ -236,7 +267,13 @@ Required readings appear first. Optional readings are included as a compact foll
 - [ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents](https://doi.org/10.1145/3676641.3716016) — ASPLOS 2025; focus: cross-layer co-design for cooperative embodied agents
 - [Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference](https://arxiv.org/abs/2608.04428) — arXiv 2026; focus: HW/SW co-design for diffusion-based VLA on edge devices
 
-**Optional:** [OctoCache (ASPLOS 2025)](https://dl.acm.org/doi/10.1145/3676641.3716263); [RobotPerf (ICRA 2024)](https://arxiv.org/abs/2309.09212); Dadu-series robotic accelerators *(link pending)*; autonomy SoC analyses (Orin/Thor) *(link pending)*
+**Optional readings**
+
+- [OctoCache: Caching Voxels for Accelerating 3D Occupancy Mapping in Autonomous Systems (ASPLOS 2025)](https://dl.acm.org/doi/10.1145/3676641.3716263)
+- [RobotPerf: An Open-Source, Vendor-Agnostic, Benchmarking Suite for Evaluating Robotics Computing System Performance (ICRA 2024)](https://arxiv.org/abs/2309.09212)
+- DaDu Series: Fast and Efficient Robot Accelerators (ICCAD 2020) *(link pending)*
+- [NVIDIA Jetson AGX Orin Series Technical Brief (2022)](https://www.nvidia.com/content/dam/en-zz/Solutions/gtcf21/jetson-orin/nvidia-jetson-agx-orin-technical-brief.pdf)
+- [NVIDIA Jetson AGX Thor Developer Kit User Guide (2026)](https://docs.nvidia.com/jetson/agx-thor-devkit/user-guide/latest/)
 
 **Deadlines**
 
@@ -253,7 +290,12 @@ Required readings appear first. Optional readings are included as a compact foll
 - [REASON: Accelerating Probabilistic Logical Reasoning for Scalable Neuro-Symbolic Intelligence](https://arxiv.org/abs/2601.20784) — HPCA 2026; focus: unified DAGs, irregular reasoning acceleration
 - [Lobster: A GPU-Accelerated Framework for Neurosymbolic Programming](https://arxiv.org/abs/2503.21937) — ASPLOS 2026; focus: compiling Datalog-based neurosymbolic programs to GPUs
 
-**Optional:** [Scallop (PLDI 2023)](https://arxiv.org/abs/2304.04812); [DeepProbLog (NeurIPS 2018)](https://arxiv.org/abs/1805.10872); [NSFlow (DAC 2025)](https://arxiv.org/abs/2504.19323); [Towards Cognitive AI Systems survey (ISPASS 2024)](https://arxiv.org/abs/2401.01040)
+**Optional readings**
+
+- [Scallop: A Language for Neurosymbolic Programming (PLDI 2023)](https://arxiv.org/abs/2304.04812)
+- [DeepProbLog: Neural Probabilistic Logic Programming (NeurIPS 2018)](https://arxiv.org/abs/1805.10872)
+- [NSFlow: An End-to-End FPGA Framework with Scalable Dataflow Architecture for Neuro-Symbolic AI (DAC 2025)](https://arxiv.org/abs/2504.19323)
+- [Towards Cognitive AI Systems: A Survey and Prospective on Neuro-Symbolic AI (ISPASS 2024)](https://arxiv.org/abs/2401.01040)
 
 ### Week 08 · Friday, October 30, 2026
 
@@ -266,7 +308,13 @@ Required readings appear first. Optional readings are included as a compact foll
 - [AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery](https://arxiv.org/abs/2506.13131) — DeepMind 2025; focus: evolutionary LLM code search across scheduling, TPU circuits, kernels
 - [KernelBench: Can LLMs Write Efficient GPU Kernels?](https://arxiv.org/abs/2502.10517) — 2025; focus: benchmark design; discussed with the Sakana AI CUDA Engineer episode
 
-**Optional:** [CompilerGym (CGO 2022)](https://arxiv.org/abs/2109.08267); [LLMs for Compiler Optimization (2023)](https://arxiv.org/abs/2309.07062); [Kevin: Multi-Turn RL for CUDA (2025)](https://arxiv.org/abs/2507.11948); [Sakana AI CUDA Engineer + post-mortem (2025)](https://sakana.ai/ai-cuda-engineer/); [ECO (2025)](https://arxiv.org/abs/2503.15669)
+**Optional readings**
+
+- [CompilerGym: Robust, Performant Compiler Optimization Environments for AI Research (CGO 2022)](https://arxiv.org/abs/2109.08267)
+- [Large Language Models for Compiler Optimization (2023)](https://arxiv.org/abs/2309.07062)
+- [Kevin: Multi-Turn RL for Generating CUDA Kernels (2025)](https://arxiv.org/abs/2507.11948)
+- [Towards Robust Agentic CUDA Kernel Benchmarking, Verification, and Optimization (Sakana AI, 2025)](https://sakana.ai/ai-cuda-engineer/)
+- [ECO: An LLM-Driven Efficient Code Optimizer for Warehouse Scale Computers (2025)](https://arxiv.org/abs/2503.15669)
 
 **Deadlines**
 
@@ -293,7 +341,15 @@ Required readings appear first. Optional readings are included as a compact foll
 - [ArchEval: Measuring AI Agents as Computer Architects](https://arxiv.org/abs/2607.03601) — arXiv 2026; focus: benchmarking LLM agents on architecture tasks
 - [PF-LLM: Large Language Model Hinted Hardware Prefetching](https://doi.org/10.1145/3779212.3790202) — ASPLOS 2026; focus: AI inside the microarchitecture
 
-**Optional:** [ArchGym (ISCA 2023)](https://arxiv.org/abs/2306.08888); [AgentDSE (MLArchSys 2026)](https://arxiv.org/abs/2606.21836); [LLM-DSE (2025)](https://arxiv.org/abs/2505.12188); [ConfuciuX (MICRO 2020)](https://arxiv.org/abs/2009.02010); [Concorde (2025)](https://arxiv.org/abs/2503.23076); [QuArch (2025)](https://arxiv.org/abs/2501.01892); [Learning Memory Access Patterns (ICML 2018)](https://arxiv.org/abs/1803.02329)
+**Optional readings**
+
+- [ArchGym: An Open-Source Gymnasium for Machine Learning Assisted Architecture Design (ISCA 2023)](https://arxiv.org/abs/2306.08888)
+- [AgentDSE: Reasoning-Augmented Architectural Design Space Exploration (MLArchSys 2026)](https://arxiv.org/abs/2606.21836)
+- [LLM-DSE: Searching Accelerator Parameters with LLM Agents (2025)](https://arxiv.org/abs/2505.12188)
+- [ConfuciuX: Autonomous Hardware Resource Assignment for DNN Accelerators Using Reinforcement Learning (MICRO 2020)](https://arxiv.org/abs/2009.02010)
+- [Concorde: Fast and Accurate CPU Performance Modeling with Compositional Analytical-ML Fusion (2025)](https://arxiv.org/abs/2503.23076)
+- [QuArch: A Question-Answering Dataset for AI Agents in Computer Architecture (2025)](https://arxiv.org/abs/2501.01892)
+- [Learning Memory Access Patterns (ICML 2018)](https://arxiv.org/abs/1803.02329)
 
 **Deadlines**
 
@@ -311,7 +367,13 @@ Required readings appear first. Optional readings are included as a compact foll
 - [CHIA: An Open-Source Framework for Principled, Agentic AI-Driven Hardware/Software Co-Design Research](https://arxiv.org/abs/2606.27350) — arXiv 2026; focus: composable design loops for agent-driven HW/SW co-design
 - [Agentic Architect: An Agentic AI Framework for Architecture Design Exploration and Optimization](https://arxiv.org/abs/2604.25083) — arXiv 2026; focus: LLM-driven microarchitecture evolution; seed quality bounds discovery
 
-**Optional:** ArchOrchestra (arXiv, Sep 2026 - link coming) *(link pending)*; [AgentDSE (MLArchSys 2026)](https://arxiv.org/abs/2606.21836); [LLM-DSE (2025)](https://arxiv.org/abs/2505.12188); [FireSim (ISCA 2018)](https://fires.im/); [Chipyard (2020)](https://github.com/ucb-bar/chipyard)
+**Optional readings**
+
+- ArchOrchestra: End-to-End Agentic Accelerator Design (forthcoming, 2026) *(link pending)*
+- [AgentDSE: Reasoning-Augmented Architectural Design Space Exploration (MLArchSys 2026)](https://arxiv.org/abs/2606.21836)
+- [LLM-DSE: Searching Accelerator Parameters with LLM Agents (2025)](https://arxiv.org/abs/2505.12188)
+- [FireSim: FPGA-Accelerated Cycle-Exact Scale-Out System Simulation in the Public Cloud (ISCA 2018)](https://fires.im/)
+- [Chipyard: Integrated Design, Simulation, and Implementation Framework for Custom SoCs (IEEE Micro 2020)](https://github.com/ucb-bar/chipyard)
 
 **Deadlines**
 
@@ -329,7 +391,17 @@ Required readings appear first. Optional readings are included as a compact foll
 - [ChipNeMo: Domain-Adapted LLMs for Chip Design](https://arxiv.org/abs/2311.00176) — NVIDIA 2024; focus: domain adaptation, retrieval, EDA scripts
 - [VerilogEval: Evaluating Large Language Models for Verilog Code Generation](https://arxiv.org/abs/2309.07544) — ICCAD 2023; focus: RTL benchmarks and their limitations
 
-**Optional:** [AssertLLM (2024)](https://arxiv.org/abs/2402.00386); [Using LLMs to Facilitate Formal Verification of RTL (2023)](https://arxiv.org/abs/2309.09437); [DREAMPlace (DAC 2019)](https://github.com/limbo018/DREAMPlace); [CVDP benchmark (2025)](https://arxiv.org/abs/2506.14074); [ChatEDA (TCAD 2024)](https://arxiv.org/abs/2308.10204); [VeriMaAS (2025)](https://arxiv.org/abs/2509.20182); [SpecLLM (2024)](https://arxiv.org/abs/2401.13266); [Chip-Chat (MLCAD 2023)](https://arxiv.org/abs/2305.13243); [RedWood white paper (2026)](https://arxiv.org/abs/2608.26418)
+**Optional readings**
+
+- [AssertLLM: Generating and Evaluating Hardware Verification Assertions from Design Specifications via Multi-LLMs (2024)](https://arxiv.org/abs/2402.00386)
+- [Using LLMs to Facilitate Formal Verification of RTL (2023)](https://arxiv.org/abs/2309.09437)
+- [DREAMPlace: Deep Learning Toolkit-Enabled GPU Acceleration for Modern VLSI Placement (DAC 2019)](https://github.com/limbo018/DREAMPlace)
+- [Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification (CVDP, 2025)](https://arxiv.org/abs/2506.14074)
+- [ChatEDA: A Large Language Model Powered Autonomous Agent for EDA (TCAD 2024)](https://arxiv.org/abs/2308.10204)
+- [Automated Multi-Agent Workflows for RTL Design (VeriMaAS, 2025)](https://arxiv.org/abs/2509.20182)
+- [SpecLLM: Exploring Generation and Review of VLSI Design Specification with Large Language Model (2024)](https://arxiv.org/abs/2401.13266)
+- [Chip-Chat: Challenges and Opportunities in Conversational Hardware Design (MLCAD 2023)](https://arxiv.org/abs/2305.13243)
+- [Redwood: A Frontier AI Accelerator Designed, Verified, and Deployed from Scratch in 2 Weeks by AI (2026)](https://arxiv.org/abs/2608.26418)
 
 ### Week 13 · Friday, December 11, 2026
 
