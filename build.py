@@ -31,6 +31,12 @@ MODULE_CLASS = {
     "Synthesis": "m-span",
 }
 
+# Divider labels inserted before the first week of each module.
+MODULE_DIVIDERS = {
+    "Computing for AI": ("m-comp", "Module 1: Computing for AI"),
+    "AI for Computing": ("m-ai", "Module 2: AI for Computing"),
+}
+
 TYPE_NOTE = {
     "midterm": "Team presentations; no mini-lecture and no assigned papers.",
     "poster": "Poster showcase; no mini-lecture and no assigned papers.",
@@ -191,7 +197,7 @@ def hero() -> str:
       </p>
       <blockquote class="thesis">AI is transforming computing in two directions: emerging AI workloads demand new hardware and system architectures, while AI is becoming a powerful tool for designing computing systems themselves.</blockquote>
       <ul class="meta-chips">
-        <li><strong>Time:</strong> {esc(course["meeting"])}</li>
+        <li><strong>Course Time:</strong> {esc(course["meeting"])}</li>
         <li><strong>Location:</strong> {esc(course["location"])}</li>
       </ul>
     </div>
@@ -225,6 +231,31 @@ def hero() -> str:
 </section>"""
 
 
+def why_course() -> str:
+    cards = [
+        ("Full-stack coverage.",
+         "From LLM serving, embodied AI, and neuro-symbolic workloads to accelerators, SoCs, and AI agents that design software, architectures, RTL, and chips."),
+        ("Research-first.",
+         "A semester-long project (teams of 1-2) scoped to mature into a top-tier architecture, systems, or EDA paper, paced by weekly milestones and mentoring."),
+        ("Evidence-centered.",
+         "Papers and claims are read against baselines, budgets, and ablations; a rigorous negative result can earn full credit."),
+        ("No exams, no problem sets.",
+         "Grading rewards research judgment, execution, and reproducibility; guest speakers and case studies from active research bring the frontier into class."),
+    ]
+    items = "\n".join(
+        f'<div class="why-card"><p><strong>{lead}</strong> {body}</p></div>'
+        for lead, body in cards
+    )
+    return f"""<section class="section" id="why" aria-labelledby="why-h">
+  <div class="wrap">
+    <h2 id="why-h">Why this course</h2>
+    <div class="why-grid">
+      {items}
+    </div>
+  </div>
+</section>"""
+
+
 def short_deadlines(w: dict) -> str:
     """Compress a week's deadline strings for the at-a-glance table."""
     outs = []
@@ -235,6 +266,7 @@ def short_deadlines(w: dict) -> str:
 
 def glance_html() -> str:
     rows, holidays, hi = [], sorted(no_class, key=lambda r: r["date"]), 0
+    seen_dividers = set()
     for w in weeks:
         while hi < len(holidays) and holidays[hi]["date"] < w["date"]:
             r = holidays[hi]
@@ -243,6 +275,10 @@ def glance_html() -> str:
                 f'<td colspan="2">{esc(r["note"])}</td></tr>'
             )
             hi += 1
+        if w["module"] in MODULE_DIVIDERS and w["module"] not in seen_dividers:
+            seen_dividers.add(w["module"])
+            mcls, label = MODULE_DIVIDERS[w["module"]]
+            rows.append(f'<tr class="g-module {mcls}"><td colspan="4">{esc(label)}</td></tr>')
         dot = f'<span class="dot g-dot {MODULE_CLASS.get(w["module"], "m-span")}" aria-hidden="true"></span>'
         dl = esc(short_deadlines(w))
         rows.append(
@@ -369,13 +405,44 @@ def holiday_article(r: dict) -> str:
 </article>"""
 
 
+def schedule_toc() -> str:
+    """Quick-navigation box: weeks grouped by module block, in schedule order."""
+    groups: list[tuple[str, str, list[dict]]] = []
+    for w in weeks:
+        mod = w["module"]
+        if mod in MODULE_DIVIDERS:
+            mcls, label = MODULE_DIVIDERS[mod]
+        elif not groups:
+            mcls, label = MODULE_CLASS.get(mod, "m-span"), mod
+        else:
+            mcls, label = None, None
+        if label and (not groups or groups[-1][1] != label):
+            groups.append((mcls, label, []))
+        if mod == "Synthesis" and groups[-1][1] != "Synthesis":
+            groups.append((MODULE_CLASS.get(mod, "m-span"), "Synthesis", []))
+        groups[-1][2].append(w)
+    blocks = []
+    for mcls, label, ws in groups:
+        lis = "\n".join(
+            f'<li><a href="#week-{w["week"]}"><span class="toc-num">{w["week"]:02d}</span> {esc(w["title"])}</a></li>'
+            for w in ws
+        )
+        blocks.append(f'<div class="toc-group"><p class="toc-head {mcls}">{esc(label)}</p><ol>{lis}</ol></div>')
+    return f'<nav class="sched-toc" aria-label="Weeks by module">{chr(10).join(blocks)}</nav>'
+
+
 def schedule_body() -> str:
     rows, holidays = [], sorted(no_class, key=lambda r: r["date"])
     hi = 0
+    seen_dividers = set()
     for w in weeks:
         while hi < len(holidays) and holidays[hi]["date"] < w["date"]:
             rows.append(holiday_article(holidays[hi]))
             hi += 1
+        if w["module"] in MODULE_DIVIDERS and w["module"] not in seen_dividers:
+            seen_dividers.add(w["module"])
+            mcls, label = MODULE_DIVIDERS[w["module"]]
+            rows.append(f'<h3 class="module-divider {mcls}"><span>{esc(label)}</span></h3>')
         rows.append(week_article(w))
     for r in holidays[hi:]:
         rows.append(holiday_article(r))
@@ -393,6 +460,7 @@ def schedule_body() -> str:
       </div>
     </div>
     <p class="section-lede">13 Friday meetings, {esc(course["meeting"].replace("Fridays ", ""))}, {esc(course["location"])}. Presentation slides are due 11:59 PM the Thursday before class; evidence capsules 11:59 PM the following Monday.</p>
+    {schedule_toc()}
     <div class="weeks"{current_attr}>
       {chr(10).join(rows)}
     </div>
@@ -681,7 +749,7 @@ def main() -> None:
             "for AI workloads, and AI agents for designing computing systems. Fridays 10:10-12:00.")
     pages = {
         "index.html": ("COMS 6998 · AI-Native Computing · Fall 2026", desc,
-                       "\n".join([hero(), glance_html()])),
+                       "\n".join([hero(), why_course(), glance_html()])),
         "schedule.html": ("Schedule · COMS 6998 AI-Native Computing",
                           "Weekly schedule with required and optional readings for COMS 6998 (Fall 2026).",
                           schedule_body()),

@@ -335,11 +335,28 @@ time { font-variant-numeric: tabular-nums; }
 .glance-table td:nth-child(3) a:hover { color: var(--comp-ink); }
 .glance-table .g-dl { color: var(--amber-ink); font-size: 0.85rem; width: 32%; }
 .glance-table .g-holiday td { color: var(--muted); font-style: italic; }
+.glance-table .g-module td {
+  padding: 7px 14px; font-size: 0.72rem; font-weight: 750;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.g-module.m-comp td { color: var(--comp-ink); background: var(--comp-soft); }
+.g-module.m-ai td { color: var(--ai-ink); background: var(--ai-soft); }
 .g-dot { margin-right: 9px; vertical-align: 1px; }
 .g-dot.m-comp { background: var(--comp); }
 .g-dot.m-ai { background: var(--ai); }
 .g-dot.m-span { background: linear-gradient(135deg, var(--comp), var(--ai)); }
 .g-dot.m-proj { background: var(--muted); }
+
+/* ---------------------------------------------------------------- why this course */
+
+#why { padding-top: 0; border-top: none; }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.why-card {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 16px 20px;
+}
+.why-card p { margin: 0; font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
+.why-card strong { color: var(--text); font-weight: 680; }
 
 /* ---------------------------------------------------------------- students */
 
@@ -384,7 +401,47 @@ time { font-variant-numeric: tabular-nums; }
 #toggle-optionals:hover { color: var(--text); background: var(--panel-2); }
 .tool-link { font-weight: 600; }
 
+/* quick navigation: weeks grouped by module */
+.sched-toc {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px 28px; margin: 0 0 28px; padding: 18px 22px;
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.toc-group ol { list-style: none; margin: 0; padding: 0; }
+.toc-head {
+  margin: 0 0 6px; font-size: 0.72rem; font-weight: 750;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding-bottom: 5px; border-bottom: 2px solid var(--line);
+}
+.toc-head.m-comp { color: var(--comp-ink); border-bottom-color: var(--comp); }
+.toc-head.m-ai { color: var(--ai-ink); border-bottom-color: var(--ai); }
+.toc-head.m-span {
+  color: var(--muted);
+  border-image: linear-gradient(90deg, var(--comp), var(--ai)) 1;
+}
+.toc-group li a {
+  display: flex; gap: 8px; align-items: baseline;
+  padding: 3px 4px; margin: 0 -4px; border-radius: 6px;
+  font-size: 0.85rem; font-weight: 550; color: var(--text); line-height: 1.4;
+}
+.toc-group li a:hover { background: var(--panel-2); color: var(--comp-ink); text-decoration: none; }
+.toc-num { color: var(--muted); font-weight: 700; font-size: 0.76rem; font-variant-numeric: tabular-nums; }
+
+/* module divider rows in the week list */
+.module-divider {
+  display: flex; align-items: center; gap: 14px;
+  margin: 20px 0 2px; font-size: 0.82rem; font-weight: 750;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.module-divider::after { content: ""; flex: 1; border-bottom: 2px solid; opacity: 0.3; }
+.module-divider.m-comp { color: var(--comp-ink); }
+.module-divider.m-comp::after { border-color: var(--comp); }
+.module-divider.m-ai { color: var(--ai-ink); }
+.module-divider.m-ai::after { border-color: var(--ai); }
+
 .weeks { display: flex; flex-direction: column; gap: 14px; }
+.weeks .module-divider:first-child { margin-top: 0; }
 
 .week {
   position: relative;
@@ -664,7 +721,8 @@ time { font-variant-numeric: tabular-nums; }
   .hero-grid { grid-template-columns: 1fr; gap: 24px; }
   .instructor-card { max-width: 420px; }
   .tracks, .tracks-2, .lead-blocks { grid-template-columns: 1fr; }
-  .col2, .col2-project, .policy-grid { grid-template-columns: 1fr; }
+  .col2, .col2-project, .policy-grid, .why-grid { grid-template-columns: 1fr; }
+  .sched-toc { grid-template-columns: 1fr; gap: 14px; }
   .foot-grid { grid-template-columns: 1fr; gap: 12px; }
   .foot-meta { text-align: left; }
 }
