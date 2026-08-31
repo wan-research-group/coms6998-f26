@@ -31,8 +31,8 @@ milestones:
   - {date: 2026-10-16, id: P1, name: "Infrastructure & baselines"}
   - {date: 2026-10-30, id: P2, name: "Prototype & pilot results"}
   - {date: 2026-11-06, id: Midterm, name: "Midterm presentation (in class)"}
-  - {date: 2026-11-13, id: P3, name: "Evaluation plan & initial results"}
-  - {date: 2026-12-01, id: P4, name: "Main results & ablations"}
+  - {date: 2026-11-20, id: P3, name: "Evaluation plan & initial results"}
+  - {date: 2026-12-04, id: P4, name: "Main results & ablations"}
   - {date: 2026-12-11, id: P5, name: "Complete draft, artifact & poster; final poster session (in class)"}
   - {date: 2026-12-21, id: Final, name: "Final paper & artifact"}
 
@@ -201,7 +201,6 @@ weeks:
       - {title: "Concorde: Fast and Accurate CPU Performance Modeling with Compositional Analytical-ML Fusion (2025)", url: "https://arxiv.org/abs/2503.23076"}
       - {title: "QuArch: A Question-Answering Dataset for AI Agents in Computer Architecture (2025)", url: "https://arxiv.org/abs/2501.01892"}
       - {title: "Learning Memory Access Patterns (ICML 2018)", url: "https://arxiv.org/abs/1803.02329"}
-    deadlines: ["Nov 13, 11:59 PM - P3 evaluation plan & initial results"]
 
   - week: 11
     date: 2026-11-20
@@ -219,7 +218,7 @@ weeks:
       - {title: "LLM-DSE: Searching Accelerator Parameters with LLM Agents (2025)", url: "https://arxiv.org/abs/2505.12188"}
       - {title: "FireSim: FPGA-Accelerated Cycle-Exact Scale-Out System Simulation in the Public Cloud (ISCA 2018)", url: "https://fires.im/"}
       - {title: "Chipyard: Integrated Design, Simulation, and Implementation Framework for Custom SoCs (IEEE Micro 2020)", url: "https://github.com/ucb-bar/chipyard"}
-    deadlines: ["Dec 1, 11:59 PM - P4 main results & ablations"]
+    deadlines: ["Nov 20, 11:59 PM - P3 evaluation plan & initial results"]
 
   - week: 12
     date: 2026-12-04
@@ -241,6 +240,7 @@ weeks:
       - {title: "SpecLLM: Exploring Generation and Review of VLSI Design Specification with Large Language Model (2024)", url: "https://arxiv.org/abs/2401.13266"}
       - {title: "Chip-Chat: Challenges and Opportunities in Conversational Hardware Design (MLCAD 2023)", url: "https://arxiv.org/abs/2305.13243"}
       - {title: "Redwood: A Frontier AI Accelerator Designed, Verified, and Deployed from Scratch in 2 Weeks by AI (2026)", url: "https://arxiv.org/abs/2608.26418"}
+    deadlines: ["Dec 4, 11:59 PM - P4 main results & ablations"]
 
   - week: 13
     date: 2026-12-11

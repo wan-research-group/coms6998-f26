@@ -128,8 +128,8 @@ The project is the center of the course: a carefully scoped research effort that
 | Oct 16 | P1 | Infrastructure & baselines |
 | Oct 30 | P2 | Prototype & pilot results |
 | Nov 6 | Midterm | Midterm presentation (in class) |
-| Nov 13 | P3 | Evaluation plan & initial results |
-| Dec 1 | P4 | Main results & ablations |
+| Nov 20 | P3 | Evaluation plan & initial results |
+| Dec 4 | P4 | Main results & ablations |
 | Dec 11 | P5 | Complete draft, artifact & poster; final poster session (in class) |
 | Dec 21 | Final | Final paper & artifact |
 
@@ -351,10 +351,6 @@ Required readings appear first. Optional readings are listed separately, one pap
 - [QuArch: A Question-Answering Dataset for AI Agents in Computer Architecture (2025)](https://arxiv.org/abs/2501.01892)
 - [Learning Memory Access Patterns (ICML 2018)](https://arxiv.org/abs/1803.02329)
 
-**Deadlines**
-
-- Nov 13, 11:59 PM - P3 evaluation plan & initial results
-
 ### Week 11 · Friday, November 20, 2026
 
 **AI for Computer Architecture II: Agentic Design Systems** · AI for Computing
@@ -377,7 +373,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Dec 1, 11:59 PM - P4 main results & ablations
+- Nov 20, 11:59 PM - P3 evaluation plan & initial results
 
 ### Week 12 · Friday, December 4, 2026
 
@@ -402,6 +398,10 @@ Required readings appear first. Optional readings are listed separately, one pap
 - [SpecLLM: Exploring Generation and Review of VLSI Design Specification with Large Language Model (2024)](https://arxiv.org/abs/2401.13266)
 - [Chip-Chat: Challenges and Opportunities in Conversational Hardware Design (MLCAD 2023)](https://arxiv.org/abs/2305.13243)
 - [Redwood: A Frontier AI Accelerator Designed, Verified, and Deployed from Scratch in 2 Weeks by AI (2026)](https://arxiv.org/abs/2608.26418)
+
+**Deadlines**
+
+- Dec 4, 11:59 PM - P4 main results & ablations
 
 ### Week 13 · Friday, December 11, 2026
 
