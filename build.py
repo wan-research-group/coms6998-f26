@@ -327,7 +327,7 @@ def glance_html() -> str:
     </div>
     <div class="table-scroll">
       <table class="glance-table">
-        <thead><tr><th>Wk</th><th>Date</th><th>Topic</th><th>Project Deadline</th></tr></thead>
+        <thead><tr><th>Wk</th><th>Date</th><th>Topic</th><th>Project Milestone</th></tr></thead>
         <tbody>
           {chr(10).join(rows)}
         </tbody>
@@ -435,7 +435,8 @@ def holiday_article(r: dict) -> str:
 
 
 def schedule_toc() -> str:
-    """Quick-navigation box: weeks grouped by module block, in schedule order."""
+    """Quick-navigation box: weeks grouped by module block, in schedule order.
+    Three columns: Launch + Synthesis stacked on the left, one module per column."""
     groups: list[tuple[str, str, list[dict]]] = []
     for w in weeks:
         mod = w["module"]
@@ -450,14 +451,20 @@ def schedule_toc() -> str:
         if mod == "Synthesis" and groups[-1][1] != "Synthesis":
             groups.append((MODULE_CLASS.get(mod, "m-span"), "Synthesis", []))
         groups[-1][2].append(w)
-    blocks = []
-    for mcls, label, ws in groups:
+
+    def render(group) -> str:
+        mcls, label, ws = group
         lis = "\n".join(
             f'<li><a href="#week-{w["week"]}"><span class="toc-num">{w["week"]:02d}</span> {esc(w["title"])}</a></li>'
             for w in ws
         )
-        blocks.append(f'<div class="toc-group"><p class="toc-head {mcls}">{esc(label)}</p><ol>{lis}</ol></div>')
-    return f'<nav class="sched-toc" aria-label="Weeks by module">{chr(10).join(blocks)}</nav>'
+        return f'<div class="toc-group"><p class="toc-head {mcls}">{esc(label)}</p><ol>{lis}</ol></div>'
+
+    edge = [g for g in groups if g[1] in ("Launch", "Synthesis")]
+    mods = [g for g in groups if g[1] not in ("Launch", "Synthesis")]
+    cols = [f'<div class="toc-col toc-col-edge">{"".join(render(g) for g in edge)}</div>']
+    cols += [f'<div class="toc-col">{render(g)}</div>' for g in mods]
+    return f'<nav class="sched-toc" aria-label="Weeks by module">{chr(10).join(cols)}</nav>'
 
 
 def schedule_body() -> str:
@@ -488,7 +495,7 @@ def schedule_body() -> str:
         <button type="button" id="toggle-optionals" data-state="closed">Expand optional readings</button>
       </div>
     </div>
-    <p class="section-lede">13 Friday meetings, {esc(course["meeting"].replace("Fridays ", ""))}, {esc(course["location"])}. Presentation slides are due 11:59 PM the Thursday before class; evidence capsules 11:59 PM the following Monday.</p>
+    <p class="section-lede">13 Friday meetings, {esc(course["meeting"].replace("Fridays ", ""))}, {esc(course["location"])}. Presentation slides are due 11:59 PM the Thursday before class.</p>
     {schedule_toc()}
     <div class="weeks"{current_attr}>
       {chr(10).join(rows)}
