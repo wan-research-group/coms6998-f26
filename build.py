@@ -140,6 +140,49 @@ PROJECT_TRACKS = [
      "Build and rigorously evaluate an agent for software optimization, compilers, GPU kernels, architecture DSE, RTL/EDA, or verification."),
 ]
 
+PROJECT_DIRECTIONS_NOTE = (
+    "A titles-only preview of the curated project portfolio. Full briefs with research "
+    "questions, baselines, evaluation plans, and platforms will be released at the Week 2 "
+    "research marketplace; directions may be added, merged, or refined before bidding opens."
+)
+
+PROJECT_DIRECTIONS = [
+    ("Module 1: Computing for AI", [
+        "SwarmServe - workflow-aware scheduling for multi-agent LLM serving",
+        "CacheCraft - program-structure-aware KV-cache retention and tiering",
+        "MuxFlow - small-language-model orchestration under real serving load",
+        "AgentShield - fault tolerance for multi-step agentic LLM pipelines",
+        "ActSpec - deadline-aware speculative action generation for real-time VLAs",
+        "VLA-Roof - an analytical performance model for VLA inference",
+        "FleetBatch - deadline-aware multi-robot serving on shared GPUs",
+        "SceneCache - consumer-aware caching for 3D scene representations",
+        "PlanFuse - profiling and co-scheduling hybrid VLA + motion-planning stacks",
+        "FaultLine - joint adversarial and soft-error robustness for VLA control",
+        "SymKern - demystifying and optimizing neuro-symbolic kernels on GPUs",
+        "SysTwo - systems characterization of System-2 (test-time-compute) inference",
+        "ESP-Reason - a reasoning-accelerator tile on the ESP SoC platform (FPGA)",
+        "HoloCIM - a compute-in-memory noise-budget study for vector-symbolic AI",
+        "HotPath - the kernel-to-system conversion rate of component speedups",
+        "WattGuard - energy-SLO co-control for edge AI inference",
+    ]),
+    ("Module 2: AI for Computing", [
+        "KernelScope - does profiler feedback make GPU-kernel agents better, per token?",
+        "MapSmith - LLM agents vs. classical search for accelerator mapping",
+        "FairDSE - a budget-matched showdown: LLM agents vs. BO/RL/GA for architecture DSE",
+        "Signals - which feedback modality buys the most design quality per token?",
+        "Ouroboros - an agent co-designs an accelerator for its own workload",
+        "ProveGen - RTL generation with verification-in-the-loop, scored by mutation testing",
+        "Spec2Socket - an agentic flow from spec to HLS to FPGA-measured accelerator",
+        "LACE-Next - workload-driven agentic RISC-V instruction extension",
+        "HDLGround - structured retrieval and grounding for hardware-design agents",
+        "FlowPilot - log-reading LLM agents vs. black-box autotuners on OpenROAD",
+        "SysDoctor - a planted-bottleneck benchmark for AI performance diagnosis",
+        "AutopilotServe - a guarded closed-loop agent that keeps a serving stack tuned",
+        "AutoEmbody - agents that configure VLA deployments for closed-loop success",
+        "RedFlag - reward-hacking forensics and hardened audits for design agents",
+    ]),
+]
+
 FINAL_SUBMISSION = (
     "An eight- to ten-page conference-style paper (excluding references and appendices); a "
     "repository with pinned environment, one-command smoke test, and a documented reproduction "
@@ -823,6 +866,15 @@ def project_body() -> str:
       </div>"""
         for i, (track_id, title, description) in enumerate(PROJECT_TRACKS)
     )
+    direction_cols = "\n".join(
+        f"""<div class="panel">
+        <h2>{esc(module)}</h2>
+        <ul class="std-list">
+          {chr(10).join(f"<li>{esc(t)}</li>" for t in titles)}
+        </ul>
+      </div>"""
+        for module, titles in PROJECT_DIRECTIONS
+    )
 
     return f"""<section class="section" id="project">
   <div class="wrap">
@@ -831,6 +883,12 @@ def project_body() -> str:
     <div class="tracks tracks-2">
       {track_cards}
     </div>
+
+    <h2 id="directions">Project Candidates (students are welcome to propose their own projects)</h2>
+    <div class="col2">
+      {direction_cols}
+    </div>
+    <p class="fine">{esc(PROJECT_DIRECTIONS_NOTE)}</p>
 
     <div class="col2 col2-project">
       <div class="panel">
@@ -982,7 +1040,7 @@ def syllabus_markdown() -> str:
         "",
         "## Course overview",
         "",
-        f"> **Course thesis — {COURSE_THESIS}**",
+        f"> **Course thesis - {COURSE_THESIS}**",
         "",
         "This advanced graduate lecture-seminar studies the two directions of AI-native computing:",
         "",
@@ -994,7 +1052,7 @@ def syllabus_markdown() -> str:
         "",
         "| Item | Details |",
         "|---|---|",
-        f"| Course | {md_table_cell(course['number'])} — {md_table_cell(course['title'])} |",
+        f"| Course | {md_table_cell(course['number'])} - {md_table_cell(course['title'])} |",
         f"| Instructor | {md_table_cell(inst['name'])} · [{inst['email']}](mailto:{inst['email']}) · [webpage]({inst['homepage']}) |",
         f"| Meeting | {md_table_cell(course['meeting'])} |",
         f"| Location | {md_table_cell(course['location'])} |",
@@ -1056,7 +1114,7 @@ def syllabus_markdown() -> str:
     lines.extend([
         "",
         "Grades reflect research judgment, technical execution, evidence quality, communication, and "
-        "reproducibility—not whether a project happens to beat the state of the art. A rigorous negative "
+        "reproducibility - not whether a project happens to beat the state of the art. A rigorous negative "
         "result can earn full credit.",
         "",
         "### Evidence-centered discussion",
@@ -1121,7 +1179,7 @@ def syllabus_markdown() -> str:
             label = "Student-led papers" if week.get("papers") else "Instructor-selected background"
             lines.extend(["", f"**{label}**", ""])
             for paper in required:
-                detail = f" — {paper['venue']}"
+                detail = f" - {paper['venue']}"
                 if paper.get("focus"):
                     detail += f"; focus: {paper['focus']}"
                 if paper.get("companion_url"):

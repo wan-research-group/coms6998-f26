@@ -11,7 +11,7 @@ Generated from the canonical course website on Monday, August 31, 2026.
 
 ## Course overview
 
-> **Course thesis — AI is transforming computing in two directions: emerging AI workloads demand new hardware and system architectures, while AI is becoming a powerful tool for designing computing systems themselves.**
+> **Course thesis - AI is transforming computing in two directions: emerging AI workloads demand new hardware and system architectures, while AI is becoming a powerful tool for designing computing systems themselves.**
 
 This advanced graduate lecture-seminar studies the two directions of AI-native computing:
 
@@ -23,7 +23,7 @@ This advanced graduate lecture-seminar studies the two directions of AI-native c
 
 | Item | Details |
 |---|---|
-| Course | COMS 6998 — AI-Native Computing: Hardware for AI, AI for Hardware |
+| Course | COMS 6998 - AI-Native Computing: Hardware for AI, AI for Hardware |
 | Instructor | Prof. Zishen Wan · [zw3306@columbia.edu](mailto:zw3306@columbia.edu) · [webpage](https://zishenwan.github.io/) |
 | Meeting | Fridays 10:10 AM - 12:00 PM |
 | Location | 602 Northwest Corner |
@@ -90,7 +90,7 @@ Presenters read the full paper, appendices, and artifact documentation. Everyone
 | Final poster | 10% |
 | Final paper & artifact | 40% |
 
-Grades reflect research judgment, technical execution, evidence quality, communication, and reproducibility—not whether a project happens to beat the state of the art. A rigorous negative result can earn full credit.
+Grades reflect research judgment, technical execution, evidence quality, communication, and reproducibility - not whether a project happens to beat the state of the art. A rigorous negative result can earn full credit.
 
 ### Evidence-centered discussion
 
@@ -150,8 +150,8 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Instructor-selected background**
 
-- [A New Golden Age for Computer Architecture](https://doi.org/10.1145/3282307) — CACM 2019
-- [GenAI for Systems: Recurring Challenges and Design Principles from Software to Silicon](https://arxiv.org/abs/2602.15241) — arXiv 2026
+- [A New Golden Age for Computer Architecture](https://doi.org/10.1145/3282307) - CACM 2019
+- [GenAI for Systems: Recurring Challenges and Design Principles from Software to Silicon](https://arxiv.org/abs/2602.15241) - arXiv 2026
 
 **Optional readings**
 
@@ -169,9 +169,9 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Instructor-selected background**
 
-- [Roofline: An Insightful Visual Performance Model for Multicore Architectures](https://doi.org/10.1145/1498765.1498785) — CACM 2009
-- [The Tail at Scale](https://research.google/pubs/the-tail-at-scale/) — CACM 2013
-- [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135) — NeurIPS 2022
+- [Roofline: An Insightful Visual Performance Model for Multicore Architectures](https://doi.org/10.1145/1498765.1498785) - CACM 2009
+- [The Tail at Scale](https://research.google/pubs/the-tail-at-scale/) - CACM 2013
+- [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135) - NeurIPS 2022
 
 **Optional readings**
 
@@ -192,8 +192,8 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Student-led papers**
 
-- [Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180) — SOSP 2023; focus: KV-cache virtualization, fragmentation, batching, vLLM
-- [SGLang: Efficient Execution of Structured Language Model Programs](https://arxiv.org/abs/2312.07104) — NeurIPS 2024; focus: RadixAttention, KV reuse across program structure
+- [Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180) - SOSP 2023; focus: KV-cache virtualization, fragmentation, batching, vLLM
+- [SGLang: Efficient Execution of Structured Language Model Programs](https://arxiv.org/abs/2312.07104) - NeurIPS 2024; focus: RadixAttention, KV reuse across program structure
 
 **Optional readings**
 
@@ -219,8 +219,8 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Student-led papers**
 
-- [In-Datacenter Performance Analysis of a Tensor Processing Unit](https://doi.org/10.1145/3079856.3080246) — ISCA 2017; focus: read as a ten-year retrospective
-- [Agile SoC Development with Open ESP](https://arxiv.org/abs/2009.01178) — ICCAD 2020; focus: Columbia's open-source heterogeneous SoC platform; available for course projects; [project site](https://www.esp.cs.columbia.edu/)
+- [In-Datacenter Performance Analysis of a Tensor Processing Unit](https://doi.org/10.1145/3079856.3080246) - ISCA 2017; focus: read as a ten-year retrospective
+- [Agile SoC Development with Open ESP](https://arxiv.org/abs/2009.01178) - ICCAD 2020; focus: Columbia's open-source heterogeneous SoC platform; available for course projects; [project site](https://www.esp.cs.columbia.edu/)
 
 **Optional readings**
 
@@ -243,9 +243,9 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Student-led papers**
 
-- [Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots](https://arxiv.org/abs/2607.02501) — arXiv 2026; focus: deployable embodied-AI runtime across heterogeneous robots
-- [VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference](https://arxiv.org/abs/2512.01031) — arXiv 2025; focus: overlapping inference with action execution; latency hiding
-- [How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf](https://arxiv.org/abs/2602.18397) — arXiv 2026; focus: analytical performance model; device/edge/cloud placement
+- [Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots](https://arxiv.org/abs/2607.02501) - arXiv 2026; focus: deployable embodied-AI runtime across heterogeneous robots
+- [VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference](https://arxiv.org/abs/2512.01031) - arXiv 2025; focus: overlapping inference with action execution; latency hiding
+- [How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf](https://arxiv.org/abs/2602.18397) - arXiv 2026; focus: analytical performance model; device/edge/cloud placement
 
 **Optional readings**
 
@@ -263,9 +263,9 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Student-led papers**
 
-- [DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation](https://arxiv.org/abs/2407.04292) — ISCA 2025; focus: decoupling LLM inference from robotic control via trajectory prediction
-- [ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents](https://doi.org/10.1145/3676641.3716016) — ASPLOS 2025; focus: cross-layer co-design for cooperative embodied agents
-- [Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference](https://arxiv.org/abs/2608.04428) — MICRO 2026; focus: HW/SW co-design for diffusion-based VLA on edge devices
+- [DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation](https://arxiv.org/abs/2407.04292) - ISCA 2025; focus: decoupling LLM inference from robotic control via trajectory prediction
+- [ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents](https://doi.org/10.1145/3676641.3716016) - ASPLOS 2025; focus: cross-layer co-design for cooperative embodied agents
+- [Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference](https://arxiv.org/abs/2608.04428) - MICRO 2026; focus: HW/SW co-design for diffusion-based VLA on edge devices
 
 **Optional readings**
 
@@ -287,9 +287,9 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Student-led papers**
 
-- [CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design](https://research.ibm.com/publications/cogsys-efficient-and-scalable-neurosymbolic-cognition-system-via-algorithm-hardware-co-design) — HPCA 2025; focus: workload characterization, reconfigurable processing
-- [REASON: Accelerating Probabilistic Logical Reasoning for Scalable Neuro-Symbolic Intelligence](https://arxiv.org/abs/2601.20784) — HPCA 2026; focus: unified DAGs, irregular reasoning acceleration
-- [Lobster: A GPU-Accelerated Framework for Neurosymbolic Programming](https://arxiv.org/abs/2503.21937) — ASPLOS 2026; focus: compiling Datalog-based neurosymbolic programs to GPUs
+- [CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design](https://research.ibm.com/publications/cogsys-efficient-and-scalable-neurosymbolic-cognition-system-via-algorithm-hardware-co-design) - HPCA 2025; focus: workload characterization, reconfigurable processing
+- [REASON: Accelerating Probabilistic Logical Reasoning for Scalable Neuro-Symbolic Intelligence](https://arxiv.org/abs/2601.20784) - HPCA 2026; focus: unified DAGs, irregular reasoning acceleration
+- [Lobster: A GPU-Accelerated Framework for Neurosymbolic Programming](https://arxiv.org/abs/2503.21937) - ASPLOS 2026; focus: compiling Datalog-based neurosymbolic programs to GPUs
 
 **Optional readings**
 
@@ -305,9 +305,9 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Student-led papers**
 
-- [Faster Sorting Algorithms Discovered Using Deep Reinforcement Learning (AlphaDev)](https://www.nature.com/articles/s41586-023-06004-9) — Nature 2023; focus: algorithm discovery, reward design, validation
-- [AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery](https://arxiv.org/abs/2506.13131) — DeepMind 2025; focus: evolutionary LLM code search across scheduling, TPU circuits, kernels
-- [KernelBench: Can LLMs Write Efficient GPU Kernels?](https://arxiv.org/abs/2502.10517) — ICML 2025; focus: benchmark design; discussed with the Sakana AI CUDA Engineer episode
+- [Faster Sorting Algorithms Discovered Using Deep Reinforcement Learning (AlphaDev)](https://www.nature.com/articles/s41586-023-06004-9) - Nature 2023; focus: algorithm discovery, reward design, validation
+- [AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery](https://arxiv.org/abs/2506.13131) - DeepMind 2025; focus: evolutionary LLM code search across scheduling, TPU circuits, kernels
+- [KernelBench: Can LLMs Write Efficient GPU Kernels?](https://arxiv.org/abs/2502.10517) - ICML 2025; focus: benchmark design; discussed with the Sakana AI CUDA Engineer episode
 
 **Optional readings**
 
@@ -339,8 +339,8 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Student-led papers**
 
-- [ArchEval: Measuring AI Agents as Computer Architects](https://arxiv.org/abs/2607.03601) — arXiv 2026; focus: benchmarking LLM agents on architecture tasks
-- [PF-LLM: Large Language Model Hinted Hardware Prefetching](https://doi.org/10.1145/3779212.3790202) — ASPLOS 2026; focus: AI inside the microarchitecture
+- [ArchEval: Measuring AI Agents as Computer Architects](https://arxiv.org/abs/2607.03601) - arXiv 2026; focus: benchmarking LLM agents on architecture tasks
+- [PF-LLM: Large Language Model Hinted Hardware Prefetching](https://doi.org/10.1145/3779212.3790202) - ASPLOS 2026; focus: AI inside the microarchitecture
 
 **Optional readings**
 
@@ -361,8 +361,8 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Student-led papers**
 
-- [CHIA: An Open-Source Framework for Principled, Agentic AI-Driven Hardware/Software Co-Design Research](https://arxiv.org/abs/2606.27350) — arXiv 2026; focus: composable design loops for agent-driven HW/SW co-design
-- [Agentic Architect: An Agentic AI Framework for Architecture Design Exploration and Optimization](https://arxiv.org/abs/2604.25083) — arXiv 2026; focus: LLM-driven microarchitecture evolution; seed quality bounds discovery
+- [CHIA: An Open-Source Framework for Principled, Agentic AI-Driven Hardware/Software Co-Design Research](https://arxiv.org/abs/2606.27350) - arXiv 2026; focus: composable design loops for agent-driven HW/SW co-design
+- [Agentic Architect: An Agentic AI Framework for Architecture Design Exploration and Optimization](https://arxiv.org/abs/2604.25083) - arXiv 2026; focus: LLM-driven microarchitecture evolution; seed quality bounds discovery
 
 **Optional readings**
 
@@ -384,9 +384,9 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Student-led papers**
 
-- [A Graph Placement Methodology for Fast Chip Design (AlphaChip)](https://www.nature.com/articles/s41586-021-03544-w) — Nature 2021 (+2024 addendum); focus: read with Markov's 'The False Dawn' critique; co-led by a pair; [companion critique](https://arxiv.org/abs/2306.09633)
-- [ChipNeMo: Domain-Adapted LLMs for Chip Design](https://arxiv.org/abs/2311.00176) — NVIDIA 2024; focus: domain adaptation, retrieval, EDA scripts
-- [Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification](https://arxiv.org/abs/2506.14074) — arXiv 2025; focus: RTL benchmarks and their limitations
+- [A Graph Placement Methodology for Fast Chip Design (AlphaChip)](https://www.nature.com/articles/s41586-021-03544-w) - Nature 2021 (+2024 addendum); focus: read with Markov's 'The False Dawn' critique; co-led by a pair; [companion critique](https://arxiv.org/abs/2306.09633)
+- [ChipNeMo: Domain-Adapted LLMs for Chip Design](https://arxiv.org/abs/2311.00176) - NVIDIA 2024; focus: domain adaptation, retrieval, EDA scripts
+- [Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification](https://arxiv.org/abs/2506.14074) - arXiv 2025; focus: RTL benchmarks and their limitations
 
 **Optional readings**
 
