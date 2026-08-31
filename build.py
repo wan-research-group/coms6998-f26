@@ -276,10 +276,10 @@ def prereq_html() -> str:
         </div>
         <div>
           <dt>Project readiness</dt>
-          <dd>Every team must include enough complementary expertise to implement, measure, and evaluate its selected project.</dd>
+          <dd>Each team should bring enough complementary expertise to implement, measure, and evaluate its selected project.</dd>
         </div>
       </dl>
-      <p class="fine"><strong>Scope note.</strong> The course concentrates on inference-side and emerging AI workloads and on AI-driven design; deep coverage of large-scale training systems and model-compression algorithms is left to ML-systems courses. Week 2 provides the working knowledge needed here.</p>
+      <p class="fine"><strong>Scope note.</strong> The course covers cross-layer computing systems, spanning computer architecture, software systems, and silicon, for emerging AI workloads such as physical, embodied, neuro-symbolic, and agentic AI; and agentic AI methods that design, optimize, and verify computing systems themselves. The two directions close a loop: better computing enables stronger AI, and stronger AI builds better computing.</p>
     </div>
   </div>
 </section>"""
