@@ -95,7 +95,7 @@ weeks:
   - week: 4
     date: 2026-10-02
     module: "Computing for AI"
-    title: "AI Hardware: Datacenter Accelerators and SoCs"
+    title: "AI Hardware: Accelerators and System-on-Chips"
     type: seminar
     guest: {label: "Guest Speaker", topic: "AI accelerator and SoC design"}
     papers:

@@ -213,7 +213,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 ### Week 04 · Friday, October 2, 2026
 
-**AI Hardware: Datacenter Accelerators and SoCs** · Computing for AI
+**AI Hardware: Accelerators and System-on-Chips** · Computing for AI
 
 - **Guest lecture:** AI accelerator and SoC design (Guest Speaker; confirmation pending).
 
