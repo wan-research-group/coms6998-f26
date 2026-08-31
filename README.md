@@ -1,7 +1,7 @@
-# COMS 6998 · AI-Native Computing — course website
+# COMS 6998 · AI-Native Computing - course website
 
 Static course site for **COMS 6998: AI-Native Computing (Fall 2026)**, Columbia University.
-The schedule, reading list, and calendar are generated from one data file.
+The schedule and reading list are generated from one data file.
 
 ## Quick start (local preview)
 
@@ -15,9 +15,9 @@ Then open <http://localhost:8000>.
 ## Weekly updates
 
 **`data/schedule.yaml`** is the single source of truth for the home-page
-"at a glance" table, the schedule page, the papers page, and the `.ics`
-calendar. Edit it and push; the GitHub Action rebuilds and redeploys
-automatically (you can even edit the file in the GitHub web UI).
+"at a glance" table, the schedule page, and the papers page. Edit it and
+push; the GitHub Action rebuilds and redeploys automatically (you can even
+edit the file in the GitHub web UI).
 
 Fields a week entry understands:
 
@@ -26,9 +26,9 @@ Fields a week entry understands:
 | `week`, `date`, `module`, `title`, `type` | Core row data. `type` is `lecture`, `seminar`, `midterm`, or `poster` |
 | `papers:` / `background:` | Required readings (seminar weeks use `papers`, lecture weeks use `background`). Each item: `title`, `venue`, `url`, optional `focus`, `extra_link`, `companion_url`, `co_led` |
 | `optional:` | Optional readings: either `{title, url}` maps or plain strings (rendered without a link) |
-| `guest:` | `{label, topic}` — renders the guest badge |
+| `guest:` | `{label, topic}` - renders the guest badge |
 | `case_study:`, `exercise:` | Extra mini-lecture lines |
-| `deadlines:` | List of strings, rendered as highlighted chips. The home-page table shows the part after the "—" |
+| `deadlines:` | List of strings, rendered as highlighted chips. The home-page table shows the part after the "-" |
 
 A required paper with `url: null` renders without a link plus an "(arXiv link
 coming in September)" note.
@@ -74,7 +74,6 @@ This site is **hand-rolled HTML/CSS/JS + a single-file Python renderer**
 | `_site/policies.html` | AI-use policy and course policies |
 | `_site/papers.html` | Compact reading list of all required/optional papers by week |
 | `_site/students.html` | Class roster (from `data/students.yaml`) |
-| `_site/course.ics` | 13 class meetings (Fri 10:10–12:00, 602 Northwest Corner) + milestone deadlines |
 | `_site/assets/` | CSS, JS, favicon (copied verbatim) |
 
 Light/dark theme (system default + manual toggle), responsive schedule
@@ -83,7 +82,7 @@ The top-nav "Group" item links to the Wan Lab site.
 
 ## TBD checklist (replace as they land)
 
-- [ ] Guest speaker confirmations (`guest:` labels in `data/schedule.yaml` — never add names before they are confirmed)
+- [ ] Guest speaker confirmations (`guest:` labels in `data/schedule.yaml` - never add names before they are confirmed)
 - [ ] ArchOrchestra arXiv link (Week 11 `case_study` + optional reading, expected September)
 - [ ] Student roster in `data/students.yaml` after enrollment settles
 - [ ] `SITE_URL` in `build.py` after the repo/Pages URL exists
@@ -91,7 +90,7 @@ The top-nav "Group" item links to the Wan Lab site.
 ## Layout
 
 ```
-├── build.py                  # renderer (HTML pages + .ics)
+├── build.py                  # renderer
 ├── data/
 │   ├── schedule.yaml         # ← EDIT WEEKLY (single source of truth)
 │   └── students.yaml         # ← class roster for students.html

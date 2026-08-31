@@ -2,8 +2,8 @@
 """Build the COMS 6998 course site.
 
 Reads data/schedule.yaml and data/students.yaml, renders the site into
-_site/ (index, schedule, format, project, policies, papers, students,
-course.ics) and copies assets/.
+_site/ (index, schedule, format, project, policies, papers, students)
+and copies assets/.
 
 Usage:  python3 build.py
 Deps:   pyyaml
@@ -161,11 +161,10 @@ def footer() -> str:
     </div>
     <div>
       <a href="https://registrar.columbia.edu/content/academic-calendar" target="_blank" rel="noopener">Registrar academic calendar</a><br>
-      <a href="papers.html">Reading list</a> · <a href="course.ics" download>Calendar (.ics)</a><br>
+      <a href="papers.html">Reading list</a><br>
       <a href="{esc(inst["homepage"])}" target="_blank" rel="noopener">Instructor Webpage</a> · <a href="{esc(inst["lab"])}" target="_blank" rel="noopener">Research Group</a>
     </div>
     <div class="foot-meta">
-      Site generated from <code>data/schedule.yaml</code>.<br>
       Last updated {esc(today)}.
     </div>
   </div>
@@ -192,15 +191,15 @@ def hero() -> str:
       </p>
       <blockquote class="thesis">AI is transforming computing in two directions: emerging AI workloads demand new hardware and system architectures, while AI is becoming a powerful tool for designing computing systems themselves.</blockquote>
       <ul class="meta-chips">
-        <li>{esc(course["meeting"])}</li>
-        <li>{esc(course["location"])}</li>
+        <li><strong>Time:</strong> {esc(course["meeting"])}</li>
+        <li><strong>Location:</strong> {esc(course["location"])}</li>
       </ul>
     </div>
     <aside class="instructor-card" aria-label="Instructor">
       <p class="card-kicker">Instructor</p>
       <p class="inst-name">{esc(inst["name"])}</p>
       <ul class="inst-links">
-        <li><a href="mailto:{esc(inst["email"])}">{esc(inst["email"])}</a></li>
+        <li><a href="mailto:{esc(inst["email"])}">Email</a></li>
         <li><a href="{esc(inst["homepage"])}" target="_blank" rel="noopener">Instructor Webpage</a></li>
         <li><a href="{esc(inst["lab"])}" target="_blank" rel="noopener">Research Group</a></li>
         <li><a href="{esc(inst["canvas"])}" target="_blank" rel="noopener">Canvas</a></li>
@@ -220,7 +219,7 @@ def hero() -> str:
       <p>Use agents to design, optimize, and verify software, compilers, architectures, SoCs, RTL, EDA flows, and chips.</p>
     </div>
     <div class="d-shared">
-      <strong>Shared methodology.</strong> Dynamic workflows, closed-loop feedback, cross-layer optimization, heterogeneous resources, quality–performance–cost tradeoffs, and evidence-driven evaluation.
+      <strong>Shared methodology.</strong> Dynamic workflows, closed-loop feedback, cross-layer optimization, heterogeneous resources, quality-performance-cost tradeoffs, and evidence-driven evaluation.
     </div>
   </div>
 </section>"""
@@ -230,7 +229,7 @@ def short_deadlines(w: dict) -> str:
     """Compress a week's deadline strings for the at-a-glance table."""
     outs = []
     for d in w.get("deadlines", []):
-        outs.append(d.split("—", 1)[1].strip() if "—" in d else d)
+        outs.append(d.split(" - ", 1)[1].strip() if " - " in d else d)
     return "; ".join(outs)
 
 
@@ -240,7 +239,7 @@ def glance_html() -> str:
         while hi < len(holidays) and holidays[hi]["date"] < w["date"]:
             r = holidays[hi]
             rows.append(
-                f'<tr class="g-holiday"><td>—</td><td>{esc(fmt_short(r["date"]))}</td>'
+                f'<tr class="g-holiday"><td>-</td><td>{esc(fmt_short(r["date"]))}</td>'
                 f'<td colspan="2">{esc(r["note"])}</td></tr>'
             )
             hi += 1
@@ -249,19 +248,21 @@ def glance_html() -> str:
         rows.append(
             f'<tr><td>{w["week"]}</td><td>{esc(fmt_short(w["date"]))}</td>'
             f'<td>{dot}<a href="schedule.html#week-{w["week"]}">{esc(w["title"])}</a></td>'
-            f'<td class="g-dl">{dl or "—"}</td></tr>'
+            f'<td class="g-dl">{dl or "-"}</td></tr>'
         )
     return f"""<section class="section" id="glance" aria-labelledby="glance-h">
   <div class="wrap">
     <div class="section-head">
       <h2 id="glance-h">Schedule at a glance</h2>
       <div class="sched-tools">
+        <span class="legend"><span class="dot dot-comp" aria-hidden="true"></span>Computing for AI</span>
+        <span class="legend"><span class="dot dot-ai" aria-hidden="true"></span>AI for Computing</span>
         <a class="tool-link" href="schedule.html">Full schedule with readings →</a>
       </div>
     </div>
     <div class="table-scroll">
       <table class="glance-table">
-        <thead><tr><th>Wk</th><th>Date</th><th>Topic</th><th>Deadline</th></tr></thead>
+        <thead><tr><th>Wk</th><th>Date</th><th>Topic</th><th>Project Deadline</th></tr></thead>
         <tbody>
           {chr(10).join(rows)}
         </tbody>
@@ -361,7 +362,7 @@ def holiday_article(r: dict) -> str:
     date = r["date"]
     return f"""<article class="week m-holiday" data-date="{date.isoformat()}" data-noclass="1">
   <div class="week-rail">
-    <span class="wk-num" aria-hidden="true">—</span>
+    <span class="wk-num" aria-hidden="true">-</span>
     <time class="wk-date" datetime="{date.isoformat()}">{esc(fmt_short(date))}</time>
   </div>
   <div class="week-body"><p class="week-title holiday-title">{esc(r["note"])}</p></div>
@@ -389,10 +390,9 @@ def schedule_body() -> str:
         <span class="legend"><span class="dot dot-comp" aria-hidden="true"></span>Computing for AI</span>
         <span class="legend"><span class="dot dot-ai" aria-hidden="true"></span>AI for Computing</span>
         <button type="button" id="toggle-optionals" data-state="closed">Expand optional readings</button>
-        <a class="tool-link" href="course.ics" download>.ics</a>
       </div>
     </div>
-    <p class="section-lede">13 Friday meetings, {esc(course["meeting"].replace("Fridays ", ""))}, {esc(course["location"])}. Presentation slides are due 8:00 PM the Thursday before class; evidence capsules 5:00 PM the following Monday.</p>
+    <p class="section-lede">13 Friday meetings, {esc(course["meeting"].replace("Fridays ", ""))}, {esc(course["location"])}. Presentation slides are due 11:59 PM the Thursday before class; evidence capsules 11:59 PM the following Monday.</p>
     <div class="weeks"{current_attr}>
       {chr(10).join(rows)}
     </div>
@@ -429,20 +429,20 @@ def format_body() -> str:
       <div class="panel">
         <h3>Regular seminar · 110 minutes</h3>
         <table class="time-table">
-          <tr><td>10:10–10:35</td><td>Instructor mini-lecture: concepts, methods, cross-paper connections</td></tr>
-          <tr><td>10:35–11:00</td><td>Paper 1 — presentation, critique, discussion</td></tr>
-          <tr><td>11:00–11:10</td><td>Break</td></tr>
-          <tr><td>11:10–11:35</td><td>Paper 2 — presentation, critique, discussion</td></tr>
-          <tr><td>11:35–12:00</td><td>Paper 3 — presentation, critique, discussion</td></tr>
+          <tr><td>10:10-10:35</td><td>Instructor mini-lecture: concepts, methods, cross-paper connections</td></tr>
+          <tr><td>10:35-11:00</td><td>Paper 1 - presentation, critique, discussion</td></tr>
+          <tr><td>11:00-11:10</td><td>Break</td></tr>
+          <tr><td>11:10-11:35</td><td>Paper 2 - presentation, critique, discussion</td></tr>
+          <tr><td>11:35-12:00</td><td>Paper 3 - presentation, critique, discussion</td></tr>
         </table>
       </div>
       <div class="panel">
         <h3>Guest-speaker weeks</h3>
         <table class="time-table">
-          <tr><td>10:10–10:35</td><td>Paper 1 — presentation, critique, discussion</td></tr>
-          <tr><td>10:35–11:00</td><td>Paper 2 — presentation, critique, discussion</td></tr>
-          <tr><td>11:00–11:10</td><td>Break</td></tr>
-          <tr><td>11:10–12:00</td><td>Guest lecture + Q&amp;A</td></tr>
+          <tr><td>10:10-10:35</td><td>Paper 1 - presentation, critique, discussion</td></tr>
+          <tr><td>10:35-11:00</td><td>Paper 2 - presentation, critique, discussion</td></tr>
+          <tr><td>11:00-11:10</td><td>Break</td></tr>
+          <tr><td>11:10-12:00</td><td>Guest lecture + Q&amp;A</td></tr>
         </table>
       </div>
     </div>
@@ -463,7 +463,7 @@ def format_body() -> str:
         <table class="grading-table">
           {grading_rows}
         </table>
-        <p class="fine">Grades reflect research judgment, technical execution, evidence quality, communication, and reproducibility — not whether a project happens to beat the state of the art. A rigorous negative result can earn full credit.</p>
+        <p class="fine">Grades reflect research judgment, technical execution, evidence quality, communication, and reproducibility - not whether a project happens to beat the state of the art. A rigorous negative result can earn full credit.</p>
       </div>
       <div class="panel">
         <h3>Evidence-centered discussion</h3>
@@ -476,7 +476,7 @@ def format_body() -> str:
 
     <div class="panel">
       <h3>Who should take this course</h3>
-      <p>Graduate students in CS and EE interested in computer architecture, systems, ML systems, hardware–software co-design, robotics and physical AI, VLSI/EDA, or adjacent areas. Expected: basic computer organization or systems knowledge, familiarity with ML concepts, and the ability to program and run quantitative experiments. CUDA, compilers, RTL, robotics simulators, or LLM-agent experience is helpful but not required — no one is expected to arrive with expertise across the entire stack.</p>
+      <p>Graduate students in CS and EE interested in computer architecture, systems, ML systems, hardware-software co-design, robotics and physical AI, VLSI/EDA, or adjacent areas. Expected: basic computer organization or systems knowledge, familiarity with ML concepts, and the ability to program and run quantitative experiments. CUDA, compilers, RTL, robotics simulators, or LLM-agent experience is helpful but not required - no one is expected to arrive with expertise across the entire stack.</p>
       <p class="fine"><strong>Scope note.</strong> The course concentrates on inference-side and emerging AI workloads and on AI-driven design; deep coverage of large-scale training systems and model-compression algorithms is left to ML-systems courses. Week 2 provides the working knowledge needed here.</p>
     </div>
   </div>
@@ -513,7 +513,7 @@ def project_body() -> str:
     return f"""<section class="section" id="project">
   <div class="wrap">
     {page_head("Semester-long research project",
-               "The project is the center of the course: a carefully scoped research effort that could mature into a top-tier architecture, systems, ML systems, robotics, or EDA paper. Teams of 1–2 are formed by bidding on a curated portfolio of directions; publication is an aspiration, not a grading requirement.")}
+               "The project is the center of the course: a carefully scoped research effort that could mature into a top-tier architecture, systems, ML systems, robotics, or EDA paper. Teams of 1-2 are formed by bidding on a curated portfolio of directions; publication is an aspiration, not a grading requirement.")}
 
     <div class="tracks tracks-2">
       <div class="track t-comp">
@@ -540,7 +540,7 @@ def project_body() -> str:
         <ol class="timeline">
           {chr(10).join(tl_items)}
         </ol>
-        <p class="fine">All written deliverables are due 5:00 PM ET. Check-ins P1–P5 are pacing devices, graded on completeness. No course deadline falls on the Thanksgiving holiday.</p>
+        <p class="fine">All written deliverables are due 11:59 PM ET. Check-ins P1-P5 are pacing devices, graded on completeness. No course deadline falls on the Thanksgiving holiday.</p>
       </div>
     </div>
 
@@ -563,7 +563,7 @@ def policies_body() -> str:
       <h3>AI use and evidence</h3>
       <p class="policy-stance">AI use is permitted and encouraged when it is disclosed, reproducible, and independently verified. Agent output is not evidence by itself.</p>
       <ul class="policy-list">
-        <li>You may use AI throughout the course — brainstorming, literature discovery, coding, debugging, experiment orchestration, and writing assistance — with meaningful use disclosed.</li>
+        <li>You may use AI throughout the course - brainstorming, literature discovery, coding, debugging, experiment orchestration, and writing assistance - with meaningful use disclosed.</li>
         <li>Every citation must be checked against a primary source, and every numerical result must trace to an actual experiment, simulator output, formal result, or cited source.</li>
         <li>AI-generated code must satisfy the same correctness, testing, performance, licensing, and provenance requirements as human-written code.</li>
       </ul>
@@ -649,6 +649,7 @@ def papers_body() -> str:
             opt = f'<p class="p-label">Optional</p><p class="opt-body">{" · ".join(optional_entry(o) for o in w["optional"])}</p>'
         blocks.append(
             f"""<article class="papers-week {MODULE_CLASS.get(w["module"], "m-span")}">
+  <div class="week-tags"><span class="chip chip-mod">{esc(w["module"])}</span></div>
   <h2><span class="wk-tag">Wk {w["week"]:02d} · {esc(fmt_short(w["date"]))}</span> {esc(w["title"])}</h2>
   <p class="p-label">{label}</p>
   <ol class="papers">{lis}</ol>
@@ -659,71 +660,13 @@ def papers_body() -> str:
   <div class="wrap">
     {page_head("Reading list",
                f'All {n_req} required readings and {n_opt} optional readings, by week. Links were individually verified against primary sources in August 2026. <a href="schedule.html">Back to the schedule.</a>')}
+    <div class="sched-tools papers-legend">
+      <span class="legend"><span class="dot dot-comp" aria-hidden="true"></span>Computing for AI</span>
+      <span class="legend"><span class="dot dot-ai" aria-hidden="true"></span>AI for Computing</span>
+    </div>
     {chr(10).join(blocks)}
   </div>
 </section>"""
-
-
-# ---------------------------------------------------------------- ics
-
-def ics_escape(s: str) -> str:
-    return s.replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,")
-
-
-def ics() -> str:
-    stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    lines = [
-        "BEGIN:VCALENDAR",
-        "VERSION:2.0",
-        "PRODID:-//Columbia CS//COMS 6998 AI-Native Computing F26//EN",
-        "CALSCALE:GREGORIAN",
-        "X-WR-CALNAME:COMS 6998 AI-Native Computing (Fall 2026)",
-        "X-WR-TIMEZONE:America/New_York",
-        "BEGIN:VTIMEZONE",
-        "TZID:America/New_York",
-        "BEGIN:DAYLIGHT",
-        "TZOFFSETFROM:-0500",
-        "TZOFFSETTO:-0400",
-        "TZNAME:EDT",
-        "DTSTART:19700308T020000",
-        "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU",
-        "END:DAYLIGHT",
-        "BEGIN:STANDARD",
-        "TZOFFSETFROM:-0400",
-        "TZOFFSETTO:-0500",
-        "TZNAME:EST",
-        "DTSTART:19701101T020000",
-        "RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU",
-        "END:STANDARD",
-        "END:VTIMEZONE",
-    ]
-    for w in weeks:
-        d = w["date"].strftime("%Y%m%d")
-        summary = ics_escape(f'COMS 6998 Wk {w["week"]}: {w["title"]}')
-        lines += [
-            "BEGIN:VEVENT",
-            f"UID:coms6998-f26-week-{w['week']}@columbia.edu",
-            f"DTSTAMP:{stamp}",
-            f"DTSTART;TZID=America/New_York:{d}T101000",
-            f"DTEND;TZID=America/New_York:{d}T120000",
-            f"SUMMARY:{summary}",
-            f"LOCATION:{ics_escape(course['location'])}",
-            "END:VEVENT",
-        ]
-    for m in milestones:
-        d = m["date"]
-        summary = ics_escape(f'COMS 6998: {m["id"]} — {m["name"]}')
-        lines += [
-            "BEGIN:VEVENT",
-            f"UID:coms6998-f26-ms-{m['id'].lower()}@columbia.edu",
-            f"DTSTAMP:{stamp}",
-            f"DTSTART;VALUE=DATE:{d.strftime('%Y%m%d')}",
-            f"DTEND;VALUE=DATE:{(d + dt.timedelta(days=1)).strftime('%Y%m%d')}",
-            f"SUMMARY:{summary}",
-            "END:VEVENT",
-        ]
-    lines.append("END:VCALENDAR")
-    return "\r\n".join(lines) + "\r\n"
 
 
 # ---------------------------------------------------------------- build
@@ -761,7 +704,6 @@ def main() -> None:
     for path, (title, d, body) in pages.items():
         (OUT / path).write_text(page(title=title, description=d, body=body, path=path))
 
-    (OUT / "course.ics").write_text(ics())
     print(f"Built {OUT} ({sum(1 for _ in OUT.rglob('*') if _.is_file())} files)")
 
 
