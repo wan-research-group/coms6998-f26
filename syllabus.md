@@ -156,7 +156,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Optional readings**
 
 - [The Bitter Lesson (2019)](http://www.incompleteideas.net/IncIdeas/BitterLesson.html)
-- [Architecture 2.0: Why Computer Architects Need a Data-Centric AI Gymnasium (IEEE CAL 2023)](https://www.sigarch.org/architecture-2-0-why-computer-architects-need-a-data-centric-ai-gymnasium/)
+- [Architecture 2.0: Why Computer Architects Need a Data-Centric AI Gymnasium (ACM SIGARCH Blog, 2023)](https://www.sigarch.org/architecture-2-0-why-computer-architects-need-a-data-centric-ai-gymnasium/)
 
 **Deadlines**
 
@@ -263,12 +263,13 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Student-led papers**
 
-- [DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation](https://arxiv.org/abs/2407.04292) — ASPLOS 2024; focus: decoupling LLM inference from robotic control via trajectory prediction
+- [DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation](https://arxiv.org/abs/2407.04292) — ISCA 2025; focus: decoupling LLM inference from robotic control via trajectory prediction
 - [ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents](https://doi.org/10.1145/3676641.3716016) — ASPLOS 2025; focus: cross-layer co-design for cooperative embodied agents
-- [Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference](https://arxiv.org/abs/2608.04428) — arXiv 2026; focus: HW/SW co-design for diffusion-based VLA on edge devices
+- [Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference](https://arxiv.org/abs/2608.04428) — MICRO 2026; focus: HW/SW co-design for diffusion-based VLA on edge devices
 
 **Optional readings**
 
+- [Algorithm-Architecture Co-Design for Efficient VLA Inference via Speculative Inference and Verification (MICRO 2026)](https://arxiv.org/abs/2608.15636)
 - [OctoCache: Caching Voxels for Accelerating 3D Occupancy Mapping in Autonomous Systems (ASPLOS 2025)](https://dl.acm.org/doi/10.1145/3676641.3716263)
 - [RobotPerf: An Open-Source, Vendor-Agnostic, Benchmarking Suite for Evaluating Robotics Computing System Performance (ICRA 2024)](https://arxiv.org/abs/2309.09212)
 - DaDu Series: Fast and Efficient Robot Accelerators (ICCAD 2020) *(link pending)*
@@ -306,7 +307,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 - [Faster Sorting Algorithms Discovered Using Deep Reinforcement Learning (AlphaDev)](https://www.nature.com/articles/s41586-023-06004-9) — Nature 2023; focus: algorithm discovery, reward design, validation
 - [AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery](https://arxiv.org/abs/2506.13131) — DeepMind 2025; focus: evolutionary LLM code search across scheduling, TPU circuits, kernels
-- [KernelBench: Can LLMs Write Efficient GPU Kernels?](https://arxiv.org/abs/2502.10517) — 2025; focus: benchmark design; discussed with the Sakana AI CUDA Engineer episode
+- [KernelBench: Can LLMs Write Efficient GPU Kernels?](https://arxiv.org/abs/2502.10517) — ICML 2025; focus: benchmark design; discussed with the Sakana AI CUDA Engineer episode
 
 **Optional readings**
 
@@ -347,8 +348,8 @@ Required readings appear first. Optional readings are listed separately, one pap
 - [AgentDSE: Reasoning-Augmented Architectural Design Space Exploration (MLArchSys 2026)](https://arxiv.org/abs/2606.21836)
 - [LLM-DSE: Searching Accelerator Parameters with LLM Agents (2025)](https://arxiv.org/abs/2505.12188)
 - [ConfuciuX: Autonomous Hardware Resource Assignment for DNN Accelerators Using Reinforcement Learning (MICRO 2020)](https://arxiv.org/abs/2009.02010)
-- [Concorde: Fast and Accurate CPU Performance Modeling with Compositional Analytical-ML Fusion (2025)](https://arxiv.org/abs/2503.23076)
-- [QuArch: A Question-Answering Dataset for AI Agents in Computer Architecture (2025)](https://arxiv.org/abs/2501.01892)
+- [Concorde: Fast and Accurate CPU Performance Modeling with Compositional Analytical-ML Fusion (ISCA 2025)](https://arxiv.org/abs/2503.23076)
+- [QuArch: A Benchmark for Evaluating LLM Reasoning in Computer Architecture (ICML 2026)](https://arxiv.org/abs/2510.22087)
 - [Learning Memory Access Patterns (ICML 2018)](https://arxiv.org/abs/1803.02329)
 
 ### Week 11 · Friday, November 20, 2026
@@ -385,14 +386,14 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 - [A Graph Placement Methodology for Fast Chip Design (AlphaChip)](https://www.nature.com/articles/s41586-021-03544-w) — Nature 2021 (+2024 addendum); focus: read with Markov's 'The False Dawn' critique; co-led by a pair; [companion critique](https://arxiv.org/abs/2306.09633)
 - [ChipNeMo: Domain-Adapted LLMs for Chip Design](https://arxiv.org/abs/2311.00176) — NVIDIA 2024; focus: domain adaptation, retrieval, EDA scripts
-- [VerilogEval: Evaluating Large Language Models for Verilog Code Generation](https://arxiv.org/abs/2309.07544) — ICCAD 2023; focus: RTL benchmarks and their limitations
+- [Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification](https://arxiv.org/abs/2506.14074) — arXiv 2025; focus: RTL benchmarks and their limitations
 
 **Optional readings**
 
 - [AssertLLM: Generating and Evaluating Hardware Verification Assertions from Design Specifications via Multi-LLMs (2024)](https://arxiv.org/abs/2402.00386)
 - [Using LLMs to Facilitate Formal Verification of RTL (2023)](https://arxiv.org/abs/2309.09437)
 - [DREAMPlace: Deep Learning Toolkit-Enabled GPU Acceleration for Modern VLSI Placement (DAC 2019)](https://github.com/limbo018/DREAMPlace)
-- [Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification (CVDP, 2025)](https://arxiv.org/abs/2506.14074)
+- [VerilogEval: Evaluating Large Language Models for Verilog Code Generation (ICCAD 2023)](https://arxiv.org/abs/2309.07544)
 - [ChatEDA: A Large Language Model Powered Autonomous Agent for EDA (TCAD 2024)](https://arxiv.org/abs/2308.10204)
 - [Automated Multi-Agent Workflows for RTL Design (VeriMaAS, 2025)](https://arxiv.org/abs/2509.20182)
 - [SpecLLM: Exploring Generation and Review of VLSI Design Specification with Large Language Model (2024)](https://arxiv.org/abs/2401.13266)

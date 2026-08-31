@@ -53,7 +53,7 @@ weeks:
       - {title: "GenAI for Systems: Recurring Challenges and Design Principles from Software to Silicon", venue: "arXiv 2026", url: "https://arxiv.org/abs/2602.15241"}
     optional:
       - {title: "The Bitter Lesson (2019)", url: "http://www.incompleteideas.net/IncIdeas/BitterLesson.html"}
-      - {title: "Architecture 2.0: Why Computer Architects Need a Data-Centric AI Gymnasium (IEEE CAL 2023)", url: "https://www.sigarch.org/architecture-2-0-why-computer-architects-need-a-data-centric-ai-gymnasium/"}
+      - {title: "Architecture 2.0: Why Computer Architects Need a Data-Centric AI Gymnasium (ACM SIGARCH Blog, 2023)", url: "https://www.sigarch.org/architecture-2-0-why-computer-architects-need-a-data-centric-ai-gymnasium/"}
     deadlines: ["Sep 12, 11:59 PM - background survey"]
 
   - week: 2
@@ -134,10 +134,11 @@ weeks:
     title: "Physical AI II: Hardware-Software Co-Design and Architecture"
     type: seminar
     papers:
-      - {title: "DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation", venue: "ASPLOS 2024", url: "https://arxiv.org/abs/2407.04292", focus: "decoupling LLM inference from robotic control via trajectory prediction"}
+      - {title: "DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation", venue: "ISCA 2025", url: "https://arxiv.org/abs/2407.04292", focus: "decoupling LLM inference from robotic control via trajectory prediction"}
       - {title: "ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents", venue: "ASPLOS 2025", url: "https://doi.org/10.1145/3676641.3716016", focus: "cross-layer co-design for cooperative embodied agents"}
-      - {title: "Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference", venue: "arXiv 2026", url: "https://arxiv.org/abs/2608.04428", focus: "HW/SW co-design for diffusion-based VLA on edge devices"}
+      - {title: "Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference", venue: "MICRO 2026", url: "https://arxiv.org/abs/2608.04428", focus: "HW/SW co-design for diffusion-based VLA on edge devices"}
     optional:
+      - {title: "Algorithm-Architecture Co-Design for Efficient VLA Inference via Speculative Inference and Verification (MICRO 2026)", url: "https://arxiv.org/abs/2608.15636"}
       - {title: "OctoCache: Caching Voxels for Accelerating 3D Occupancy Mapping in Autonomous Systems (ASPLOS 2025)", url: "https://dl.acm.org/doi/10.1145/3676641.3716263"}
       - {title: "RobotPerf: An Open-Source, Vendor-Agnostic, Benchmarking Suite for Evaluating Robotics Computing System Performance (ICRA 2024)", url: "https://arxiv.org/abs/2309.09212"}
       - {title: "DaDu Series: Fast and Efficient Robot Accelerators (ICCAD 2020)", url: null}
@@ -168,7 +169,7 @@ weeks:
     papers:
       - {title: "Faster Sorting Algorithms Discovered Using Deep Reinforcement Learning (AlphaDev)", venue: "Nature 2023", url: "https://www.nature.com/articles/s41586-023-06004-9", focus: "algorithm discovery, reward design, validation"}
       - {title: "AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery", venue: "DeepMind 2025", url: "https://arxiv.org/abs/2506.13131", focus: "evolutionary LLM code search across scheduling, TPU circuits, kernels"}
-      - {title: "KernelBench: Can LLMs Write Efficient GPU Kernels?", venue: "2025", url: "https://arxiv.org/abs/2502.10517", focus: "benchmark design; discussed with the Sakana AI CUDA Engineer episode"}
+      - {title: "KernelBench: Can LLMs Write Efficient GPU Kernels?", venue: "ICML 2025", url: "https://arxiv.org/abs/2502.10517", focus: "benchmark design; discussed with the Sakana AI CUDA Engineer episode"}
     optional:
       - {title: "CompilerGym: Robust, Performant Compiler Optimization Environments for AI Research (CGO 2022)", url: "https://arxiv.org/abs/2109.08267"}
       - {title: "Large Language Models for Compiler Optimization (2023)", url: "https://arxiv.org/abs/2309.07062"}
@@ -198,8 +199,8 @@ weeks:
       - {title: "AgentDSE: Reasoning-Augmented Architectural Design Space Exploration (MLArchSys 2026)", url: "https://arxiv.org/abs/2606.21836"}
       - {title: "LLM-DSE: Searching Accelerator Parameters with LLM Agents (2025)", url: "https://arxiv.org/abs/2505.12188"}
       - {title: "ConfuciuX: Autonomous Hardware Resource Assignment for DNN Accelerators Using Reinforcement Learning (MICRO 2020)", url: "https://arxiv.org/abs/2009.02010"}
-      - {title: "Concorde: Fast and Accurate CPU Performance Modeling with Compositional Analytical-ML Fusion (2025)", url: "https://arxiv.org/abs/2503.23076"}
-      - {title: "QuArch: A Question-Answering Dataset for AI Agents in Computer Architecture (2025)", url: "https://arxiv.org/abs/2501.01892"}
+      - {title: "Concorde: Fast and Accurate CPU Performance Modeling with Compositional Analytical-ML Fusion (ISCA 2025)", url: "https://arxiv.org/abs/2503.23076"}
+      - {title: "QuArch: A Benchmark for Evaluating LLM Reasoning in Computer Architecture (ICML 2026)", url: "https://arxiv.org/abs/2510.22087"}
       - {title: "Learning Memory Access Patterns (ICML 2018)", url: "https://arxiv.org/abs/1803.02329"}
 
   - week: 11
@@ -229,12 +230,12 @@ weeks:
     papers:
       - {title: "A Graph Placement Methodology for Fast Chip Design (AlphaChip)", venue: "Nature 2021 (+2024 addendum)", url: "https://www.nature.com/articles/s41586-021-03544-w", focus: "read with Markov's 'The False Dawn' critique; co-led by a pair", companion_url: "https://arxiv.org/abs/2306.09633", co_led: true}
       - {title: "ChipNeMo: Domain-Adapted LLMs for Chip Design", venue: "NVIDIA 2024", url: "https://arxiv.org/abs/2311.00176", focus: "domain adaptation, retrieval, EDA scripts"}
-      - {title: "VerilogEval: Evaluating Large Language Models for Verilog Code Generation", venue: "ICCAD 2023", url: "https://arxiv.org/abs/2309.07544", focus: "RTL benchmarks and their limitations"}
+      - {title: "Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification", venue: "arXiv 2025", url: "https://arxiv.org/abs/2506.14074", focus: "RTL benchmarks and their limitations"}
     optional:
       - {title: "AssertLLM: Generating and Evaluating Hardware Verification Assertions from Design Specifications via Multi-LLMs (2024)", url: "https://arxiv.org/abs/2402.00386"}
       - {title: "Using LLMs to Facilitate Formal Verification of RTL (2023)", url: "https://arxiv.org/abs/2309.09437"}
       - {title: "DREAMPlace: Deep Learning Toolkit-Enabled GPU Acceleration for Modern VLSI Placement (DAC 2019)", url: "https://github.com/limbo018/DREAMPlace"}
-      - {title: "Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification (CVDP, 2025)", url: "https://arxiv.org/abs/2506.14074"}
+      - {title: "VerilogEval: Evaluating Large Language Models for Verilog Code Generation (ICCAD 2023)", url: "https://arxiv.org/abs/2309.07544"}
       - {title: "ChatEDA: A Large Language Model Powered Autonomous Agent for EDA (TCAD 2024)", url: "https://arxiv.org/abs/2308.10204"}
       - {title: "Automated Multi-Agent Workflows for RTL Design (VeriMaAS, 2025)", url: "https://arxiv.org/abs/2509.20182"}
       - {title: "SpecLLM: Exploring Generation and Review of VLSI Design Specification with Large Language Model (2024)", url: "https://arxiv.org/abs/2401.13266"}
