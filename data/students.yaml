@@ -1,0 +1,13 @@
+# Enrolled students, shown on students.html in file order.
+# Each entry: name (required), plus optional link (homepage) and photo
+# (path relative to the site root, e.g. assets/students/jane.jpg).
+#
+# Example:
+#   - name: "Jane Doe"
+#     link: "https://janedoe.github.io/"
+#     photo: "assets/students/jane.jpg"
+#
+# While the list is empty, the page shows a "roster coming after enrollment"
+# placeholder.
+
+students: []

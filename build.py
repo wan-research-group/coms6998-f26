@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Build the COMS 6998 course site.
 
-Reads data/schedule.yaml and data/announcements.yaml, renders the site into
-_site/ (index.html, papers.html, course.ics) and copies assets/.
+Reads data/schedule.yaml and data/students.yaml, renders the site into
+_site/ (index, schedule, format, project, policies, papers, students,
+course.ics) and copies assets/.
 
 Usage:  python3 build.py
 Deps:   pyyaml
@@ -51,19 +52,30 @@ def fmt_long(d: dt.date) -> str:
 # ---------------------------------------------------------------- data
 
 data = yaml.safe_load((ROOT / "data" / "schedule.yaml").read_text())
-ann_data = yaml.safe_load((ROOT / "data" / "announcements.yaml").read_text())
+students_data = yaml.safe_load((ROOT / "data" / "students.yaml").read_text())
 
 course = data["course"]
+inst = course["instructor"]
 weeks = data["weeks"]
 milestones = data["milestones"]
 grading = data["grading"]
 registrar = data["registrar_dates"]
-announcements = ann_data.get("announcements") or []
+students = students_data.get("students") or []
 
 no_class = [r for r in registrar if str(r["note"]).lower().startswith("no class")]
 
 
 # ---------------------------------------------------------------- shared page shell
+
+NAV_ITEMS = [
+    ("schedule.html", "Schedule"),
+    ("format.html", "Format"),
+    ("project.html", "Project"),
+    ("policies.html", "Policies"),
+    ("papers.html", "Papers"),
+    ("students.html", "Students"),
+]
+
 
 def page(*, title: str, description: str, body: str, path: str) -> str:
     canonical = ""
@@ -115,25 +127,21 @@ def page(*, title: str, description: str, body: str, path: str) -> str:
 
 
 def nav(path: str) -> str:
-    on_index = path == "index.html"
-
-    def link(anchor: str, label: str) -> str:
-        href = f"#{anchor}" if on_index else f"index.html#{anchor}"
-        return f'<a href="{href}">{label}</a>'
-
-    papers_cls = ' class="active"' if path == "papers.html" else ""
+    links = []
+    for href, label in NAV_ITEMS:
+        cls = ' class="active"' if path == href else ""
+        links.append(f'<a href="{href}"{cls}>{label}</a>')
+    links.append(
+        f'<a href="{esc(inst["lab"])}" target="_blank" rel="noopener">Group<span class="ext" aria-hidden="true">↗</span></a>'
+    )
     return f"""<header class="site-head">
   <nav class="wrap" aria-label="Site">
-    <a class="brand" href="{'#top' if on_index else 'index.html'}">
+    <a class="brand" href="index.html">
       <span class="brand-mark" aria-hidden="true">⇄</span>
       <span><strong>COMS 6998</strong> <span class="brand-sub">AI-Native Computing</span></span>
     </a>
     <div class="nav-links">
-      {link("schedule", "Schedule")}
-      {link("format", "Format")}
-      {link("project", "Project")}
-      {link("policies", "Policies")}
-      <a href="papers.html"{papers_cls}>Papers</a>
+      {chr(10).join(links)}
       <button id="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">
         <span class="ico-sun" aria-hidden="true">☀</span><span class="ico-moon" aria-hidden="true">☾</span>
       </button>
@@ -154,7 +162,7 @@ def footer() -> str:
     <div>
       <a href="https://registrar.columbia.edu/content/academic-calendar" target="_blank" rel="noopener">Registrar academic calendar</a><br>
       <a href="papers.html">Reading list</a> · <a href="course.ics" download>Calendar (.ics)</a><br>
-      <a href="{esc(course["instructor"]["homepage"])}" target="_blank" rel="noopener">Instructor</a> · <a href="{esc(course["instructor"]["lab"])}" target="_blank" rel="noopener">Wan Lab</a>
+      <a href="{esc(inst["homepage"])}" target="_blank" rel="noopener">Instructor Webpage</a> · <a href="{esc(inst["lab"])}" target="_blank" rel="noopener">Research Group</a>
     </div>
     <div class="foot-meta">
       Site generated from <code>data/schedule.yaml</code>.<br>
@@ -164,10 +172,14 @@ def footer() -> str:
 </footer>"""
 
 
-# ---------------------------------------------------------------- hero
+def page_head(title: str, lede: str = "") -> str:
+    lede_html = f'<p class="section-lede">{lede}</p>' if lede else ""
+    return f'<h1 class="page-title">{title}</h1>\n{lede_html}'
+
+
+# ---------------------------------------------------------------- home
 
 def hero() -> str:
-    inst = course["instructor"]
     return f"""<section class="hero" id="top">
   <div class="wrap hero-grid">
     <div class="hero-main">
@@ -181,9 +193,7 @@ def hero() -> str:
       <blockquote class="thesis">AI is transforming computing in two directions: emerging AI workloads demand new hardware and system architectures, while AI is becoming a powerful tool for designing computing systems themselves.</blockquote>
       <ul class="meta-chips">
         <li>{esc(course["meeting"])}</li>
-        <li>Location <span class="tbd">TBD</span></li>
-        <li>13 weeks · seminar</li>
-        <li>Enrollment cap {esc(course["enrollment_cap"])}</li>
+        <li>{esc(course["location"])}</li>
       </ul>
     </div>
     <aside class="instructor-card" aria-label="Instructor">
@@ -191,13 +201,12 @@ def hero() -> str:
       <p class="inst-name">{esc(inst["name"])}</p>
       <ul class="inst-links">
         <li><a href="mailto:{esc(inst["email"])}">{esc(inst["email"])}</a></li>
-        <li><a href="{esc(inst["homepage"])}" target="_blank" rel="noopener">zishenwan.github.io</a></li>
-        <li><a href="{esc(inst["lab"])}" target="_blank" rel="noopener">Wan Lab</a></li>
+        <li><a href="{esc(inst["homepage"])}" target="_blank" rel="noopener">Instructor Webpage</a></li>
+        <li><a href="{esc(inst["lab"])}" target="_blank" rel="noopener">Research Group</a></li>
+        <li><a href="{esc(inst["canvas"])}" target="_blank" rel="noopener">Canvas</a></li>
       </ul>
       <ul class="tbd-list">
-        <li>Office hours <span class="tbd">TBD</span></li>
-        <li>Ed discussion <span class="tbd">TBD</span></li>
-        <li>Canvas <span class="tbd">TBD</span></li>
+        <li><span>Office hours</span> <span class="oh">{esc(inst["office_hours"])}</span></li>
       </ul>
     </aside>
   </div>
@@ -217,24 +226,47 @@ def hero() -> str:
 </section>"""
 
 
-# ---------------------------------------------------------------- announcements
+def short_deadlines(w: dict) -> str:
+    """Compress a week's deadline strings for the at-a-glance table."""
+    outs = []
+    for d in w.get("deadlines", []):
+        outs.append(d.split("—", 1)[1].strip() if "—" in d else d)
+    return "; ".join(outs)
 
-def announcements_html() -> str:
-    items = []
-    for a in announcements:
-        link = ""
-        if a.get("link"):
-            link = f' <a href="{esc(a["link"])}" target="_blank" rel="noopener">{esc(a.get("link_text", "link"))}</a>'
-        items.append(
-            f'<li><time datetime="{a["date"].isoformat()}">{esc(fmt_short(a["date"]))}</time>'
-            f"<span>{esc(a['text'])}{link}</span></li>"
+
+def glance_html() -> str:
+    rows, holidays, hi = [], sorted(no_class, key=lambda r: r["date"]), 0
+    for w in weeks:
+        while hi < len(holidays) and holidays[hi]["date"] < w["date"]:
+            r = holidays[hi]
+            rows.append(
+                f'<tr class="g-holiday"><td>—</td><td>{esc(fmt_short(r["date"]))}</td>'
+                f'<td colspan="2">{esc(r["note"])}</td></tr>'
+            )
+            hi += 1
+        dot = f'<span class="dot g-dot {MODULE_CLASS.get(w["module"], "m-span")}" aria-hidden="true"></span>'
+        dl = esc(short_deadlines(w))
+        rows.append(
+            f'<tr><td>{w["week"]}</td><td>{esc(fmt_short(w["date"]))}</td>'
+            f'<td>{dot}<a href="schedule.html#week-{w["week"]}">{esc(w["title"])}</a></td>'
+            f'<td class="g-dl">{dl or "—"}</td></tr>'
         )
-    return f"""<section class="section" id="announcements" aria-labelledby="announcements-h">
+    return f"""<section class="section" id="glance" aria-labelledby="glance-h">
   <div class="wrap">
-    <h2 id="announcements-h">Announcements</h2>
-    <ul class="ann-list">
-      {chr(10).join(items)}
-    </ul>
+    <div class="section-head">
+      <h2 id="glance-h">Schedule at a glance</h2>
+      <div class="sched-tools">
+        <a class="tool-link" href="schedule.html">Full schedule with readings →</a>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table class="glance-table">
+        <thead><tr><th>Wk</th><th>Date</th><th>Topic</th><th>Deadline</th></tr></thead>
+        <tbody>
+          {chr(10).join(rows)}
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>"""
 
@@ -263,6 +295,15 @@ def paper_li(p: dict, kind: str) -> str:
     return f'<li class="{kind}"><div class="p-head">{" ".join(bits)}</div>{focus}</li>'
 
 
+def optional_entry(o) -> str:
+    """An optional reading is either a plain string or {title, url}."""
+    if isinstance(o, dict):
+        if o.get("url"):
+            return f'<a href="{esc(o["url"])}" target="_blank" rel="noopener">{esc(o["title"])}</a>'
+        return esc(o["title"])
+    return esc(o)
+
+
 def week_article(w: dict) -> str:
     mod = w["module"]
     mcls = MODULE_CLASS.get(mod, "m-span")
@@ -276,7 +317,7 @@ def week_article(w: dict) -> str:
             f'<h3 class="week-title">{esc(w["title"])}</h3>']
 
     if w.get("guest"):
-        body.append(f'<p class="week-note">Guest lecture: {esc(w["guest"]["topic"])} (speaker to be confirmed).</p>')
+        body.append(f'<p class="week-note">Guest lecture: {esc(w["guest"]["topic"])}.</p>')
     if w.get("case_study"):
         cs = esc(w["case_study"])
         if "ArchOrchestra" in w["case_study"]:
@@ -295,7 +336,7 @@ def week_article(w: dict) -> str:
         body.append(f'<p class="p-label">Instructor-selected background · no student presentation</p><ol class="papers">{lis}</ol>')
 
     if w.get("optional"):
-        opts = " · ".join(esc(o) for o in w["optional"])
+        opts = " · ".join(optional_entry(o) for o in w["optional"])
         body.append(
             f'<details class="optional"><summary>Optional readings <span class="opt-count">({len(w["optional"])})</span></summary>'
             f'<p class="opt-body">{opts}</p></details>'
@@ -327,7 +368,7 @@ def holiday_article(r: dict) -> str:
 </article>"""
 
 
-def schedule_html() -> str:
+def schedule_body() -> str:
     rows, holidays = [], sorted(no_class, key=lambda r: r["date"])
     hi = 0
     for w in weeks:
@@ -340,10 +381,10 @@ def schedule_html() -> str:
 
     current_attr = f' data-current-week="{data["current_week"]}"' if data.get("current_week") else ""
     reg = " · ".join(f'{esc(fmt_short(r["date"]))}: {esc(r["note"])}' for r in registrar)
-    return f"""<section class="section" id="schedule" aria-labelledby="schedule-h">
+    return f"""<section class="section" id="schedule">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="schedule-h">Schedule</h2>
+      {page_head("Schedule")}
       <div class="sched-tools">
         <span class="legend"><span class="dot dot-comp" aria-hidden="true"></span>Computing for AI</span>
         <span class="legend"><span class="dot dot-ai" aria-hidden="true"></span>AI for Computing</span>
@@ -351,7 +392,7 @@ def schedule_html() -> str:
         <a class="tool-link" href="course.ics" download>.ics</a>
       </div>
     </div>
-    <p class="section-lede">13 Friday meetings, {esc(course["meeting"].replace("Fridays ", ""))}. Presentation slides are due 8:00 PM the Thursday before class; evidence capsules 5:00 PM the following Monday.</p>
+    <p class="section-lede">13 Friday meetings, {esc(course["meeting"].replace("Fridays ", ""))}, {esc(course["location"])}. Presentation slides are due 8:00 PM the Thursday before class; evidence capsules 5:00 PM the following Monday.</p>
     <div class="weeks"{current_attr}>
       {chr(10).join(rows)}
     </div>
@@ -362,7 +403,7 @@ def schedule_html() -> str:
 
 # ---------------------------------------------------------------- format & grading
 
-def format_html() -> str:
+def format_body() -> str:
     grading_rows = "\n".join(
         f"""<tr><td>{esc(g["component"])}</td>
 <td class="w-num">{g["weight"]}%</td>
@@ -379,10 +420,10 @@ def format_html() -> str:
     ]
     q_lis = "\n".join(f"<li>{q}</li>" for q in questions)
 
-    return f"""<section class="section" id="format" aria-labelledby="format-h">
+    return f"""<section class="section" id="format">
   <div class="wrap">
-    <h2 id="format-h">Course format &amp; grading</h2>
-    <p class="section-lede">Advanced graduate lecture-seminar with a semester-long research project. Nine seminar meetings provide 23 paper-lead slots; every student leads exactly once. There are no exams and no problem sets.</p>
+    {page_head("Course format &amp; grading",
+               "Advanced graduate lecture-seminar with a semester-long research project. Nine seminar meetings provide 23 paper-lead slots; every student leads exactly once. There are no exams and no problem sets.")}
 
     <div class="col2">
       <div class="panel">
@@ -396,20 +437,18 @@ def format_html() -> str:
         </table>
       </div>
       <div class="panel">
-        <h3>Guest-speaker weeks · 3, 6, 10, 11 <span class="tbd">TBC</span></h3>
+        <h3>Guest-speaker weeks</h3>
         <table class="time-table">
-          <tr><td>10:10–10:25</td><td>Instructor mini-lecture</td></tr>
-          <tr><td>10:25–11:05</td><td>Guest lecture + Q&amp;A</td></tr>
-          <tr><td>11:05–11:10</td><td>Break</td></tr>
-          <tr><td>11:10–11:35</td><td>Paper 1 — presentation, critique, discussion</td></tr>
-          <tr><td>11:35–12:00</td><td>Paper 2 — presentation, critique, discussion</td></tr>
+          <tr><td>10:10–10:35</td><td>Paper 1 — presentation, critique, discussion</td></tr>
+          <tr><td>10:35–11:00</td><td>Paper 2 — presentation, critique, discussion</td></tr>
+          <tr><td>11:00–11:10</td><td>Break</td></tr>
+          <tr><td>11:10–12:00</td><td>Guest lecture + Q&amp;A</td></tr>
         </table>
-        <p class="fine">An unfilled guest slot becomes a regular three-paper week.</p>
       </div>
     </div>
 
     <div class="panel lead-panel">
-      <h3>Leading a paper · the 25-minute block</h3>
+      <h3>Student-Led Paper Presentation · the 25-minute block</h3>
       <div class="lead-blocks">
         <div class="lead-block"><span class="lead-min">12 min</span> problem, context, mechanism, and the minimum results needed to understand the paper</div>
         <div class="lead-block"><span class="lead-min">8 min</span> critical analysis of claims, baselines, assumptions, methodology, and missing evidence</div>
@@ -446,10 +485,10 @@ def format_html() -> str:
 
 # ---------------------------------------------------------------- project
 
-def project_html() -> str:
+def project_body() -> str:
     tl_items = []
     for m in milestones:
-        cls = " tl-major" if m["id"] in ("Midterm", "Final") else ""
+        cls = " tl-major" if m["id"] in ("Midterm", "Poster", "Final") else ""
         tl_items.append(
             f"""<li class="tl-item{cls}">
   <span class="tl-dot" aria-hidden="true"></span>
@@ -471,12 +510,12 @@ def project_html() -> str:
     ]
     std_lis = "\n".join(f"<li>{s}</li>" for s in standard)
 
-    return f"""<section class="section" id="project" aria-labelledby="project-h">
+    return f"""<section class="section" id="project">
   <div class="wrap">
-    <h2 id="project-h">Semester-long research project</h2>
-    <p class="section-lede">The project is the center of the course: a carefully scoped research effort that could mature into a top-tier architecture, systems, ML systems, robotics, or EDA paper. Teams of 3–4 are formed by bidding on a curated portfolio of directions; publication is an aspiration, not a grading requirement.</p>
+    {page_head("Semester-long research project",
+               "The project is the center of the course: a carefully scoped research effort that could mature into a top-tier architecture, systems, ML systems, robotics, or EDA paper. Teams of 1–2 are formed by bidding on a curated portfolio of directions; publication is an aspiration, not a grading requirement.")}
 
-    <div class="tracks">
+    <div class="tracks tracks-2">
       <div class="track t-comp">
         <p class="track-id">Track A</p>
         <h3>Computing for AI</h3>
@@ -486,11 +525,6 @@ def project_html() -> str:
         <p class="track-id">Track B</p>
         <h3>AI for Computing</h3>
         <p>Build and rigorously evaluate an agent for software optimization, compilers, GPU kernels, architecture DSE, RTL/EDA, or verification.</p>
-      </div>
-      <div class="track t-loop">
-        <p class="track-id">Track C</p>
-        <h3>Closing the Loop</h3>
-        <p>Build a system that profiles an AI workload, diagnoses a bottleneck, changes model, runtime, or hardware decisions, and experimentally verifies the improvement.</p>
       </div>
     </div>
 
@@ -512,7 +546,7 @@ def project_html() -> str:
 
     <div class="panel">
       <h3>Final submission</h3>
-      <p>A six- to eight-page conference-style paper (excluding references and appendices); a repository with pinned environment, one-command smoke test, and a documented reproduction path for one central result; machine-readable results with scripts regenerating principal figures; an experiment manifest covering seeds, configurations, models, machines, tool versions, and resource budgets; a response-to-feedback memo and individual contribution statements.</p>
+      <p>An eight- to ten-page conference-style paper (excluding references and appendices); a repository with pinned environment, one-command smoke test, and a documented reproduction path for one central result; machine-readable results with scripts regenerating principal figures; an experiment manifest covering seeds, configurations, models, machines, tool versions, and resource budgets; a response-to-feedback memo and individual contribution statements.</p>
     </div>
   </div>
 </section>"""
@@ -520,20 +554,18 @@ def project_html() -> str:
 
 # ---------------------------------------------------------------- policies
 
-def policies_html() -> str:
-    return """<section class="section" id="policies" aria-labelledby="policies-h">
+def policies_body() -> str:
+    return f"""<section class="section" id="policies">
   <div class="wrap">
-    <h2 id="policies-h">Policies</h2>
+    {page_head("Policies")}
 
     <div class="panel policy-ai">
       <h3>AI use and evidence</h3>
       <p class="policy-stance">AI use is permitted and encouraged when it is disclosed, reproducible, and independently verified. Agent output is not evidence by itself.</p>
       <ul class="policy-list">
-        <li>Students may use AI for brainstorming, literature discovery, coding, debugging, experiment orchestration, writing assistance, and design-space exploration.</li>
-        <li>Projects must disclose the models, major prompts or tool workflows, relevant settings, API/token cost, and substantive human modifications.</li>
-        <li>Every citation must be checked against a primary source. Every numerical result must trace to an actual experiment, simulator output, formal result, or cited source.</li>
+        <li>You may use AI throughout the course — brainstorming, literature discovery, coding, debugging, experiment orchestration, and writing assistance — with meaningful use disclosed.</li>
+        <li>Every citation must be checked against a primary source, and every numerical result must trace to an actual experiment, simulator output, formal result, or cited source.</li>
         <li>AI-generated code must satisfy the same correctness, testing, performance, licensing, and provenance requirements as human-written code.</li>
-        <li>The final artifact must distinguish agent actions, human decisions, tool feedback, and verified outcomes.</li>
       </ul>
     </div>
 
@@ -567,9 +599,42 @@ def policies_html() -> str:
 </section>"""
 
 
+# ---------------------------------------------------------------- students
+
+def initials(name: str) -> str:
+    parts = [p for p in name.split() if p]
+    return "".join(p[0].upper() for p in parts[:2]) or "?"
+
+
+def students_body() -> str:
+    if not students:
+        cards = """<div class="panel roster-empty">
+      <p>The class roster will appear here once enrollment is finalized in September.</p>
+    </div>"""
+    else:
+        items = []
+        for s in students:
+            if s.get("photo"):
+                avatar = f'<img class="stu-photo" src="{esc(s["photo"])}" alt="" loading="lazy">'
+            else:
+                avatar = f'<span class="stu-photo stu-initials" aria-hidden="true">{esc(initials(s["name"]))}</span>'
+            name = esc(s["name"])
+            if s.get("link"):
+                name = f'<a href="{esc(s["link"])}" target="_blank" rel="noopener">{name}</a>'
+            items.append(f'<li class="stu-card">{avatar}<span class="stu-name">{name}</span></li>')
+        cards = f'<ul class="students-grid">{chr(10).join(items)}</ul>'
+    return f"""<section class="section" id="students">
+  <div class="wrap">
+    {page_head("Students",
+               "The people of COMS 6998, Fall 2026.")}
+    {cards}
+  </div>
+</section>"""
+
+
 # ---------------------------------------------------------------- papers page
 
-def papers_page_body() -> str:
+def papers_body() -> str:
     blocks = []
     n_req = sum(len(w.get("papers", []) or w.get("background", [])) for w in weeks)
     n_opt = sum(len(w.get("optional", [])) for w in weeks)
@@ -581,7 +646,7 @@ def papers_page_body() -> str:
         lis = "\n".join(paper_li(p, "req") for p in (req or []))
         opt = ""
         if w.get("optional"):
-            opt = f'<p class="p-label">Optional</p><p class="opt-body">{" · ".join(esc(o) for o in w["optional"])}</p>'
+            opt = f'<p class="p-label">Optional</p><p class="opt-body">{" · ".join(optional_entry(o) for o in w["optional"])}</p>'
         blocks.append(
             f"""<article class="papers-week {MODULE_CLASS.get(w["module"], "m-span")}">
   <h2><span class="wk-tag">Wk {w["week"]:02d} · {esc(fmt_short(w["date"]))}</span> {esc(w["title"])}</h2>
@@ -592,8 +657,8 @@ def papers_page_body() -> str:
         )
     return f"""<section class="section papers-index">
   <div class="wrap">
-    <h1>Reading list</h1>
-    <p class="section-lede">All {n_req} required readings and {n_opt} optional readings, by week. Links were individually verified against primary sources in August 2026. <a href="index.html#schedule">Back to the schedule.</a></p>
+    {page_head("Reading list",
+               f'All {n_req} required readings and {n_opt} optional readings, by week. Links were individually verified against primary sources in August 2026. <a href="schedule.html">Back to the schedule.</a>')}
     {chr(10).join(blocks)}
   </div>
 </section>"""
@@ -642,12 +707,12 @@ def ics() -> str:
             f"DTSTART;TZID=America/New_York:{d}T101000",
             f"DTEND;TZID=America/New_York:{d}T120000",
             f"SUMMARY:{summary}",
-            "LOCATION:TBD",
+            f"LOCATION:{ics_escape(course['location'])}",
             "END:VEVENT",
         ]
     for m in milestones:
         d = m["date"]
-        summary = ics_escape(f'COMS 6998 due: {m["id"]} {m["name"]}')
+        summary = ics_escape(f'COMS 6998: {m["id"]} — {m["name"]}')
         lines += [
             "BEGIN:VEVENT",
             f"UID:coms6998-f26-ms-{m['id'].lower()}@columbia.edu",
@@ -671,15 +736,30 @@ def main() -> None:
 
     desc = ("COMS 6998, Columbia University, Fall 2026. Graduate seminar on hardware and systems "
             "for AI workloads, and AI agents for designing computing systems. Fridays 10:10-12:00.")
-    index_body = "\n".join([hero(), announcements_html(), schedule_html(), format_html(), project_html(), policies_html()])
-    (OUT / "index.html").write_text(page(
-        title="COMS 6998 · AI-Native Computing · Fall 2026",
-        description=desc, body=index_body, path="index.html"))
-
-    (OUT / "papers.html").write_text(page(
-        title="Reading list · COMS 6998 AI-Native Computing",
-        description="All required and optional readings for COMS 6998 (Fall 2026), by week.",
-        body=papers_page_body(), path="papers.html"))
+    pages = {
+        "index.html": ("COMS 6998 · AI-Native Computing · Fall 2026", desc,
+                       "\n".join([hero(), glance_html()])),
+        "schedule.html": ("Schedule · COMS 6998 AI-Native Computing",
+                          "Weekly schedule with required and optional readings for COMS 6998 (Fall 2026).",
+                          schedule_body()),
+        "format.html": ("Format & grading · COMS 6998 AI-Native Computing",
+                        "Seminar format, paper presentations, and grading for COMS 6998 (Fall 2026).",
+                        format_body()),
+        "project.html": ("Project · COMS 6998 AI-Native Computing",
+                         "Semester-long research project: tracks, research standard, and milestones.",
+                         project_body()),
+        "policies.html": ("Policies · COMS 6998 AI-Native Computing",
+                          "Course policies for COMS 6998 (Fall 2026), including the AI-use policy.",
+                          policies_body()),
+        "papers.html": ("Reading list · COMS 6998 AI-Native Computing",
+                        "All required and optional readings for COMS 6998 (Fall 2026), by week.",
+                        papers_body()),
+        "students.html": ("Students · COMS 6998 AI-Native Computing",
+                          "The students of COMS 6998 (Fall 2026).",
+                          students_body()),
+    }
+    for path, (title, d, body) in pages.items():
+        (OUT / path).write_text(page(title=title, description=d, body=body, path=path))
 
     (OUT / "course.ics").write_text(ics())
     print(f"Built {OUT} ({sum(1 for _ in OUT.rglob('*') if _.is_file())} files)")
