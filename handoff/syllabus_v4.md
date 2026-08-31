@@ -1,3 +1,6 @@
+> **ARCHIVED INPUT — DO NOT EDIT.** The website source is now canonical. The current
+> student-facing syllabus is generated at `../syllabus.md` by `../build.py`.
+
 # COMS 6998 | Fall 2026
 # AI-Native Computing
 ## *Hardware for AI, AI for Hardware*

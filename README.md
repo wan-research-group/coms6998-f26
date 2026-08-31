@@ -1,7 +1,8 @@
 # COMS 6998 · AI-Native Computing - course website
 
 Static course site for **COMS 6998: AI-Native Computing (Fall 2026)**, Columbia University.
-The schedule and reading list are generated from one data file.
+The website source is canonical; the schedule, reading list, and student-facing
+syllabus are generated from the same course data.
 
 ## Quick start (local preview)
 
@@ -15,9 +16,9 @@ Then open <http://localhost:8000>.
 ## Weekly updates
 
 **`data/schedule.yaml`** is the single source of truth for the home-page
-"at a glance" table, the schedule page, and the papers page. Edit it and
-push; the GitHub Action rebuilds and redeploys automatically (you can even
-edit the file in the GitHub web UI).
+"Now" and "at a glance" views, schedule page, papers page, and the generated
+`syllabus.md`. Edit it and push; the GitHub Action rebuilds and redeploys
+automatically (you can even edit the file in the GitHub web UI).
 
 Fields a week entry understands:
 
@@ -37,6 +38,14 @@ The **current week is highlighted automatically by date** (and past weeks are
 dimmed). To pin it manually instead, add a top-level `current_week: 5` to
 `data/schedule.yaml`.
 
+**Announcements**: edit `data/announcements.yaml`; keep the newest entries at
+the top or rely on the date sort. The home page displays the latest three.
+
+**Syllabus**: `python3 build.py` regenerates both `syllabus.md` and
+`_site/syllabus.md`. Do not edit the generated syllabus directly; edit
+`build.py` for shared course prose or `data/schedule.yaml` for structured
+course information, then rebuild.
+
 **Students page**: add entries to `data/students.yaml` (`name`, optional
 `link` and `photo`; put photo files under `assets/students/`). While the list
 is empty the page shows a placeholder.
@@ -47,8 +56,9 @@ is empty the page shows a placeholder.
 2. Repository **Settings → Pages → Source: GitHub Actions**.
 3. Every push to `main` runs `.github/workflows/deploy.yml`, which builds with
    `python build.py` and deploys `_site/`.
-4. Once the URL exists, set `SITE_URL` at the top of `build.py` (enables
-   canonical + `og:url` tags).
+4. The build infers the standard GitHub Pages URL from `GITHUB_REPOSITORY` and
+   emits canonical, `og:url`, and `og:image` tags. For a custom domain, set the
+   `SITE_URL` environment variable in the workflow or local build.
 
 ## Why this stack
 
@@ -67,25 +77,25 @@ This site is **hand-rolled HTML/CSS/JS + a single-file Python renderer**
 
 | Output | Contents |
 |---|---|
-| `_site/index.html` | Home: hero, course info, instructor card, schedule at a glance |
+| `_site/index.html` | Home: hero, current week/readings, next deadline, announcements, course info, schedule at a glance |
 | `_site/schedule.html` | Full weekly schedule with readings, guests, deadlines |
 | `_site/format.html` | Seminar format, presentation structure, grading |
 | `_site/project.html` | Project tracks, research standard, milestones |
 | `_site/policies.html` | AI-use policy and course policies |
 | `_site/papers.html` | Compact reading list of all required/optional papers by week |
 | `_site/students.html` | Class roster (from `data/students.yaml`) |
-| `_site/assets/` | CSS, JS, favicon (copied verbatim) |
+| `_site/syllabus.md` | Generated student-facing syllabus (also written to root `syllabus.md`) |
+| `_site/assets/` | CSS, JS, favicon, and social preview image (copied verbatim) |
 
 Light/dark theme (system default + manual toggle), responsive schedule
 (cards on mobile), print stylesheet, keyboard-accessible collapsibles.
-The top-nav "Group" item links to the Wan Lab site.
+The research-group link lives in the footer to keep the mobile navigation compact.
 
 ## TBD checklist (replace as they land)
 
 - [ ] Guest speaker confirmations (`guest:` labels in `data/schedule.yaml` - never add names before they are confirmed)
 - [ ] ArchOrchestra arXiv link (Week 11 `case_study` + optional reading, expected September)
 - [ ] Student roster in `data/students.yaml` after enrollment settles
-- [ ] `SITE_URL` in `build.py` after the repo/Pages URL exists
 
 ## Layout
 
@@ -93,9 +103,11 @@ The top-nav "Group" item links to the Wan Lab site.
 ├── build.py                  # renderer
 ├── data/
 │   ├── schedule.yaml         # ← EDIT WEEKLY (single source of truth)
+│   ├── announcements.yaml    # ← latest home-page announcements
 │   └── students.yaml         # ← class roster for students.html
-├── assets/                   # style.css, site.js, favicon.svg (+ students/ photos)
+├── assets/                   # style.css, site.js, favicon.svg, og.png (+ students/ photos)
+├── syllabus.md               # generated; do not edit directly
 ├── .github/workflows/deploy.yml
-├── handoff/                  # original spec + syllabus (reference only, not built)
+├── handoff/                  # archived original spec + syllabus (reference only)
 └── _site/                    # build output (gitignored)
 ```

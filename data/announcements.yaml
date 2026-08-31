@@ -1,0 +1,11 @@
+# Homepage announcements, newest first when dates differ.
+# Keep each item short; the homepage displays the latest three.
+
+announcements:
+  - date: 2026-08-31
+    title: "Course website is live"
+    body: "The complete schedule and reading list are now available. Material updates will also be announced in Canvas."
+
+  - date: 2026-08-31
+    title: "First meeting"
+    body: "We meet Friday, September 11, 10:10 AM-12:00 PM in 602 Northwest Corner."

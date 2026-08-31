@@ -3,7 +3,7 @@
 
 Reads data/schedule.yaml and data/students.yaml, renders the site into
 _site/ (index, schedule, format, project, policies, papers, students)
-and copies assets/.
+and copies assets/. It also regenerates the student-facing syllabus.md.
 
 Usage:  python3 build.py
 Deps:   pyyaml
@@ -12,16 +12,37 @@ from __future__ import annotations
 
 import datetime as dt
 import html
+import os
 import pathlib
+import re
 import shutil
+from zoneinfo import ZoneInfo
 
 import yaml
 
 ROOT = pathlib.Path(__file__).resolve().parent
 OUT = ROOT / "_site"
 
-# Set once the repository has a public URL (used for canonical/og:url).
-SITE_URL = ""
+def public_site_url() -> str:
+    """Resolve the public origin without hard-coding a repository name.
+
+    SITE_URL wins when set explicitly. On GitHub Actions, infer the normal
+    GitHub Pages URL from GITHUB_REPOSITORY (owner/repository).
+    """
+    explicit = os.environ.get("SITE_URL", "").strip().rstrip("/")
+    if explicit:
+        return explicit
+    repository = os.environ.get("GITHUB_REPOSITORY", "").strip()
+    if "/" not in repository:
+        return ""
+    owner, name = repository.split("/", 1)
+    root_repo = f"{owner}.github.io"
+    suffix = "" if name.lower() == root_repo.lower() else f"/{name}"
+    return f"https://{owner}.github.io{suffix}"
+
+
+SITE_URL = public_site_url()
+COURSE_TZ = ZoneInfo("America/New_York")
 
 MODULE_CLASS = {
     "Computing for AI": "m-comp",
@@ -42,6 +63,111 @@ TYPE_NOTE = {
     "poster": "Poster showcase; no mini-lecture and no assigned papers.",
 }
 
+COURSE_THESIS = (
+    "AI is transforming computing in two directions: emerging AI workloads demand new "
+    "hardware and system architectures, while AI is becoming a powerful tool for designing "
+    "computing systems themselves."
+)
+
+LEARNING_OUTCOMES = [
+    ("Profile and diagnose AI systems.",
+     "Represent an AI application as a pipeline, dynamic DAG, or feedback loop; measure latency, throughput, utilization, energy, and cost; locate bottlenecks with roofline reasoning, queueing, and trace analysis."),
+    ("Reason across the stack.",
+     "Connect model, software, runtime, architecture, memory, accelerator, SoC, and deployment decisions, and evaluate joint quality-performance-energy-cost tradeoffs."),
+    ("Serve and accelerate emerging workloads.",
+     "LLM and agent serving, embodied and physical AI inference, neuro-symbolic acceleration, datacenter accelerators, and SoCs."),
+    ("Build AI that designs computing systems.",
+     "Formulate system design as an agent environment with state, actions, tools, and feedback; compare LLM agents, RL, Bayesian optimization, and classical heuristics under matched budgets."),
+    ("Audit claims like a reviewer.",
+     "Read papers and industry claims against baselines, budgets, ablations, and held-out evidence."),
+    ("Produce conference-style research.",
+     "A semester-long project with meaningful baselines, ablations, failure analysis, and a reproducible artifact."),
+]
+
+PREREQUISITES = [
+    ("Expected", "Basic computer organization or systems knowledge, familiarity with machine-learning concepts, and the ability to program and run quantitative experiments."),
+    ("Helpful, not required", "Experience with CUDA, compilers, digital design, RTL, EDA, robotics simulators, FPGA platforms, LLM agents, or research-paper reading. No one is expected to arrive with expertise across the entire stack."),
+    ("Project readiness", "Each team should bring enough complementary expertise to implement, measure, and evaluate its selected project."),
+]
+
+REGULAR_FORMAT = [
+    ("10:10-10:35", "Instructor mini-lecture: concepts, methods, cross-paper connections"),
+    ("10:35-11:00", "Paper 1 - presentation, critique, discussion"),
+    ("11:00-11:10", "Break"),
+    ("11:10-11:35", "Paper 2 - presentation, critique, discussion"),
+    ("11:35-12:00", "Paper 3 - presentation, critique, discussion"),
+]
+
+GUEST_FORMAT = [
+    ("10:10-10:35", "Paper 1 - presentation, critique, discussion"),
+    ("10:35-11:00", "Paper 2 - presentation, critique, discussion"),
+    ("11:00-11:10", "Break"),
+    ("11:10-12:00", "Guest lecture + Q&A"),
+]
+
+DISCUSSION_QUESTIONS = [
+    "What is the paper's exact central claim?",
+    "Which experiment most directly supports that claim?",
+    "What hidden assumption is most likely to break?",
+    "Is the baseline fair and budget-matched?",
+    "Which conclusion extends beyond the presented evidence?",
+    "What single additional experiment would most change confidence in the result?",
+]
+
+RESEARCH_STANDARD = [
+    "A falsifiable research question and a precise intended claim.",
+    "At least two meaningful baselines, including a classical or non-agentic baseline where applicable.",
+    "A mechanism, not only a correlation or leaderboard result.",
+    "At least one ablation or controlled intervention tied to the central claim.",
+    "Joint reporting of task quality or success and relevant systems metrics.",
+    "A held-out workload, configuration, system scale, or design budget.",
+    "Explicit compute, GPU, API, token, simulation, and wall-clock budgets.",
+    "Failure-case analysis, including invalid actions and tool failures for agentic design systems.",
+    "Reproducible code, environment instructions, configurations, data, and figure-generation scripts.",
+]
+
+PROJECT_OVERVIEW = (
+    "The project is the center of the course: a carefully scoped research effort that could "
+    "mature into a top-tier architecture, systems, ML systems, robotics, or EDA paper. Teams "
+    "of 1-2 are formed by bidding on a curated portfolio of directions; publication is an "
+    "aspiration, not a grading requirement."
+)
+
+PROJECT_TRACKS = [
+    ("Track A", "Computing for AI",
+     "Profile, serve, schedule, map, accelerate, or make reliable an LLM, agentic, physical, or neuro-symbolic workload."),
+    ("Track B", "AI for Computing",
+     "Build and rigorously evaluate an agent for software optimization, compilers, GPU kernels, architecture DSE, RTL/EDA, or verification."),
+]
+
+FINAL_SUBMISSION = (
+    "An eight- to ten-page conference-style paper (excluding references and appendices); a "
+    "repository with pinned environment, one-command smoke test, and a documented reproduction "
+    "path for one central result; machine-readable results with scripts regenerating principal "
+    "figures; an experiment manifest covering seeds, configurations, models, machines, tool "
+    "versions, and resource budgets; a response-to-feedback memo and individual contribution statements."
+)
+
+AI_POLICY_STANCE = (
+    "AI use is permitted and encouraged when it is disclosed, reproducible, and independently "
+    "verified. Agent output is not evidence by itself."
+)
+
+AI_POLICY_ITEMS = [
+    "You may use AI throughout the course - brainstorming, literature discovery, coding, debugging, experiment orchestration, and writing assistance - with meaningful use disclosed.",
+    "Every citation must be checked against a primary source, and every numerical result must trace to an actual experiment, simulator output, formal result, or cited source.",
+    "AI-generated code must satisfy the same correctness, testing, performance, licensing, and provenance requirements as human-written code.",
+]
+
+POLICY_SECTIONS = [
+    ("Academic integrity", "Students must follow Columbia academic-integrity policies. Fabricated citations, invented experiments, altered logs, undisclosed result selection, plagiarism, or presenting agent-generated claims as verified evidence are serious violations. When in doubt, disclose the tool, source, assistance, or collaboration."),
+    ("Collaboration & authorship", "Course collaboration does not automatically establish publication authorship. If a project continues after the semester, authorship and ordering follow substantive intellectual and technical contributions, manuscript participation, accountability, and venue policies. Students retain credit for their work; continuation plans should be discussed transparently with the instructor and research mentors."),
+    ("Accessibility & accommodations", "Students who require disability-related accommodations should contact Columbia Disability Services and inform the instructor as early as possible so approved accommodations can be implemented. Please communicate time-sensitive circumstances before deadlines whenever possible."),
+    ("Resource fairness", "Projects report GPU, API, token, simulation, and wall-clock budgets. Grades are not based on access to the largest model or most GPUs. Every project defines a fallback experiment that remains valid if an API, simulator, board, robot, or cloud resource becomes unavailable. Curated starter environments and smoke tests are provided for officially supported directions when feasible."),
+    ("Late work", "Each team may use one 48-hour grace pass on a written milestone, requested before the deadline. The grace pass does not apply to in-class presentations, the final poster, or the final submission. Other extensions require prior approval or documented circumstances."),
+    ("Changes to the syllabus", "This is a first-offering advanced-topics course in a rapidly changing research area. Individual readings, project briefs, guest-speaker scheduling, or detailed deadlines may be updated when new work appears or infrastructure changes. Material changes will be announced clearly and will not retroactively disadvantage students."),
+]
+
 
 def esc(s) -> str:
     return html.escape(str(s), quote=True)
@@ -59,6 +185,7 @@ def fmt_long(d: dt.date) -> str:
 
 data = yaml.safe_load((ROOT / "data" / "schedule.yaml").read_text())
 students_data = yaml.safe_load((ROOT / "data" / "students.yaml").read_text())
+announcements_data = yaml.safe_load((ROOT / "data" / "announcements.yaml").read_text())
 
 course = data["course"]
 inst = course["instructor"]
@@ -67,6 +194,11 @@ milestones = data["milestones"]
 grading = data["grading"]
 registrar = data["registrar_dates"]
 students = students_data.get("students") or []
+announcements = sorted(
+    announcements_data.get("announcements") or [],
+    key=lambda item: item["date"],
+    reverse=True,
+)
 
 no_class = [r for r in registrar if str(r["note"]).lower().startswith("no class")]
 
@@ -85,11 +217,22 @@ NAV_ITEMS = [
 
 def page(*, title: str, description: str, body: str, path: str) -> str:
     canonical = ""
+    social_image = ""
+    twitter_card = "summary"
     if SITE_URL:
+        image_url = SITE_URL.rstrip("/") + "/assets/og.png"
         canonical = (
             f'\n  <link rel="canonical" href="{esc(SITE_URL.rstrip("/") + "/" + path)}">'
             f'\n  <meta property="og:url" content="{esc(SITE_URL.rstrip("/") + "/" + path)}">'
         )
+        social_image = (
+            f'\n  <meta property="og:image" content="{esc(image_url)}">'
+            '\n  <meta property="og:image:width" content="1734">'
+            '\n  <meta property="og:image:height" content="907">'
+            '\n  <meta property="og:image:alt" content="COMS 6998 AI-Native Computing">'
+            f'\n  <meta name="twitter:image" content="{esc(image_url)}">'
+        )
+        twitter_card = "summary_large_image"
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,8 +243,10 @@ def page(*, title: str, description: str, body: str, path: str) -> str:
   <meta property="og:type" content="website">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
-  <meta property="og:site_name" content="COMS 6998 · AI-Native Computing">
-  <meta name="twitter:card" content="summary">{canonical}
+  <meta property="og:site_name" content="COMS 6998 · AI-Native Computing">{social_image}
+  <meta name="twitter:card" content="{twitter_card}">
+  <meta name="twitter:title" content="{esc(title)}">
+  <meta name="twitter:description" content="{esc(description)}">{canonical}
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e1116">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -137,9 +282,6 @@ def nav(path: str) -> str:
     for href, label in NAV_ITEMS:
         cls = ' class="active"' if path == href else ""
         links.append(f'<a href="{href}"{cls}>{label}</a>')
-    links.append(
-        f'<a href="{esc(inst["lab"])}" target="_blank" rel="noopener">Group<span class="ext" aria-hidden="true">↗</span></a>'
-    )
     return f"""<header class="site-head">
   <nav class="wrap" aria-label="Site">
     <a class="brand" href="index.html">
@@ -168,6 +310,7 @@ def footer() -> str:
     <div>
       <a href="https://registrar.columbia.edu/content/academic-calendar" target="_blank" rel="noopener">Registrar academic calendar</a><br>
       <a href="papers.html">Reading list</a><br>
+      <a href="syllabus.md">Syllabus</a><br>
       <a href="{esc(inst["homepage"])}" target="_blank" rel="noopener">Instructor Webpage</a> · <a href="{esc(inst["lab"])}" target="_blank" rel="noopener">Research Group</a>
     </div>
     <div class="foot-meta">
@@ -195,7 +338,7 @@ def hero() -> str:
         <span class="d-arrows" aria-hidden="true">⇄</span>
         <span class="d-ai">AI for Hardware</span>
       </p>
-      <blockquote class="thesis">AI is transforming computing in two directions: emerging AI workloads demand new hardware and system architectures, while AI is becoming a powerful tool for designing computing systems themselves.</blockquote>
+      <blockquote class="thesis">{esc(COURSE_THESIS)}</blockquote>
       <ul class="meta-chips">
         <li><strong>Course Time:</strong> {esc(course["meeting"])}</li>
         <li><strong>Location:</strong> {esc(course["location"])}</li>
@@ -231,24 +374,106 @@ def hero() -> str:
 </section>"""
 
 
+def dated_deadlines() -> list[dict]:
+    """Return display deadlines with machine-readable local timestamps."""
+    pattern = re.compile(
+        r"^(?P<date>[A-Z][a-z]{2} \d{1,2})(?:, (?P<time>\d{1,2}:\d{2} [AP]M))? - (?P<label>.+)$"
+    )
+    year = weeks[0]["date"].year
+    records = []
+    for week in weeks:
+        for raw in week.get("deadlines", []):
+            match = pattern.match(raw)
+            if not match:
+                continue
+            clock = match.group("time") or "11:59 PM"
+            due = dt.datetime.strptime(
+                f'{match.group("date")} {year} {clock}', "%b %d %Y %I:%M %p"
+            ).replace(tzinfo=COURSE_TZ)
+            display = match.group("date")
+            if match.group("time"):
+                display += f', {match.group("time")}'
+            records.append({"due": due, "display": display, "label": match.group("label")})
+    return sorted(records, key=lambda item: item["due"])
+
+
+def now_html() -> str:
+    today = dt.date.today()
+    visible_week = next((w for w in weeks if w["date"] >= today), weeks[-1])
+    class_cards = []
+    for week in weeks:
+        required = week.get("papers") or week.get("background") or []
+        if required:
+            reading_items = "".join(
+                f'<li><a href="{esc(p["url"])}" target="_blank" rel="noopener">{esc(p["title"])}</a>'
+                f' <span class="venue">{esc(p["venue"])}</span></li>'
+                if p.get("url") else f'<li>{esc(p["title"])}</li>'
+                for p in required
+            )
+            readings = f'<ol class="now-readings">{reading_items}</ol>'
+        else:
+            readings = '<p class="now-empty">No assigned readings.</p>'
+        hidden = "" if week is visible_week else " hidden"
+        class_cards.append(
+            f"""<article class="now-class" data-date="{week['date'].isoformat()}" data-week="{week['week']}"{hidden}>
+  <p class="now-label"><span class="now-state">Next class</span> · Week {week['week']:02d} · <time datetime="{week['date'].isoformat()}">{esc(fmt_short(week['date']))}</time></p>
+  <h3><a href="schedule.html#week-{week['week']}">{esc(week['title'])}</a></h3>
+  <p class="now-subhead">Required reading</p>
+  {readings}
+</article>"""
+        )
+
+    deadlines = dated_deadlines()
+    now = dt.datetime.now(COURSE_TZ)
+    visible_deadline = next((item for item in deadlines if item["due"] >= now), None)
+    deadline_items = []
+    for item in deadlines:
+        hidden = "" if item is visible_deadline else " hidden"
+        deadline_items.append(
+            f"""<div class="now-deadline-item" data-due="{item['due'].isoformat()}"{hidden}>
+  <time datetime="{item['due'].isoformat()}">{esc(item['display'])}</time>
+  <p>{esc(item['label'])}</p>
+</div>"""
+        )
+    if not deadline_items:
+        deadline_items.append('<p class="now-empty">No upcoming deadlines.</p>')
+
+    news_items = "\n".join(
+        f"""<li>
+  <time datetime="{item['date'].isoformat()}">{esc(fmt_short(item['date']))}</time>
+  <div><strong>{esc(item['title'])}</strong><p>{esc(item['body'])}</p></div>
+</li>"""
+        for item in announcements[:3]
+    )
+
+    return f"""<section class="now-section" id="now" aria-labelledby="now-h">
+  <div class="wrap">
+    <div class="now-heading">
+      <p class="eyebrow">Now</p>
+      <h2 id="now-h">Start here this week</h2>
+    </div>
+    <div class="now-grid">
+      <div class="now-panel now-class-panel">
+        {chr(10).join(class_cards)}
+      </div>
+      <div class="now-panel now-deadline-panel">
+        <p class="now-kicker">Next deadline</p>
+        {chr(10).join(deadline_items)}
+        <p class="now-empty" id="now-no-deadline" hidden>No upcoming deadlines.</p>
+      </div>
+      <div class="now-panel now-news-panel">
+        <p class="now-kicker">Announcements</p>
+        <ol class="now-news">{news_items}</ol>
+      </div>
+    </div>
+  </div>
+</section>"""
+
+
 def learn_html() -> str:
-    cards = [
-        ("Profile and diagnose AI systems.",
-         "Represent an AI application as a pipeline, dynamic DAG, or feedback loop; measure latency, throughput, utilization, energy, and cost; locate bottlenecks with roofline reasoning, queueing, and trace analysis."),
-        ("Reason across the stack.",
-         "Connect model, software, runtime, architecture, memory, accelerator, SoC, and deployment decisions, and evaluate joint quality-performance-energy-cost tradeoffs."),
-        ("Serve and accelerate emerging workloads.",
-         "LLM and agent serving, embodied and physical AI inference, neuro-symbolic acceleration, datacenter accelerators, and SoCs."),
-        ("Build AI that designs computing systems.",
-         "Formulate system design as an agent environment with state, actions, tools, and feedback; compare LLM agents, RL, Bayesian optimization, and classical heuristics under matched budgets."),
-        ("Audit claims like a reviewer.",
-         "Read papers and industry claims against baselines, budgets, ablations, and held-out evidence."),
-        ("Produce conference-style research.",
-         "A semester-long project with meaningful baselines, ablations, failure analysis, and a reproducible artifact."),
-    ]
     items = "\n".join(
         f'<div class="learn-card"><p><strong>{lead}</strong> {body}</p></div>'
-        for lead, body in cards
+        for lead, body in LEARNING_OUTCOMES
     )
     return f"""<section class="section" id="learn" aria-labelledby="learn-h">
   <div class="wrap">
@@ -261,23 +486,19 @@ def learn_html() -> str:
 
 
 def prereq_html() -> str:
-    return """<section class="section" id="prereqs" aria-labelledby="prereqs-h">
+    items = "\n".join(
+        f"""<div>
+          <dt>{esc(label)}</dt>
+          <dd>{esc(body)}</dd>
+        </div>"""
+        for label, body in PREREQUISITES
+    )
+    return f"""<section class="section" id="prereqs" aria-labelledby="prereqs-h">
   <div class="wrap">
     <h2 id="prereqs-h">Prerequisites &amp; expectations</h2>
     <div class="panel prereq-panel">
       <dl class="prereq-list">
-        <div>
-          <dt>Expected</dt>
-          <dd>Basic computer organization or systems knowledge, familiarity with machine-learning concepts, and the ability to program and run quantitative experiments.</dd>
-        </div>
-        <div>
-          <dt>Helpful, not required</dt>
-          <dd>Experience with CUDA, compilers, digital design, RTL, EDA, robotics simulators, FPGA platforms, LLM agents, or research-paper reading. No one is expected to arrive with expertise across the entire stack.</dd>
-        </div>
-        <div>
-          <dt>Project readiness</dt>
-          <dd>Each team should bring enough complementary expertise to implement, measure, and evaluate its selected project.</dd>
-        </div>
+        {items}
       </dl>
       <p class="fine"><strong>Scope note.</strong> The course covers cross-layer computing systems, spanning computer architecture, software systems, and silicon, for emerging AI workloads such as physical, embodied, neuro-symbolic, and agentic AI; and agentic AI methods that design, optimize, and verify computing systems themselves. The two directions close a loop: better computing enables stronger AI, and stronger AI builds better computing.</p>
     </div>
@@ -380,7 +601,7 @@ def week_article(w: dict) -> str:
         tags.append(f'<span class="chip chip-guest">🎤 {esc(w["guest"]["label"])}</span>')
 
     body = [f'<div class="week-tags">{"".join(tags)}<span class="chip chip-now" hidden>this week</span></div>',
-            f'<h3 class="week-title">{esc(w["title"])}</h3>']
+            f'<h2 class="week-title">{esc(w["title"])}</h2>']
 
     if w.get("guest"):
         body.append(f'<p class="week-note">Guest lecture: {esc(w["guest"]["topic"])}.</p>')
@@ -478,7 +699,7 @@ def schedule_body() -> str:
         if w["module"] in MODULE_DIVIDERS and w["module"] not in seen_dividers:
             seen_dividers.add(w["module"])
             mcls, label = MODULE_DIVIDERS[w["module"]]
-            rows.append(f'<h3 class="module-divider {mcls}"><span>{esc(label)}</span></h3>')
+            rows.append(f'<h2 class="module-divider {mcls}"><span>{esc(label)}</span></h2>')
         rows.append(week_article(w))
     for r in holidays[hi:]:
         rows.append(holiday_article(r))
@@ -509,20 +730,20 @@ def schedule_body() -> str:
 
 def format_body() -> str:
     grading_rows = "\n".join(
-        f"""<tr><td>{esc(g["component"])}</td>
+        f"""<tr><th scope="row">{esc(g["component"])}</th>
 <td class="w-num">{g["weight"]}%</td>
-<td class="w-bar"><span style="width:{g["weight"] * 2}%"></span></td></tr>"""
+<td class="w-bar" aria-hidden="true"><span style="width:{g["weight"] * 2}%"></span></td></tr>"""
         for g in grading
     )
-    questions = [
-        "What is the paper's exact central claim?",
-        "Which experiment most directly supports that claim?",
-        "What hidden assumption is most likely to break?",
-        "Is the baseline fair and budget-matched?",
-        "Which conclusion extends beyond the presented evidence?",
-        "What single additional experiment would most change confidence in the result?",
-    ]
-    q_lis = "\n".join(f"<li>{q}</li>" for q in questions)
+    q_lis = "\n".join(f"<li>{q}</li>" for q in DISCUSSION_QUESTIONS)
+    regular_rows = "\n".join(
+        f'<tr><th scope="row">{esc(time)}</th><td>{esc(component)}</td></tr>'
+        for time, component in REGULAR_FORMAT
+    )
+    guest_rows = "\n".join(
+        f'<tr><th scope="row">{esc(time)}</th><td>{esc(component)}</td></tr>'
+        for time, component in GUEST_FORMAT
+    )
 
     return f"""<section class="section" id="format">
   <div class="wrap">
@@ -531,28 +752,23 @@ def format_body() -> str:
 
     <div class="col2">
       <div class="panel">
-        <h3>Regular seminar · 110 minutes</h3>
+        <h2>Regular week · 110 minutes</h2>
         <table class="time-table">
-          <tr><td>10:10-10:35</td><td>Instructor mini-lecture: concepts, methods, cross-paper connections</td></tr>
-          <tr><td>10:35-11:00</td><td>Paper 1 - presentation, critique, discussion</td></tr>
-          <tr><td>11:00-11:10</td><td>Break</td></tr>
-          <tr><td>11:10-11:35</td><td>Paper 2 - presentation, critique, discussion</td></tr>
-          <tr><td>11:35-12:00</td><td>Paper 3 - presentation, critique, discussion</td></tr>
+          <caption class="visually-hidden">Regular week schedule</caption>
+          <tbody>{regular_rows}</tbody>
         </table>
       </div>
       <div class="panel">
-        <h3>Guest-speaker weeks</h3>
+        <h2>Guest-speaker weeks</h2>
         <table class="time-table">
-          <tr><td>10:10-10:35</td><td>Paper 1 - presentation, critique, discussion</td></tr>
-          <tr><td>10:35-11:00</td><td>Paper 2 - presentation, critique, discussion</td></tr>
-          <tr><td>11:00-11:10</td><td>Break</td></tr>
-          <tr><td>11:10-12:00</td><td>Guest lecture + Q&amp;A</td></tr>
+          <caption class="visually-hidden">Guest-speaker week schedule</caption>
+          <tbody>{guest_rows}</tbody>
         </table>
       </div>
     </div>
 
     <div class="panel lead-panel">
-      <h3>Student-Led Paper Presentation · the 25-minute block</h3>
+      <h2>Student-Led Paper Presentation · the 25-minute block</h2>
       <div class="lead-blocks">
         <div class="lead-block"><span class="lead-min">12 min</span> problem, context, mechanism, and the minimum results needed to understand the paper</div>
         <div class="lead-block"><span class="lead-min">8 min</span> critical analysis of claims, baselines, assumptions, methodology, and missing evidence</div>
@@ -563,14 +779,16 @@ def format_body() -> str:
 
     <div class="col2">
       <div class="panel">
-        <h3>Grading</h3>
+        <h2>Grading</h2>
         <table class="grading-table">
-          {grading_rows}
+          <caption class="visually-hidden">Grading components and weights</caption>
+          <thead class="visually-hidden"><tr><th>Component</th><th>Weight</th><th>Visual proportion</th></tr></thead>
+          <tbody>{grading_rows}</tbody>
         </table>
         <p class="fine">Grades reflect research judgment, technical execution, evidence quality, communication, and reproducibility - not whether a project happens to beat the state of the art. A rigorous negative result can earn full credit.</p>
       </div>
       <div class="panel">
-        <h3>Evidence-centered discussion</h3>
+        <h2>Evidence-centered discussion</h2>
         <p class="fine">Every paper discussion returns to six questions:</p>
         <ol class="q-list">
           {q_lis}
@@ -596,46 +814,33 @@ def project_body() -> str:
   <span class="tl-name">{esc(m["name"])}</span>
 </li>"""
         )
-    standard = [
-        "A falsifiable research question and a precise intended claim.",
-        "At least two meaningful baselines, including a classical or non-agentic baseline where applicable.",
-        "A mechanism, not only a correlation or leaderboard result.",
-        "At least one ablation or controlled intervention tied to the central claim.",
-        "Joint reporting of task quality or success and relevant systems metrics.",
-        "A held-out workload, configuration, system scale, or design budget.",
-        "Explicit compute, GPU, API, token, simulation, and wall-clock budgets.",
-        "Failure-case analysis, including invalid actions and tool failures for agentic design systems.",
-        "Reproducible code, environment instructions, configurations, data, and figure-generation scripts.",
-    ]
-    std_lis = "\n".join(f"<li>{s}</li>" for s in standard)
+    std_lis = "\n".join(f"<li>{s}</li>" for s in RESEARCH_STANDARD)
+    track_cards = "\n".join(
+        f"""<div class="track {'t-comp' if i == 0 else 't-ai'}">
+        <p class="track-id">{esc(track_id)}</p>
+        <h2>{esc(title)}</h2>
+        <p>{esc(description)}</p>
+      </div>"""
+        for i, (track_id, title, description) in enumerate(PROJECT_TRACKS)
+    )
 
     return f"""<section class="section" id="project">
   <div class="wrap">
-    {page_head("Semester-long research project",
-               "The project is the center of the course: a carefully scoped research effort that could mature into a top-tier architecture, systems, ML systems, robotics, or EDA paper. Teams of 1-2 are formed by bidding on a curated portfolio of directions; publication is an aspiration, not a grading requirement.")}
+    {page_head("Semester-long research project", esc(PROJECT_OVERVIEW))}
 
     <div class="tracks tracks-2">
-      <div class="track t-comp">
-        <p class="track-id">Track A</p>
-        <h3>Computing for AI</h3>
-        <p>Profile, serve, schedule, map, accelerate, or make reliable an LLM, agentic, physical, or neuro-symbolic workload.</p>
-      </div>
-      <div class="track t-ai">
-        <p class="track-id">Track B</p>
-        <h3>AI for Computing</h3>
-        <p>Build and rigorously evaluate an agent for software optimization, compilers, GPU kernels, architecture DSE, RTL/EDA, or verification.</p>
-      </div>
+      {track_cards}
     </div>
 
     <div class="col2 col2-project">
       <div class="panel">
-        <h3>Minimum research standard</h3>
+        <h2>Minimum research standard</h2>
         <ul class="std-list">
           {std_lis}
         </ul>
       </div>
       <div class="panel">
-        <h3>Milestones</h3>
+        <h2>Milestones</h2>
         <ol class="timeline">
           {chr(10).join(tl_items)}
         </ol>
@@ -644,8 +849,8 @@ def project_body() -> str:
     </div>
 
     <div class="panel">
-      <h3>Final submission</h3>
-      <p>An eight- to ten-page conference-style paper (excluding references and appendices); a repository with pinned environment, one-command smoke test, and a documented reproduction path for one central result; machine-readable results with scripts regenerating principal figures; an experiment manifest covering seeds, configurations, models, machines, tool versions, and resource budgets; a response-to-feedback memo and individual contribution statements.</p>
+      <h2>Final submission</h2>
+      <p>{esc(FINAL_SUBMISSION)}</p>
     </div>
   </div>
 </section>"""
@@ -654,45 +859,25 @@ def project_body() -> str:
 # ---------------------------------------------------------------- policies
 
 def policies_body() -> str:
+    ai_items = "\n".join(f"<li>{esc(item)}</li>" for item in AI_POLICY_ITEMS)
+    policy_cards = "\n".join(
+        f'<div class="panel"><h2>{esc(title)}</h2><p>{esc(body)}</p></div>'
+        for title, body in POLICY_SECTIONS
+    )
     return f"""<section class="section" id="policies">
   <div class="wrap">
     {page_head("Policies")}
 
     <div class="panel policy-ai">
-      <h3>AI use and evidence</h3>
-      <p class="policy-stance">AI use is permitted and encouraged when it is disclosed, reproducible, and independently verified. Agent output is not evidence by itself.</p>
+      <h2>AI use and evidence</h2>
+      <p class="policy-stance">{esc(AI_POLICY_STANCE)}</p>
       <ul class="policy-list">
-        <li>You may use AI throughout the course - brainstorming, literature discovery, coding, debugging, experiment orchestration, and writing assistance - with meaningful use disclosed.</li>
-        <li>Every citation must be checked against a primary source, and every numerical result must trace to an actual experiment, simulator output, formal result, or cited source.</li>
-        <li>AI-generated code must satisfy the same correctness, testing, performance, licensing, and provenance requirements as human-written code.</li>
+        {ai_items}
       </ul>
     </div>
 
     <div class="policy-grid">
-      <div class="panel">
-        <h3>Academic integrity</h3>
-        <p>Students must follow Columbia academic-integrity policies. Fabricated citations, invented experiments, altered logs, undisclosed result selection, plagiarism, or presenting agent-generated claims as verified evidence are serious violations. When in doubt, disclose the tool, source, assistance, or collaboration.</p>
-      </div>
-      <div class="panel">
-        <h3>Collaboration &amp; authorship</h3>
-        <p>Course collaboration does not automatically establish publication authorship. If a project continues after the semester, authorship and ordering follow substantive intellectual and technical contributions, manuscript participation, accountability, and venue policies. Students retain credit for their work; continuation plans should be discussed transparently with the instructor and research mentors.</p>
-      </div>
-      <div class="panel">
-        <h3>Accessibility &amp; accommodations</h3>
-        <p>Students who require disability-related accommodations should contact Columbia Disability Services and inform the instructor as early as possible so approved accommodations can be implemented. Please communicate time-sensitive circumstances before deadlines whenever possible.</p>
-      </div>
-      <div class="panel">
-        <h3>Resource fairness</h3>
-        <p>Projects report GPU, API, token, simulation, and wall-clock budgets. Grades are not based on access to the largest model or most GPUs. Every project defines a fallback experiment that remains valid if an API, simulator, board, robot, or cloud resource becomes unavailable. Curated starter environments and smoke tests are provided for officially supported directions when feasible.</p>
-      </div>
-      <div class="panel">
-        <h3>Late work</h3>
-        <p>Each team may use one 48-hour grace pass on a written milestone, requested before the deadline. The grace pass does not apply to in-class presentations, the final poster, or the final submission. Other extensions require prior approval or documented circumstances.</p>
-      </div>
-      <div class="panel">
-        <h3>Changes to the syllabus</h3>
-        <p>This is a first-offering advanced-topics course in a rapidly changing research area. Individual readings, project briefs, guest-speaker scheduling, or detailed deadlines may be updated when new work appears or infrastructure changes. Material changes will be announced clearly and will not retroactively disadvantage students.</p>
-      </div>
+      {policy_cards}
     </div>
   </div>
 </section>"""
@@ -768,6 +953,221 @@ def papers_body() -> str:
 </section>"""
 
 
+# ---------------------------------------------------------------- generated syllabus
+
+def md_link(title: str, url: str | None) -> str:
+    """Render a Markdown link, preserving pending references as plain text."""
+    return f"[{title}]({url})" if url else f"{title} *(link pending)*"
+
+
+def md_table_cell(value) -> str:
+    return str(value).replace("|", "\\|").replace("\n", " ")
+
+
+def syllabus_markdown() -> str:
+    """Generate the student-facing syllabus from the website's canonical source."""
+    lines = [
+        "<!-- AUTO-GENERATED by build.py. Edit build.py or data/*.yaml, then rebuild. -->",
+        f"# {course['number']} | {course['semester']}",
+        "# AI-Native Computing",
+        "## *Hardware for AI ⇄ AI for Hardware*",
+        "",
+        "**Columbia University | Department of Computer Science**  ",
+        f"Instructor: {inst['name']} · {course['meeting']} · {course['location']}  ",
+        f"Generated from the canonical course website on {fmt_long(dt.date.today())}.",
+        "",
+        "> **Canonical-source notice.** This syllabus is generated from the same source as the course website. "
+        "The live website and Canvas announcements govern later schedule or logistics updates.",
+        "",
+        "## Course overview",
+        "",
+        f"> **Course thesis — {COURSE_THESIS}**",
+        "",
+        "This advanced graduate lecture-seminar studies the two directions of AI-native computing:",
+        "",
+        "- **Computing for AI.** Profile, serve, schedule, map, accelerate, and make reliable emerging LLM, agentic, physical, and compositional AI workloads.",
+        "- **AI for Computing.** Use agents to design, optimize, and verify software, compilers, architectures, SoCs, RTL, EDA flows, and chips.",
+        "- **Shared methodology.** Dynamic workflows, closed-loop feedback, cross-layer optimization, heterogeneous resources, quality-performance-cost tradeoffs, and evidence-driven evaluation.",
+        "",
+        "## Course information",
+        "",
+        "| Item | Details |",
+        "|---|---|",
+        f"| Course | {md_table_cell(course['number'])} — {md_table_cell(course['title'])} |",
+        f"| Instructor | {md_table_cell(inst['name'])} · [{inst['email']}](mailto:{inst['email']}) · [webpage]({inst['homepage']}) |",
+        f"| Meeting | {md_table_cell(course['meeting'])} |",
+        f"| Location | {md_table_cell(course['location'])} |",
+        f"| Office hours | {md_table_cell(inst['office_hours'])} |",
+        f"| Enrollment | Cap {course['enrollment_cap']} |",
+        f"| Course platform | [Canvas]({inst['canvas']}) |",
+        "| Format | Advanced graduate lecture-seminar with a semester-long research project; no exams and no problem sets |",
+        "",
+        "## Learning outcomes",
+        "",
+    ]
+    lines.extend(
+        f"{i}. **{lead}** {body}" for i, (lead, body) in enumerate(LEARNING_OUTCOMES, 1)
+    )
+    lines.extend(["", "## Prerequisites and expectations", ""])
+    lines.extend(f"- **{label}.** {body}" for label, body in PREREQUISITES)
+
+    lines.extend([
+        "",
+        "## Course format",
+        "",
+        "Nine seminar meetings provide 23 paper-lead slots; every student leads exactly once. "
+        "Presentation slides are due at 11:59 PM ET on the Thursday before class.",
+        "",
+        "### Regular week (110 minutes)",
+        "",
+        "| Time | Activity |",
+        "|---|---|",
+    ])
+    lines.extend(f"| {time} | {md_table_cell(activity)} |" for time, activity in REGULAR_FORMAT)
+    lines.extend([
+        "",
+        "### Guest-speaker week",
+        "",
+        "| Time | Activity |",
+        "|---|---|",
+    ])
+    lines.extend(f"| {time} | {md_table_cell(activity)} |" for time, activity in GUEST_FORMAT)
+    lines.extend([
+        "",
+        "### Student-led paper presentation (25 minutes)",
+        "",
+        "- **12 minutes:** problem, context, mechanism, and the minimum results needed to understand the paper.",
+        "- **8 minutes:** critical analysis of claims, baselines, assumptions, methodology, and missing evidence.",
+        "- **5 minutes:** facilitated discussion around two or three precise questions.",
+        "",
+        "Presenters read the full paper, appendices, and artifact documentation. Everyone else reads the "
+        "abstract, introduction, core method, principal results, and limitations of all assigned papers, "
+        "and arrives with at least one discussion question. There are no weekly summary reports.",
+        "",
+        "## Grading",
+        "",
+        "| Component | Weight |",
+        "|---|---:|",
+    ])
+    lines.extend(
+        f"| {md_table_cell(item['component'])} | {item['weight']}% |" for item in grading
+    )
+    lines.extend([
+        "",
+        "Grades reflect research judgment, technical execution, evidence quality, communication, and "
+        "reproducibility—not whether a project happens to beat the state of the art. A rigorous negative "
+        "result can earn full credit.",
+        "",
+        "### Evidence-centered discussion",
+        "",
+    ])
+    lines.extend(f"{i}. {question}" for i, question in enumerate(DISCUSSION_QUESTIONS, 1))
+
+    lines.extend([
+        "",
+        "## Semester-long research project",
+        "",
+        PROJECT_OVERVIEW,
+        "",
+    ])
+    lines.extend(f"- **{track_id}: {title}.** {body}" for track_id, title, body in PROJECT_TRACKS)
+    lines.extend(["", "### Minimum research standard", ""])
+    lines.extend(f"- {item}" for item in RESEARCH_STANDARD)
+    lines.extend([
+        "",
+        "### Milestones",
+        "",
+        "| Date | ID | Deliverable |",
+        "|---|---|---|",
+    ])
+    lines.extend(
+        f"| {fmt_short(item['date'])} | {item['id']} | {md_table_cell(item['name'])} |"
+        for item in milestones
+    )
+    lines.extend([
+        "",
+        "All written deliverables are due at 11:59 PM ET. Check-ins P1-P5 are pacing devices, graded "
+        "on completeness. No course deadline falls on the Thanksgiving holiday.",
+        "",
+        "### Final submission",
+        "",
+        FINAL_SUBMISSION,
+        "",
+        "## Weekly schedule and readings",
+        "",
+        "Required readings appear first. Optional readings are included as a compact follow-up list. "
+        "Guest-speaker details remain tentative until announced.",
+        "",
+    ])
+
+    for week in weeks:
+        lines.extend([
+            f"### Week {week['week']:02d} · {fmt_long(week['date'])}",
+            "",
+            f"**{week['title']}** · {week['module']}",
+            "",
+        ])
+        if week.get("guest"):
+            lines.append(f"- **Guest lecture:** {week['guest']['topic']} ({week['guest']['label']}; confirmation pending).")
+        if week.get("case_study"):
+            lines.append(f"- **Mini-lecture case study:** {week['case_study']}.")
+        if week.get("exercise"):
+            lines.append(f"- **In-class exercise:** {week['exercise']}.")
+        if week.get("type") in TYPE_NOTE:
+            lines.append(f"- **Format note:** {TYPE_NOTE[week['type']]}")
+        required = week.get("papers") or week.get("background") or []
+        if required:
+            label = "Student-led papers" if week.get("papers") else "Instructor-selected background"
+            lines.extend(["", f"**{label}**", ""])
+            for paper in required:
+                detail = f" — {paper['venue']}"
+                if paper.get("focus"):
+                    detail += f"; focus: {paper['focus']}"
+                if paper.get("companion_url"):
+                    detail += f"; [companion critique]({paper['companion_url']})"
+                if paper.get("extra_link"):
+                    detail += f"; [project site]({paper['extra_link']})"
+                lines.append(f"- {md_link(paper['title'], paper.get('url'))}{detail}")
+        if week.get("optional"):
+            optional_links = []
+            for item in week["optional"]:
+                if isinstance(item, dict):
+                    optional_links.append(md_link(item["title"], item.get("url")))
+                else:
+                    optional_links.append(str(item))
+            lines.extend(["", "**Optional:** " + "; ".join(optional_links)])
+        if week.get("deadlines"):
+            lines.extend(["", "**Deadlines**", ""])
+            lines.extend(f"- {deadline}" for deadline in week["deadlines"])
+        lines.append("")
+
+    lines.extend([
+        "## Policies",
+        "",
+        "### AI use and evidence",
+        "",
+        f"**{AI_POLICY_STANCE}**",
+        "",
+    ])
+    lines.extend(f"- {item}" for item in AI_POLICY_ITEMS)
+    for title, body in POLICY_SECTIONS:
+        lines.extend(["", f"### {title}", "", body])
+
+    lines.extend([
+        "",
+        "## Registrar dates",
+        "",
+    ])
+    lines.extend(f"- **{fmt_long(item['date'])}:** {item['note']}" for item in registrar)
+    lines.extend([
+        "",
+        "See the [Columbia Registrar academic calendar](https://registrar.columbia.edu/content/academic-calendar) "
+        "for the authoritative university calendar.",
+        "",
+    ])
+    return "\n".join(lines)
+
+
 # ---------------------------------------------------------------- build
 
 def main() -> None:
@@ -776,11 +1176,15 @@ def main() -> None:
     OUT.mkdir()
     shutil.copytree(ROOT / "assets", OUT / "assets")
 
+    syllabus = syllabus_markdown()
+    (ROOT / "syllabus.md").write_text(syllabus)
+    (OUT / "syllabus.md").write_text(syllabus)
+
     desc = ("COMS 6998, Columbia University, Fall 2026. Graduate seminar on hardware and systems "
             "for AI workloads, and AI agents for designing computing systems. Fridays 10:10-12:00.")
     pages = {
         "index.html": ("COMS 6998 · AI-Native Computing · Fall 2026", desc,
-                       "\n".join([hero(), learn_html(), prereq_html(), glance_html()])),
+                       "\n".join([hero(), now_html(), learn_html(), prereq_html(), glance_html()])),
         "schedule.html": ("Schedule · COMS 6998 AI-Native Computing",
                           "Weekly schedule with required and optional readings for COMS 6998 (Fall 2026).",
                           schedule_body()),

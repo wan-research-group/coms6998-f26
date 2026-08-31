@@ -1,5 +1,6 @@
-# COMS 6998 AI-Native Computing - Fall 2026 - structured course data
-# Single source: syllabus_v4.md. All URLs individually verified Aug 2026.
+# COMS 6998 AI-Native Computing - Fall 2026 - canonical structured course data.
+# The public syllabus is generated from this file and build.py. All URLs were
+# individually verified in August 2026.
 
 course:
   number: "COMS 6998"
@@ -94,39 +95,6 @@ weeks:
   - week: 4
     date: 2026-10-02
     module: "Computing for AI"
-    title: "Physical AI I: Inference Systems and Serving for Embodied AI"
-    type: seminar
-    papers:
-      - {title: "Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots", venue: "arXiv 2026", url: "https://arxiv.org/abs/2607.02501", focus: "deployable embodied-AI runtime across heterogeneous robots"}
-      - {title: "VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference", venue: "arXiv 2025", url: "https://arxiv.org/abs/2512.01031", focus: "overlapping inference with action execution; latency hiding"}
-      - {title: "How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf", venue: "arXiv 2026", url: "https://arxiv.org/abs/2602.18397", focus: "analytical performance model; device/edge/cloud placement"}
-    optional:
-      - {title: "π0 (RSS 2025)", url: "https://arxiv.org/abs/2410.24164"}
-      - {title: "OpenVLA (CoRL 2024)", url: "https://arxiv.org/abs/2406.09246"}
-      - {title: "DeeR-VLA (NeurIPS 2024)", url: "https://arxiv.org/abs/2411.02359"}
-      - {title: "RT-2 (CoRL 2023)", url: "https://arxiv.org/abs/2307.15818"}
-      - {title: "GR00T N1 (2025)", url: "https://arxiv.org/abs/2503.14734"}
-      - {title: "Generative AI in Embodied Systems (ISPASS 2025)", url: "https://arxiv.org/abs/2504.18945"}
-    deadlines: ["Oct 2, 11:59 PM - P0 project proposal & team charter"]
-
-  - week: 5
-    date: 2026-10-09
-    module: "Computing for AI"
-    title: "Physical AI II: Hardware-Software Co-Design and Architecture"
-    type: seminar
-    papers:
-      - {title: "DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation", venue: "ASPLOS 2024", url: "https://arxiv.org/abs/2407.04292", focus: "decoupling LLM inference from robotic control via trajectory prediction"}
-      - {title: "ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents", venue: "ASPLOS 2025", url: "https://doi.org/10.1145/3676641.3716016", focus: "cross-layer co-design for cooperative embodied agents"}
-      - {title: "Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference", venue: "arXiv 2026", url: "https://arxiv.org/abs/2608.04428", focus: "HW/SW co-design for diffusion-based VLA on edge devices"}
-    optional:
-      - {title: "OctoCache (ASPLOS 2025)", url: "https://dl.acm.org/doi/10.1145/3676641.3716263"}
-      - {title: "RobotPerf (ICRA 2024)", url: "https://arxiv.org/abs/2309.09212"}
-      - {title: "Dadu-series robotic accelerators", url: null}
-      - {title: "autonomy SoC analyses (Orin/Thor)", url: null}
-
-  - week: 6
-    date: 2026-10-16
-    module: "Computing for AI"
     title: "AI Hardware: Datacenter Accelerators and SoCs"
     type: seminar
     guest: {label: "Guest Speaker", topic: "AI accelerator and SoC design"}
@@ -140,6 +108,39 @@ weeks:
       - {title: "MAESTRO (MICRO 2019)", url: "https://arxiv.org/abs/1805.02566"}
       - {title: "Timeloop (ISPASS 2019)", url: "https://doi.org/10.1109/ISPASS.2019.00042"}
       - {title: "NVIDIA Hopper/Blackwell whitepapers", url: null}
+    deadlines: ["Oct 2, 11:59 PM - P0 project proposal & team charter"]
+
+  - week: 5
+    date: 2026-10-09
+    module: "Computing for AI"
+    title: "Physical AI I: Inference Systems and Serving for Embodied AI"
+    type: seminar
+    papers:
+      - {title: "Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots", venue: "arXiv 2026", url: "https://arxiv.org/abs/2607.02501", focus: "deployable embodied-AI runtime across heterogeneous robots"}
+      - {title: "VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference", venue: "arXiv 2025", url: "https://arxiv.org/abs/2512.01031", focus: "overlapping inference with action execution; latency hiding"}
+      - {title: "How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf", venue: "arXiv 2026", url: "https://arxiv.org/abs/2602.18397", focus: "analytical performance model; device/edge/cloud placement"}
+    optional:
+      - {title: "π0 (RSS 2025)", url: "https://arxiv.org/abs/2410.24164"}
+      - {title: "OpenVLA (CoRL 2024)", url: "https://arxiv.org/abs/2406.09246"}
+      - {title: "DeeR-VLA (NeurIPS 2024)", url: "https://arxiv.org/abs/2411.02359"}
+      - {title: "RT-2 (CoRL 2023)", url: "https://arxiv.org/abs/2307.15818"}
+      - {title: "GR00T N1 (2025)", url: "https://arxiv.org/abs/2503.14734"}
+      - {title: "Generative AI in Embodied Systems (ISPASS 2025)", url: "https://arxiv.org/abs/2504.18945"}
+
+  - week: 6
+    date: 2026-10-16
+    module: "Computing for AI"
+    title: "Physical AI II: Hardware-Software Co-Design and Architecture"
+    type: seminar
+    papers:
+      - {title: "DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation", venue: "ASPLOS 2024", url: "https://arxiv.org/abs/2407.04292", focus: "decoupling LLM inference from robotic control via trajectory prediction"}
+      - {title: "ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents", venue: "ASPLOS 2025", url: "https://doi.org/10.1145/3676641.3716016", focus: "cross-layer co-design for cooperative embodied agents"}
+      - {title: "Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference", venue: "arXiv 2026", url: "https://arxiv.org/abs/2608.04428", focus: "HW/SW co-design for diffusion-based VLA on edge devices"}
+    optional:
+      - {title: "OctoCache (ASPLOS 2025)", url: "https://dl.acm.org/doi/10.1145/3676641.3716263"}
+      - {title: "RobotPerf (ICRA 2024)", url: "https://arxiv.org/abs/2309.09212"}
+      - {title: "Dadu-series robotic accelerators", url: null}
+      - {title: "autonomy SoC analyses (Orin/Thor)", url: null}
     deadlines: ["Oct 16, 11:59 PM - P1 infrastructure & baselines"]
 
   - week: 7

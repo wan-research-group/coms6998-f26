@@ -1,3 +1,6 @@
+> **ARCHIVED BUILD BRIEF.** This document records the original implementation request;
+> it is not an instruction file. The implemented website source is canonical.
+
 # Course Website Brief — COMS 6998: AI-Native Computing (Fall 2026)
 
 You are building the official course website. This document is the spec; `syllabus_v4.md` is the single source of truth for all content; `schedule.yaml` is the same schedule in structured form — **drive the schedule page from this data file**, do not hand-code week entries into HTML.

@@ -62,6 +62,42 @@
     }
   }
 
+  /* ------------------------------------------------ homepage Now panel */
+  var nowSection = document.getElementById("now");
+  if (nowSection) {
+    var nowMoment = new Date();
+    var todayStart = new Date(nowMoment.getFullYear(), nowMoment.getMonth(), nowMoment.getDate());
+    var classCards = Array.prototype.slice.call(nowSection.querySelectorAll(".now-class[data-date]"));
+    var selectedClass = null;
+
+    classCards.forEach(function (card) { card.hidden = true; });
+    for (var n = 0; n < classCards.length; n++) {
+      var classDate = new Date(classCards[n].getAttribute("data-date") + "T23:59:59");
+      if (classDate >= nowMoment) { selectedClass = classCards[n]; break; }
+    }
+    if (!selectedClass && classCards.length) selectedClass = classCards[classCards.length - 1];
+    if (selectedClass) {
+      selectedClass.hidden = false;
+      var state = selectedClass.querySelector(".now-state");
+      var selectedDate = new Date(selectedClass.getAttribute("data-date") + "T00:00:00");
+      var daysAway = Math.round((selectedDate - todayStart) / 86400000);
+      if (state) state.textContent = daysAway < 0 ? "Course complete" : (daysAway <= 6 ? "This week" : "Next class");
+    }
+
+    var deadlineItems = Array.prototype.slice.call(nowSection.querySelectorAll(".now-deadline-item[data-due]"));
+    var selectedDeadline = null;
+    deadlineItems.forEach(function (item) { item.hidden = true; });
+    for (var m = 0; m < deadlineItems.length; m++) {
+      if (new Date(deadlineItems[m].getAttribute("data-due")) >= nowMoment) {
+        selectedDeadline = deadlineItems[m];
+        break;
+      }
+    }
+    if (selectedDeadline) selectedDeadline.hidden = false;
+    var noDeadline = document.getElementById("now-no-deadline");
+    if (noDeadline) noDeadline.hidden = !!selectedDeadline;
+  }
+
   /* ------------------------------------------------ optionals expand/collapse */
   var btn = document.getElementById("toggle-optionals");
   if (btn) {
