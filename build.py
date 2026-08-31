@@ -231,26 +231,55 @@ def hero() -> str:
 </section>"""
 
 
-def why_course() -> str:
+def learn_html() -> str:
     cards = [
-        ("Full-stack coverage.",
-         "From LLM serving, embodied AI, and neuro-symbolic workloads to accelerators, SoCs, and AI agents that design software, architectures, RTL, and chips."),
-        ("Research-first.",
-         "A semester-long project (teams of 1-2) scoped to mature into a top-tier architecture, systems, or EDA paper, paced by weekly milestones and mentoring."),
-        ("Evidence-centered.",
-         "Papers and claims are read against baselines, budgets, and ablations; a rigorous negative result can earn full credit."),
-        ("No exams, no problem sets.",
-         "Grading rewards research judgment, execution, and reproducibility; guest speakers and case studies from active research bring the frontier into class."),
+        ("Profile and diagnose AI systems.",
+         "Represent an AI application as a pipeline, dynamic DAG, or feedback loop; measure latency, throughput, utilization, energy, and cost; locate bottlenecks with roofline reasoning, queueing, and trace analysis."),
+        ("Reason across the stack.",
+         "Connect model, software, runtime, architecture, memory, accelerator, SoC, and deployment decisions, and evaluate joint quality-performance-energy-cost tradeoffs."),
+        ("Serve and accelerate emerging workloads.",
+         "LLM and agent serving, embodied and physical AI inference, neuro-symbolic acceleration, datacenter accelerators, and SoCs."),
+        ("Build AI that designs computing systems.",
+         "Formulate system design as an agent environment with state, actions, tools, and feedback; compare LLM agents, RL, Bayesian optimization, and classical heuristics under matched budgets."),
+        ("Audit claims like a reviewer.",
+         "Read papers and industry claims against baselines, budgets, ablations, and held-out evidence."),
+        ("Produce conference-style research.",
+         "A semester-long project with meaningful baselines, ablations, failure analysis, and a reproducible artifact."),
     ]
     items = "\n".join(
-        f'<div class="why-card"><p><strong>{lead}</strong> {body}</p></div>'
+        f'<div class="learn-card"><p><strong>{lead}</strong> {body}</p></div>'
         for lead, body in cards
     )
-    return f"""<section class="section" id="why" aria-labelledby="why-h">
+    return f"""<section class="section" id="learn" aria-labelledby="learn-h">
   <div class="wrap">
-    <h2 id="why-h">Why this course</h2>
-    <div class="why-grid">
+    <h2 id="learn-h">What you'll learn</h2>
+    <div class="learn-grid">
       {items}
+    </div>
+  </div>
+</section>"""
+
+
+def prereq_html() -> str:
+    return """<section class="section" id="prereqs" aria-labelledby="prereqs-h">
+  <div class="wrap">
+    <h2 id="prereqs-h">Prerequisites &amp; expectations</h2>
+    <div class="panel prereq-panel">
+      <dl class="prereq-list">
+        <div>
+          <dt>Expected</dt>
+          <dd>Basic computer organization or systems knowledge, familiarity with machine-learning concepts, and the ability to program and run quantitative experiments.</dd>
+        </div>
+        <div>
+          <dt>Helpful, not required</dt>
+          <dd>Experience with CUDA, compilers, digital design, RTL, EDA, robotics simulators, FPGA platforms, LLM agents, or research-paper reading. No one is expected to arrive with expertise across the entire stack.</dd>
+        </div>
+        <div>
+          <dt>Project readiness</dt>
+          <dd>Every team must include enough complementary expertise to implement, measure, and evaluate its selected project.</dd>
+        </div>
+      </dl>
+      <p class="fine"><strong>Scope note.</strong> The course concentrates on inference-side and emerging AI workloads and on AI-driven design; deep coverage of large-scale training systems and model-compression algorithms is left to ML-systems courses. Week 2 provides the working knowledge needed here.</p>
     </div>
   </div>
 </section>"""
@@ -542,11 +571,6 @@ def format_body() -> str:
       </div>
     </div>
 
-    <div class="panel">
-      <h3>Who should take this course</h3>
-      <p>Graduate students in CS and EE interested in computer architecture, systems, ML systems, hardware-software co-design, robotics and physical AI, VLSI/EDA, or adjacent areas. Expected: basic computer organization or systems knowledge, familiarity with ML concepts, and the ability to program and run quantitative experiments. CUDA, compilers, RTL, robotics simulators, or LLM-agent experience is helpful but not required - no one is expected to arrive with expertise across the entire stack.</p>
-      <p class="fine"><strong>Scope note.</strong> The course concentrates on inference-side and emerging AI workloads and on AI-driven design; deep coverage of large-scale training systems and model-compression algorithms is left to ML-systems courses. Week 2 provides the working knowledge needed here.</p>
-    </div>
   </div>
 </section>"""
 
@@ -556,7 +580,7 @@ def format_body() -> str:
 def project_body() -> str:
     tl_items = []
     for m in milestones:
-        cls = " tl-major" if m["id"] in ("Midterm", "Poster", "Final") else ""
+        cls = " tl-major" if m["id"] in ("Midterm", "P5", "Final") else ""
         tl_items.append(
             f"""<li class="tl-item{cls}">
   <span class="tl-dot" aria-hidden="true"></span>
@@ -749,7 +773,7 @@ def main() -> None:
             "for AI workloads, and AI agents for designing computing systems. Fridays 10:10-12:00.")
     pages = {
         "index.html": ("COMS 6998 · AI-Native Computing · Fall 2026", desc,
-                       "\n".join([hero(), why_course(), glance_html()])),
+                       "\n".join([hero(), learn_html(), prereq_html(), glance_html()])),
         "schedule.html": ("Schedule · COMS 6998 AI-Native Computing",
                           "Weekly schedule with required and optional readings for COMS 6998 (Fall 2026).",
                           schedule_body()),

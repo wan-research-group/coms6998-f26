@@ -26,14 +26,13 @@ grading:
   - {component: "Final paper & artifact", weight: 40}
 
 milestones:
-  - {date: 2026-10-02, id: P0, name: "Proposal"}
+  - {date: 2026-10-02, id: P0, name: "Project proposal"}
   - {date: 2026-10-16, id: P1, name: "Infrastructure & baselines"}
-  - {date: 2026-10-30, id: P2, name: "Prototype & pilot"}
-  - {date: 2026-11-06, id: Midterm, name: "Midterm presentations (in class)"}
-  - {date: 2026-11-13, id: P3, name: "Evaluation readiness"}
-  - {date: 2026-11-24, id: P4, name: "Main results"}
-  - {date: 2026-12-09, id: P5, name: "Complete draft, artifact & poster"}
-  - {date: 2026-12-11, id: Poster, name: "Final presentations & poster session (in class)"}
+  - {date: 2026-10-30, id: P2, name: "Prototype & pilot results"}
+  - {date: 2026-11-06, id: Midterm, name: "Midterm presentation (in class)"}
+  - {date: 2026-11-13, id: P3, name: "Evaluation plan & initial results"}
+  - {date: 2026-12-01, id: P4, name: "Main results & ablations"}
+  - {date: 2026-12-11, id: P5, name: "Complete draft, artifact & poster; final poster session (in class)"}
   - {date: 2026-12-21, id: Final, name: "Final paper & artifact"}
 
 registrar_dates:
@@ -46,7 +45,7 @@ weeks:
   - week: 1
     date: 2026-09-11
     module: "Launch"
-    title: "AI as Workload, AI as Designer"
+    title: "Course Introduction: AI as Workload, AI as Designer"
     type: lecture
     background:
       - {title: "A New Golden Age for Computer Architecture", venue: "CACM 2019", url: "https://doi.org/10.1145/3282307"}
@@ -54,7 +53,7 @@ weeks:
     optional:
       - {title: "Sutton, The Bitter Lesson (2019)", url: "http://www.incompleteideas.net/IncIdeas/BitterLesson.html"}
       - {title: "Architecture 2.0: Why Computer Architects Need a Data-Centric AI Gymnasium (IEEE CAL 2023)", url: "https://www.sigarch.org/architecture-2-0-why-computer-architects-need-a-data-centric-ai-gymnasium/"}
-    deadlines: ["Sep 12, 11:59 PM - background survey & readiness assessment close"]
+    deadlines: ["Sep 12, 11:59 PM - background survey"]
 
   - week: 2
     date: 2026-09-18
@@ -68,7 +67,7 @@ weeks:
     optional:
       - {title: "MLPerf Inference Benchmark (ISCA 2020)", url: "https://arxiv.org/abs/1911.02549"}
       - {title: "Efficient Processing of Deep Neural Networks (Proc. IEEE 2017)", url: "https://arxiv.org/abs/1703.09039"}
-    deadlines: ["Sep 18, 11:59 PM - paper preference form", "Sep 20 - student-proposed project approval requests", "Sep 23 - project bidding form"]
+    deadlines: ["Sep 18, 11:59 PM - paper preference form", "Sep 23 - project bidding form"]
 
   - week: 3
     date: 2026-09-25
@@ -108,7 +107,7 @@ weeks:
       - {title: "RT-2 (CoRL 2023)", url: "https://arxiv.org/abs/2307.15818"}
       - {title: "GR00T N1 (2025)", url: "https://arxiv.org/abs/2503.14734"}
       - {title: "Generative AI in Embodied Systems (ISPASS 2025)", url: "https://arxiv.org/abs/2504.18945"}
-    deadlines: ["Oct 2, 11:59 PM - P0 proposal & team charter"]
+    deadlines: ["Oct 2, 11:59 PM - P0 project proposal & team charter"]
 
   - week: 5
     date: 2026-10-09
@@ -173,14 +172,14 @@ weeks:
       - {title: "Kevin: Multi-Turn RL for CUDA (2025)", url: "https://arxiv.org/abs/2507.11948"}
       - {title: "Sakana AI CUDA Engineer + post-mortem (2025)", url: "https://sakana.ai/ai-cuda-engineer/"}
       - {title: "ECO (2025)", url: "https://arxiv.org/abs/2503.15669"}
-    deadlines: ["Oct 30, 11:59 PM - P2 prototype & pilot (continue/pivot decision)"]
+    deadlines: ["Oct 30, 11:59 PM - P2 prototype & pilot results"]
 
   - week: 9
     date: 2026-11-06
     module: "Project"
     title: "Midterm Project Presentations"
     type: midterm
-    deadlines: ["Nov 5, 11:59 PM - midterm slides", "Nov 9 - decision memos returned"]
+    deadlines: ["Nov 5, 11:59 PM - midterm slides"]
 
   - week: 10
     date: 2026-11-13
@@ -199,7 +198,7 @@ weeks:
       - {title: "Concorde (2025)", url: "https://arxiv.org/abs/2503.23076"}
       - {title: "QuArch (2025)", url: "https://arxiv.org/abs/2501.01892"}
       - {title: "Learning Memory Access Patterns (ICML 2018)", url: "https://arxiv.org/abs/1803.02329"}
-    deadlines: ["Nov 13, 11:59 PM - P3 evaluation readiness"]
+    deadlines: ["Nov 13, 11:59 PM - P3 evaluation plan & initial results"]
 
   - week: 11
     date: 2026-11-20
@@ -217,7 +216,7 @@ weeks:
       - {title: "LLM-DSE (2025)", url: "https://arxiv.org/abs/2505.12188"}
       - {title: "FireSim (ISCA 2018)", url: "https://fires.im/"}
       - {title: "Chipyard (2020)", url: "https://github.com/ucb-bar/chipyard"}
-    deadlines: ["Nov 24, 11:59 PM - P4 main results (before Thanksgiving)"]
+    deadlines: ["Dec 1, 11:59 PM - P4 main results & ablations"]
 
   - week: 12
     date: 2026-12-04
@@ -239,11 +238,10 @@ weeks:
       - {title: "SpecLLM (2024)", url: "https://arxiv.org/abs/2401.13266"}
       - {title: "Chip-Chat (MLCAD 2023)", url: "https://arxiv.org/abs/2305.13243"}
       - {title: "RedWood white paper (2026)", url: "https://arxiv.org/abs/2608.26418"}
-    deadlines: ["Dec 9, 11:59 PM - P5 complete draft, artifact & poster"]
 
   - week: 13
     date: 2026-12-11
     module: "Synthesis"
     title: "Final Project Poster Session"
     type: poster
-    deadlines: ["Dec 10, 11:59 PM - posters in shared folder", "Dec 21, 11:59 PM - final paper & artifact"]
+    deadlines: ["Dec 10, 11:59 PM - posters in shared folder", "Dec 11, 11:59 PM - P5 complete draft & artifact", "Dec 21, 11:59 PM - final paper & artifact"]

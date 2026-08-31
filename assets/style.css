@@ -347,16 +347,27 @@ time { font-variant-numeric: tabular-nums; }
 .g-dot.m-span { background: linear-gradient(135deg, var(--comp), var(--ai)); }
 .g-dot.m-proj { background: var(--muted); }
 
-/* ---------------------------------------------------------------- why this course */
+/* ---------------------------------------------------------------- what you'll learn + prerequisites */
 
-#why { padding-top: 0; border-top: none; }
-.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
-.why-card {
+#learn { padding-top: 0; border-top: none; }
+.learn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.learn-card {
   background: var(--panel); border: 1px solid var(--line);
   border-radius: var(--radius); padding: 16px 20px;
 }
-.why-card p { margin: 0; font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
-.why-card strong { color: var(--text); font-weight: 680; }
+.learn-card p { margin: 0; font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
+.learn-card strong { color: var(--text); font-weight: 680; }
+
+.prereq-panel { margin-bottom: 0; }
+.prereq-list { margin: 0 0 14px; }
+.prereq-list > div {
+  display: grid; grid-template-columns: 190px 1fr; gap: 6px 20px;
+  padding: 10px 0; border-bottom: 1px solid var(--line-soft);
+}
+.prereq-list > div:first-child { padding-top: 0; }
+.prereq-list > div:last-child { border-bottom: none; }
+.prereq-list dt { font-weight: 680; font-size: 0.92rem; }
+.prereq-list dd { margin: 0; font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
 
 /* ---------------------------------------------------------------- students */
 
@@ -721,8 +732,9 @@ time { font-variant-numeric: tabular-nums; }
   .hero-grid { grid-template-columns: 1fr; gap: 24px; }
   .instructor-card { max-width: 420px; }
   .tracks, .tracks-2, .lead-blocks { grid-template-columns: 1fr; }
-  .col2, .col2-project, .policy-grid, .why-grid { grid-template-columns: 1fr; }
+  .col2, .col2-project, .policy-grid, .learn-grid { grid-template-columns: 1fr; }
   .sched-toc { grid-template-columns: 1fr; gap: 14px; }
+  .prereq-list > div { grid-template-columns: 1fr; gap: 2px; }
   .foot-grid { grid-template-columns: 1fr; gap: 12px; }
   .foot-meta { text-align: left; }
 }
