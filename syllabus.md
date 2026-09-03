@@ -5,7 +5,7 @@
 
 **Columbia University | Department of Computer Science**  
 Instructor: Prof. Zishen Wan · Fridays 10:10 AM - 12:00 PM · 602 Northwest Corner  
-Generated from the canonical course website on Monday, August 31, 2026.
+Generated from the canonical course website on Wednesday, September 2, 2026.
 
 > **Canonical-source notice.** This syllabus is generated from the same source as the course website. The live website and Canvas announcements govern later schedule or logistics updates.
 
@@ -24,7 +24,7 @@ This advanced graduate lecture-seminar studies the two directions of AI-native c
 | Item | Details |
 |---|---|
 | Course | COMS 6998 - AI-Native Computing: Hardware for AI, AI for Hardware |
-| Instructor | Prof. Zishen Wan · [zw3306@columbia.edu](mailto:zw3306@columbia.edu) · [webpage](https://zishenwan.github.io/) |
+| Instructor | Prof. Zishen Wan · [zishen.wan@columbia.edu](mailto:zishen.wan@columbia.edu) · [webpage](https://zishenwan.github.io/) |
 | Meeting | Fridays 10:10 AM - 12:00 PM |
 | Location | 602 Northwest Corner |
 | Office hours | Wednesdays 5-6 PM, CSB 522 |
