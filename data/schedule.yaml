@@ -73,6 +73,7 @@ weeks:
     title: "Course Introduction: AI as Workload, AI as Designer"
     research_question: "How does the relationship between workloads and architectures change when AI can adapt both?"
     type: lecture
+    slides: "assets/slides/COMS6998_F26_Week1.pdf"
     background:
       - {short_title: "A New Golden Age", title: "A New Golden Age for Computer Architecture", venue: "CACM 2019", url: "https://doi.org/10.1145/3282307"}
       - {short_title: "GenAI for Systems", title: "GenAI for Systems: Recurring Challenges and Design Principles from Software to Silicon", venue: "arXiv 2026", url: "https://arxiv.org/abs/2602.15241"}
@@ -80,6 +81,8 @@ weeks:
       - {title: "The Bitter Lesson (2019)", url: "http://www.incompleteideas.net/IncIdeas/BitterLesson.html"}
       - {title: "Architecture 2.0: Why Computer Architects Need a Data-Centric AI Gymnasium (ACM SIGARCH Blog, 2023)", url: "https://www.sigarch.org/architecture-2-0-why-computer-architects-need-a-data-centric-ai-gymnasium/"}
     deadlines: ["Sep 12, 11:59 PM - background survey"]
+    deadline_links:
+      background survey: "https://forms.gle/7PZBZyQjFQkZ3EXt8"
 
   - week: 2
     date: 2026-09-18

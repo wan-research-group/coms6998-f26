@@ -391,6 +391,28 @@ def hero() -> str:
 </section>"""
 
 
+def deadline_url(week: dict, deadline: str) -> str | None:
+    label = deadline.split(" - ", 1)[-1].strip()
+    return week.get("deadline_links", {}).get(label)
+
+
+def deadline_html(week: dict, deadline: str, *, short: bool = False) -> str:
+    label = deadline.split(" - ", 1)[-1].strip() if short else deadline
+    url = deadline_url(week, deadline)
+    if url:
+        return f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(label)}</a>'
+    return esc(label)
+
+
+def slides_html(week: dict) -> str:
+    if not week.get("slides"):
+        return ""
+    return (
+        f'<p class="week-materials"><a href="{esc(week["slides"])}" target="_blank" '
+        f'rel="noopener" aria-label="Week {week["week"]} lecture slides (PDF)">Lecture slides (PDF)</a></p>'
+    )
+
+
 def dated_deadlines() -> list[dict]:
     """Return display deadlines with machine-readable local timestamps."""
     pattern = re.compile(
@@ -410,7 +432,8 @@ def dated_deadlines() -> list[dict]:
             display = match.group("date")
             if match.group("time"):
                 display += f', {match.group("time")}'
-            records.append({"due": due, "display": display, "label": match.group("label")})
+            records.append({"due": due, "display": display, "label": match.group("label"),
+                            "url": deadline_url(week, raw)})
     return sorted(records, key=lambda item: item["due"])
 
 
@@ -452,6 +475,7 @@ def now_html() -> str:
             f"""<article class="now-class" data-date="{week['date'].isoformat()}" data-week="{week['week']}"{hidden}>
   <p class="now-label"><span class="now-state">Next class</span> · Week {week['week']:02d} · <time datetime="{week['date'].isoformat()}">{esc(fmt_short(week['date']))}</time></p>
   <h3><a href="schedule.html#week-{week['week']}">{esc(week['title'])}</a></h3>
+  {slides_html(week)}
   {guest_note}
   {research_question_html(week)}
   <p class="now-subhead">Required reading</p>
@@ -465,10 +489,14 @@ def now_html() -> str:
     deadline_items = []
     for item in deadlines:
         hidden = "" if item is visible_deadline else " hidden"
+        label = (
+            f'<a href="{esc(item["url"])}" target="_blank" rel="noopener">{esc(item["label"])}</a>'
+            if item.get("url") else esc(item["label"])
+        )
         deadline_items.append(
             f"""<div class="now-deadline-item" data-due="{item['due'].isoformat()}"{hidden}>
   <time datetime="{item['due'].isoformat()}">{esc(item['display'])}</time>
-  <p>{esc(item['label'])}</p>
+  <p>{label}</p>
 </div>"""
         )
     if not deadline_items:
@@ -542,14 +570,11 @@ def prereq_html() -> str:
 </section>"""
 
 
-def short_deadlines(w: dict) -> str:
-    """Compress a week's deadline strings for the at-a-glance table."""
+def short_deadlines_html(w: dict) -> str:
+    """Compress deadline labels for the at-a-glance table, preserving form links."""
     if w.get("glance_deadline"):
-        return w["glance_deadline"]
-    outs = []
-    for d in w.get("deadlines", []):
-        outs.append(d.split(" - ", 1)[1].strip() if " - " in d else d)
-    return "; ".join(outs)
+        return esc(w["glance_deadline"])
+    return "; ".join(deadline_html(w, d, short=True) for d in w.get("deadlines", []))
 
 
 def glance_html() -> str:
@@ -568,7 +593,7 @@ def glance_html() -> str:
             mcls, label = MODULE_DIVIDERS[w["module"]]
             rows.append(f'<tr class="g-module {mcls}"><td colspan="4">{esc(label)}</td></tr>')
         dot = f'<span class="dot g-dot {MODULE_CLASS.get(w["module"], "m-span")}" aria-hidden="true"></span>'
-        dl = esc(short_deadlines(w))
+        dl = short_deadlines_html(w)
         guest_note = (
             f'<p class="fine">Guest lecture: {guest_html(w["guest"])}</p>'
             if w.get("guest") else ""
@@ -593,7 +618,7 @@ def glance_html() -> str:
             )
         rows.append(
             f'<tr><td>{w["week"]}</td><td>{esc(fmt_short(w["date"]))}</td>'
-            f'<td>{dot}<a href="schedule.html#week-{w["week"]}">{esc(w["title"])}</a>{guest_note}{reading_note}</td>'
+            f'<td>{dot}<a href="schedule.html#week-{w["week"]}">{esc(w["title"])}</a>{slides_html(w)}{guest_note}{reading_note}</td>'
             f'<td class="g-dl">{dl or "-"}</td></tr>'
         )
     return f"""<section class="section" id="glance" aria-labelledby="glance-h">
@@ -662,6 +687,8 @@ def week_article(w: dict) -> str:
 
     body = [f'<div class="week-tags">{"".join(tags)}<span class="chip chip-now" hidden>this week</span></div>',
             f'<h2 class="week-title">{esc(w["title"])}</h2>']
+    if w.get("slides"):
+        body.append(slides_html(w))
 
     if w.get("guest"):
         body.append(f'<p class="week-note"><strong>Guest lecture:</strong> {guest_html(w["guest"])}</p>')
@@ -689,7 +716,7 @@ def week_article(w: dict) -> str:
         )
 
     if w.get("deadlines"):
-        chips = "".join(f'<li>{esc(d)}</li>' for d in w["deadlines"])
+        chips = "".join(f'<li>{deadline_html(w, d)}</li>' for d in w["deadlines"])
         body.append(f'<ul class="deadlines">{chips}</ul>')
 
     return f"""<article class="week {mcls}" id="week-{w["week"]}" data-date="{date.isoformat()}">
@@ -1260,6 +1287,8 @@ def syllabus_markdown() -> str:
             guest = week["guest"]
             speaker = md_link(guest["name"], guest["url"])
             lines.append(f"- **Guest lecture:** {speaker} ({guest['affiliation']}).")
+        if week.get("slides"):
+            lines.append(f"- **Lecture slides:** {md_link('Week ' + str(week['week']) + ' slides (PDF)', week['slides'])}")
         if week.get("case_study"):
             lines.append(f"- **Mini-lecture case study:** {week['case_study']}.")
         if week.get("exercise"):
@@ -1290,7 +1319,11 @@ def syllabus_markdown() -> str:
             lines.extend(f"- {item}" for item in optional_links)
         if week.get("deadlines"):
             lines.extend(["", "**Deadlines**", ""])
-            lines.extend(f"- {deadline}" for deadline in week["deadlines"])
+            lines.extend(
+                f"- {md_link(deadline, deadline_url(week, deadline))}"
+                if deadline_url(week, deadline) else f"- {deadline}"
+                for deadline in week["deadlines"]
+            )
         lines.append("")
 
     lines.extend([

@@ -5,7 +5,7 @@
 
 **Columbia University | Department of Computer Science**  
 Instructor: Prof. Zishen Wan · Fridays 10:10 AM - 12:00 PM · 602 Northwest Corner  
-Generated from the canonical course website on Thursday, September 10, 2026.
+Generated from the canonical course website on Friday, September 11, 2026.
 
 > **Canonical-source notice.** This syllabus is generated from the same source as the course website. The live website and Canvas announcements govern later schedule or logistics updates.
 
@@ -200,6 +200,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Research question of the week:** How does the relationship between workloads and architectures change when AI can adapt both?
 
+- **Lecture slides:** [Week 1 slides (PDF)](assets/slides/COMS6998_F26_Week1.pdf)
 
 **Instructor-selected background**
 
@@ -213,7 +214,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Sep 12, 11:59 PM - background survey
+- [Sep 12, 11:59 PM - background survey](https://forms.gle/7PZBZyQjFQkZ3EXt8)
 
 ### Week 02 · Friday, September 18, 2026
 

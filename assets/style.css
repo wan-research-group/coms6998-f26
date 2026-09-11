@@ -602,6 +602,11 @@ time { font-variant-numeric: tabular-nums; }
 .research-question { margin: 12px 0 16px; padding-left: 12px; border-left: 2px solid var(--line); font-size: 0.9rem; color: var(--muted); }
 .research-question strong { display: block; margin-bottom: 3px; color: var(--text); font-size: 0.8rem; font-weight: 650; }
 .research-question span { display: block; }
+.week-materials { margin: 8px 0 12px; font-size: 0.9rem; font-weight: 600; }
+.week-materials a, .deadlines a, .g-dl a, .now-deadline-item a {
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.glance-table td:nth-child(3) .week-materials a { color: var(--comp-ink); }
 
 .p-label {
   margin: 12px 0 6px;

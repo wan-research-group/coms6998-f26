@@ -29,8 +29,10 @@ Fields a week entry understands:
 | `optional:` | Optional readings: either `{title, url}` maps or plain strings (rendered without a link) |
 | `guest:` | Confirmed speakers only: `{label, name, affiliation, url}`. Omit until confirmed; `url` links to the speaker's homepage. |
 | `research_question:` | One concise research question per week; shared by Schedule, Papers, Now, and the syllabus |
+| `slides:` | Optional lecture PDF URL; shown in Now, the home-page schedule, full Schedule, and syllabus. Store local slides under `assets/slides/`. |
 | `case_study:`, `exercise:` | Extra mini-lecture lines |
 | `deadlines:` | List of strings, rendered as highlighted chips. The home-page table shows the part after the "-" |
+| `deadline_links:` | Optional mapping from a deadline label (the text after " - ") to its form/submission URL; makes the deadline clickable in Now, the home-page table, Schedule, and syllabus. |
 | `glance_deadline:` | Optional concise deadline label for the home-page table only |
 
 A required paper with `url: null` renders without a link plus an "(arXiv link
