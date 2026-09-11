@@ -5,7 +5,7 @@
 
 **Columbia University | Department of Computer Science**  
 Instructor: Prof. Zishen Wan · Fridays 10:10 AM - 12:00 PM · 602 Northwest Corner  
-Generated from the canonical course website on Wednesday, September 2, 2026.
+Generated from the canonical course website on Thursday, September 10, 2026.
 
 > **Canonical-source notice.** This syllabus is generated from the same source as the course website. The live website and Canvas announcements govern later schedule or logistics updates.
 
@@ -49,7 +49,7 @@ This advanced graduate lecture-seminar studies the two directions of AI-native c
 
 ## Course format
 
-Nine seminar meetings provide 23 paper-lead slots; every student leads exactly once. Presentation slides are due at 11:59 PM ET on the Thursday before class.
+Paper presentations are student-led; every student leads exactly once. Presentation slides are due at 11:59 PM ET on the Thursday before class.
 
 ### Regular week (110 minutes)
 
@@ -84,11 +84,11 @@ Presenters read the full paper, appendices, and artifact documentation. Everyone
 |---|---:|
 | Paper presentation & discussion leadership | 15% |
 | Engagement & participation | 10% |
-| Project P0 - Proposal | 5% |
-| Project check-ins P1-P5 (completion-based) | 10% |
+| Project proposal | 10% |
+| Project check-ins P1-P5 (completion-based) | 15% |
 | Midterm presentation | 10% |
 | Final poster | 10% |
-| Final paper & artifact | 40% |
+| Final paper & artifact | 30% |
 
 Grades reflect research judgment, technical execution, evidence quality, communication, and reproducibility - not whether a project happens to beat the state of the art. A rigorous negative result can earn full credit.
 
@@ -103,7 +103,7 @@ Grades reflect research judgment, technical execution, evidence quality, communi
 
 ## Semester-long research project
 
-The project is the center of the course: a carefully scoped research effort that could mature into a top-tier architecture, systems, ML systems, robotics, or EDA paper. Teams of 1-2 are formed by bidding on a curated portfolio of directions; publication is an aspiration, not a grading requirement.
+The project is the center of the course: a carefully scoped research effort that could mature into a top-tier architecture, systems, ML systems, robotics, or EDA paper. Teams of 1-3 are formed by bidding on a curated portfolio of directions; publication is an aspiration, not a grading requirement.
 
 - **Track A: Computing for AI.** Profile, serve, schedule, map, accelerate, or make reliable an LLM, agentic, physical, or neuro-symbolic workload.
 - **Track B: AI for Computing.** Build and rigorously evaluate an agent for software optimization, compilers, GPU kernels, architecture DSE, RTL/EDA, or verification.
@@ -122,16 +122,16 @@ The project is the center of the course: a carefully scoped research effort that
 
 ### Milestones
 
-| Date | ID | Deliverable |
+| Date | Milestone | Deliverable checklist |
 |---|---|---|
-| Oct 2 | P0 | Project proposal |
-| Oct 16 | P1 | Infrastructure & baselines |
-| Oct 30 | P2 | Prototype & pilot results |
-| Nov 6 | Midterm | Midterm presentation (in class) |
-| Nov 20 | P3 | Evaluation plan & initial results |
-| Dec 4 | P4 | Main results & ablations |
-| Dec 11 | P5 | Complete draft, artifact & poster; final poster session (in class) |
-| Dec 21 | Final | Final paper & artifact |
+| Oct 2 | Project proposal | State the research question, closest work, and testable hypothesis.<br>Specify baselines, metrics, resource needs, and team responsibilities. |
+| Oct 16 | P1 - Infrastructure & baselines | Share a runnable repository with setup instructions.<br>Report the first baseline measurement and its configuration. |
+| Oct 30 | P2 - Prototype & pilot results | Run a minimal end-to-end prototype.<br>Include one pilot comparison figure and the main remaining risk. |
+| Nov 6 | Midterm - Midterm presentation (in class) | Present the question, approach, baseline, and early evidence.<br>Identify the feedback needed and the next experiments. |
+| Nov 20 | P3 - Evaluation plan & initial results | Fix the workloads, metrics, baselines, and experiment budget.<br>Submit initial comparisons and the planned ablations. |
+| Dec 4 | P4 - Main results & ablations | Submit main results, an ablation, and a failure or boundary case.<br>Include repeated measurements or uncertainty where relevant. |
+| Dec 11 | P5 - Complete draft, artifact & poster; final poster session (in class) | Submit a complete paper draft and a runnable artifact.<br>Upload the poster by Dec 10 and present it in class on Dec 11. |
+| Dec 18 | Final - Final paper & artifact | Submit the revised paper, artifact, and figure-generation scripts.<br>Include responses to feedback and individual contributions. |
 
 All written deliverables are due at 11:59 PM ET. Check-ins P1-P5 are pacing devices, graded on completeness. No course deadline falls on the Thanksgiving holiday.
 
@@ -139,13 +139,66 @@ All written deliverables are due at 11:59 PM ET. Check-ins P1-P5 are pacing devi
 
 An eight- to ten-page conference-style paper (excluding references and appendices); a repository with pinned environment, one-command smoke test, and a documented reproduction path for one central result; machine-readable results with scripts regenerating principal figures; an experiment manifest covering seeds, configurations, models, machines, tool versions, and resource budgets; a response-to-feedback memo and individual contribution statements.
 
+### Project candidates
+
+Choose a question, build a strong baseline, and test one mechanism. These 26 starting points can be narrowed to fit a team of 1-3; students are also welcome to propose their own projects. Agree on scope and platform requirements with the instructor before committing to a direction.
+
+The [Project page](project.html#directions) includes each candidate's proposed mechanism, semester evaluation, scope checks, and helpful background.
+
+#### Module 1: Computing for AI
+
+##### Physical AI & World Models
+
+- **PlanBudget — Deadline-Aware Compute Allocation for World-Model Planning.** When does thinking longer improve an action, and when does it make the observation too stale to act well?
+- **RolloutReuse — Reusing Computation Across World-Model Planning Steps.** As observations and actions change, which parts of a previous plan remain valid enough to reuse?
+- **RankPreserve — Decision-Preserving Quantization for World Models.** Should a compressed world model preserve its predictions, or preserve the decisions those predictions support?
+- **FreshAct — Freshness-Aware Scheduling for Asynchronous Robot Inference.** When new information arrives during inference, is it better to finish an old decision or start a fresher one?
+- **LoopWatt — Closed-Loop Energy Management for Physical AI.** Which combination of computation and hardware power minimizes energy to finish a task, rather than energy per inference?
+- **FleetSlack — Control-Aware GPU Sharing for Multiple Robots.** If two requests share a deadline but tolerate delay differently, how should they share a GPU?
+- **SceneBudget — Task-Aware Memory Management for 3D Scene Representations.** Under a memory limit, which scene details are worth keeping because they change what an agent can do?
+
+##### Agentic AI Serving
+
+- **BranchServe — Uncertainty-Aware Preparation for Dynamic Agent Workflows.** When an agent's next step is uncertain, when is preparing resources early worth the risk of wasted work?
+- **StateValue — Value-Based KV Retention Across Agent Tool Gaps.** While an agent waits for a tool, when is its idle KV state worth keeping, offloading, or recomputing later?
+- **ToolCritical — Joint Scheduling of LLM Calls and External Tools.** When does speeding up model inference merely move the bottleneck to the tools an agent depends on?
+- **VerifyBudget — Online Allocation of Verification Effort.** Which intermediate checks prevent costly downstream errors, and which only add delay?
+- **RecoverGraph — Dependency-Aware Recovery for Stateful Agents.** After a tool fails, what can an agent safely keep, and what must it undo or replay?
+
+##### Architecture, Memory & VLSI
+
+- **DeltaReason — Incremental Execution for Neuro-Symbolic Inference.** When only a few facts change, how much reasoning truly needs to be repeated?
+- **ReasonLink — Data-Movement-Aware Integration of Neural and Symbolic Accelerators.** After accelerating both ends of a pipeline, does the interface between them become the bottleneck?
+- **RolloutMem — Memory Architecture for Batched World-Model Planning.** How do candidate trajectories, time steps, and planning iterations change the memory reuse an accelerator should exploit?
+- **MarginCIM — Decision-Margin-Aware Reliability for Associative Computing.** Can hardware protection focus on numerical errors that would actually change a decision?
+- **HorizonGuard — Temporal Fault Protection for World-Model Rollouts.** Which faults matter most when a prediction is repeatedly fed into future predictions and decisions?
+
+#### Module 2: AI for Computing
+
+##### Architecture & Software Agents
+
+- **CausalArch — Hypothesis-Driven Experiments for Architecture Agents.** Can an agent use experiments to distinguish competing explanations, rather than explain a design only after seeing its score?
+- **FidelityDSE — Cost-Aware Selection of Evaluation Fidelity.** How much evidence is enough to reject a design, and when is a more faithful evaluation worth its cost?
+- **MapTransfer — Reusable Mapping Knowledge for AI Accelerators.** Can a good accelerator mapping become reusable knowledge with clear limits, rather than a configuration that works only once?
+- **KernelContract — Contract-Aware GPU Kernel Optimization Agents.** What must an optimized kernel preserve for a microbenchmark speedup to become a correct end-to-end improvement?
+
+##### RTL, Verification & Physical Design
+
+- **ProofFirst — Verified RTL Optimization Under Fixed Specifications.** Can an agent improve hardware efficiency while keeping the functional specification completely fixed?
+- **ConeRepair — Dependency-Grounded Repair of RTL Repositories.** Which structural and runtime evidence helps an agent locate the logic responsible for a cross-module hardware failure?
+- **ISABenefit — Workload-Driven, Verified RISC-V Instruction Discovery.** What makes a new instruction worth adding once software use, hardware cost, and end-to-end impact are all counted?
+- **PowerProbe — Goal-Conditioned Workload Synthesis for Power Characterization.** Which legal program behaviors do standard workloads miss when characterizing power and rapid power changes?
+- **TimingPilot — Report-Grounded Agents for Physical-Design Closure.** Can understanding why a design violates constraints make an agent more effective than treating the design flow as a black box?
+
 ## Weekly schedule and readings
 
-Required readings appear first. Optional readings are listed separately, one paper per line. Guest-speaker details remain tentative until announced.
+Required readings appear first. Optional readings are listed separately, one paper per line. Guest speakers are listed once confirmed.
 
 ### Week 01 · Friday, September 11, 2026
 
 **Course Introduction: AI as Workload, AI as Designer** · Launch
+
+**Research question of the week:** How does the relationship between workloads and architectures change when AI can adapt both?
 
 
 **Instructor-selected background**
@@ -165,6 +218,8 @@ Required readings appear first. Optional readings are listed separately, one pap
 ### Week 02 · Friday, September 18, 2026
 
 **How to Study an AI Computing System + LLM Inference Fundamentals** · Computing for AI
+
+**Research question of the week:** What makes a performance model useful when bottlenecks shift with workload, scale, and operating conditions?
 
 
 **Instructor-selected background**
@@ -187,7 +242,9 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Serving Systems for LLMs and AI Agents** · Computing for AI
 
-- **Guest lecture:** LLM serving and efficiency (Guest Speaker; confirmation pending).
+**Research question of the week:** What is the right unit of optimization when an AI application is a workflow rather than a single model?
+
+- **Guest lecture:** [Prof. Jovan Stojkovic](https://jovans2.github.io/) (UT Austin).
 - **Mini-lecture case study:** DyServe - a workflow-aware serving layer (instructor's work).
 
 **Student-led papers**
@@ -197,6 +254,9 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Optional readings**
 
+- [Architectural Implications of Agentic AI Workflows (arXiv 2026)](https://arxiv.org/abs/2608.04458)
+- [DynamoLLM: Designing LLM Inference Clusters for Performance and Energy Efficiency (HPCA 2025)](https://arxiv.org/abs/2408.00741)
+- [TAPAS: Thermal- and Power-Aware Scheduling for LLM Inference in Cloud Platforms (ASPLOS 2025)](https://dl.acm.org/doi/10.1145/3676641.3716025)
 - [Splitwise: Efficient Generative LLM Inference Using Phase Splitting (ISCA 2024)](https://arxiv.org/abs/2311.18677)
 - [Agentix: An Efficient Serving Engine for LLM Agents as General Programs (NSDI 2026)](https://www.usenix.org/conference/nsdi26/presentation/luo)
 - [A Workflow-Aware Serving Layer for Agentic Applications (DyServe, arXiv 2026)](https://arxiv.org/abs/2607.02942)
@@ -215,12 +275,14 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **AI Hardware: Accelerators and System-on-Chips** · Computing for AI
 
-- **Guest lecture:** AI accelerator and SoC design (Guest Speaker; confirmation pending).
+**Research question of the week:** When does specialization create a lasting advantage, and when does it bind a system too closely to today's workloads?
+
 
 **Student-led papers**
 
 - [In-Datacenter Performance Analysis of a Tensor Processing Unit](https://doi.org/10.1145/3079856.3080246) - ISCA 2017; focus: read as a ten-year retrospective
 - [Agile SoC Development with Open ESP](https://arxiv.org/abs/2009.01178) - ICCAD 2020; focus: Columbia's open-source heterogeneous SoC platform; available for course projects; [project site](https://www.esp.cs.columbia.edu/)
+- [Open AI Jalapeño Chip](assets/readings/openai-jalapeno-hot-chips-2026.pdf) - Hot Chips 2026 slides; focus: inference-driven ASIC and system co-design; [OpenAI blog](https://openai.com/index/jalapeno-first-results/)
 
 **Optional readings**
 
@@ -234,21 +296,24 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Oct 2, 11:59 PM - P0 project proposal & team charter
+- Oct 2, 11:59 PM - project proposal & team charter
 
 ### Week 05 · Friday, October 9, 2026
 
 **Physical AI I: Inference Systems and Serving for Embodied AI** · Computing for AI
 
+**Research question of the week:** How should computation be organized when the value of a prediction depends on when an action is taken?
+
+- **Guest lecture:** [Prof. Yilun Du](https://yilundu.github.io/) (Harvard).
 
 **Student-led papers**
 
 - [Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots](https://arxiv.org/abs/2607.02501) - arXiv 2026; focus: deployable embodied-AI runtime across heterogeneous robots
-- [VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference](https://arxiv.org/abs/2512.01031) - arXiv 2025; focus: overlapping inference with action execution; latency hiding
 - [How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf](https://arxiv.org/abs/2602.18397) - arXiv 2026; focus: analytical performance model; device/edge/cloud placement
 
 **Optional readings**
 
+- [VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference (arXiv 2025)](https://arxiv.org/abs/2512.01031)
 - [π0: A Vision-Language-Action Flow Model for General Robot Control (RSS 2025)](https://arxiv.org/abs/2410.24164)
 - [OpenVLA: An Open-Source Vision-Language-Action Model (CoRL 2024)](https://arxiv.org/abs/2406.09246)
 - [DeeR-VLA: Dynamic Inference of Multimodal Large Language Models for Efficient Robot Execution (NeurIPS 2024)](https://arxiv.org/abs/2411.02359)
@@ -260,15 +325,19 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Physical AI II: Hardware-Software Co-Design and Architecture** · Computing for AI
 
+**Research question of the week:** Where should the boundary between algorithm and hardware move when latency, energy, and task success must be optimized together?
+
+- **Guest lecture:** [Prof. Luca Carloni](https://www.cs.columbia.edu/~luca/) (Columbia).
 
 **Student-led papers**
 
-- [DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation](https://arxiv.org/abs/2407.04292) - ISCA 2025; focus: decoupling LLM inference from robotic control via trajectory prediction
 - [ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents](https://doi.org/10.1145/3676641.3716016) - ASPLOS 2025; focus: cross-layer co-design for cooperative embodied agents
-- [Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference](https://arxiv.org/abs/2608.04428) - MICRO 2026; focus: HW/SW co-design for diffusion-based VLA on edge devices
+- [DiTPA: A DiT-Based Action Planner Accelerator Exploiting Action-Denoising-Multimodality Redundancy for Embodied Artificial Intelligence](https://ieeexplore.ieee.org/document/11617959) - ISCA 2026; focus: exploiting action, denoising, and multimodality redundancy for embodied-AI action planning
 
 **Optional readings**
 
+- [DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation (ISCA 2025)](https://arxiv.org/abs/2407.04292)
+- [Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference (MICRO 2026)](https://arxiv.org/abs/2608.04428)
 - [Algorithm-Architecture Co-Design for Efficient VLA Inference via Speculative Inference and Verification (MICRO 2026)](https://arxiv.org/abs/2608.15636)
 - [OctoCache: Caching Voxels for Accelerating 3D Occupancy Mapping in Autonomous Systems (ASPLOS 2025)](https://dl.acm.org/doi/10.1145/3676641.3716263)
 - [RobotPerf: An Open-Source, Vendor-Agnostic, Benchmarking Suite for Evaluating Robotics Computing System Performance (ICRA 2024)](https://arxiv.org/abs/2309.09212)
@@ -283,6 +352,8 @@ Required readings appear first. Optional readings are listed separately, one pap
 ### Week 07 · Friday, October 23, 2026
 
 **Accelerating Neuro-Symbolic and Compositional AI** · Computing for AI
+
+**Research question of the week:** How should computing abstractions change when intelligence combines learning, search, and symbolic reasoning?
 
 
 **Student-led papers**
@@ -301,6 +372,8 @@ Required readings appear first. Optional readings are listed separately, one pap
 ### Week 08 · Friday, October 30, 2026
 
 **AI for Software Systems: Compilers and GPU Kernels** · AI for Computing
+
+**Research question of the week:** What should an AI optimizer be free to change, and which properties must remain invariant?
 
 
 **Student-led papers**
@@ -325,6 +398,8 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Midterm Project Presentations** · Project
 
+**Research question of the week:** Which uncertainty is most worth resolving before investing further in a research direction?
+
 - **Format note:** Team presentations; no mini-lecture and no assigned papers.
 
 **Deadlines**
@@ -335,12 +410,14 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **AI for Computer Architecture I: Measuring and Exploring** · AI for Computing
 
-- **Guest lecture:** AI-assisted architecture design (Guest Speaker; confirmation pending).
+**Research question of the week:** What makes a design environment informative enough for an AI agent to discover better architectures?
+
+- **Guest lecture:** [Prof. Sagar Karandikar](https://sagark.org/) (UC Berkeley).
 
 **Student-led papers**
 
 - [ArchEval: Measuring AI Agents as Computer Architects](https://arxiv.org/abs/2607.03601) - arXiv 2026; focus: benchmarking LLM agents on architecture tasks
-- [PF-LLM: Large Language Model Hinted Hardware Prefetching](https://doi.org/10.1145/3779212.3790202) - ASPLOS 2026; focus: AI inside the microarchitecture
+- [CHIA: An Open-Source Framework for Principled, Agentic AI-Driven Hardware/Software Co-Design Research](https://arxiv.org/abs/2606.27350) - arXiv 2026; focus: composable design loops for agent-driven HW/SW co-design
 
 **Optional readings**
 
@@ -356,17 +433,18 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **AI for Computer Architecture II: Agentic Design Systems** · AI for Computing
 
-- **Guest lecture:** agentic hardware design frameworks (Guest Speaker; confirmation pending).
-- **Mini-lecture case study:** ArchOrchestra - end-to-end agentic accelerator design (instructor's work).
+**Research question of the week:** How can automated design produce transferable knowledge rather than solutions tailored to one evaluation?
+
 
 **Student-led papers**
 
-- [CHIA: An Open-Source Framework for Principled, Agentic AI-Driven Hardware/Software Co-Design Research](https://arxiv.org/abs/2606.27350) - arXiv 2026; focus: composable design loops for agent-driven HW/SW co-design
-- [Agentic Architect: An Agentic AI Framework for Architecture Design Exploration and Optimization](https://arxiv.org/abs/2604.25083) - arXiv 2026; focus: LLM-driven microarchitecture evolution; seed quality bounds discovery
+- [PF-LLM: Large Language Model Hinted Hardware Prefetching](https://doi.org/10.1145/3779212.3790202) - ASPLOS 2026; focus: AI inside the microarchitecture
+- [Computer Architecture's AlphaZero Moment: Automated Discovery in an Encircled World](https://arxiv.org/abs/2604.03312) - arXiv 2026; focus: automated architecture discovery and multi-tier evaluation pipelines
+- ArchOrchestra: End-to-End Agentic Accelerator Design *(link pending)* - Forthcoming 2026; focus: end-to-end agentic accelerator design
 
 **Optional readings**
 
-- ArchOrchestra: End-to-End Agentic Accelerator Design (forthcoming, 2026) *(link pending)*
+- [Agentic Architect: An Agentic AI Framework for Architecture Design Exploration and Optimization (arXiv 2026)](https://arxiv.org/abs/2604.25083)
 - [AgentDSE: Reasoning-Augmented Architectural Design Space Exploration (MLArchSys 2026)](https://arxiv.org/abs/2606.21836)
 - [LLM-DSE: Searching Accelerator Parameters with LLM Agents (2025)](https://arxiv.org/abs/2505.12188)
 - [FireSim: FPGA-Accelerated Cycle-Exact Scale-Out System Simulation in the Public Cloud (ISCA 2018)](https://fires.im/)
@@ -380,11 +458,13 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **AI for RTL and Chip Physical Design** · AI for Computing
 
+**Research question of the week:** How should exploration and verification work together when AI makes consequential design decisions?
+
 - **In-class exercise:** In-class critical reading: the RedWood white paper (Architect Labs 2026) audited with the evidence-centered checklist.
 
 **Student-led papers**
 
-- [A Graph Placement Methodology for Fast Chip Design (AlphaChip)](https://www.nature.com/articles/s41586-021-03544-w) - Nature 2021 (+2024 addendum); focus: read with Markov's 'The False Dawn' critique; co-led by a pair; [companion critique](https://arxiv.org/abs/2306.09633)
+- [A Graph Placement Methodology for Fast Chip Design (AlphaChip)](https://www.nature.com/articles/s41586-021-03544-w) - Nature 2021 (+2024 addendum); focus: reinforcement learning for chip placement; co-led by a pair
 - [ChipNeMo: Domain-Adapted LLMs for Chip Design](https://arxiv.org/abs/2311.00176) - NVIDIA 2024; focus: domain adaptation, retrieval, EDA scripts
 - [Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification](https://arxiv.org/abs/2506.14074) - arXiv 2025; focus: RTL benchmarks and their limitations
 
@@ -408,21 +488,24 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Final Project Poster Session** · Synthesis
 
+**Research question of the week:** What general principle does a research result establish, and where does that principle stop applying?
+
 - **Format note:** Poster showcase; no mini-lecture and no assigned papers.
 
 **Deadlines**
 
 - Dec 10, 11:59 PM - posters in shared folder
 - Dec 11, 11:59 PM - P5 complete draft & artifact
-- Dec 21, 11:59 PM - final paper & artifact
+- Dec 18, 11:59 PM - final paper & artifact
 
 ## Policies
 
 ### AI use and evidence
 
-**AI use is permitted and encouraged when it is disclosed, reproducible, and independently verified. Agent output is not evidence by itself.**
+**Use AI actively and creatively. Learning to collaborate effectively with AI tools is part of this course: explore more ideas, build faster, and deepen your understanding.**
 
-- You may use AI throughout the course - brainstorming, literature discovery, coding, debugging, experiment orchestration, and writing assistance - with meaningful use disclosed.
+- AI tools are welcome throughout the course: learning unfamiliar concepts, brainstorming, finding literature, coding, debugging, running experiments, and improving writing. Thoughtful AI use is encouraged, not penalized.
+- Include a brief note describing meaningful AI assistance and how you checked the result. Be ready to explain your design choices, code, and conclusions in your own words.
 - Every citation must be checked against a primary source, and every numerical result must trace to an actual experiment, simulator output, formal result, or cited source.
 - AI-generated code must satisfy the same correctness, testing, performance, licensing, and provenance requirements as human-written code.
 
@@ -430,17 +513,9 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 Students must follow Columbia academic-integrity policies. Fabricated citations, invented experiments, altered logs, undisclosed result selection, plagiarism, or presenting agent-generated claims as verified evidence are serious violations. When in doubt, disclose the tool, source, assistance, or collaboration.
 
-### Collaboration & authorship
-
-Course collaboration does not automatically establish publication authorship. If a project continues after the semester, authorship and ordering follow substantive intellectual and technical contributions, manuscript participation, accountability, and venue policies. Students retain credit for their work; continuation plans should be discussed transparently with the instructor and research mentors.
-
 ### Accessibility & accommodations
 
 Students who require disability-related accommodations should contact Columbia Disability Services and inform the instructor as early as possible so approved accommodations can be implemented. Please communicate time-sensitive circumstances before deadlines whenever possible.
-
-### Resource fairness
-
-Projects report GPU, API, token, simulation, and wall-clock budgets. Grades are not based on access to the largest model or most GPUs. Every project defines a fallback experiment that remains valid if an API, simulator, board, robot, or cloud resource becomes unavailable. Curated starter environments and smoke tests are provided for officially supported directions when feasible.
 
 ### Late work
 

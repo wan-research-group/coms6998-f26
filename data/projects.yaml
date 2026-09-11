@@ -1,0 +1,203 @@
+# Candidate briefs, not a guarantee of novelty or provisioned infrastructure.
+# Shared by the Project page and the generated syllabus catalogue.
+modules:
+  - id: computing-for-ai
+    title: "Module 1: Computing for AI"
+    theme: comp
+    groups:
+      - title: Physical AI & World Models
+        projects:
+          - name: PlanBudget
+            title: Deadline-Aware Compute Allocation for World-Model Planning
+            question: When does thinking longer improve an action, and when does it make the observation too stale to act well?
+            approach: Use action disagreement, recent planning gains, and remaining time to allocate candidate trajectories and optimization iterations; initially keep the planning horizon fixed.
+            evaluation: One pretrained model and two environments. Compare tuned fixed budgets, convergence-based early stopping, and time-budget heuristics; measure success, completion time, and deadline misses with inference latency inside the control loop.
+            caution: First test whether inexpensive signals predict the marginal value of more planning. If not, narrow the policy to a few identifiable task states.
+            background: Physical AI · ML systems
+          - name: RolloutReuse
+            title: Reusing Computation Across World-Model Planning Steps
+            question: As observations and actions change, which parts of a previous plan remain valid enough to reuse?
+            approach: Separate exact reuse of invariant goal or context computations from approximate reuse of predicted states; use observation residuals to decide when to refresh.
+            evaluation: Implement one exact and one approximate reuse mechanism in a single planner. Compare no reuse, action-sequence warm starts, and periodic refresh; include lookup, validation, and recomputation costs.
+            caution: Similar trajectories do not imply cacheable intermediate states. Establish what the model actually permits before building a cache.
+            background: ML systems · Architecture
+          - name: RankPreserve
+            title: Decision-Preserving Quantization for World Models
+            question: Should a compressed world model preserve its predictions, or preserve the decisions those predictions support?
+            approach: Allocate layer precision using trajectory-ranking changes, action flips, and decision margins rather than reconstruction error alone.
+            evaluation: Fix one planner and compare uniform quantization, reconstruction-based mixed precision, and decision-based mixed precision. Test held-out tasks and planning horizons; trace numerical error through action selection to control quality.
+            caution: Report measured low-precision speedups separately from simulated precision benefits when the target kernels are unavailable.
+            background: ML systems · Architecture / VLSI
+          - name: FreshAct
+            title: Freshness-Aware Scheduling for Asynchronous Robot Inference
+            question: When new information arrives during inference, is it better to finish an old decision or start a fresher one?
+            approach: Incorporate observation age, action validity, and task stage into either cancel-or-continue decisions or action-chunk sizing; choose one control axis first.
+            evaluation: Use one vision-language-action or world-model controller with injected latency and jitter. Compare synchronous inference, a fixed asynchronous policy, latest-observation-first, and applicable asynchronous methods.
+            caution: Let delays change the environment state. Timing inference while the simulator is paused cannot establish the value of freshness.
+            background: Physical AI · Systems
+          - name: LoopWatt
+            title: Closed-Loop Energy Management for Physical AI
+            question: Which combination of computation and hardware power minimizes energy to finish a task, rather than energy per inference?
+            approach: Jointly select a small set of inference budgets and frequency or power settings using task stage and control slack.
+            evaluation: One device and one control-task suite. Compare static settings, hardware-only control, algorithm-only control, and a joint policy; measure success, completion time, and total energy across all attempts per successful task.
+            caution: Include controller, CPU, memory, and extra-action costs. Without reliable device-level power measurement, scope the project around latency and resource use instead.
+            background: Architecture · Physical AI
+          - name: FleetSlack
+            title: Control-Aware GPU Sharing for Multiple Robots
+            question: If two requests share a deadline but tolerate delay differently, how should they share a GPU?
+            approach: Estimate stage-specific control sensitivity and combine it with batching benefits to choose request priorities and batch windows.
+            evaluation: Start with 2–8 simulated clients on one shared GPU. Compare earliest-deadline-first, fixed batching, and load-aware batching; report per-robot success, fairness, tail latency, and task completion rate.
+            caution: Use independently advancing clients or an explicit time model; pausing every robot together can overstate the benefit of sharing.
+            background: Systems · Robotics
+          - name: SceneBudget
+            title: Task-Aware Memory Management for 3D Scene Representations
+            question: Under a memory limit, which scene details are worth keeping because they change what an agent can do?
+            approach: Use planned paths, interaction regions, and query distributions to prioritize retention or precision of occupancy blocks or Gaussian primitives; choose one representation.
+            evaluation: One scene system and one downstream task. At equal memory budgets, compare least-recently-used, distance-based, and visibility-based policies; measure task quality, query latency, and reconstruction cost.
+            caution: Rendering quality alone is not enough. Demonstrate how memory decisions affect planning, avoidance, or interaction.
+            background: Architecture · Physical AI / Graphics
+      - title: Agentic AI Serving
+        projects:
+          - name: BranchServe
+            title: Uncertainty-Aware Preparation for Dynamic Agent Workflows
+            question: When an agent's next step is uncertain, when is preparing resources early worth the risk of wasted work?
+            approach: Combine next-call probabilities, preparation cost, memory pressure, and expected latency savings to choose which model or KV states to prepare.
+            evaluation: One dynamic coding or tool-use agent and two resource types. Compare no preparation, top-1 prediction, frequency heuristics, and a future-information oracle; measure end-to-end gains and wasted preparation.
+            caution: Prediction accuracy is not the objective. Reconstruct dependencies from observable events, not merely from their temporal order.
+            background: ML systems · Agentic AI
+          - name: StateValue
+            title: Value-Based KV Retention Across Agent Tool Gaps
+            question: While an agent waits for a tool, when is its idle KV state worth keeping, offloading, or recomputing later?
+            approach: Estimate retention value from uncertain return times, restore and recomputation costs, remaining workflow value, and memory pressure.
+            evaluation: One serving engine and two tool-gap distributions. Compare least-recently-used, fixed and adaptive time-to-live, and cost-aware caching; measure completion time, goodput, memory use, and transfer costs.
+            caution: Go beyond adding a timeout. Isolate the value of return-time uncertainty, storage tiers, or workflow completion value relative to strong cache baselines.
+            background: ML systems · Memory systems
+          - name: ToolCritical
+            title: Joint Scheduling of LLM Calls and External Tools
+            question: When does speeding up model inference merely move the bottleneck to the tools an agent depends on?
+            approach: Estimate a shared critical path across model calls and tools; use admission control and backpressure to coordinate upstream generation with tool capacity.
+            evaluation: A coding agent's generate–compile–test workflow, initially limited to GPU and CPU resources. Compare independent queues, LLM-only scheduling, and simple backpressure; measure task completion and queueing across both stages.
+            caution: Identify the load regimes where coordination helps or hurts. Higher GPU utilization alone does not establish a system benefit.
+            background: Systems · Agentic AI
+          - name: VerifyBudget
+            title: Online Allocation of Verification Effort
+            question: Which intermediate checks prevent costly downstream errors, and which only add delay?
+            approach: Use runtime evidence to estimate error risk and avoidable downstream work, then choose no check, a lightweight check, or a stronger verifier.
+            evaluation: One code or constraint-solving workflow with objectively checkable outcomes. Compare verify-all, fixed placement, random placement, and an offline allocation policy at matched budgets.
+            caution: Isolate the value of new runtime information. Evaluation labels must never be available to the online decision policy.
+            background: Agentic AI · ML systems
+          - name: RecoverGraph
+            title: Dependency-Aware Recovery for Stateful Agents
+            question: After a tool fails, what can an agent safely keep, and what must it undo or replay?
+            approach: Track file versions, tool inputs and outputs, and side effects to identify invalidated dependencies and selectively roll back or replay affected steps.
+            evaluation: Inject failures in an isolated file-and-test environment. Compare full restart, fixed checkpoints, and local retries; measure recovery correctness, duplicate side effects, and recomputation cost.
+            caution: Validate both task completion and the final external state. Passing a test does not prove that recovery left no inconsistent side effects.
+            background: Systems · Agentic AI
+      - title: Architecture, Memory & VLSI
+        projects:
+          - name: DeltaReason
+            title: Incremental Execution for Neuro-Symbolic Inference
+            question: When only a few facts change, how much reasoning truly needs to be repeated?
+            approach: Propagate evidence changes through affected dependencies, cache reusable intermediates, and switch between incremental and full execution based on the affected region.
+            evaluation: One probabilistic-circuit or rule-reasoning framework. Compare full recomputation, an existing incremental or memoization method, and an adaptive policy across update locality and graph structure.
+            caution: First establish equivalence with full execution. Look for reasoning-specific effects such as normalization dependencies, pruning, or conflicts with GPU batching.
+            background: Architecture · Neuro-symbolic AI / ML systems
+          - name: ReasonLink
+            title: Data-Movement-Aware Integration of Neural and Symbolic Accelerators
+            question: After accelerating both ends of a pipeline, does the interface between them become the bottleneck?
+            approach: Combine compact intermediate representations, buffering, delta transfers, and producer–consumer overlap to reduce conversion, synchronization, and data-movement costs.
+            evaluation: One neural frontend and one simplified reasoning kernel. Build a calibrated system model and one RTL or high-level-synthesis module; compare serial transfers, double buffering, and the proposed interface.
+            caution: The contribution should be an interface or dataflow mechanism. Make board-level integration a goal only when a working FPGA platform already exists.
+            background: VLSI · Architecture
+          - name: RolloutMem
+            title: Memory Architecture for Batched World-Model Planning
+            question: How do candidate trajectories, time steps, and planning iterations change the memory reuse an accelerator should exploit?
+            approach: Profile real planning workloads and design tiling, scratchpad partitions, and state storage around the tradeoff between candidate parallelism and memory capacity.
+            evaluation: One predictor and two planner configurations. Validate a memory model, compare generic matrix-multiplication-oriented mapping with planning-aware mapping, and synthesize one key module for area and timing estimates.
+            caution: Show structure beyond ordinary batched inference. The model must represent actual operators and dependencies rather than assume an extra reuse benefit.
+            background: Architecture · VLSI
+          - name: MarginCIM
+            title: Decision-Margin-Aware Reliability for Associative Computing
+            question: Can hardware protection focus on numerical errors that would actually change a decision?
+            approach: Use the margin between candidate matches to selectively repeat reads, raise precision, or strengthen error correction for vulnerable associative queries.
+            evaluation: One vector-symbolic or associative-search workload and an explicit device-error model. Compare uniform protection, uniformly reduced precision, and margin-aware protection, including sensing and digital-periphery overhead.
+            caution: Distinguish fixed bias, random read noise, and correlated errors; an independent Gaussian-noise sweep alone is not a sufficient reliability model.
+            background: VLSI · Emerging memory
+          - name: HorizonGuard
+            title: Temporal Fault Protection for World-Model Rollouts
+            question: Which faults matter most when a prediction is repeatedly fed into future predictions and decisions?
+            approach: Trace error propagation across states and time steps, then selectively protect, detect, or recompute computations with high decision sensitivity.
+            evaluation: Fix one model and planner and inject one fault family, such as memory bit flips. Compare uniform, layer-sensitive, and temporal protection; trace fault location through action changes to task outcomes.
+            caution: Software fault injection does not establish real low-voltage energy savings; such claims require separate hardware calibration.
+            background: Architecture / VLSI · Physical AI
+  - id: ai-for-computing
+    title: "Module 2: AI for Computing"
+    theme: ai
+    groups:
+      - title: Architecture & Software Agents
+        projects:
+          - name: CausalArch
+            title: Hypothesis-Driven Experiments for Architecture Agents
+            question: Can an agent use experiments to distinguish competing explanations, rather than explain a design only after seeing its score?
+            approach: Require performance predictions and bottleneck hypotheses before each run; select interventions that distinguish explanations and update beliefs when predictions fail.
+            evaluation: Two small architecture-evaluation tasks. Compare a standard agent loop, structured reflection, Bayesian optimization, and explicit experiment design; measure design quality, prediction calibration, and the cost of identifying bottlenecks.
+            caution: Keep the model, tools, and budget fixed. The contribution is better experimental choices, not longer reasoning or more runs.
+            background: Architecture · Agentic AI
+          - name: FidelityDSE
+            title: Cost-Aware Selection of Evaluation Fidelity
+            question: How much evidence is enough to reject a design, and when is a more faithful evaluation worth its cost?
+            approach: Estimate bias and uncertainty across analytic models, short traces, and full simulation; selectively promote candidates to higher-fidelity evaluation.
+            evaluation: One design space and 2–3 fidelity levels. Compare a fixed pipeline, successive halving, multi-fidelity Bayesian optimization, and agent-assisted selection; validate every final candidate at the highest fidelity.
+            caution: Count API, simulation, and wall-clock costs. Isolate whether design structure or failure explanations add value beyond established multi-fidelity search.
+            background: Architecture · ML / Optimization
+          - name: MapTransfer
+            title: Reusable Mapping Knowledge for AI Accelerators
+            question: Can a good accelerator mapping become reusable knowledge with clear limits, rather than a configuration that works only once?
+            approach: Turn successful and failed mappings into constrained templates with explicit applicability conditions; match new workloads to templates and refine locally.
+            evaluation: One mature mapping platform. Compare a memoryless agent, nearest-neighbor reuse, a classical mapper, and template-guided search on held-out model families, shape ranges, or memory capacities.
+            caution: Test genuine transfer. Reusing near-duplicate configurations or simply adding past answers to a prompt is not enough.
+            background: Architecture · Compilers / Agentic AI
+          - name: KernelContract
+            title: Contract-Aware GPU Kernel Optimization Agents
+            question: What must an optimized kernel preserve for a microbenchmark speedup to become a correct end-to-end improvement?
+            approach: Give the agent explicit constraints on data type, layout, dynamic shapes, aliasing, numerical tolerance, and invocation patterns; prioritize actual pipeline bottlenecks.
+            evaluation: Optimize 3–5 hotspots in a world-model or neuro-symbolic pipeline. Compare a generic kernel agent, profiler-only feedback, and contract-aware optimization, alongside compiled-framework and optimized-library baselines.
+            caution: Identify a workload-specific cross-operator constraint or mechanism. End-to-end measurement is necessary but is not, by itself, the research contribution.
+            background: CUDA / Compilers · Agentic AI
+      - title: RTL, Verification & Physical Design
+        projects:
+          - name: ProofFirst
+            title: Verified RTL Optimization Under Fixed Specifications
+            question: Can an agent improve hardware efficiency while keeping the functional specification completely fixed?
+            approach: Start from correct RTL, propose local transformations, and use formal-equivalence counterexamples to guide repair; evaluate power, performance, and area only after verification passes.
+            evaluation: Small arithmetic modules, FIFOs, or arbiters. Compare default synthesis, simulation-only feedback, and formal-guided optimization; report equivalence pass rate, PPA, verification time, and timeouts.
+            caution: Isolate the specification and verifier from agent edits. Make reset behavior, temporal equivalence, and environmental assumptions explicit; a timeout is not a proof.
+            background: VLSI / Formal methods · Agentic AI
+          - name: ConeRepair
+            title: Dependency-Grounded Repair of RTL Repositories
+            question: Which structural and runtime evidence helps an agent locate the logic responsible for a cross-module hardware failure?
+            approach: Combine module hierarchy and signal dependencies with failing assertions or waveforms; use the resulting cone of influence to focus edits and reverify repairs.
+            evaluation: One bug class in two small open-source designs. Compare text retrieval, vector retrieval, HDL-graph retrieval, and failure-guided retrieval using repository-level holdouts.
+            caution: Isolate the value of dynamic failure evidence beyond structural retrieval. Report historical bugs separately from injected mutations.
+            background: VLSI · Agentic AI
+          - name: ISABenefit
+            title: Workload-Driven, Verified RISC-V Instruction Discovery
+            question: What makes a new instruction worth adding once software use, hardware cost, and end-to-end impact are all counted?
+            approach: Propose a few extensions from application hotspots, connect them through intrinsics, verify their semantics, and select for area-constrained system benefit.
+            evaluation: One core, one workload family, and at most three candidates. Compare the standard instruction set, manually selected hotspot fusion, and search- or agent-selected extensions; include synthesis and held-out inputs.
+            caution: Focus on selecting useful extensions, not merely integrating RTL. Count critical-path effects, data movement, and how often software can use the instruction.
+            background: Architecture · VLSI / Compilers
+          - name: PowerProbe
+            title: Goal-Conditioned Workload Synthesis for Power Characterization
+            question: Which legal program behaviors do standard workloads miss when characterizing power and rapid power changes?
+            approach: Generate programs against explicit power-profile goals and coverage gaps, then refine them using simulation and power feedback rather than a single maximum score.
+            evaluation: One small RISC-V core and two targets, such as average dynamic power and windowed power change. Compare random, coverage-guided, and evolutionary search; retain reproducible programs and validate high-fidelity results separately.
+            caution: Switching activity is a proxy, not a measurement of voltage droop or worst-case chip power. State precisely what the evaluation supports.
+            background: VLSI · Architecture / Agentic AI
+          - name: TimingPilot
+            title: Report-Grounded Agents for Physical-Design Closure
+            question: Can understanding why a design violates constraints make an agent more effective than treating the design flow as a black box?
+            approach: Map critical-path, congestion, and violation reports to a limited action set such as placement density, buffering, or selected flow parameters; track the effects of each change.
+            evaluation: One fixed tool flow and several small blocks. Compare defaults, Bayesian optimization, a score-only agent, and a report-grounded agent; measure valid-design rate and PPA under matched budgets with held-out designs.
+            caution: Fix tool and process-design-kit versions. A good parameter setting on one block does not demonstrate a transferable optimization strategy.
+            background: VLSI / Physical design · Agentic AI

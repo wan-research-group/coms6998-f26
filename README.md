@@ -25,11 +25,13 @@ Fields a week entry understands:
 | Field | Meaning |
 |---|---|
 | `week`, `date`, `module`, `title`, `type` | Core row data. `type` is `lecture`, `seminar`, `midterm`, or `poster` |
-| `papers:` / `background:` | Required readings (seminar weeks use `papers`, lecture weeks use `background`). Each item: `title`, `venue`, `url`, optional `focus`, `extra_link`, `companion_url`, `co_led` |
+| `papers:` / `background:` | Required readings (seminar weeks use `papers`, lecture weeks use `background`). Each item: `title`, `short_title` (home-page label), `venue`, `url`, optional `focus`, `extra_link`, `extra_label`, `co_led` |
 | `optional:` | Optional readings: either `{title, url}` maps or plain strings (rendered without a link) |
-| `guest:` | `{label, topic}` - renders the guest badge |
+| `guest:` | Confirmed speakers only: `{label, name, affiliation, url}`. Omit until confirmed; `url` links to the speaker's homepage. |
+| `research_question:` | One concise research question per week; shared by Schedule, Papers, Now, and the syllabus |
 | `case_study:`, `exercise:` | Extra mini-lecture lines |
 | `deadlines:` | List of strings, rendered as highlighted chips. The home-page table shows the part after the "-" |
+| `glance_deadline:` | Optional concise deadline label for the home-page table only |
 
 A required paper with `url: null` renders without a link plus an "(arXiv link
 coming in September)" note.
@@ -45,6 +47,21 @@ the top or rely on the date sort. The home page displays the latest three.
 `_site/syllabus.md`. Do not edit the generated syllabus directly; edit
 `build.py` for shared course prose or `data/schedule.yaml` for structured
 course information, then rebuild.
+
+**Milestones**: each entry in `data/schedule.yaml` has a concise `checklist`.
+When a template is ready, add `template_url` to that milestone; its link appears
+in both the project page and syllabus. No placeholder links are shown.
+
+**Project candidates**: edit `data/projects.yaml`. The 26 briefs are grouped by
+module and research area, after Final submission on the Project page. Each entry
+has a `name`, full `title`, `question`, `approach`, `evaluation`, `caution`,
+and `background`. The page shows the question up front and expands the
+remaining details on demand; the syllabus includes a concise title/question
+catalogue.
+
+**Local readings**: put handouts and slides in `assets/readings/` and use a
+relative URL such as `assets/readings/openai-jalapeno-hot-chips-2026.pdf`.
+The build copies these assets unchanged into the published site.
 
 **Students page**: add entries to `data/students.yaml` (`name`, optional
 `link` and `photo`; put photo files under `assets/students/`). While the list
@@ -80,7 +97,7 @@ This site is **hand-rolled HTML/CSS/JS + a single-file Python renderer**
 | `_site/index.html` | Home: hero, current week/readings, next deadline, announcements, course info, schedule at a glance |
 | `_site/schedule.html` | Full weekly schedule with readings, guests, deadlines |
 | `_site/format.html` | Seminar format, presentation structure, grading |
-| `_site/project.html` | Project tracks, research standard, milestones |
+| `_site/project.html` | Project tracks, research standard, milestones, final submission, and 26 candidate briefs |
 | `_site/policies.html` | AI-use policy and course policies |
 | `_site/papers.html` | Compact reading list of all required/optional papers by week |
 | `_site/students.html` | Class roster (from `data/students.yaml`) |
@@ -104,6 +121,7 @@ The research-group link lives in the footer to keep the mobile navigation compac
 ├── data/
 │   ├── schedule.yaml         # ← EDIT WEEKLY (single source of truth)
 │   ├── announcements.yaml    # ← latest home-page announcements
+│   ├── projects.yaml         # ← candidate briefs grouped by module
 │   └── students.yaml         # ← class roster for students.html
 ├── assets/                   # style.css, site.js, favicon.svg, og.png (+ students/ photos)
 ├── syllabus.md               # generated; do not edit directly

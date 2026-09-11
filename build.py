@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the COMS 6998 course site.
 
-Reads data/schedule.yaml and data/students.yaml, renders the site into
+Reads structured course data from data/, renders the site into
 _site/ (index, schedule, format, project, policies, papers, students)
 and copies assets/. It also regenerates the student-facing syllabus.md.
 
@@ -129,7 +129,7 @@ RESEARCH_STANDARD = [
 PROJECT_OVERVIEW = (
     "The project is the center of the course: a carefully scoped research effort that could "
     "mature into a top-tier architecture, systems, ML systems, robotics, or EDA paper. Teams "
-    "of 1-2 are formed by bidding on a curated portfolio of directions; publication is an "
+    "of 1-3 are formed by bidding on a curated portfolio of directions; publication is an "
     "aspiration, not a grading requirement."
 )
 
@@ -140,48 +140,12 @@ PROJECT_TRACKS = [
      "Build and rigorously evaluate an agent for software optimization, compilers, GPU kernels, architecture DSE, RTL/EDA, or verification."),
 ]
 
-PROJECT_DIRECTIONS_NOTE = (
-    "A titles-only preview of the curated project portfolio. Full briefs with research "
-    "questions, baselines, evaluation plans, and platforms will be released at the Week 2 "
-    "research marketplace; directions may be added, merged, or refined before bidding opens."
+PROJECT_CANDIDATES_NOTE = (
+    "Choose a question, build a strong baseline, and test one mechanism. These 26 starting "
+    "points can be narrowed to fit a team of 1-3; students are also welcome to propose their "
+    "own projects. Agree on scope and platform requirements with the instructor before "
+    "committing to a direction."
 )
-
-PROJECT_DIRECTIONS = [
-    ("Module 1: Computing for AI", [
-        "SwarmServe - workflow-aware scheduling for multi-agent LLM serving",
-        "CacheCraft - program-structure-aware KV-cache retention and tiering",
-        "MuxFlow - small-language-model orchestration under real serving load",
-        "AgentShield - fault tolerance for multi-step agentic LLM pipelines",
-        "ActSpec - deadline-aware speculative action generation for real-time VLAs",
-        "VLA-Roof - an analytical performance model for VLA inference",
-        "FleetBatch - deadline-aware multi-robot serving on shared GPUs",
-        "SceneCache - consumer-aware caching for 3D scene representations",
-        "PlanFuse - profiling and co-scheduling hybrid VLA + motion-planning stacks",
-        "FaultLine - joint adversarial and soft-error robustness for VLA control",
-        "SymKern - demystifying and optimizing neuro-symbolic kernels on GPUs",
-        "SysTwo - systems characterization of System-2 (test-time-compute) inference",
-        "ESP-Reason - a reasoning-accelerator tile on the ESP SoC platform (FPGA)",
-        "HoloCIM - a compute-in-memory noise-budget study for vector-symbolic AI",
-        "HotPath - the kernel-to-system conversion rate of component speedups",
-        "WattGuard - energy-SLO co-control for edge AI inference",
-    ]),
-    ("Module 2: AI for Computing", [
-        "KernelScope - does profiler feedback make GPU-kernel agents better, per token?",
-        "MapSmith - LLM agents vs. classical search for accelerator mapping",
-        "FairDSE - a budget-matched showdown: LLM agents vs. BO/RL/GA for architecture DSE",
-        "Signals - which feedback modality buys the most design quality per token?",
-        "Ouroboros - an agent co-designs an accelerator for its own workload",
-        "ProveGen - RTL generation with verification-in-the-loop, scored by mutation testing",
-        "Spec2Socket - an agentic flow from spec to HLS to FPGA-measured accelerator",
-        "LACE-Next - workload-driven agentic RISC-V instruction extension",
-        "HDLGround - structured retrieval and grounding for hardware-design agents",
-        "FlowPilot - log-reading LLM agents vs. black-box autotuners on OpenROAD",
-        "SysDoctor - a planted-bottleneck benchmark for AI performance diagnosis",
-        "AutopilotServe - a guarded closed-loop agent that keeps a serving stack tuned",
-        "AutoEmbody - agents that configure VLA deployments for closed-loop success",
-        "RedFlag - reward-hacking forensics and hardened audits for design agents",
-    ]),
-]
 
 FINAL_SUBMISSION = (
     "An eight- to ten-page conference-style paper (excluding references and appendices); a "
@@ -192,21 +156,20 @@ FINAL_SUBMISSION = (
 )
 
 AI_POLICY_STANCE = (
-    "AI use is permitted and encouraged when it is disclosed, reproducible, and independently "
-    "verified. Agent output is not evidence by itself."
+    "Use AI actively and creatively. Learning to collaborate effectively with AI tools is part "
+    "of this course: explore more ideas, build faster, and deepen your understanding."
 )
 
 AI_POLICY_ITEMS = [
-    "You may use AI throughout the course - brainstorming, literature discovery, coding, debugging, experiment orchestration, and writing assistance - with meaningful use disclosed.",
+    "AI tools are welcome throughout the course: learning unfamiliar concepts, brainstorming, finding literature, coding, debugging, running experiments, and improving writing. Thoughtful AI use is encouraged, not penalized.",
+    "Include a brief note describing meaningful AI assistance and how you checked the result. Be ready to explain your design choices, code, and conclusions in your own words.",
     "Every citation must be checked against a primary source, and every numerical result must trace to an actual experiment, simulator output, formal result, or cited source.",
     "AI-generated code must satisfy the same correctness, testing, performance, licensing, and provenance requirements as human-written code.",
 ]
 
 POLICY_SECTIONS = [
     ("Academic integrity", "Students must follow Columbia academic-integrity policies. Fabricated citations, invented experiments, altered logs, undisclosed result selection, plagiarism, or presenting agent-generated claims as verified evidence are serious violations. When in doubt, disclose the tool, source, assistance, or collaboration."),
-    ("Collaboration & authorship", "Course collaboration does not automatically establish publication authorship. If a project continues after the semester, authorship and ordering follow substantive intellectual and technical contributions, manuscript participation, accountability, and venue policies. Students retain credit for their work; continuation plans should be discussed transparently with the instructor and research mentors."),
     ("Accessibility & accommodations", "Students who require disability-related accommodations should contact Columbia Disability Services and inform the instructor as early as possible so approved accommodations can be implemented. Please communicate time-sensitive circumstances before deadlines whenever possible."),
-    ("Resource fairness", "Projects report GPU, API, token, simulation, and wall-clock budgets. Grades are not based on access to the largest model or most GPUs. Every project defines a fallback experiment that remains valid if an API, simulator, board, robot, or cloud resource becomes unavailable. Curated starter environments and smoke tests are provided for officially supported directions when feasible."),
     ("Late work", "Each team may use one 48-hour grace pass on a written milestone, requested before the deadline. The grace pass does not apply to in-class presentations, the final poster, or the final submission. Other extensions require prior approval or documented circumstances."),
     ("Changes to the syllabus", "This is a first-offering advanced-topics course in a rapidly changing research area. Individual readings, project briefs, guest-speaker scheduling, or detailed deadlines may be updated when new work appears or infrastructure changes. Material changes will be announced clearly and will not retroactively disadvantage students."),
 ]
@@ -229,6 +192,8 @@ def fmt_long(d: dt.date) -> str:
 data = yaml.safe_load((ROOT / "data" / "schedule.yaml").read_text())
 students_data = yaml.safe_load((ROOT / "data" / "students.yaml").read_text())
 announcements_data = yaml.safe_load((ROOT / "data" / "announcements.yaml").read_text())
+projects_data = yaml.safe_load((ROOT / "data" / "projects.yaml").read_text())
+project_modules = projects_data["modules"]
 
 course = data["course"]
 inst = course["instructor"]
@@ -394,6 +359,7 @@ def hero() -> str:
         <li><strong>Course Time:</strong> {esc(course["meeting"])}</li>
         <li><strong>Location:</strong> {esc(course["location"])}</li>
       </ul>
+      <p class="hero-shortcuts"><a href="#now">This week ↓</a> · <a href="#glance">Schedule ↓</a></p>
     </div>
     <aside class="instructor-card" aria-label="Instructor">
       <p class="card-kicker">Instructor</p>
@@ -448,6 +414,19 @@ def dated_deadlines() -> list[dict]:
     return sorted(records, key=lambda item: item["due"])
 
 
+def guest_html(guest: dict) -> str:
+    """Only confirmed speakers belong in the published course data."""
+    name = f'<a href="{esc(guest["url"])}" target="_blank" rel="noopener">{esc(guest["name"])}</a>'
+    return f'{name} ({esc(guest["affiliation"])})'
+
+
+def research_question_html(week: dict) -> str:
+    return (
+        '<p class="research-question"><strong>Research question of the week</strong>'
+        f'<span>{esc(week["research_question"])}</span></p>'
+    )
+
+
 def now_html() -> str:
     today = dt.date.today()
     visible_week = next((w for w in weeks if w["date"] >= today), weeks[-1])
@@ -465,10 +444,16 @@ def now_html() -> str:
         else:
             readings = '<p class="now-empty">No assigned readings.</p>'
         hidden = "" if week is visible_week else " hidden"
+        guest_note = (
+            f'<p class="week-note"><strong>Guest lecture:</strong> {guest_html(week["guest"])}</p>'
+            if week.get("guest") else ""
+        )
         class_cards.append(
             f"""<article class="now-class" data-date="{week['date'].isoformat()}" data-week="{week['week']}"{hidden}>
   <p class="now-label"><span class="now-state">Next class</span> · Week {week['week']:02d} · <time datetime="{week['date'].isoformat()}">{esc(fmt_short(week['date']))}</time></p>
   <h3><a href="schedule.html#week-{week['week']}">{esc(week['title'])}</a></h3>
+  {guest_note}
+  {research_question_html(week)}
   <p class="now-subhead">Required reading</p>
   {readings}
 </article>"""
@@ -559,6 +544,8 @@ def prereq_html() -> str:
 
 def short_deadlines(w: dict) -> str:
     """Compress a week's deadline strings for the at-a-glance table."""
+    if w.get("glance_deadline"):
+        return w["glance_deadline"]
     outs = []
     for d in w.get("deadlines", []):
         outs.append(d.split(" - ", 1)[1].strip() if " - " in d else d)
@@ -582,9 +569,31 @@ def glance_html() -> str:
             rows.append(f'<tr class="g-module {mcls}"><td colspan="4">{esc(label)}</td></tr>')
         dot = f'<span class="dot g-dot {MODULE_CLASS.get(w["module"], "m-span")}" aria-hidden="true"></span>'
         dl = esc(short_deadlines(w))
+        guest_note = (
+            f'<p class="fine">Guest lecture: {guest_html(w["guest"])}</p>'
+            if w.get("guest") else ""
+        )
+        required = w.get("papers") or w.get("background") or []
+        reading_links = []
+        for paper in required:
+            short = esc(paper.get("short_title", paper["title"]))
+            reading_links.append(
+                f'<a href="{esc(paper["url"])}" title="{esc(paper["title"])}" target="_blank" rel="noopener">{short}</a>'
+                if paper.get("url") else short
+            )
+        reading_note = (
+            '<p class="glance-readings"><span class="glance-label">Required reading:</span> '
+            + ' · '.join(reading_links) + '</p>'
+            if required else '<p class="glance-readings">No assigned readings.</p>'
+        )
+        if w.get("optional"):
+            reading_note += (
+                f'<a class="glance-more" href="schedule.html#optional-week-{w["week"]}" '
+                f'aria-label="Optional readings and details for week {w["week"]}">Optional reading &amp; more →</a>'
+            )
         rows.append(
             f'<tr><td>{w["week"]}</td><td>{esc(fmt_short(w["date"]))}</td>'
-            f'<td>{dot}<a href="schedule.html#week-{w["week"]}">{esc(w["title"])}</a></td>'
+            f'<td>{dot}<a href="schedule.html#week-{w["week"]}">{esc(w["title"])}</a>{guest_note}{reading_note}</td>'
             f'<td class="g-dl">{dl or "-"}</td></tr>'
         )
     return f"""<section class="section" id="glance" aria-labelledby="glance-h">
@@ -618,7 +627,7 @@ def paper_li(p: dict, kind: str) -> str:
         note = ""
     else:
         title_html = title
-        note = ' <span class="pending">(arXiv link coming in September)</span>'
+        note = ' <span class="pending">(reading link forthcoming)</span>'
     bits = [f'<span class="p-title">{title_html}</span>{note}',
             f'<span class="venue">{esc(p["venue"])}</span>']
     if p.get("co_led"):
@@ -627,7 +636,7 @@ def paper_li(p: dict, kind: str) -> str:
     if p.get("companion_url"):
         extras.append(f'<a class="p-extra" href="{esc(p["companion_url"])}" target="_blank" rel="noopener">companion critique</a>')
     if p.get("extra_link"):
-        extras.append(f'<a class="p-extra" href="{esc(p["extra_link"])}" target="_blank" rel="noopener">project site</a>')
+        extras.append(f'<a class="p-extra" href="{esc(p["extra_link"])}" target="_blank" rel="noopener">{esc(p.get("extra_label", "project site"))}</a>')
     bits.extend(extras)
     focus = f'<span class="focus">{esc(p["focus"])}</span>' if p.get("focus") else ""
     return f'<li class="{kind}"><div class="p-head">{" ".join(bits)}</div>{focus}</li>'
@@ -655,11 +664,10 @@ def week_article(w: dict) -> str:
             f'<h2 class="week-title">{esc(w["title"])}</h2>']
 
     if w.get("guest"):
-        body.append(f'<p class="week-note">Guest lecture: {esc(w["guest"]["topic"])}.</p>')
+        body.append(f'<p class="week-note"><strong>Guest lecture:</strong> {guest_html(w["guest"])}</p>')
+    body.append(research_question_html(w))
     if w.get("case_study"):
         cs = esc(w["case_study"])
-        if "ArchOrchestra" in w["case_study"]:
-            cs += ' <span class="pending">(arXiv link coming in September)</span>'
         body.append(f'<p class="week-note"><strong>Mini-lecture case study:</strong> {cs}</p>')
     if w.get("exercise"):
         body.append(f'<p class="week-note"><strong>In-class exercise:</strong> {esc(w["exercise"])}</p>')
@@ -676,7 +684,7 @@ def week_article(w: dict) -> str:
     if w.get("optional"):
         opts = "\n".join(f"<li>{optional_entry(o)}</li>" for o in w["optional"])
         body.append(
-            f'<details class="optional"><summary>Optional readings <span class="opt-count">({len(w["optional"])})</span></summary>'
+            f'<details class="optional" id="optional-week-{w["week"]}"><summary>Optional readings <span class="opt-count">({len(w["optional"])})</span></summary>'
             f'<ul class="optional-list">{opts}</ul></details>'
         )
 
@@ -799,7 +807,7 @@ def format_body() -> str:
     return f"""<section class="section" id="format">
   <div class="wrap">
     {page_head("Course format &amp; grading",
-               "Advanced graduate lecture-seminar with a semester-long research project. Nine seminar meetings provide 23 paper-lead slots; every student leads exactly once. There are no exams and no problem sets.")}
+               "Advanced graduate lecture-seminar with a semester-long research project. Paper presentations are student-led; every student leads exactly once. There are no exams and no problem sets.")}
 
     <div class="col2">
       <div class="panel">
@@ -857,12 +865,20 @@ def project_body() -> str:
     tl_items = []
     for m in milestones:
         cls = " tl-major" if m["id"] in ("Midterm", "P5", "Final") else ""
+        milestone_id = f'<span class="tl-id">{esc(m["id"])}</span>' if m["id"] != "Proposal" else ""
+        checklist = ''.join(f'<li>{esc(item)}</li>' for item in m["checklist"])
+        template = (
+            f'<a class="milestone-template" href="{esc(m["template_url"])}">Template →</a>'
+            if m.get("template_url") else ""
+        )
         tl_items.append(
             f"""<li class="tl-item{cls}">
   <span class="tl-dot" aria-hidden="true"></span>
   <time datetime="{m["date"].isoformat()}">{esc(fmt_short(m["date"]))}</time>
-  <span class="tl-id">{esc(m["id"])}</span>
+  {milestone_id}
   <span class="tl-name">{esc(m["name"])}</span>
+  <ul class="milestone-checklist">{checklist}</ul>
+  {template}
 </li>"""
         )
     std_lis = "\n".join(f"<li>{s}</li>" for s in RESEARCH_STANDARD)
@@ -874,29 +890,64 @@ def project_body() -> str:
       </div>"""
         for i, (track_id, title, description) in enumerate(PROJECT_TRACKS)
     )
-    direction_cols = "\n".join(
-        f"""<div class="panel">
-        <h2>{esc(module)}</h2>
-        <ul class="std-list">
-          {chr(10).join(f"<li>{esc(t)}</li>" for t in titles)}
-        </ul>
-      </div>"""
-        for module, titles in PROJECT_DIRECTIONS
-    )
+    candidate_modules = []
+    candidate_links = []
+    project_number = 0
+    for module in project_modules:
+        count = sum(len(group["projects"]) for group in module["groups"])
+        candidate_links.append(
+            f'<a class="candidate-jump candidate-jump-{esc(module["theme"])}" '
+            f'href="#{esc(module["id"])}">{esc(module["title"])} <span>{count} projects</span></a>'
+        )
+        groups = []
+        for group in module["groups"]:
+            cards = []
+            for project in group["projects"]:
+                project_number += 1
+                project_id = "project-" + project["name"].lower()
+                brief_rows = "".join(
+                    f'<div><dt>{label}</dt><dd>{esc(project[key])}</dd></div>'
+                    for label, key in [
+                        ("Mechanism to explore", "approach"),
+                        ("Semester scope & evaluation", "evaluation"),
+                        ("Key check", "caution"),
+                        ("Helpful background", "background"),
+                    ]
+                )
+                cards.append(f"""<article class="candidate" id="{project_id}" aria-labelledby="{project_id}-title">
+          <h5 id="{project_id}-title"><span class="candidate-number">{project_number:02d}</span>
+            <a href="#{project_id}">{esc(project["name"])}</a></h5>
+          <p class="candidate-title">{esc(project["title"])}</p>
+          <p class="candidate-question">{esc(project["question"])}</p>
+          <details class="project-brief">
+            <summary>Approach &amp; evaluation<span class="visually-hidden"> for {esc(project["name"])}</span></summary>
+            <dl>{brief_rows}</dl>
+          </details>
+        </article>""")
+            groups.append(
+                f'<div class="candidate-group"><h4>{esc(group["title"])}</h4>'
+                f'<div class="candidate-grid">{chr(10).join(cards)}</div></div>'
+            )
+        candidate_modules.append(f"""<section class="candidate-module candidate-module-{esc(module["theme"])}"
+      id="{esc(module["id"])}" aria-labelledby="{esc(module["id"])}-title">
+      <div class="candidate-module-head">
+        <h3 id="{esc(module["id"])}-title">{esc(module["title"])}</h3>
+        <span>{count} projects</span>
+      </div>
+      {chr(10).join(groups)}
+    </section>""")
 
     return f"""<section class="section" id="project">
   <div class="wrap">
     {page_head("Semester-long research project", esc(PROJECT_OVERVIEW))}
+    <p class="project-shortcuts"><a href="#milestones">Milestone checklist ↓</a>
+      <a href="#directions">Project candidates ↓</a></p>
 
     <div class="tracks tracks-2">
       {track_cards}
     </div>
 
-    <h2 id="directions">Project Candidates (students are welcome to propose their own projects)</h2>
-    <div class="col2">
-      {direction_cols}
-    </div>
-    <p class="fine">{esc(PROJECT_DIRECTIONS_NOTE)}</p>
+
 
     <div class="col2 col2-project">
       <div class="panel">
@@ -906,7 +957,7 @@ def project_body() -> str:
         </ul>
       </div>
       <div class="panel">
-        <h2>Milestones</h2>
+        <h2 id="milestones">Milestones</h2>
         <ol class="timeline">
           {chr(10).join(tl_items)}
         </ol>
@@ -915,11 +966,22 @@ def project_body() -> str:
     </div>
 
     <div class="panel">
-      <h2>Final submission</h2>
+      <h2 id="final-submission">Final submission</h2>
       <p>{esc(FINAL_SUBMISSION)}</p>
     </div>
+
+    <section class="project-candidates" aria-labelledby="directions">
+      <h2 id="directions">Project candidates</h2>
+      <p class="candidate-intro">{esc(PROJECT_CANDIDATES_NOTE)}</p>
+      <nav class="candidate-nav" aria-label="Project candidate modules">
+        {chr(10).join(candidate_links)}
+      </nav>
+      {chr(10).join(candidate_modules)}
+    </section>
   </div>
 </section>"""
+
+
 
 
 # ---------------------------------------------------------------- policies
@@ -1002,6 +1064,7 @@ def papers_body() -> str:
             f"""<article class="papers-week {MODULE_CLASS.get(w["module"], "m-span")}">
   <div class="week-tags"><span class="chip chip-mod">{esc(w["module"])}</span></div>
   <h2><span class="wk-tag">Wk {w["week"]:02d} · {esc(fmt_short(w["date"]))}</span> {esc(w["title"])}</h2>
+  {research_question_html(w)}
   <p class="p-label">{label}</p>
   <ol class="papers">{lis}</ol>
   {opt}
@@ -1010,7 +1073,7 @@ def papers_body() -> str:
     return f"""<section class="section papers-index">
   <div class="wrap">
     {page_head("Reading list",
-               f'All {n_req} required readings and {n_opt} optional readings, by week. Links were individually verified against primary sources in August 2026. <a href="schedule.html">Back to the schedule.</a>')}
+               f'All {n_req} required readings and {n_opt} optional readings, by week. <a href="schedule.html">Back to the schedule.</a>')}
     <div class="sched-tools papers-legend">
       <span class="legend"><span class="dot dot-comp" aria-hidden="true"></span>Computing for AI</span>
       <span class="legend"><span class="dot dot-ai" aria-hidden="true"></span>AI for Computing</span>
@@ -1082,7 +1145,7 @@ def syllabus_markdown() -> str:
         "",
         "## Course format",
         "",
-        "Nine seminar meetings provide 23 paper-lead slots; every student leads exactly once. "
+        "Paper presentations are student-led; every student leads exactly once. "
         "Presentation slides are due at 11:59 PM ET on the Thursday before class.",
         "",
         "### Regular week (110 minutes)",
@@ -1144,11 +1207,12 @@ def syllabus_markdown() -> str:
         "",
         "### Milestones",
         "",
-        "| Date | ID | Deliverable |",
+        "| Date | Milestone | Deliverable checklist |",
         "|---|---|---|",
     ])
     lines.extend(
-        f"| {fmt_short(item['date'])} | {item['id']} | {md_table_cell(item['name'])} |"
+        f"| {fmt_short(item['date'])} | {md_table_cell(item['name'] if item['id'] == 'Proposal' else item['id'] + ' - ' + item['name'])} | {'<br>'.join(md_table_cell(point) for point in item['checklist'])}"
+        + (f"<br>[Template]({item['template_url']})" if item.get('template_url') else "") + " |"
         for item in milestones
     )
     lines.extend([
@@ -1160,10 +1224,26 @@ def syllabus_markdown() -> str:
         "",
         FINAL_SUBMISSION,
         "",
+        "### Project candidates",
+        "",
+        PROJECT_CANDIDATES_NOTE,
+        "",
+        "The [Project page](project.html#directions) includes each candidate's proposed mechanism, "
+        "semester evaluation, scope checks, and helpful background.",
+        "",
+    ])
+    for module in project_modules:
+        lines.extend([f"#### {module['title']}", ""])
+        for group in module["groups"]:
+            lines.extend([f"##### {group['title']}", ""])
+            for project in group["projects"]:
+                lines.append(f"- **{project['name']} — {project['title']}.** {project['question']}")
+            lines.append("")
+    lines.extend([
         "## Weekly schedule and readings",
         "",
         "Required readings appear first. Optional readings are listed separately, one paper per line. "
-        "Guest-speaker details remain tentative until announced.",
+        "Guest speakers are listed once confirmed.",
         "",
     ])
 
@@ -1173,9 +1253,13 @@ def syllabus_markdown() -> str:
             "",
             f"**{week['title']}** · {week['module']}",
             "",
+            f"**Research question of the week:** {week['research_question']}",
+            "",
         ])
         if week.get("guest"):
-            lines.append(f"- **Guest lecture:** {week['guest']['topic']} ({week['guest']['label']}; confirmation pending).")
+            guest = week["guest"]
+            speaker = md_link(guest["name"], guest["url"])
+            lines.append(f"- **Guest lecture:** {speaker} ({guest['affiliation']}).")
         if week.get("case_study"):
             lines.append(f"- **Mini-lecture case study:** {week['case_study']}.")
         if week.get("exercise"):
@@ -1193,7 +1277,7 @@ def syllabus_markdown() -> str:
                 if paper.get("companion_url"):
                     detail += f"; [companion critique]({paper['companion_url']})"
                 if paper.get("extra_link"):
-                    detail += f"; [project site]({paper['extra_link']})"
+                    detail += f"; [{paper.get('extra_label', 'project site')}]({paper['extra_link']})"
                 lines.append(f"- {md_link(paper['title'], paper.get('url'))}{detail}")
         if week.get("optional"):
             optional_links = []

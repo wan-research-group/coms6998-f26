@@ -1,6 +1,6 @@
 # COMS 6998 AI-Native Computing - Fall 2026 - canonical structured course data.
-# The public syllabus is generated from this file and build.py. All URLs were
-# individually verified in August 2026.
+# The public syllabus is generated from this file and build.py.
+# Verify new reading links against primary sources when updating the schedule.
 
 course:
   number: "COMS 6998"
@@ -20,21 +20,45 @@ course:
 grading:
   - {component: "Paper presentation & discussion leadership", weight: 15}
   - {component: "Engagement & participation", weight: 10}
-  - {component: "Project P0 - Proposal", weight: 5}
-  - {component: "Project check-ins P1-P5 (completion-based)", weight: 10}
+  - {component: "Project proposal", weight: 10}
+  - {component: "Project check-ins P1-P5 (completion-based)", weight: 15}
   - {component: "Midterm presentation", weight: 10}
   - {component: "Final poster", weight: 10}
-  - {component: "Final paper & artifact", weight: 40}
+  - {component: "Final paper & artifact", weight: 30}
 
 milestones:
-  - {date: 2026-10-02, id: P0, name: "Project proposal"}
-  - {date: 2026-10-16, id: P1, name: "Infrastructure & baselines"}
-  - {date: 2026-10-30, id: P2, name: "Prototype & pilot results"}
-  - {date: 2026-11-06, id: Midterm, name: "Midterm presentation (in class)"}
-  - {date: 2026-11-20, id: P3, name: "Evaluation plan & initial results"}
-  - {date: 2026-12-04, id: P4, name: "Main results & ablations"}
-  - {date: 2026-12-11, id: P5, name: "Complete draft, artifact & poster; final poster session (in class)"}
-  - {date: 2026-12-21, id: Final, name: "Final paper & artifact"}
+  - date: 2026-10-02
+    id: Proposal
+    name: "Project proposal"
+    checklist: ["State the research question, closest work, and testable hypothesis.", "Specify baselines, metrics, resource needs, and team responsibilities."]
+  - date: 2026-10-16
+    id: P1
+    name: "Infrastructure & baselines"
+    checklist: ["Share a runnable repository with setup instructions.", "Report the first baseline measurement and its configuration."]
+  - date: 2026-10-30
+    id: P2
+    name: "Prototype & pilot results"
+    checklist: ["Run a minimal end-to-end prototype.", "Include one pilot comparison figure and the main remaining risk."]
+  - date: 2026-11-06
+    id: Midterm
+    name: "Midterm presentation (in class)"
+    checklist: ["Present the question, approach, baseline, and early evidence.", "Identify the feedback needed and the next experiments."]
+  - date: 2026-11-20
+    id: P3
+    name: "Evaluation plan & initial results"
+    checklist: ["Fix the workloads, metrics, baselines, and experiment budget.", "Submit initial comparisons and the planned ablations."]
+  - date: 2026-12-04
+    id: P4
+    name: "Main results & ablations"
+    checklist: ["Submit main results, an ablation, and a failure or boundary case.", "Include repeated measurements or uncertainty where relevant."]
+  - date: 2026-12-11
+    id: P5
+    name: "Complete draft, artifact & poster; final poster session (in class)"
+    checklist: ["Submit a complete paper draft and a runnable artifact.", "Upload the poster by Dec 10 and present it in class on Dec 11."]
+  - date: 2026-12-18
+    id: Final
+    name: "Final paper & artifact"
+    checklist: ["Submit the revised paper, artifact, and figure-generation scripts.", "Include responses to feedback and individual contributions."]
 
 registrar_dates:
   - {date: 2026-09-18, note: "Last day to add (Change of Program)"}
@@ -47,10 +71,11 @@ weeks:
     date: 2026-09-11
     module: "Launch"
     title: "Course Introduction: AI as Workload, AI as Designer"
+    research_question: "How does the relationship between workloads and architectures change when AI can adapt both?"
     type: lecture
     background:
-      - {title: "A New Golden Age for Computer Architecture", venue: "CACM 2019", url: "https://doi.org/10.1145/3282307"}
-      - {title: "GenAI for Systems: Recurring Challenges and Design Principles from Software to Silicon", venue: "arXiv 2026", url: "https://arxiv.org/abs/2602.15241"}
+      - {short_title: "A New Golden Age", title: "A New Golden Age for Computer Architecture", venue: "CACM 2019", url: "https://doi.org/10.1145/3282307"}
+      - {short_title: "GenAI for Systems", title: "GenAI for Systems: Recurring Challenges and Design Principles from Software to Silicon", venue: "arXiv 2026", url: "https://arxiv.org/abs/2602.15241"}
     optional:
       - {title: "The Bitter Lesson (2019)", url: "http://www.incompleteideas.net/IncIdeas/BitterLesson.html"}
       - {title: "Architecture 2.0: Why Computer Architects Need a Data-Centric AI Gymnasium (ACM SIGARCH Blog, 2023)", url: "https://www.sigarch.org/architecture-2-0-why-computer-architects-need-a-data-centric-ai-gymnasium/"}
@@ -60,11 +85,12 @@ weeks:
     date: 2026-09-18
     module: "Computing for AI"
     title: "How to Study an AI Computing System + LLM Inference Fundamentals"
+    research_question: "What makes a performance model useful when bottlenecks shift with workload, scale, and operating conditions?"
     type: lecture
     background:
-      - {title: "Roofline: An Insightful Visual Performance Model for Multicore Architectures", venue: "CACM 2009", url: "https://doi.org/10.1145/1498765.1498785"}
-      - {title: "The Tail at Scale", venue: "CACM 2013", url: "https://research.google/pubs/the-tail-at-scale/"}
-      - {title: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness", venue: "NeurIPS 2022", url: "https://arxiv.org/abs/2205.14135"}
+      - {short_title: "Roofline", title: "Roofline: An Insightful Visual Performance Model for Multicore Architectures", venue: "CACM 2009", url: "https://doi.org/10.1145/1498765.1498785"}
+      - {short_title: "The Tail at Scale", title: "The Tail at Scale", venue: "CACM 2013", url: "https://research.google/pubs/the-tail-at-scale/"}
+      - {short_title: "FlashAttention", title: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness", venue: "NeurIPS 2022", url: "https://arxiv.org/abs/2205.14135"}
     optional:
       - {title: "MLPerf Inference Benchmark (ISCA 2020)", url: "https://arxiv.org/abs/1911.02549"}
       - {title: "Efficient Processing of Deep Neural Networks: A Tutorial and Survey (Proceedings of the IEEE 2017)", url: "https://arxiv.org/abs/1703.09039"}
@@ -74,13 +100,17 @@ weeks:
     date: 2026-09-25
     module: "Computing for AI"
     title: "Serving Systems for LLMs and AI Agents"
+    research_question: "What is the right unit of optimization when an AI application is a workflow rather than a single model?"
     type: seminar
-    guest: {label: "Guest Speaker", topic: "LLM serving and efficiency"}
+    guest: {label: "Guest Speaker", name: "Prof. Jovan Stojkovic", affiliation: "UT Austin", url: "https://jovans2.github.io/"}
     case_study: "DyServe - a workflow-aware serving layer (instructor's work)"
     papers:
-      - {title: "Efficient Memory Management for Large Language Model Serving with PagedAttention", venue: "SOSP 2023", url: "https://arxiv.org/abs/2309.06180", focus: "KV-cache virtualization, fragmentation, batching, vLLM"}
-      - {title: "SGLang: Efficient Execution of Structured Language Model Programs", venue: "NeurIPS 2024", url: "https://arxiv.org/abs/2312.07104", focus: "RadixAttention, KV reuse across program structure"}
+      - {short_title: "PagedAttention", title: "Efficient Memory Management for Large Language Model Serving with PagedAttention", venue: "SOSP 2023", url: "https://arxiv.org/abs/2309.06180", focus: "KV-cache virtualization, fragmentation, batching, vLLM"}
+      - {short_title: "SGLang", title: "SGLang: Efficient Execution of Structured Language Model Programs", venue: "NeurIPS 2024", url: "https://arxiv.org/abs/2312.07104", focus: "RadixAttention, KV reuse across program structure"}
     optional:
+      - {title: "Architectural Implications of Agentic AI Workflows (arXiv 2026)", url: "https://arxiv.org/abs/2608.04458"}
+      - {title: "DynamoLLM: Designing LLM Inference Clusters for Performance and Energy Efficiency (HPCA 2025)", url: "https://arxiv.org/abs/2408.00741"}
+      - {title: "TAPAS: Thermal- and Power-Aware Scheduling for LLM Inference in Cloud Platforms (ASPLOS 2025)", url: "https://dl.acm.org/doi/10.1145/3676641.3716025"}
       - {title: "Splitwise: Efficient Generative LLM Inference Using Phase Splitting (ISCA 2024)", url: "https://arxiv.org/abs/2311.18677"}
       - {title: "Agentix: An Efficient Serving Engine for LLM Agents as General Programs (NSDI 2026)", url: "https://www.usenix.org/conference/nsdi26/presentation/luo"}
       - {title: "A Workflow-Aware Serving Layer for Agentic Applications (DyServe, arXiv 2026)", url: "https://arxiv.org/abs/2607.02942"}
@@ -96,11 +126,12 @@ weeks:
     date: 2026-10-02
     module: "Computing for AI"
     title: "AI Hardware: Accelerators and System-on-Chips"
+    research_question: "When does specialization create a lasting advantage, and when does it bind a system too closely to today's workloads?"
     type: seminar
-    guest: {label: "Guest Speaker", topic: "AI accelerator and SoC design"}
     papers:
-      - {title: "In-Datacenter Performance Analysis of a Tensor Processing Unit", venue: "ISCA 2017", url: "https://doi.org/10.1145/3079856.3080246", focus: "read as a ten-year retrospective"}
-      - {title: "Agile SoC Development with Open ESP", venue: "ICCAD 2020", url: "https://arxiv.org/abs/2009.01178", focus: "Columbia's open-source heterogeneous SoC platform; available for course projects", extra_link: "https://www.esp.cs.columbia.edu/"}
+      - {short_title: "TPU", title: "In-Datacenter Performance Analysis of a Tensor Processing Unit", venue: "ISCA 2017", url: "https://doi.org/10.1145/3079856.3080246", focus: "read as a ten-year retrospective"}
+      - {short_title: "Open ESP", title: "Agile SoC Development with Open ESP", venue: "ICCAD 2020", url: "https://arxiv.org/abs/2009.01178", focus: "Columbia's open-source heterogeneous SoC platform; available for course projects", extra_link: "https://www.esp.cs.columbia.edu/"}
+      - {title: "Open AI Jalapeño Chip", short_title: "Open AI Jalapeño Chip", venue: "Hot Chips 2026 slides", url: "assets/readings/openai-jalapeno-hot-chips-2026.pdf", focus: "inference-driven ASIC and system co-design", extra_link: "https://openai.com/index/jalapeno-first-results/", extra_label: "OpenAI blog"}
     optional:
       - {title: "Gemmini: Enabling Systematic Deep-Learning Architecture Evaluation via Full-Stack Integration (DAC 2021)", url: "https://arxiv.org/abs/1911.09925"}
       - {title: "TPU v4: An Optically Reconfigurable Supercomputer for Machine Learning with Hardware Support for Embeddings (ISCA 2023)", url: "https://arxiv.org/abs/2304.01433"}
@@ -109,18 +140,21 @@ weeks:
       - {title: "Timeloop: A Systematic Approach to DNN Accelerator Evaluation (ISPASS 2019)", url: "https://doi.org/10.1109/ISPASS.2019.00042"}
       - {title: "NVIDIA H100 Tensor Core GPU Architecture (Whitepaper, 2022)", url: null}
       - {title: "NVIDIA Blackwell Architecture Technical Brief (2024)", url: null}
-    deadlines: ["Oct 2, 11:59 PM - P0 project proposal & team charter"]
+    deadlines: ["Oct 2, 11:59 PM - project proposal & team charter"]
+    glance_deadline: "P0 project proposal"
 
   - week: 5
     date: 2026-10-09
     module: "Computing for AI"
     title: "Physical AI I: Inference Systems and Serving for Embodied AI"
+    research_question: "How should computation be organized when the value of a prediction depends on when an action is taken?"
     type: seminar
+    guest: {label: "Guest Speaker", name: "Prof. Yilun Du", affiliation: "Harvard", url: "https://yilundu.github.io/"}
     papers:
-      - {title: "Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots", venue: "arXiv 2026", url: "https://arxiv.org/abs/2607.02501", focus: "deployable embodied-AI runtime across heterogeneous robots"}
-      - {title: "VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference", venue: "arXiv 2025", url: "https://arxiv.org/abs/2512.01031", focus: "overlapping inference with action execution; latency hiding"}
-      - {title: "How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf", venue: "arXiv 2026", url: "https://arxiv.org/abs/2602.18397", focus: "analytical performance model; device/edge/cloud placement"}
+      - {short_title: "Embodied.cpp", title: "Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots", venue: "arXiv 2026", url: "https://arxiv.org/abs/2607.02501", focus: "deployable embodied-AI runtime across heterogeneous robots"}
+      - {short_title: "VLA-Perf", title: "How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf", venue: "arXiv 2026", url: "https://arxiv.org/abs/2602.18397", focus: "analytical performance model; device/edge/cloud placement"}
     optional:
+      - {title: "VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference (arXiv 2025)", url: "https://arxiv.org/abs/2512.01031"}
       - {title: "π0: A Vision-Language-Action Flow Model for General Robot Control (RSS 2025)", url: "https://arxiv.org/abs/2410.24164"}
       - {title: "OpenVLA: An Open-Source Vision-Language-Action Model (CoRL 2024)", url: "https://arxiv.org/abs/2406.09246"}
       - {title: "DeeR-VLA: Dynamic Inference of Multimodal Large Language Models for Efficient Robot Execution (NeurIPS 2024)", url: "https://arxiv.org/abs/2411.02359"}
@@ -132,12 +166,15 @@ weeks:
     date: 2026-10-16
     module: "Computing for AI"
     title: "Physical AI II: Hardware-Software Co-Design and Architecture"
+    research_question: "Where should the boundary between algorithm and hardware move when latency, energy, and task success must be optimized together?"
     type: seminar
+    guest: {label: "Guest Speaker", name: "Prof. Luca Carloni", affiliation: "Columbia", url: "https://www.cs.columbia.edu/~luca/"}
     papers:
-      - {title: "DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation", venue: "ISCA 2025", url: "https://arxiv.org/abs/2407.04292", focus: "decoupling LLM inference from robotic control via trajectory prediction"}
-      - {title: "ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents", venue: "ASPLOS 2025", url: "https://doi.org/10.1145/3676641.3716016", focus: "cross-layer co-design for cooperative embodied agents"}
-      - {title: "Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference", venue: "MICRO 2026", url: "https://arxiv.org/abs/2608.04428", focus: "HW/SW co-design for diffusion-based VLA on edge devices"}
+      - {short_title: "ReCA", title: "ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents", venue: "ASPLOS 2025", url: "https://doi.org/10.1145/3676641.3716016", focus: "cross-layer co-design for cooperative embodied agents"}
+      - {short_title: "DiTPA", title: "DiTPA: A DiT-Based Action Planner Accelerator Exploiting Action-Denoising-Multimodality Redundancy for Embodied Artificial Intelligence", venue: "ISCA 2026", url: "https://ieeexplore.ieee.org/document/11617959", focus: "exploiting action, denoising, and multimodality redundancy for embodied-AI action planning"}
     optional:
+      - {title: "DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation (ISCA 2025)", url: "https://arxiv.org/abs/2407.04292"}
+      - {title: "Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference (MICRO 2026)", url: "https://arxiv.org/abs/2608.04428"}
       - {title: "Algorithm-Architecture Co-Design for Efficient VLA Inference via Speculative Inference and Verification (MICRO 2026)", url: "https://arxiv.org/abs/2608.15636"}
       - {title: "OctoCache: Caching Voxels for Accelerating 3D Occupancy Mapping in Autonomous Systems (ASPLOS 2025)", url: "https://dl.acm.org/doi/10.1145/3676641.3716263"}
       - {title: "RobotPerf: An Open-Source, Vendor-Agnostic, Benchmarking Suite for Evaluating Robotics Computing System Performance (ICRA 2024)", url: "https://arxiv.org/abs/2309.09212"}
@@ -150,11 +187,12 @@ weeks:
     date: 2026-10-23
     module: "Computing for AI"
     title: "Accelerating Neuro-Symbolic and Compositional AI"
+    research_question: "How should computing abstractions change when intelligence combines learning, search, and symbolic reasoning?"
     type: seminar
     papers:
-      - {title: "CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design", venue: "HPCA 2025", url: "https://research.ibm.com/publications/cogsys-efficient-and-scalable-neurosymbolic-cognition-system-via-algorithm-hardware-co-design", focus: "workload characterization, reconfigurable processing"}
-      - {title: "REASON: Accelerating Probabilistic Logical Reasoning for Scalable Neuro-Symbolic Intelligence", venue: "HPCA 2026", url: "https://arxiv.org/abs/2601.20784", focus: "unified DAGs, irregular reasoning acceleration"}
-      - {title: "Lobster: A GPU-Accelerated Framework for Neurosymbolic Programming", venue: "ASPLOS 2026", url: "https://arxiv.org/abs/2503.21937", focus: "compiling Datalog-based neurosymbolic programs to GPUs"}
+      - {short_title: "CogSys", title: "CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design", venue: "HPCA 2025", url: "https://research.ibm.com/publications/cogsys-efficient-and-scalable-neurosymbolic-cognition-system-via-algorithm-hardware-co-design", focus: "workload characterization, reconfigurable processing"}
+      - {short_title: "REASON", title: "REASON: Accelerating Probabilistic Logical Reasoning for Scalable Neuro-Symbolic Intelligence", venue: "HPCA 2026", url: "https://arxiv.org/abs/2601.20784", focus: "unified DAGs, irregular reasoning acceleration"}
+      - {short_title: "Lobster", title: "Lobster: A GPU-Accelerated Framework for Neurosymbolic Programming", venue: "ASPLOS 2026", url: "https://arxiv.org/abs/2503.21937", focus: "compiling Datalog-based neurosymbolic programs to GPUs"}
     optional:
       - {title: "Scallop: A Language for Neurosymbolic Programming (PLDI 2023)", url: "https://arxiv.org/abs/2304.04812"}
       - {title: "DeepProbLog: Neural Probabilistic Logic Programming (NeurIPS 2018)", url: "https://arxiv.org/abs/1805.10872"}
@@ -165,11 +203,12 @@ weeks:
     date: 2026-10-30
     module: "AI for Computing"
     title: "AI for Software Systems: Compilers and GPU Kernels"
+    research_question: "What should an AI optimizer be free to change, and which properties must remain invariant?"
     type: seminar
     papers:
-      - {title: "Faster Sorting Algorithms Discovered Using Deep Reinforcement Learning (AlphaDev)", venue: "Nature 2023", url: "https://www.nature.com/articles/s41586-023-06004-9", focus: "algorithm discovery, reward design, validation"}
-      - {title: "AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery", venue: "DeepMind 2025", url: "https://arxiv.org/abs/2506.13131", focus: "evolutionary LLM code search across scheduling, TPU circuits, kernels"}
-      - {title: "KernelBench: Can LLMs Write Efficient GPU Kernels?", venue: "ICML 2025", url: "https://arxiv.org/abs/2502.10517", focus: "benchmark design; discussed with the Sakana AI CUDA Engineer episode"}
+      - {short_title: "AlphaDev", title: "Faster Sorting Algorithms Discovered Using Deep Reinforcement Learning (AlphaDev)", venue: "Nature 2023", url: "https://www.nature.com/articles/s41586-023-06004-9", focus: "algorithm discovery, reward design, validation"}
+      - {short_title: "AlphaEvolve", title: "AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery", venue: "DeepMind 2025", url: "https://arxiv.org/abs/2506.13131", focus: "evolutionary LLM code search across scheduling, TPU circuits, kernels"}
+      - {short_title: "KernelBench", title: "KernelBench: Can LLMs Write Efficient GPU Kernels?", venue: "ICML 2025", url: "https://arxiv.org/abs/2502.10517", focus: "benchmark design; discussed with the Sakana AI CUDA Engineer episode"}
     optional:
       - {title: "CompilerGym: Robust, Performant Compiler Optimization Environments for AI Research (CGO 2022)", url: "https://arxiv.org/abs/2109.08267"}
       - {title: "Large Language Models for Compiler Optimization (2023)", url: "https://arxiv.org/abs/2309.07062"}
@@ -182,6 +221,7 @@ weeks:
     date: 2026-11-06
     module: "Project"
     title: "Midterm Project Presentations"
+    research_question: "Which uncertainty is most worth resolving before investing further in a research direction?"
     type: midterm
     deadlines: ["Nov 5, 11:59 PM - midterm slides"]
 
@@ -189,11 +229,12 @@ weeks:
     date: 2026-11-13
     module: "AI for Computing"
     title: "AI for Computer Architecture I: Measuring and Exploring"
+    research_question: "What makes a design environment informative enough for an AI agent to discover better architectures?"
     type: seminar
-    guest: {label: "Guest Speaker", topic: "AI-assisted architecture design"}
+    guest: {label: "Guest Speaker", name: "Prof. Sagar Karandikar", affiliation: "UC Berkeley", url: "https://sagark.org/"}
     papers:
-      - {title: "ArchEval: Measuring AI Agents as Computer Architects", venue: "arXiv 2026", url: "https://arxiv.org/abs/2607.03601", focus: "benchmarking LLM agents on architecture tasks"}
-      - {title: "PF-LLM: Large Language Model Hinted Hardware Prefetching", venue: "ASPLOS 2026", url: "https://doi.org/10.1145/3779212.3790202", focus: "AI inside the microarchitecture"}
+      - {short_title: "ArchEval", title: "ArchEval: Measuring AI Agents as Computer Architects", venue: "arXiv 2026", url: "https://arxiv.org/abs/2607.03601", focus: "benchmarking LLM agents on architecture tasks"}
+      - {short_title: "CHIA", title: "CHIA: An Open-Source Framework for Principled, Agentic AI-Driven Hardware/Software Co-Design Research", venue: "arXiv 2026", url: "https://arxiv.org/abs/2606.27350", focus: "composable design loops for agent-driven HW/SW co-design"}
     optional:
       - {title: "ArchGym: An Open-Source Gymnasium for Machine Learning Assisted Architecture Design (ISCA 2023)", url: "https://arxiv.org/abs/2306.08888"}
       - {title: "AgentDSE: Reasoning-Augmented Architectural Design Space Exploration (MLArchSys 2026)", url: "https://arxiv.org/abs/2606.21836"}
@@ -207,14 +248,14 @@ weeks:
     date: 2026-11-20
     module: "AI for Computing"
     title: "AI for Computer Architecture II: Agentic Design Systems"
+    research_question: "How can automated design produce transferable knowledge rather than solutions tailored to one evaluation?"
     type: seminar
-    guest: {label: "Guest Speaker", topic: "agentic hardware design frameworks"}
-    case_study: "ArchOrchestra - end-to-end agentic accelerator design (instructor's work)"
     papers:
-      - {title: "CHIA: An Open-Source Framework for Principled, Agentic AI-Driven Hardware/Software Co-Design Research", venue: "arXiv 2026", url: "https://arxiv.org/abs/2606.27350", focus: "composable design loops for agent-driven HW/SW co-design"}
-      - {title: "Agentic Architect: An Agentic AI Framework for Architecture Design Exploration and Optimization", venue: "arXiv 2026", url: "https://arxiv.org/abs/2604.25083", focus: "LLM-driven microarchitecture evolution; seed quality bounds discovery"}
+      - {short_title: "PF-LLM", title: "PF-LLM: Large Language Model Hinted Hardware Prefetching", venue: "ASPLOS 2026", url: "https://doi.org/10.1145/3779212.3790202", focus: "AI inside the microarchitecture"}
+      - {short_title: "Architecture’s AlphaZero Moment", title: "Computer Architecture's AlphaZero Moment: Automated Discovery in an Encircled World", venue: "arXiv 2026", url: "https://arxiv.org/abs/2604.03312", focus: "automated architecture discovery and multi-tier evaluation pipelines"}
+      - {short_title: "ArchOrchestra", title: "ArchOrchestra: End-to-End Agentic Accelerator Design", venue: "Forthcoming 2026", url: null, focus: "end-to-end agentic accelerator design"}
     optional:
-      - {title: "ArchOrchestra: End-to-End Agentic Accelerator Design (forthcoming, 2026)", url: null}
+      - {title: "Agentic Architect: An Agentic AI Framework for Architecture Design Exploration and Optimization (arXiv 2026)", url: "https://arxiv.org/abs/2604.25083"}
       - {title: "AgentDSE: Reasoning-Augmented Architectural Design Space Exploration (MLArchSys 2026)", url: "https://arxiv.org/abs/2606.21836"}
       - {title: "LLM-DSE: Searching Accelerator Parameters with LLM Agents (2025)", url: "https://arxiv.org/abs/2505.12188"}
       - {title: "FireSim: FPGA-Accelerated Cycle-Exact Scale-Out System Simulation in the Public Cloud (ISCA 2018)", url: "https://fires.im/"}
@@ -225,12 +266,13 @@ weeks:
     date: 2026-12-04
     module: "AI for Computing"
     title: "AI for RTL and Chip Physical Design"
+    research_question: "How should exploration and verification work together when AI makes consequential design decisions?"
     type: seminar
     exercise: "In-class critical reading: the RedWood white paper (Architect Labs 2026) audited with the evidence-centered checklist"
     papers:
-      - {title: "A Graph Placement Methodology for Fast Chip Design (AlphaChip)", venue: "Nature 2021 (+2024 addendum)", url: "https://www.nature.com/articles/s41586-021-03544-w", focus: "read with Markov's 'The False Dawn' critique; co-led by a pair", companion_url: "https://arxiv.org/abs/2306.09633", co_led: true}
-      - {title: "ChipNeMo: Domain-Adapted LLMs for Chip Design", venue: "NVIDIA 2024", url: "https://arxiv.org/abs/2311.00176", focus: "domain adaptation, retrieval, EDA scripts"}
-      - {title: "Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification", venue: "arXiv 2025", url: "https://arxiv.org/abs/2506.14074", focus: "RTL benchmarks and their limitations"}
+      - {short_title: "AlphaChip", title: "A Graph Placement Methodology for Fast Chip Design (AlphaChip)", venue: "Nature 2021 (+2024 addendum)", url: "https://www.nature.com/articles/s41586-021-03544-w", focus: "reinforcement learning for chip placement; co-led by a pair", co_led: true}
+      - {short_title: "ChipNeMo", title: "ChipNeMo: Domain-Adapted LLMs for Chip Design", venue: "NVIDIA 2024", url: "https://arxiv.org/abs/2311.00176", focus: "domain adaptation, retrieval, EDA scripts"}
+      - {short_title: "Comprehensive Verilog Design Problems", title: "Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification", venue: "arXiv 2025", url: "https://arxiv.org/abs/2506.14074", focus: "RTL benchmarks and their limitations"}
     optional:
       - {title: "AssertLLM: Generating and Evaluating Hardware Verification Assertions from Design Specifications via Multi-LLMs (2024)", url: "https://arxiv.org/abs/2402.00386"}
       - {title: "Using LLMs to Facilitate Formal Verification of RTL (2023)", url: "https://arxiv.org/abs/2309.09437"}
@@ -247,5 +289,6 @@ weeks:
     date: 2026-12-11
     module: "Synthesis"
     title: "Final Project Poster Session"
+    research_question: "What general principle does a research result establish, and where does that principle stop applying?"
     type: poster
-    deadlines: ["Dec 10, 11:59 PM - posters in shared folder", "Dec 11, 11:59 PM - P5 complete draft & artifact", "Dec 21, 11:59 PM - final paper & artifact"]
+    deadlines: ["Dec 10, 11:59 PM - posters in shared folder", "Dec 11, 11:59 PM - P5 complete draft & artifact", "Dec 18, 11:59 PM - final paper & artifact"]

@@ -99,6 +99,18 @@
   }
 
   /* ------------------------------------------------ optionals expand/collapse */
+  function revealLinkedOptional() {
+    var id = window.location.hash.slice(1);
+    if (id.indexOf("optional-week-") !== 0) return;
+    var detail = document.getElementById(id);
+    if (detail && detail.matches("details.optional")) {
+      detail.open = true;
+      detail.scrollIntoView({ block: "start" });
+    }
+  }
+  revealLinkedOptional();
+  window.addEventListener("hashchange", revealLinkedOptional);
+
   var btn = document.getElementById("toggle-optionals");
   if (btn) {
     btn.addEventListener("click", function () {
@@ -113,7 +125,7 @@
   var reopened = [];
   window.addEventListener("beforeprint", function () {
     reopened = [];
-    document.querySelectorAll("details.optional:not([open])").forEach(function (d) {
+    document.querySelectorAll("details.optional:not([open]), details.project-brief:not([open])").forEach(function (d) {
       d.open = true;
       reopened.push(d);
     });
