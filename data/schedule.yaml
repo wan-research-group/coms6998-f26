@@ -83,6 +83,8 @@ weeks:
     deadlines: ["Sep 12, 11:59 PM - background survey"]
     deadline_links:
       background survey: "https://forms.gle/7PZBZyQjFQkZ3EXt8"
+    deadline_notes:
+      background survey: "Please open with your Columbia email account."
 
   - week: 2
     date: 2026-09-18
@@ -253,6 +255,7 @@ weeks:
     title: "AI for Computer Architecture II: Agentic Design Systems"
     research_question: "How can automated design produce transferable knowledge rather than solutions tailored to one evaluation?"
     type: seminar
+    guest: {label: "Guest Speaker", name: "Prof. Vijay Janapa Reddi", affiliation: "Harvard", url: "https://vijay.seas.harvard.edu/"}
     papers:
       - {short_title: "PF-LLM", title: "PF-LLM: Large Language Model Hinted Hardware Prefetching", venue: "ASPLOS 2026", url: "https://doi.org/10.1145/3779212.3790202", focus: "AI inside the microarchitecture"}
       - {short_title: "Architecture’s AlphaZero Moment", title: "Computer Architecture's AlphaZero Moment: Automated Discovery in an Encircled World", venue: "arXiv 2026", url: "https://arxiv.org/abs/2604.03312", focus: "automated architecture discovery and multi-tier evaluation pipelines"}

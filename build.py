@@ -265,7 +265,7 @@ def page(*, title: str, description: str, body: str, path: str) -> str:
   <meta name="twitter:description" content="{esc(description)}">{canonical}
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e1116">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-columbia.png" type="image/png" sizes="192x192">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400..600&display=swap" rel="stylesheet">
@@ -396,12 +396,23 @@ def deadline_url(week: dict, deadline: str) -> str | None:
     return week.get("deadline_links", {}).get(label)
 
 
+def deadline_note(week: dict, deadline: str) -> str:
+    label = deadline.split(" - ", 1)[-1].strip()
+    return week.get("deadline_notes", {}).get(label, "")
+
+
 def deadline_html(week: dict, deadline: str, *, short: bool = False) -> str:
-    label = deadline.split(" - ", 1)[-1].strip() if short else deadline
+    label = deadline.split(" - ", 1)[-1].strip()
+    prefix = deadline.split(" - ", 1)[0] + " - " if " - " in deadline and not short else ""
     url = deadline_url(week, deadline)
+    note = deadline_note(week, deadline)
     if url:
-        return f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(label)}</a>'
-    return esc(label)
+        content = f'{esc(prefix)}<a href="{esc(url)}" target="_blank" rel="noopener">{esc(label)}</a>'
+    else:
+        content = esc(label if short else deadline)
+    if note:
+        content += f' <span class="deadline-note">{esc(note)}</span>'
+    return content
 
 
 def slides_html(week: dict) -> str:
@@ -433,7 +444,8 @@ def dated_deadlines() -> list[dict]:
             if match.group("time"):
                 display += f', {match.group("time")}'
             records.append({"due": due, "display": display, "label": match.group("label"),
-                            "url": deadline_url(week, raw)})
+                            "url": deadline_url(week, raw),
+                            "label_html": deadline_html(week, raw, short=True)})
     return sorted(records, key=lambda item: item["due"])
 
 
@@ -489,14 +501,10 @@ def now_html() -> str:
     deadline_items = []
     for item in deadlines:
         hidden = "" if item is visible_deadline else " hidden"
-        label = (
-            f'<a href="{esc(item["url"])}" target="_blank" rel="noopener">{esc(item["label"])}</a>'
-            if item.get("url") else esc(item["label"])
-        )
         deadline_items.append(
             f"""<div class="now-deadline-item" data-due="{item['due'].isoformat()}"{hidden}>
   <time datetime="{item['due'].isoformat()}">{esc(item['display'])}</time>
-  <p>{label}</p>
+  <p>{item['label_html']}</p>
 </div>"""
         )
     if not deadline_items:
@@ -1319,11 +1327,16 @@ def syllabus_markdown() -> str:
             lines.extend(f"- {item}" for item in optional_links)
         if week.get("deadlines"):
             lines.extend(["", "**Deadlines**", ""])
-            lines.extend(
-                f"- {md_link(deadline, deadline_url(week, deadline))}"
-                if deadline_url(week, deadline) else f"- {deadline}"
-                for deadline in week["deadlines"]
-            )
+            for deadline in week["deadlines"]:
+                url = deadline_url(week, deadline)
+                note = deadline_note(week, deadline)
+                if url:
+                    parts = deadline.split(" - ", 1)
+                    prefix = parts[0] + " - " if len(parts) == 2 else ""
+                    label = prefix + md_link(parts[-1].strip(), url)
+                else:
+                    label = deadline
+                lines.append(f"- {label}" + (f" — {note}" if note else ""))
         lines.append("")
 
     lines.extend([

@@ -356,6 +356,7 @@ time { font-variant-numeric: tabular-nums; }
   font-size: 0.82rem; font-weight: 700;
 }
 .now-deadline-item p { margin: 4px 0 0; font-size: 0.94rem; font-weight: 650; }
+.deadline-note { display: block; margin-top: 4px; color: var(--muted); font-size: 0.875rem; font-weight: 400; }
 .now-empty { margin: 0; color: var(--muted); font-size: 0.86rem; }
 .now-news { list-style: none; margin: 0; padding: 0; }
 .now-news li {

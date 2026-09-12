@@ -33,6 +33,7 @@ Fields a week entry understands:
 | `case_study:`, `exercise:` | Extra mini-lecture lines |
 | `deadlines:` | List of strings, rendered as highlighted chips. The home-page table shows the part after the "-" |
 | `deadline_links:` | Optional mapping from a deadline label (the text after " - ") to its form/submission URL; makes the deadline clickable in Now, the home-page table, Schedule, and syllabus. |
+| `deadline_notes:` | Optional mapping from a deadline label to a plain-text reminder; displayed beside the deadline, outside its link, in all the same views. |
 | `glance_deadline:` | Optional concise deadline label for the home-page table only |
 
 A required paper with `url: null` renders without a link plus an "(arXiv link
@@ -110,6 +111,11 @@ Light/dark theme (system default + manual toggle), responsive schedule
 (cards on mobile), print stylesheet, keyboard-accessible collapsibles.
 The research-group link lives in the footer to keep the mobile navigation compact.
 
+The browser favicon (`assets/favicon-columbia.png`) is the unmodified Columbia
+crown PNG from the University's [favicon guidelines](https://visualidentity.columbia.edu/content/favicons)
+([source asset](https://visualidentity.columbia.edu/sites/visualidentity.columbia.edu/files/content/Components/favicon.png)).
+The in-page blue/purple course mark and social preview image remain separate.
+
 ## TBD checklist (replace as they land)
 
 - [ ] Guest speaker confirmations (`guest:` labels in `data/schedule.yaml` - never add names before they are confirmed)
@@ -125,7 +131,7 @@ The research-group link lives in the footer to keep the mobile navigation compac
 │   ├── announcements.yaml    # ← latest home-page announcements
 │   ├── projects.yaml         # ← candidate briefs grouped by module
 │   └── students.yaml         # ← class roster for students.html
-├── assets/                   # style.css, site.js, favicon.svg, og.png (+ students/ photos)
+├── assets/                   # style.css, site.js, favicon-columbia.png, og.png (+ students/ photos)
 ├── syllabus.md               # generated; do not edit directly
 ├── .github/workflows/deploy.yml
 ├── handoff/                  # archived original spec + syllabus (reference only)
