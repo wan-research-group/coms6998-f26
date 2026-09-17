@@ -54,6 +54,14 @@ course information, then rebuild.
 **Milestones**: each entry in `data/schedule.yaml` has a concise `checklist`.
 When a template is ready, add `template_url` to that milestone; its link appears
 in both the project page and syllabus. No placeholder links are shown.
+The project proposal (P0) and P1-P4 are due on Mondays at 11:59 PM ET;
+presentation materials, P5, and the final submission follow their listed dates.
+Keep milestone dates and the corresponding weekly `deadlines` aligned. The
+home-page table explicitly shows due dates that differ from the Friday class date.
+
+**Teaching assistants**: edit `course.teaching_assistants` in `data/schedule.yaml`
+with each TA's `name` and `email`. They appear below the instructor information on
+the home page and in the syllabus, with clickable email links.
 
 **Project candidates**: edit `data/projects.yaml`. The 26 briefs are grouped by
 module and research area, after Final submission on the Project page. Each entry

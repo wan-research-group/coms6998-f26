@@ -5,7 +5,7 @@
 
 **Columbia University | Department of Computer Science**  
 Instructor: Prof. Zishen Wan · Fridays 10:10 AM - 12:00 PM · 602 Northwest Corner  
-Generated from the canonical course website on Saturday, September 12, 2026.
+Generated from the canonical course website on Thursday, September 17, 2026.
 
 > **Canonical-source notice.** This syllabus is generated from the same source as the course website. The live website and Canvas announcements govern later schedule or logistics updates.
 
@@ -25,6 +25,7 @@ This advanced graduate lecture-seminar studies the two directions of AI-native c
 |---|---|
 | Course | COMS 6998 - AI-Native Computing: Hardware for AI, AI for Hardware |
 | Instructor | Prof. Zishen Wan · [zishen.wan@columbia.edu](mailto:zishen.wan@columbia.edu) · [webpage](https://zishenwan.github.io/) |
+| Teaching assistants | Sergey Sokolovskiy · [ss7299@columbia.edu](mailto:ss7299@columbia.edu)<br>Priyal Agarwal · [pa2746@columbia.edu](mailto:pa2746@columbia.edu) |
 | Meeting | Fridays 10:10 AM - 12:00 PM |
 | Location | 602 Northwest Corner |
 | Office hours | Wednesdays 5-6 PM, CSB 522 |
@@ -124,16 +125,16 @@ The project is the center of the course: a carefully scoped research effort that
 
 | Date | Milestone | Deliverable checklist |
 |---|---|---|
-| Oct 2 | Project proposal | State the research question, closest work, and testable hypothesis.<br>Specify baselines, metrics, resource needs, and team responsibilities. |
-| Oct 16 | P1 - Infrastructure & baselines | Share a runnable repository with setup instructions.<br>Report the first baseline measurement and its configuration. |
-| Oct 30 | P2 - Prototype & pilot results | Run a minimal end-to-end prototype.<br>Include one pilot comparison figure and the main remaining risk. |
+| Oct 5 | Project proposal | State the research question, closest work, and testable hypothesis.<br>Specify baselines, metrics, resource needs, and team responsibilities. |
+| Oct 19 | P1 - Infrastructure & baselines | Share a runnable repository with setup instructions.<br>Report the first baseline measurement and its configuration. |
+| Nov 2 | P2 - Prototype & pilot results | Run a minimal end-to-end prototype.<br>Include one pilot comparison figure and the main remaining risk. |
 | Nov 6 | Midterm - Midterm presentation (in class) | Present the question, approach, baseline, and early evidence.<br>Identify the feedback needed and the next experiments. |
-| Nov 20 | P3 - Evaluation plan & initial results | Fix the workloads, metrics, baselines, and experiment budget.<br>Submit initial comparisons and the planned ablations. |
-| Dec 4 | P4 - Main results & ablations | Submit main results, an ablation, and a failure or boundary case.<br>Include repeated measurements or uncertainty where relevant. |
+| Nov 23 | P3 - Evaluation plan & initial results | Fix the workloads, metrics, baselines, and experiment budget.<br>Submit initial comparisons and the planned ablations. |
+| Dec 7 | P4 - Main results & ablations | Submit main results, an ablation, and a failure or boundary case.<br>Include repeated measurements or uncertainty where relevant. |
 | Dec 11 | P5 - Complete draft, artifact & poster; final poster session (in class) | Submit a complete paper draft and a runnable artifact.<br>Upload the poster by Dec 10 and present it in class on Dec 11. |
 | Dec 18 | Final - Final paper & artifact | Submit the revised paper, artifact, and figure-generation scripts.<br>Include responses to feedback and individual contributions. |
 
-All written deliverables are due at 11:59 PM ET. Check-ins P1-P5 are pacing devices, graded on completeness. No course deadline falls on the Thanksgiving holiday.
+All written deliverables are due at 11:59 PM ET. The project proposal (P0) and P1-P4 are due on Mondays after the corresponding Friday class. Presentation materials remain due before class; P5 and the final submission keep their listed dates. Check-ins P1-P5 are pacing devices, graded on completeness. No course deadline falls on the Thanksgiving holiday.
 
 ### Final submission
 
@@ -236,8 +237,8 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Sep 18, 11:59 PM - paper preference form
-- Sep 23 - project bidding form
+- Sep 20, 11:59 PM - paper presentation bidding form
+- Sep 24, 11:59 PM - project bidding form
 
 ### Week 03 · Friday, September 25, 2026
 
@@ -278,15 +279,16 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Research question of the week:** When does specialization create a lasting advantage, and when does it bind a system too closely to today's workloads?
 
+- **Guest lecture:** [Prof. Tushar Krishna](https://tusharkrishna.ece.gatech.edu/) (Georgia Tech).
 
 **Student-led papers**
 
 - [In-Datacenter Performance Analysis of a Tensor Processing Unit](https://doi.org/10.1145/3079856.3080246) - ISCA 2017; focus: read as a ten-year retrospective
-- [Agile SoC Development with Open ESP](https://arxiv.org/abs/2009.01178) - ICCAD 2020; focus: Columbia's open-source heterogeneous SoC platform; available for course projects; [project site](https://www.esp.cs.columbia.edu/)
 - [Open AI Jalapeño Chip](assets/readings/openai-jalapeno-hot-chips-2026.pdf) - Hot Chips 2026 slides; focus: inference-driven ASIC and system co-design; [OpenAI blog](https://openai.com/index/jalapeno-first-results/)
 
 **Optional readings**
 
+- [Agile SoC Development with Open ESP (ICCAD 2020)](https://arxiv.org/abs/2009.01178)
 - [Gemmini: Enabling Systematic Deep-Learning Architecture Evaluation via Full-Stack Integration (DAC 2021)](https://arxiv.org/abs/1911.09925)
 - [TPU v4: An Optically Reconfigurable Supercomputer for Machine Learning with Hardware Support for Embeddings (ISCA 2023)](https://arxiv.org/abs/2304.01433)
 - [Eyeriss: An Energy-Efficient Reconfigurable Accelerator for Deep Convolutional Neural Networks (ISCA 2016)](https://dl.acm.org/doi/10.1145/3007787.3001177)
@@ -297,7 +299,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Oct 2, 11:59 PM - project proposal & team charter
+- Oct 5, 11:59 PM - project proposal & team charter
 
 ### Week 05 · Friday, October 9, 2026
 
@@ -348,7 +350,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Oct 16, 11:59 PM - P1 infrastructure & baselines
+- Oct 19, 11:59 PM - P1 infrastructure & baselines
 
 ### Week 07 · Friday, October 23, 2026
 
@@ -393,7 +395,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Oct 30, 11:59 PM - P2 prototype & pilot results
+- Nov 2, 11:59 PM - P2 prototype & pilot results
 
 ### Week 09 · Friday, November 6, 2026
 
@@ -454,7 +456,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Nov 20, 11:59 PM - P3 evaluation plan & initial results
+- Nov 23, 11:59 PM - P3 evaluation plan & initial results
 
 ### Week 12 · Friday, December 4, 2026
 
@@ -484,7 +486,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Dec 4, 11:59 PM - P4 main results & ablations
+- Dec 7, 11:59 PM - P4 main results & ablations
 
 ### Week 13 · Friday, December 11, 2026
 
