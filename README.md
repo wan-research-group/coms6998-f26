@@ -77,6 +77,11 @@ The build copies these assets unchanged into the published site.
 **Students page**: add entries to `data/students.yaml` (`name`, optional
 `link` and `photo`; put photo files under `assets/students/`). While the list
 is empty the page shows a placeholder.
+Use First name + Last name for `name`. Without `photo`, a circular avatar shows
+the first and last initials; adding a student-provided photo replaces it
+automatically. The current list contains 33 enrolled students from the
+September 16 roster. Do not include student IDs, email addresses, or the source
+roster PDF in the website assets.
 
 ## Deploying to GitHub Pages
 
@@ -128,7 +133,7 @@ The in-page blue/purple course mark and social preview image remain separate.
 
 - [ ] Guest speaker confirmations (`guest:` labels in `data/schedule.yaml` - never add names before they are confirmed)
 - [ ] ArchOrchestra arXiv link (Week 11 `case_study` + optional reading, expected September)
-- [ ] Student roster in `data/students.yaml` after enrollment settles
+- [ ] Student-provided photos in `assets/students/`; add each `photo` path to `data/students.yaml`
 
 ## Layout
 
