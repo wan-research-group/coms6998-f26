@@ -1080,9 +1080,7 @@ def policies_body() -> str:
 
 def initials(name: str) -> str:
     parts = [p for p in name.split() if p]
-    if not parts:
-        return "?"
-    return parts[0][0].upper() + (parts[-1][0].upper() if len(parts) > 1 else "")
+    return "".join(p[0].upper() for p in parts[:2]) or "?"
 
 
 def students_body() -> str:
