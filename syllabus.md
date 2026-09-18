@@ -313,8 +313,8 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Sep 20, 11:59 PM - paper presentation bidding form
-- Sep 24, 11:59 PM - project bidding form
+- Sep 20, 11:59 PM - [paper presentation bidding form](https://docs.google.com/spreadsheets/d/1hneYipCYakyj1Qf0Y5sKURe-VCy_jYyxruAI3TOVg6Q/edit?usp=sharing)
+- Sep 24, 11:59 PM - [project bidding form](https://docs.google.com/spreadsheets/d/1Onq9G_wzRuuEnGHdQXAT3Vg-At6H93aN8mkit25Xwoo/edit?usp=sharing)
 
 ### Week 03 · Friday, September 25, 2026
 

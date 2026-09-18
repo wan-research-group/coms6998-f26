@@ -103,6 +103,9 @@ weeks:
       - {title: "MLPerf Inference Benchmark (ISCA 2020)", url: "https://arxiv.org/abs/1911.02549"}
       - {title: "Efficient Processing of Deep Neural Networks: A Tutorial and Survey (Proceedings of the IEEE 2017)", url: "https://arxiv.org/abs/1703.09039"}
     deadlines: ["Sep 20, 11:59 PM - paper presentation bidding form", "Sep 24, 11:59 PM - project bidding form"]
+    deadline_links:
+      paper presentation bidding form: "https://docs.google.com/spreadsheets/d/1hneYipCYakyj1Qf0Y5sKURe-VCy_jYyxruAI3TOVg6Q/edit?usp=sharing"
+      project bidding form: "https://docs.google.com/spreadsheets/d/1Onq9G_wzRuuEnGHdQXAT3Vg-At6H93aN8mkit25Xwoo/edit?usp=sharing"
 
   - week: 3
     date: 2026-09-25
