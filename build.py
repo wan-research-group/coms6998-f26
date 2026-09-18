@@ -140,13 +140,6 @@ PROJECT_TRACKS = [
      "Build and rigorously evaluate an agent for software optimization, compilers, GPU kernels, architecture DSE, RTL/EDA, or verification."),
 ]
 
-PROJECT_CANDIDATES_NOTE = (
-    "Choose a question, build a strong baseline, and test one mechanism. These 26 starting "
-    "points can be narrowed to fit a team of 1-3; students are also welcome to propose their "
-    "own projects. Agree on scope and platform requirements with the instructor before "
-    "committing to a direction."
-)
-
 PROJECT_DEADLINE_POLICY = (
     "All written deliverables are due at 11:59 PM ET. The project proposal (P0) and P1-P4 "
     "are due on Mondays after the corresponding Friday class. Presentation materials remain "
@@ -200,7 +193,19 @@ data = yaml.safe_load((ROOT / "data" / "schedule.yaml").read_text())
 students_data = yaml.safe_load((ROOT / "data" / "students.yaml").read_text())
 announcements_data = yaml.safe_load((ROOT / "data" / "announcements.yaml").read_text())
 projects_data = yaml.safe_load((ROOT / "data" / "projects.yaml").read_text())
-project_modules = projects_data["modules"]
+project_guide = yaml.safe_load((ROOT / "data" / "project_modules.yaml").read_text())
+project_modules = project_guide["modules"]
+project_briefs = {
+    project["name"]: project
+    for module in projects_data["modules"]
+    for group in module["groups"]
+    for project in group["projects"]
+}
+assigned_briefs = [
+    name for module in project_modules for idea in module["ideas"] for name in idea["briefs"]
+]
+if set(assigned_briefs) != set(project_briefs) or len(assigned_briefs) != len(set(assigned_briefs)):
+    raise ValueError("Each existing project brief must be assigned to exactly one project idea.")
 
 course = data["course"]
 inst = course["instructor"]
@@ -926,6 +931,104 @@ def format_body() -> str:
 
 # ---------------------------------------------------------------- project
 
+def project_brief_html(name: str) -> str:
+    project = project_briefs[name]
+    project_id = "project-" + name.lower()
+    rows = "".join(
+        f'<div><dt>{label}</dt><dd>{esc(project[key])}</dd></div>'
+        for label, key in [
+            ("Mechanism to explore", "approach"),
+            ("Semester scope & evaluation", "evaluation"),
+            ("Key check", "caution"),
+            ("Helpful background", "background"),
+        ]
+    )
+    return f"""<article class="candidate" id="{project_id}" aria-labelledby="{project_id}-title">
+      <h6 id="{project_id}-title"><a href="#{project_id}">{esc(name)}</a></h6>
+      <p class="candidate-title">{esc(project["title"])}</p>
+      <p class="candidate-question">{esc(project["question"])}</p>
+      <dl class="brief-fields">{rows}</dl>
+    </article>"""
+
+
+def project_module_html(module: dict, theme: str) -> str:
+    ideas = []
+    for idea in module["ideas"]:
+        briefs = ""
+        if idea["briefs"]:
+            cards = "\n".join(project_brief_html(name) for name in idea["briefs"])
+            label = "Detailed brief" if len(idea["briefs"]) == 1 else "Detailed briefs"
+            briefs = f"""<details class="project-brief">
+          <summary>{label} <span class="brief-names">· {esc(', '.join(idea['briefs']))}</span></summary>
+          <div class="candidate-grid">{cards}</div>
+        </details>"""
+        ideas.append(f"""<li class="project-idea" id="{esc(idea['id'])}">
+        <h5>{esc(idea['title'])}</h5>
+        <p>{esc(idea['description'])}</p>
+        {briefs}
+      </li>""")
+    scope_note = (
+        f'<p class="module-scope-note">{esc(module["scope_note"])}</p>'
+        if module.get("scope_note") else ""
+    )
+    return f"""<section class="candidate-module candidate-module-{esc(theme)}"
+      id="{esc(module['id'])}" aria-labelledby="{esc(module['id'])}-title">
+      <div class="candidate-module-head">
+        <p class="project-module-label">Project Module {module['number']}</p>
+        <h4 id="{esc(module['id'])}-title">{esc(module['title'])}</h4>
+      </div>
+      <p class="module-overview">{esc(module['overview'])}</p>
+      <dl class="module-guidance">
+        <div><dt>Helpful background</dt><dd>{esc(module['background'])}</dd></div>
+        <div><dt>Evidence of success</dt><dd>{esc(module['success'])}</dd></div>
+      </dl>
+      {scope_note}
+      <details class="project-ideas">
+        <summary>Explore project ideas <span class="idea-count">({len(module['ideas'])})</span>
+          <span class="visually-hidden">for Project Module {module['number']}: {esc(module['title'])}</span></summary>
+        <ol class="project-idea-list">{chr(10).join(ideas)}</ol>
+      </details>
+    </section>"""
+
+
+def project_candidates_html() -> str:
+    navigation = []
+    tracks = []
+    for track in project_guide["tracks"]:
+        modules = [m for m in project_modules if m["track"] == track["id"]]
+        links = "\n".join(
+            f'<li><a class="candidate-jump" href="#{esc(m["id"])}">'
+            f'<span class="candidate-number">{m["number"]:02d}</span>'
+            f'<span>{esc(m["title"].removeprefix("Computing Systems for ").removeprefix("AI for "))}</span></a></li>'
+            for m in modules
+        )
+        navigation.append(f"""<div class="candidate-nav-track candidate-nav-{esc(track['theme'])}">
+        <p class="candidate-nav-title">{esc(track['title'])}</p>
+        <ul>{links}</ul>
+      </div>""")
+        tracks.append(f"""<section class="candidate-track" id="{esc(track['id'])}" aria-labelledby="{esc(track['id'])}-title">
+        <div class="candidate-track-head candidate-track-{esc(track['theme'])}">
+          <h3 id="{esc(track['id'])}-title">{esc(track['title'])}</h3>
+          <p>{esc(track['description'])}</p>
+        </div>
+        {chr(10).join(project_module_html(m, track['theme']) for m in modules)}
+      </section>""")
+    choosing = "\n".join(f'<p>{esc(p)}</p>' for p in project_guide["choosing"])
+    return f"""<section class="project-candidates" aria-labelledby="directions">
+      <h2 id="directions">Project candidates</h2>
+      <p class="candidate-intro">{esc(project_guide['intro'])}</p>
+      <nav class="candidate-nav" aria-label="Six project research modules">
+        {chr(10).join(navigation)}
+      </nav>
+      <p class="candidate-scope">{esc(project_guide['scope'])}</p>
+      {chr(10).join(tracks)}
+      <section class="panel choosing-project" aria-labelledby="choosing-project">
+        <h3 id="choosing-project">Choosing a project</h3>
+        {choosing}
+      </section>
+    </section>"""
+
+
 def project_body() -> str:
     tl_items = []
     for m in milestones:
@@ -955,53 +1058,6 @@ def project_body() -> str:
       </div>"""
         for i, (track_id, title, description) in enumerate(PROJECT_TRACKS)
     )
-    candidate_modules = []
-    candidate_links = []
-    project_number = 0
-    for module in project_modules:
-        count = sum(len(group["projects"]) for group in module["groups"])
-        candidate_links.append(
-            f'<a class="candidate-jump candidate-jump-{esc(module["theme"])}" '
-            f'href="#{esc(module["id"])}">{esc(module["title"])} <span>{count} projects</span></a>'
-        )
-        groups = []
-        for group in module["groups"]:
-            cards = []
-            for project in group["projects"]:
-                project_number += 1
-                project_id = "project-" + project["name"].lower()
-                brief_rows = "".join(
-                    f'<div><dt>{label}</dt><dd>{esc(project[key])}</dd></div>'
-                    for label, key in [
-                        ("Mechanism to explore", "approach"),
-                        ("Semester scope & evaluation", "evaluation"),
-                        ("Key check", "caution"),
-                        ("Helpful background", "background"),
-                    ]
-                )
-                cards.append(f"""<article class="candidate" id="{project_id}" aria-labelledby="{project_id}-title">
-          <h5 id="{project_id}-title"><span class="candidate-number">{project_number:02d}</span>
-            <a href="#{project_id}">{esc(project["name"])}</a></h5>
-          <p class="candidate-title">{esc(project["title"])}</p>
-          <p class="candidate-question">{esc(project["question"])}</p>
-          <details class="project-brief">
-            <summary>Approach &amp; evaluation<span class="visually-hidden"> for {esc(project["name"])}</span></summary>
-            <dl>{brief_rows}</dl>
-          </details>
-        </article>""")
-            groups.append(
-                f'<div class="candidate-group"><h4>{esc(group["title"])}</h4>'
-                f'<div class="candidate-grid">{chr(10).join(cards)}</div></div>'
-            )
-        candidate_modules.append(f"""<section class="candidate-module candidate-module-{esc(module["theme"])}"
-      id="{esc(module["id"])}" aria-labelledby="{esc(module["id"])}-title">
-      <div class="candidate-module-head">
-        <h3 id="{esc(module["id"])}-title">{esc(module["title"])}</h3>
-        <span>{count} projects</span>
-      </div>
-      {chr(10).join(groups)}
-    </section>""")
-
     return f"""<section class="section" id="project">
   <div class="wrap">
     {page_head("Semester-long research project", esc(PROJECT_OVERVIEW))}
@@ -1035,14 +1091,7 @@ def project_body() -> str:
       <p>{esc(FINAL_SUBMISSION)}</p>
     </div>
 
-    <section class="project-candidates" aria-labelledby="directions">
-      <h2 id="directions">Project candidates</h2>
-      <p class="candidate-intro">{esc(PROJECT_CANDIDATES_NOTE)}</p>
-      <nav class="candidate-nav" aria-label="Project candidate modules">
-        {chr(10).join(candidate_links)}
-      </nav>
-      {chr(10).join(candidate_modules)}
-    </section>
+    {project_candidates_html()}
   </div>
 </section>"""
 
@@ -1295,19 +1344,35 @@ def syllabus_markdown() -> str:
         "",
         "### Project candidates",
         "",
-        PROJECT_CANDIDATES_NOTE,
+        project_guide["intro"],
         "",
-        "The [Project page](project.html#directions) includes each candidate's proposed mechanism, "
-        "semester evaluation, scope checks, and helpful background.",
+        project_guide["scope"],
+        "",
+        "The [Project page](project.html#directions) groups six research modules under two directions. "
+        "Expand an idea to explore the original detailed briefs, including mechanisms, baselines, "
+        "semester evaluations, and scope checks.",
         "",
     ])
-    for module in project_modules:
-        lines.extend([f"#### {module['title']}", ""])
-        for group in module["groups"]:
-            lines.extend([f"##### {group['title']}", ""])
-            for project in group["projects"]:
-                lines.append(f"- **{project['name']} — {project['title']}.** {project['question']}")
+    for track in project_guide["tracks"]:
+        lines.extend([f"#### {track['title']}", "", track["description"], ""])
+        for module in (m for m in project_modules if m["track"] == track["id"]):
+            lines.extend([
+                f"##### Project Module {module['number']}: {module['title']}", "",
+                module["overview"], "",
+                f"**Helpful background:** {module['background']}", "",
+                f"**Evidence of success:** {module['success']}", "",
+            ])
+            if module.get("scope_note"):
+                lines.extend([module["scope_note"], ""])
+            for idea in module["ideas"]:
+                lines.append(f"- **{idea['title']}.** {idea['description']}")
+                if idea["briefs"]:
+                    links = ", ".join(f"[{name}](project.html#project-{name.lower()})" for name in idea["briefs"])
+                    lines.append(f"  Detailed briefs: {links}.")
             lines.append("")
+    lines.extend(["#### Choosing a project", ""])
+    for paragraph in project_guide["choosing"]:
+        lines.extend([paragraph, ""])
     lines.extend([
         "## Weekly schedule and readings",
         "",

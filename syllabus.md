@@ -142,54 +142,130 @@ An eight- to ten-page conference-style paper (excluding references and appendice
 
 ### Project candidates
 
-Choose a question, build a strong baseline, and test one mechanism. These 26 starting points can be narrowed to fit a team of 1-3; students are also welcome to propose their own projects. Agree on scope and platform requirements with the instructor before committing to a direction.
+Explore six research modules at the intersection of AI and computing. Start with a module that interests you, then choose one concrete question to investigate (you are welcome to propose your own).
 
-The [Project page](project.html#directions) includes each candidate's proposed mechanism, semester evaluation, scope checks, and helpful background.
+The ideas below are starting points for teams of 1–3 students. Select one principal mechanism, establish strong baselines, and evaluate benefits and limitations within an agreed scope.
 
-#### Module 1: Computing for AI
+The [Project page](project.html#directions) groups six research modules under two directions. Expand an idea to explore the original detailed briefs, including mechanisms, baselines, semester evaluations, and scope checks.
 
-##### Physical AI & World Models
+#### Computing for AI
 
-- **PlanBudget — Deadline-Aware Compute Allocation for World-Model Planning.** When does thinking longer improve an action, and when does it make the observation too stale to act well?
-- **RolloutReuse — Reusing Computation Across World-Model Planning Steps.** As observations and actions change, which parts of a previous plan remain valid enough to reuse?
-- **RankPreserve — Decision-Preserving Quantization for World Models.** Should a compressed world model preserve its predictions, or preserve the decisions those predictions support?
-- **FreshAct — Freshness-Aware Scheduling for Asynchronous Robot Inference.** When new information arrives during inference, is it better to finish an old decision or start a fresher one?
-- **LoopWatt — Closed-Loop Energy Management for Physical AI.** Which combination of computation and hardware power minimizes energy to finish a task, rather than energy per inference?
-- **FleetSlack — Control-Aware GPU Sharing for Multiple Robots.** If two requests share a deadline but tolerate delay differently, how should they share a GPU?
-- **SceneBudget — Task-Aware Memory Management for 3D Scene Representations.** Under a memory limit, which scene details are worth keeping because they change what an agent can do?
+Develops the systems, architectures, and hardware that emerging AI workloads need.
 
-##### Agentic AI Serving
+##### Project Module 1: Computing Systems for Agentic AI
 
-- **BranchServe — Uncertainty-Aware Preparation for Dynamic Agent Workflows.** When an agent's next step is uncertain, when is preparing resources early worth the risk of wasted work?
-- **StateValue — Value-Based KV Retention Across Agent Tool Gaps.** While an agent waits for a tool, when is its idle KV state worth keeping, offloading, or recomputing later?
-- **ToolCritical — Joint Scheduling of LLM Calls and External Tools.** When does speeding up model inference merely move the bottleneck to the tools an agent depends on?
-- **VerifyBudget — Online Allocation of Verification Effort.** Which intermediate checks prevent costly downstream errors, and which only add delay?
-- **RecoverGraph — Dependency-Aware Recovery for Stateful Agents.** After a tool fails, what can an agent safely keep, and what must it undo or replay?
+AI agents perform extended tasks through sequences of model calls, tool use, planning, and verification. Their execution can branch, pause, retry, and share state, creating resource demands that change throughout a task. The systems challenge is to coordinate these activities across compute, memory, and external tools while managing variable latency, state growth, and failures. Projects in this module investigate workflow execution, memory management, resource allocation, and recovery. Our goal is to complete more tasks correctly within practical latency and cost budgets. Better systems could make long-running coding assistants, research agents, and multi-agent applications more responsive, scalable, and dependable.
 
-##### Architecture, Memory & VLSI
+**Helpful background:** ML systems, operating or distributed systems, memory management, agent frameworks.
 
-- **DeltaReason — Incremental Execution for Neuro-Symbolic Inference.** When only a few facts change, how much reasoning truly needs to be repeated?
-- **ReasonLink — Data-Movement-Aware Integration of Neural and Symbolic Accelerators.** After accelerating both ends of a pipeline, does the interface between them become the bottleneck?
-- **RolloutMem — Memory Architecture for Batched World-Model Planning.** How do candidate trajectories, time steps, and planning iterations change the memory reuse an accelerator should exploit?
-- **MarginCIM — Decision-Margin-Aware Reliability for Associative Computing.** Can hardware protection focus on numerical errors that would actually change a decision?
-- **HorizonGuard — Temporal Fault Protection for World-Model Rollouts.** Which faults matter most when a prediction is repeatedly fed into future predictions and decisions?
+**Evidence of success:** Task success, end-to-end and tail latency, correct completions within a time target, memory use, and cost per successful task under realistic load.
 
-#### Module 2: AI for Computing
+- **Memory management for long-running agents.** Decide when to retain, offload, or recompute an agent's key-value (KV) cache while it waits for tools. Investigate whether return-time uncertainty and recovery cost improve decisions under memory pressure.
+  Detailed briefs: [StateValue](project.html#project-statevalue).
+- **Dynamic workflow execution and scheduling.** Coordinate model calls and tool execution as dependencies emerge. Choose a focused mechanism such as selective resource preparation, critical-path scheduling, or backpressure between GPU inference and CPU tools.
+  Detailed briefs: [BranchServe](project.html#project-branchserve), [ToolCritical](project.html#project-toolcritical).
+- **Adaptive reasoning and verification budgets.** Use runtime evidence to decide where additional model effort or verification is worth its cost. Study how these choices affect downstream errors, task completion, and resource use.
+  Detailed briefs: [VerifyBudget](project.html#project-verifybudget).
+- **Reliable execution and selective recovery.** Track dependencies and state changes to identify which steps must be replayed after a failure. Reduce repeated work while preserving both task correctness and consistent external state.
+  Detailed briefs: [RecoverGraph](project.html#project-recovergraph).
 
-##### Architecture & Software Agents
+##### Project Module 2: Computing Systems for Physical AI
 
-- **CausalArch — Hypothesis-Driven Experiments for Architecture Agents.** Can an agent use experiments to distinguish competing explanations, rather than explain a design only after seeing its score?
-- **FidelityDSE — Cost-Aware Selection of Evaluation Fidelity.** How much evidence is enough to reject a design, and when is a more faithful evaluation worth its cost?
-- **MapTransfer — Reusable Mapping Knowledge for AI Accelerators.** Can a good accelerator mapping become reusable knowledge with clear limits, rather than a configuration that works only once?
-- **KernelContract — Contract-Aware GPU Kernel Optimization Agents.** What must an optimized kernel preserve for a microbenchmark speedup to become a correct end-to-end improvement?
+Physical AI connects perception, prediction, and reasoning to actions in a changing environment. World models, vision-language-action models, and other controllers must operate within physical deadlines and limited compute, memory, and energy. More computation can improve a prediction while delaying the action that depends on it; compression or reuse can save resources while changing behavior. Projects in this module study these interactions through runtime optimization, memory systems, reliability, and hardware–software co-design. Our goal is to improve task success and responsiveness under resource constraints. The potential impact is more capable and efficient robots and autonomous systems that can operate on practical edge platforms.
 
-##### RTL, Verification & Physical Design
+**Helpful background:** Physical AI, robotics, ML systems, computer architecture, accelerators, VLSI.
 
-- **ProofFirst — Verified RTL Optimization Under Fixed Specifications.** Can an agent improve hardware efficiency while keeping the functional specification completely fixed?
-- **ConeRepair — Dependency-Grounded Repair of RTL Repositories.** Which structural and runtime evidence helps an agent locate the logic responsible for a cross-module hardware failure?
-- **ISABenefit — Workload-Driven, Verified RISC-V Instruction Discovery.** What makes a new instruction worth adding once software use, hardware cost, and end-to-end impact are all counted?
-- **PowerProbe — Goal-Conditioned Workload Synthesis for Power Characterization.** Which legal program behaviors do standard workloads miss when characterizing power and rapid power changes?
-- **TimingPilot — Report-Grounded Agents for Physical-Design Closure.** Can understanding why a design violates constraints make an agent more effective than treating the design flow as a black box?
+**Evidence of success:** Closed-loop task success, completion time, deadline misses, and energy or memory cost. Execution delays and approximation errors should affect the evaluated control loop.
+
+Each idea is a starting point to narrow further: choose one principal mechanism. Compression and resilience, for example, can become separate projects.
+
+- **Adaptive planning and timely action.** Allocate candidate trajectories or planning iterations according to remaining time and expected decision benefit. Alternatively, study when an asynchronous controller should finish an existing inference or restart from a fresher observation.
+  Detailed briefs: [PlanBudget](project.html#project-planbudget), [FreshAct](project.html#project-freshact).
+- **Memory and computation reuse across time.** Reuse valid scene representations, context encodings, or planning results across control steps. Develop one retention or refresh policy that accounts for how stale information affects downstream decisions.
+  Detailed briefs: [RolloutReuse](project.html#project-rolloutreuse), [SceneBudget](project.html#project-scenebudget).
+- **Decision-aware compression and resilience.** Identify which numerical changes alter action selection or task outcomes. Choose a focused study of mixed precision, selective protection, or error recovery, and measure the resulting efficiency–quality tradeoff.
+  Detailed briefs: [RankPreserve](project.html#project-rankpreserve), [HorizonGuard](project.html#project-horizonguard).
+- **Architectures for world-model planning.** Study the data reuse exposed by candidate trajectories, rollout steps, and planning iterations. Design and evaluate a memory organization, dataflow, or accelerator component around a measured bottleneck.
+  Detailed briefs: [RolloutMem](project.html#project-rolloutmem).
+- **Resource-aware deployment and robot serving.** Investigate either energy management on one edge device or scheduling for multiple robots sharing compute. Use control requirements to guide resource decisions and evaluate their effect on completed tasks.
+  Detailed briefs: [LoopWatt](project.html#project-loopwatt), [FleetSlack](project.html#project-fleetslack).
+
+##### Project Module 3: Computing Systems for Neuro-Symbolic and Compositional AI
+
+Neuro-symbolic and compositional AI combines learned models with explicit rules, probabilistic reasoning, structured search, or other specialized components. This offers ways to incorporate constraints and domain knowledge into intelligent behavior, but it also creates heterogeneous computation: dense neural operations interact with irregular dependencies, sparse updates, and iterative reasoning. Data conversion and coordination can become as important as individual operators. Projects in this module explore incremental execution, efficient composition, and architectures for these workloads. Our goal is to reduce the cost of structured intelligence while preserving its intended semantics and task quality. Progress could make reasoning, planning, and constrained decision-making practical on a wider range of computing platforms.
+
+**Helpful background:** Computer architecture, ML systems, neuro-symbolic AI, probabilistic models, VLSI, emerging memory.
+
+**Evidence of success:** Reasoning correctness or task quality, latency, energy, and data movement across different graph structures, evidence changes, or composition patterns.
+
+- **Incremental reasoning under changing evidence.** Update only the portions of a reasoning graph affected by new observations or facts. Study when dependency tracking and cached intermediates outperform complete recomputation while preserving correctness.
+  Detailed briefs: [DeltaReason](project.html#project-deltareason).
+- **Heterogeneous execution of neural and symbolic components.** Optimize communication, representation conversion, or scheduling between components with different execution patterns. Start with one pipeline and one interface or dataflow mechanism.
+  Detailed briefs: [ReasonLink](project.html#project-reasonlink).
+- **Efficient compositional inference.** Study one workload that combines models, constraints, or energy functions. Investigate a concrete bottleneck such as repeated sampling, shared intermediate computation, or inefficient batching across components.
+- **Memory-centric architectures for structured reasoning.** Explore compute-in-memory or associative hardware for a selected vector-symbolic or reasoning operation. Account for data movement, device errors, and peripheral costs when evaluating task-level benefits.
+  Detailed briefs: [MarginCIM](project.html#project-margincim).
+
+#### AI for Computing
+
+Uses AI to design, optimize, and verify the computing stack itself.
+
+##### Project Module 4: AI for Software Systems
+
+Software performance depends on many interacting choices, from kernel implementations and compiler transformations to runtime configuration and resource allocation. These choices are difficult to optimize across changing workloads and hardware, and an apparently faster component may introduce errors or fail to improve the full application. AI can help navigate this space by inspecting programs, interpreting performance evidence, and proposing testable changes. Projects in this module build and evaluate such optimization agents with compilers, profilers, tests, and execution environments in the loop. Our goal is to produce correct, measurable software improvements within a limited optimization budget. The potential impact is more efficient applications and less manual effort in performance engineering.
+
+**Helpful background:** Systems programming, CUDA, compilers, performance profiling, ML systems, agentic AI.
+
+**Evidence of success:** Correctness, application-level performance, optimization cost, and transfer across workloads or configurations, compared with strong non-agentic methods.
+
+This module studies AI as the optimizer of software systems; Project Module 1 studies the systems that execute AI agents.
+
+- **GPU kernel generation and optimization.** Use AI to optimize a real bottleneck in an AI pipeline while respecting shapes, layouts, and numerical requirements. Compare against compiled frameworks and optimized libraries, and measure end-to-end effects.
+  Detailed briefs: [KernelContract](project.html#project-kernelcontract).
+- **Compiler and program optimization.** Guide a bounded set of compiler passes, fusion decisions, or program transformations using code structure and execution feedback. Test correctness and performance on held-out programs or input configurations.
+- **Performance diagnosis through targeted experiments.** Build an agent that uses traces and profiles to propose bottleneck explanations and select experiments that distinguish them. Evaluate whether the resulting diagnosis leads to an effective fix.
+- **Adaptive runtime and serving configuration.** Use AI to recommend or adjust a small set of runtime settings as load changes. Study one mechanism for adaptation, accounting for monitoring, decision, and reconfiguration costs.
+
+##### Project Module 5: AI for Computer Architecture
+
+Computer architects must connect workload behavior to design mechanisms while balancing performance, energy, area, and implementation constraints. The design space is large, detailed simulation is expensive, and good decisions require explanations that survive experimental testing. AI agents may help analyze workloads, formulate hypotheses, explore designs, and reuse knowledge across tasks. The challenge is to turn this assistance into valid architectural improvements with reliable predictions and efficient use of evaluation resources. Projects in this module study agents working with architecture models and simulators. Our goal is to improve design quality and reduce exploration cost, creating methods that help architects discover and assess useful mechanisms across changing workloads.
+
+**Helpful background:** Computer architecture, simulators, accelerators, compilers, optimization, agentic AI.
+
+**Evidence of success:** Validated design quality, prediction accuracy, search cost, and generalization under matched compute and tool budgets. Final claims should follow from independently evaluated designs.
+
+- **Hypothesis-driven architectural exploration.** Require an agent to predict the effect of a design change before running an experiment. Study whether targeted interventions and prediction updates improve design quality under a fixed budget.
+  Detailed briefs: [CausalArch](project.html#project-causalarch).
+- **Efficient use of simulation fidelity.** Decide when an analytic estimate, short trace, or detailed simulation provides enough evidence to advance or reject a candidate. Validate final designs at the highest selected fidelity.
+  Detailed briefs: [FidelityDSE](project.html#project-fidelitydse).
+- **Transferable accelerator mapping knowledge.** Turn successful and failed mappings into reusable guidance with explicit applicability conditions. Evaluate transfer to unseen workloads, tensor shapes, or hardware resource configurations.
+  Detailed briefs: [MapTransfer](project.html#project-maptransfer).
+- **Workload-driven ISA and accelerator extensions.** Use AI to propose a small extension from an application hotspot, then evaluate its software use, functional correctness, and hardware cost. Start with one processor and one workload family.
+  Detailed briefs: [ISABenefit](project.html#project-isabenefit).
+
+##### Project Module 6: AI for Chip Design
+
+Chip design translates intended behavior into hardware that must satisfy functional, timing, power, area, and physical constraints. Progress often depends on specialized expertise and repeated interactions with verification, synthesis, simulation, and implementation tools. AI can assist with generating changes, interpreting failures, and deciding what to try next, but useful automation must preserve specifications and produce designs that withstand independent checking. Projects in this module explore bounded tasks in digital and analog design with tool feedback in the loop. Our goal is to improve verified design quality and reduce iteration cost. The potential impact is a more accessible and efficient path from design intent to implementable hardware.
+
+**Helpful background:** Digital or analog IC design, RTL, formal verification, physical design, EDA, computer architecture.
+
+**Evidence of success:** Functional or specification correctness, relevant circuit or PPA metrics, tool cost, and robustness across designs or operating conditions. A semester project may use simulation and synthesis; tapeout is not required.
+
+- **Verified RTL optimization.** Start from correct RTL and use AI to propose local changes that improve power, performance, or area. Apply equivalence checking against a fixed reference before accepting an optimization.
+  Detailed briefs: [ProofFirst](project.html#project-prooffirst).
+- **Hardware debugging and repair.** Combine RTL structure with failing assertions, waveforms, or simulation evidence to locate and repair a specific class of bugs. Verify fixes against tests or properties unavailable during repair.
+  Detailed briefs: [ConeRepair](project.html#project-conerepair).
+- **Physical-design optimization.** Use timing and congestion reports to guide a restricted set of implementation decisions. Evaluate valid-design rate and physical metrics across several blocks under matched tool budgets.
+  Detailed briefs: [TimingPilot](project.html#project-timingpilot).
+- **Workload generation for power characterization.** Generate legal programs that exercise underexplored activity patterns in a processor. Compare coverage and power estimates with random, coverage-guided, or evolutionary search, and validate the measurement model.
+  Detailed briefs: [PowerProbe](project.html#project-powerprobe).
+- **Analog and mixed-signal circuit optimization.** Use simulation feedback to optimize sizing or bias choices in one small circuit with a fixed topology. Check specification satisfaction across selected process, voltage, and temperature conditions.
+
+#### Choosing a project
+
+Select one idea and narrow it to one testable hypothesis, one principal mechanism, and a manageable evaluation platform. Agree on scope, available tools, and resource needs with the instructor before committing. A typical starting point is one model, runtime, simulator, or design family with strong baselines and an additional held-out condition.
+
+The modules describe research opportunities; they do not prescribe a solution. Cross-module projects are welcome when the contribution remains clear. Research quality is judged through sound reasoning, careful experiments, and reproducible evidence, including informative negative results. Publication is an aspiration, not a grading requirement. For cross-module work, make each team member's contribution explicit.
 
 ## Weekly schedule and readings
 
@@ -424,6 +500,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Optional readings**
 
+- [ArchAgent: Agentic AI-driven Computer Architecture Discovery (arXiv 2026)](https://arxiv.org/pdf/2602.22425)
 - [ArchGym: An Open-Source Gymnasium for Machine Learning Assisted Architecture Design (ISCA 2023)](https://arxiv.org/abs/2306.08888)
 - [AgentDSE: Reasoning-Augmented Architectural Design Space Exploration (MLArchSys 2026)](https://arxiv.org/abs/2606.21836)
 - [LLM-DSE: Searching Accelerator Parameters with LLM Agents (2025)](https://arxiv.org/abs/2505.12188)
@@ -434,20 +511,21 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 ### Week 11 · Friday, November 20, 2026
 
-**AI for Computer Architecture II: Agentic Design Systems** · AI for Computing
+**AI for Computer Architecture II: Architecture 2.0** · AI for Computing
 
-**Research question of the week:** How can automated design produce transferable knowledge rather than solutions tailored to one evaluation?
+**Research question of the week:** What would it take for AI-native design to turn high-level intent into better, physically verified systems and chips?
 
 - **Guest lecture:** [Prof. Vijay Janapa Reddi](https://vijay.seas.harvard.edu/) (Harvard).
 
 **Student-led papers**
 
-- [PF-LLM: Large Language Model Hinted Hardware Prefetching](https://doi.org/10.1145/3779212.3790202) - ASPLOS 2026; focus: AI inside the microarchitecture
-- [Computer Architecture's AlphaZero Moment: Automated Discovery in an Encircled World](https://arxiv.org/abs/2604.03312) - arXiv 2026; focus: automated architecture discovery and multi-tier evaluation pipelines
-- ArchOrchestra: End-to-End Agentic Accelerator Design *(link pending)* - Forthcoming 2026; focus: end-to-end agentic accelerator design
+- [ArchOrchestra: End-to-End Agentic Accelerator Design](https://drive.google.com/file/d/1ItrBZMEXQfmqdBGqyGa-gCUz5ANGgoNj/view?usp=sharing) - Forthcoming 2026; focus: end-to-end agentic accelerator design
+- [Architecture 2.0: Principles of AI-Native System and Chip Design](https://arch2.mlsysbook.ai/book/index.html) - Online book, 2026; focus: Read one chapter.
 
 **Optional readings**
 
+- [PF-LLM: Large Language Model Hinted Hardware Prefetching (ASPLOS 2026)](https://doi.org/10.1145/3779212.3790202)
+- [Computer Architecture's AlphaZero Moment: Automated Discovery in an Encircled World (arXiv 2026)](https://arxiv.org/abs/2604.03312)
 - [Agentic Architect: An Agentic AI Framework for Architecture Design Exploration and Optimization (arXiv 2026)](https://arxiv.org/abs/2604.25083)
 - [AgentDSE: Reasoning-Augmented Architectural Design Space Exploration (MLArchSys 2026)](https://arxiv.org/abs/2606.21836)
 - [LLM-DSE: Searching Accelerator Parameters with LLM Agents (2025)](https://arxiv.org/abs/2505.12188)

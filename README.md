@@ -63,12 +63,23 @@ home-page table explicitly shows due dates that differ from the Friday class dat
 with each TA's `name` and `email`. They appear below the instructor information on
 the home page and in the syllabus, with clickable email links.
 
-**Project candidates**: edit `data/projects.yaml`. The 26 briefs are grouped by
-module and research area, after Final submission on the Project page. Each entry
-has a `name`, full `title`, `question`, `approach`, `evaluation`, `caution`,
-and `background`. The page shows the question up front and expands the
-remaining details on demand; the syllabus includes a concise title/question
-catalogue.
+**Project candidates**: edit `data/project_modules.yaml` for the six project
+research modules, grouped under Computing for AI and AI for Computing after
+Final submission. These are distinct from the course's two lecture modules.
+Module overviews, helpful background, and evidence of success are always visible;
+“Explore project ideas” reveals the 26 concise starting points. Each idea can
+reference original detailed briefs by name in its `briefs` list.
+
+The 26 original briefs remain in `data/projects.yaml`, with their full `title`,
+`question`, `approach`, `evaluation`, `caution`, and `background` intact. The legacy
+grouping in that file is only storage; `project_modules.yaml` controls display
+order. Every brief must be assigned exactly once. Existing `#project-name` links
+still work and open the relevant disclosures. The generated syllabus mirrors
+the six-module guide and links to the detailed briefs. Printing reveals all ideas
+and briefs, then restores the previous disclosure state.
+
+Regression checks: `python3 -m unittest discover -s tests` and
+`node tests/test_site_behaviors.js` (no extra test dependencies).
 
 **Local readings**: put handouts and slides in `assets/readings/` and use a
 relative URL such as `assets/readings/openai-jalapeno-hot-chips-2026.pdf`.
@@ -108,7 +119,7 @@ This site is **hand-rolled HTML/CSS/JS + a single-file Python renderer**
 | `_site/index.html` | Home: hero, current week/readings, next deadline, announcements, course info, schedule at a glance |
 | `_site/schedule.html` | Full weekly schedule with readings, guests, deadlines |
 | `_site/format.html` | Seminar format, presentation structure, grading |
-| `_site/project.html` | Project tracks, research standard, milestones, final submission, and 26 candidate briefs |
+| `_site/project.html` | Project tracks, milestones, final submission, six research modules, and expandable ideas/briefs |
 | `_site/policies.html` | AI-use policy and course policies |
 | `_site/papers.html` | Compact reading list of all required/optional papers by week |
 | `_site/students.html` | Class roster (from `data/students.yaml`) |
@@ -127,7 +138,6 @@ The in-page blue/purple course mark and social preview image remain separate.
 ## TBD checklist (replace as they land)
 
 - [ ] Guest speaker confirmations (`guest:` labels in `data/schedule.yaml` - never add names before they are confirmed)
-- [ ] ArchOrchestra arXiv link (Week 11 `case_study` + optional reading, expected September)
 - [ ] Student roster in `data/students.yaml` after enrollment settles
 
 ## Layout
@@ -137,7 +147,8 @@ The in-page blue/purple course mark and social preview image remain separate.
 ├── data/
 │   ├── schedule.yaml         # ← EDIT WEEKLY (single source of truth)
 │   ├── announcements.yaml    # ← latest home-page announcements
-│   ├── projects.yaml         # ← candidate briefs grouped by module
+│   ├── project_modules.yaml  # ← six-module guide and detailed-brief assignments
+│   ├── projects.yaml         # ← original detailed briefs (referenced by name)
 │   └── students.yaml         # ← class roster for students.html
 ├── assets/                   # style.css, site.js, favicon-columbia.png, og.png (+ students/ photos)
 ├── syllabus.md               # generated; do not edit directly

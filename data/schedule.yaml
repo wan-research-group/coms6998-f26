@@ -245,6 +245,7 @@ weeks:
       - {short_title: "ArchEval", title: "ArchEval: Measuring AI Agents as Computer Architects", venue: "arXiv 2026", url: "https://arxiv.org/abs/2607.03601", focus: "benchmarking LLM agents on architecture tasks"}
       - {short_title: "CHIA", title: "CHIA: An Open-Source Framework for Principled, Agentic AI-Driven Hardware/Software Co-Design Research", venue: "arXiv 2026", url: "https://arxiv.org/abs/2606.27350", focus: "composable design loops for agent-driven HW/SW co-design"}
     optional:
+      - {title: "ArchAgent: Agentic AI-driven Computer Architecture Discovery (arXiv 2026)", url: "https://arxiv.org/pdf/2602.22425"}
       - {title: "ArchGym: An Open-Source Gymnasium for Machine Learning Assisted Architecture Design (ISCA 2023)", url: "https://arxiv.org/abs/2306.08888"}
       - {title: "AgentDSE: Reasoning-Augmented Architectural Design Space Exploration (MLArchSys 2026)", url: "https://arxiv.org/abs/2606.21836"}
       - {title: "LLM-DSE: Searching Accelerator Parameters with LLM Agents (2025)", url: "https://arxiv.org/abs/2505.12188"}
@@ -256,15 +257,16 @@ weeks:
   - week: 11
     date: 2026-11-20
     module: "AI for Computing"
-    title: "AI for Computer Architecture II: Agentic Design Systems"
-    research_question: "How can automated design produce transferable knowledge rather than solutions tailored to one evaluation?"
+    title: "AI for Computer Architecture II: Architecture 2.0"
+    research_question: "What would it take for AI-native design to turn high-level intent into better, physically verified systems and chips?"
     type: seminar
     guest: {label: "Guest Speaker", name: "Prof. Vijay Janapa Reddi", affiliation: "Harvard", url: "https://vijay.seas.harvard.edu/"}
     papers:
-      - {short_title: "PF-LLM", title: "PF-LLM: Large Language Model Hinted Hardware Prefetching", venue: "ASPLOS 2026", url: "https://doi.org/10.1145/3779212.3790202", focus: "AI inside the microarchitecture"}
-      - {short_title: "Architecture’s AlphaZero Moment", title: "Computer Architecture's AlphaZero Moment: Automated Discovery in an Encircled World", venue: "arXiv 2026", url: "https://arxiv.org/abs/2604.03312", focus: "automated architecture discovery and multi-tier evaluation pipelines"}
-      - {short_title: "ArchOrchestra", title: "ArchOrchestra: End-to-End Agentic Accelerator Design", venue: "Forthcoming 2026", url: null, focus: "end-to-end agentic accelerator design"}
+      - {short_title: "ArchOrchestra", title: "ArchOrchestra: End-to-End Agentic Accelerator Design", venue: "Forthcoming 2026", url: "https://drive.google.com/file/d/1ItrBZMEXQfmqdBGqyGa-gCUz5ANGgoNj/view?usp=sharing", focus: "end-to-end agentic accelerator design"}
+      - {short_title: "Architecture 2.0 (one chapter)", title: "Architecture 2.0: Principles of AI-Native System and Chip Design", venue: "Online book, 2026", url: "https://arch2.mlsysbook.ai/book/index.html", focus: "Read one chapter."}
     optional:
+      - {short_title: "PF-LLM", title: "PF-LLM: Large Language Model Hinted Hardware Prefetching (ASPLOS 2026)", venue: "ASPLOS 2026", url: "https://doi.org/10.1145/3779212.3790202", focus: "AI inside the microarchitecture"}
+      - {short_title: "Architecture’s AlphaZero Moment", title: "Computer Architecture's AlphaZero Moment: Automated Discovery in an Encircled World (arXiv 2026)", venue: "arXiv 2026", url: "https://arxiv.org/abs/2604.03312", focus: "automated architecture discovery and multi-tier evaluation pipelines"}
       - {title: "Agentic Architect: An Agentic AI Framework for Architecture Design Exploration and Optimization (arXiv 2026)", url: "https://arxiv.org/abs/2604.25083"}
       - {title: "AgentDSE: Reasoning-Augmented Architectural Design Space Exploration (MLArchSys 2026)", url: "https://arxiv.org/abs/2606.21836"}
       - {title: "LLM-DSE: Searching Accelerator Parameters with LLM Agents (2025)", url: "https://arxiv.org/abs/2505.12188"}

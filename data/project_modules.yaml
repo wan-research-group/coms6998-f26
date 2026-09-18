@@ -1,0 +1,303 @@
+# Six project research modules; overview and idea text adapted from the instructor-provided manuscript.
+# Detailed-brief references resolve by name in projects.yaml. Course lecture modules are separate.
+intro: Explore six research modules at the intersection of AI and computing. Start with a module that
+  interests you, then choose one concrete question to investigate (you are welcome to propose your own).
+scope: The ideas below are starting points for teams of 1–3 students. Select one principal mechanism,
+  establish strong baselines, and evaluate benefits and limitations within an agreed scope.
+tracks:
+- id: computing-for-ai
+  title: Computing for AI
+  theme: comp
+  description: Develops the systems, architectures, and hardware that emerging AI workloads need.
+- id: ai-for-computing
+  title: AI for Computing
+  theme: ai
+  description: Uses AI to design, optimize, and verify the computing stack itself.
+modules:
+- id: project-module-agentic-ai
+  number: 1
+  track: computing-for-ai
+  title: Computing Systems for Agentic AI
+  overview: AI agents perform extended tasks through sequences of model calls, tool use, planning, and
+    verification. Their execution can branch, pause, retry, and share state, creating resource demands
+    that change throughout a task. The systems challenge is to coordinate these activities across compute,
+    memory, and external tools while managing variable latency, state growth, and failures. Projects in
+    this module investigate workflow execution, memory management, resource allocation, and recovery.
+    Our goal is to complete more tasks correctly within practical latency and cost budgets. Better systems
+    could make long-running coding assistants, research agents, and multi-agent applications more responsive,
+    scalable, and dependable.
+  background: ML systems, operating or distributed systems, memory management, agent frameworks.
+  success: Task success, end-to-end and tail latency, correct completions within a time target, memory
+    use, and cost per successful task under realistic load.
+  ideas:
+  - id: project-idea-1-1
+    title: Memory management for long-running agents
+    description: Decide when to retain, offload, or recompute an agent's key-value (KV) cache while it
+      waits for tools. Investigate whether return-time uncertainty and recovery cost improve decisions
+      under memory pressure.
+    briefs:
+    - StateValue
+  - id: project-idea-1-2
+    title: Dynamic workflow execution and scheduling
+    description: Coordinate model calls and tool execution as dependencies emerge. Choose a focused mechanism
+      such as selective resource preparation, critical-path scheduling, or backpressure between GPU inference
+      and CPU tools.
+    briefs:
+    - BranchServe
+    - ToolCritical
+  - id: project-idea-1-3
+    title: Adaptive reasoning and verification budgets
+    description: Use runtime evidence to decide where additional model effort or verification is worth
+      its cost. Study how these choices affect downstream errors, task completion, and resource use.
+    briefs:
+    - VerifyBudget
+  - id: project-idea-1-4
+    title: Reliable execution and selective recovery
+    description: Track dependencies and state changes to identify which steps must be replayed after a
+      failure. Reduce repeated work while preserving both task correctness and consistent external state.
+    briefs:
+    - RecoverGraph
+- id: project-module-physical-ai
+  number: 2
+  track: computing-for-ai
+  title: Computing Systems for Physical AI
+  overview: Physical AI connects perception, prediction, and reasoning to actions in a changing environment.
+    World models, vision-language-action models, and other controllers must operate within physical deadlines
+    and limited compute, memory, and energy. More computation can improve a prediction while delaying
+    the action that depends on it; compression or reuse can save resources while changing behavior. Projects
+    in this module study these interactions through runtime optimization, memory systems, reliability,
+    and hardware–software co-design. Our goal is to improve task success and responsiveness under resource
+    constraints. The potential impact is more capable and efficient robots and autonomous systems that
+    can operate on practical edge platforms.
+  background: Physical AI, robotics, ML systems, computer architecture, accelerators, VLSI.
+  success: Closed-loop task success, completion time, deadline misses, and energy or memory cost. Execution
+    delays and approximation errors should affect the evaluated control loop.
+  scope_note: 'Each idea is a starting point to narrow further: choose one principal mechanism. Compression
+    and resilience, for example, can become separate projects.'
+  ideas:
+  - id: project-idea-2-1
+    title: Adaptive planning and timely action
+    description: Allocate candidate trajectories or planning iterations according to remaining time and
+      expected decision benefit. Alternatively, study when an asynchronous controller should finish an
+      existing inference or restart from a fresher observation.
+    briefs:
+    - PlanBudget
+    - FreshAct
+  - id: project-idea-2-2
+    title: Memory and computation reuse across time
+    description: Reuse valid scene representations, context encodings, or planning results across control
+      steps. Develop one retention or refresh policy that accounts for how stale information affects downstream
+      decisions.
+    briefs:
+    - RolloutReuse
+    - SceneBudget
+  - id: project-idea-2-3
+    title: Decision-aware compression and resilience
+    description: Identify which numerical changes alter action selection or task outcomes. Choose a focused
+      study of mixed precision, selective protection, or error recovery, and measure the resulting efficiency–quality
+      tradeoff.
+    briefs:
+    - RankPreserve
+    - HorizonGuard
+  - id: project-idea-2-4
+    title: Architectures for world-model planning
+    description: Study the data reuse exposed by candidate trajectories, rollout steps, and planning iterations.
+      Design and evaluate a memory organization, dataflow, or accelerator component around a measured
+      bottleneck.
+    briefs:
+    - RolloutMem
+  - id: project-idea-2-5
+    title: Resource-aware deployment and robot serving
+    description: Investigate either energy management on one edge device or scheduling for multiple robots
+      sharing compute. Use control requirements to guide resource decisions and evaluate their effect
+      on completed tasks.
+    briefs:
+    - LoopWatt
+    - FleetSlack
+- id: project-module-neuro-symbolic-ai
+  number: 3
+  track: computing-for-ai
+  title: Computing Systems for Neuro-Symbolic and Compositional AI
+  overview: 'Neuro-symbolic and compositional AI combines learned models with explicit rules, probabilistic
+    reasoning, structured search, or other specialized components. This offers ways to incorporate constraints
+    and domain knowledge into intelligent behavior, but it also creates heterogeneous computation: dense
+    neural operations interact with irregular dependencies, sparse updates, and iterative reasoning. Data
+    conversion and coordination can become as important as individual operators. Projects in this module
+    explore incremental execution, efficient composition, and architectures for these workloads. Our goal
+    is to reduce the cost of structured intelligence while preserving its intended semantics and task
+    quality. Progress could make reasoning, planning, and constrained decision-making practical on a wider
+    range of computing platforms.'
+  background: Computer architecture, ML systems, neuro-symbolic AI, probabilistic models, VLSI, emerging
+    memory.
+  success: Reasoning correctness or task quality, latency, energy, and data movement across different
+    graph structures, evidence changes, or composition patterns.
+  ideas:
+  - id: project-idea-3-1
+    title: Incremental reasoning under changing evidence
+    description: Update only the portions of a reasoning graph affected by new observations or facts.
+      Study when dependency tracking and cached intermediates outperform complete recomputation while
+      preserving correctness.
+    briefs:
+    - DeltaReason
+  - id: project-idea-3-2
+    title: Heterogeneous execution of neural and symbolic components
+    description: Optimize communication, representation conversion, or scheduling between components with
+      different execution patterns. Start with one pipeline and one interface or dataflow mechanism.
+    briefs:
+    - ReasonLink
+  - id: project-idea-3-3
+    title: Efficient compositional inference
+    description: Study one workload that combines models, constraints, or energy functions. Investigate
+      a concrete bottleneck such as repeated sampling, shared intermediate computation, or inefficient
+      batching across components.
+    briefs: []
+  - id: project-idea-3-4
+    title: Memory-centric architectures for structured reasoning
+    description: Explore compute-in-memory or associative hardware for a selected vector-symbolic or reasoning
+      operation. Account for data movement, device errors, and peripheral costs when evaluating task-level
+      benefits.
+    briefs:
+    - MarginCIM
+- id: project-module-software-systems
+  number: 4
+  track: ai-for-computing
+  title: AI for Software Systems
+  overview: Software performance depends on many interacting choices, from kernel implementations and
+    compiler transformations to runtime configuration and resource allocation. These choices are difficult
+    to optimize across changing workloads and hardware, and an apparently faster component may introduce
+    errors or fail to improve the full application. AI can help navigate this space by inspecting programs,
+    interpreting performance evidence, and proposing testable changes. Projects in this module build and
+    evaluate such optimization agents with compilers, profilers, tests, and execution environments in
+    the loop. Our goal is to produce correct, measurable software improvements within a limited optimization
+    budget. The potential impact is more efficient applications and less manual effort in performance
+    engineering.
+  background: Systems programming, CUDA, compilers, performance profiling, ML systems, agentic AI.
+  success: Correctness, application-level performance, optimization cost, and transfer across workloads
+    or configurations, compared with strong non-agentic methods.
+  scope_note: This module studies AI as the optimizer of software systems; Project Module 1 studies the
+    systems that execute AI agents.
+  ideas:
+  - id: project-idea-4-1
+    title: GPU kernel generation and optimization
+    description: Use AI to optimize a real bottleneck in an AI pipeline while respecting shapes, layouts,
+      and numerical requirements. Compare against compiled frameworks and optimized libraries, and measure
+      end-to-end effects.
+    briefs:
+    - KernelContract
+  - id: project-idea-4-2
+    title: Compiler and program optimization
+    description: Guide a bounded set of compiler passes, fusion decisions, or program transformations
+      using code structure and execution feedback. Test correctness and performance on held-out programs
+      or input configurations.
+    briefs: []
+  - id: project-idea-4-3
+    title: Performance diagnosis through targeted experiments
+    description: Build an agent that uses traces and profiles to propose bottleneck explanations and select
+      experiments that distinguish them. Evaluate whether the resulting diagnosis leads to an effective
+      fix.
+    briefs: []
+  - id: project-idea-4-4
+    title: Adaptive runtime and serving configuration
+    description: Use AI to recommend or adjust a small set of runtime settings as load changes. Study
+      one mechanism for adaptation, accounting for monitoring, decision, and reconfiguration costs.
+    briefs: []
+- id: project-module-computer-architecture
+  number: 5
+  track: ai-for-computing
+  title: AI for Computer Architecture
+  overview: Computer architects must connect workload behavior to design mechanisms while balancing performance,
+    energy, area, and implementation constraints. The design space is large, detailed simulation is expensive,
+    and good decisions require explanations that survive experimental testing. AI agents may help analyze
+    workloads, formulate hypotheses, explore designs, and reuse knowledge across tasks. The challenge
+    is to turn this assistance into valid architectural improvements with reliable predictions and efficient
+    use of evaluation resources. Projects in this module study agents working with architecture models
+    and simulators. Our goal is to improve design quality and reduce exploration cost, creating methods
+    that help architects discover and assess useful mechanisms across changing workloads.
+  background: Computer architecture, simulators, accelerators, compilers, optimization, agentic AI.
+  success: Validated design quality, prediction accuracy, search cost, and generalization under matched
+    compute and tool budgets. Final claims should follow from independently evaluated designs.
+  ideas:
+  - id: project-idea-5-1
+    title: Hypothesis-driven architectural exploration
+    description: Require an agent to predict the effect of a design change before running an experiment.
+      Study whether targeted interventions and prediction updates improve design quality under a fixed
+      budget.
+    briefs:
+    - CausalArch
+  - id: project-idea-5-2
+    title: Efficient use of simulation fidelity
+    description: Decide when an analytic estimate, short trace, or detailed simulation provides enough
+      evidence to advance or reject a candidate. Validate final designs at the highest selected fidelity.
+    briefs:
+    - FidelityDSE
+  - id: project-idea-5-3
+    title: Transferable accelerator mapping knowledge
+    description: Turn successful and failed mappings into reusable guidance with explicit applicability
+      conditions. Evaluate transfer to unseen workloads, tensor shapes, or hardware resource configurations.
+    briefs:
+    - MapTransfer
+  - id: project-idea-5-4
+    title: Workload-driven ISA and accelerator extensions
+    description: Use AI to propose a small extension from an application hotspot, then evaluate its software
+      use, functional correctness, and hardware cost. Start with one processor and one workload family.
+    briefs:
+    - ISABenefit
+- id: project-module-chip-design
+  number: 6
+  track: ai-for-computing
+  title: AI for Chip Design
+  overview: Chip design translates intended behavior into hardware that must satisfy functional, timing,
+    power, area, and physical constraints. Progress often depends on specialized expertise and repeated
+    interactions with verification, synthesis, simulation, and implementation tools. AI can assist with
+    generating changes, interpreting failures, and deciding what to try next, but useful automation must
+    preserve specifications and produce designs that withstand independent checking. Projects in this
+    module explore bounded tasks in digital and analog design with tool feedback in the loop. Our goal
+    is to improve verified design quality and reduce iteration cost. The potential impact is a more accessible
+    and efficient path from design intent to implementable hardware.
+  background: Digital or analog IC design, RTL, formal verification, physical design, EDA, computer architecture.
+  success: Functional or specification correctness, relevant circuit or PPA metrics, tool cost, and robustness
+    across designs or operating conditions. A semester project may use simulation and synthesis; tapeout
+    is not required.
+  ideas:
+  - id: project-idea-6-1
+    title: Verified RTL optimization
+    description: Start from correct RTL and use AI to propose local changes that improve power, performance,
+      or area. Apply equivalence checking against a fixed reference before accepting an optimization.
+    briefs:
+    - ProofFirst
+  - id: project-idea-6-2
+    title: Hardware debugging and repair
+    description: Combine RTL structure with failing assertions, waveforms, or simulation evidence to locate
+      and repair a specific class of bugs. Verify fixes against tests or properties unavailable during
+      repair.
+    briefs:
+    - ConeRepair
+  - id: project-idea-6-3
+    title: Physical-design optimization
+    description: Use timing and congestion reports to guide a restricted set of implementation decisions.
+      Evaluate valid-design rate and physical metrics across several blocks under matched tool budgets.
+    briefs:
+    - TimingPilot
+  - id: project-idea-6-4
+    title: Workload generation for power characterization
+    description: Generate legal programs that exercise underexplored activity patterns in a processor.
+      Compare coverage and power estimates with random, coverage-guided, or evolutionary search, and validate
+      the measurement model.
+    briefs:
+    - PowerProbe
+  - id: project-idea-6-5
+    title: Analog and mixed-signal circuit optimization
+    description: Use simulation feedback to optimize sizing or bias choices in one small circuit with
+      a fixed topology. Check specification satisfaction across selected process, voltage, and temperature
+      conditions.
+    briefs: []
+choosing:
+- Select one idea and narrow it to one testable hypothesis, one principal mechanism, and a manageable
+  evaluation platform. Agree on scope, available tools, and resource needs with the instructor before
+  committing. A typical starting point is one model, runtime, simulator, or design family with strong
+  baselines and an additional held-out condition.
+- The modules describe research opportunities; they do not prescribe a solution. Cross-module projects
+  are welcome when the contribution remains clear. Research quality is judged through sound reasoning,
+  careful experiments, and reproducible evidence, including informative negative results. Publication
+  is an aspiration, not a grading requirement. For cross-module work, make each team member's contribution
+  explicit.

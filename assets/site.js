@@ -111,6 +111,22 @@
   revealLinkedOptional();
   window.addEventListener("hashchange", revealLinkedOptional);
 
+  /* Preserve links to original briefs, even inside two levels of disclosure. */
+  function revealLinkedProject() {
+    var id;
+    try { id = decodeURIComponent(window.location.hash.slice(1)); } catch (e) { return; }
+    var target = document.getElementById(id);
+    if (!target || !target.matches(".candidate, .project-idea")) return;
+    var parent = target.parentElement;
+    while (parent) {
+      if (parent.tagName === "DETAILS") parent.open = true;
+      parent = parent.parentElement;
+    }
+    target.scrollIntoView({ block: "start" });
+  }
+  revealLinkedProject();
+  window.addEventListener("hashchange", revealLinkedProject);
+
   var btn = document.getElementById("toggle-optionals");
   if (btn) {
     btn.addEventListener("click", function () {
@@ -125,7 +141,7 @@
   var reopened = [];
   window.addEventListener("beforeprint", function () {
     reopened = [];
-    document.querySelectorAll("details.optional:not([open]), details.project-brief:not([open])").forEach(function (d) {
+    document.querySelectorAll("details.optional:not([open]), details.project-ideas:not([open]), details.project-brief:not([open])").forEach(function (d) {
       d.open = true;
       reopened.push(d);
     });
