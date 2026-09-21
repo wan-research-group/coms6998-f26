@@ -91,7 +91,7 @@ is empty the page shows a placeholder.
 Use First name + Last name for `name`, sorted by last name and then first name.
 Without `photo`, a circular avatar shows the first and last initials; adding a
 student-provided photo replaces it automatically. The current list contains 36
-enrolled students from the September 17 roster, with instructor name corrections.
+enrolled students from the final September 21 roster, with instructor name corrections.
 Do not include student IDs, email addresses, or the source roster PDF in website assets.
 
 ## Deploying to GitHub Pages

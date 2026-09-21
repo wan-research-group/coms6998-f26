@@ -8,7 +8,7 @@
 #     link: "https://janedoe.github.io/"
 #     photo: "assets/students/jane.jpg"
 #
-# Based on the September 17, 2026 enrolled roster, with instructor name corrections.
+# Based on the final September 21, 2026 enrolled roster, with instructor name corrections.
 # Preserve First name + Last name order. Do not add student IDs or emails.
 # Add photo only after a student supplies a photo for the course website.
 
@@ -32,12 +32,12 @@ students:
   - name: "Shiyao Lam"
   - name: "Mingkai Li"
   - name: "Shen Li"
+  - name: "Ryan Ma"
   - name: "Pulak Mehrotra"
   - name: "Stephen Ogunmwonyi"
   - name: "Mikul Saravanan"
   - name: "Yishan Song"
   - name: "Zixin Wan"
-  - name: "Daniel Wang"
   - name: "George Wang"
   - name: "Lizhong Wang"
   - name: "Yutong Wu"
