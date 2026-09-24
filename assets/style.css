@@ -471,8 +471,13 @@ time { font-variant-numeric: tabular-nums; }
   color: var(--text); font-weight: 700; font-size: 1.25rem;
 }
 .stu-name { max-width: 100%; overflow-wrap: anywhere; font-weight: 600; font-size: 0.92rem; }
-.stu-name a { color: var(--text); }
-.stu-name a:hover { color: var(--comp-ink); }
+.stu-profile {
+  display: grid; place-items: center;
+  width: 36px; height: 36px; margin-top: auto;
+  border-radius: 50%; color: var(--comp-ink); text-decoration: none;
+}
+.stu-profile:hover { color: var(--comp-ink); background: var(--comp-soft); }
+.stu-profile:focus-visible { outline: 2px solid var(--comp); outline-offset: 2px; }
 .roster-empty p { margin: 0; color: var(--muted); }
 
 /* ---------------------------------------------------------------- schedule */

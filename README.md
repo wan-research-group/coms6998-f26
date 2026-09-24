@@ -90,9 +90,19 @@ The build copies these assets unchanged into the published site.
 is empty the page shows a placeholder.
 Use First name + Last name for `name`, sorted by last name and then first name.
 Without `photo`, a circular avatar shows the first and last initials; adding a
-student-provided photo replaces it automatically. The current list contains 36
-enrolled students from the final September 21 roster, with instructor name corrections.
+student-provided photo replaces it automatically. The current list contains 35
+enrolled students from the final September 24 roster, with instructor name corrections.
 Do not include student IDs, email addresses, or the source roster PDF in website assets.
+Use student-submitted display names when available. Photo filenames use
+`Student Name_photo.jpg`, preserving the displayed name's capitalization,
+spaces, and any middle/preferred name (e.g. `Shufeng Chen_photo.jpg`), with
+web-sized JPEG copies stripped of metadata; keep the supplied originals unchanged.
+An optional `photo_position` (CSS object-position, e.g. `"50% 0%"`) adjusts the
+circular crop without altering the photograph.
+The September 24 profile submissions add 20 photos and profile links for 18 students.
+Student names are plain text. A supplied `link` appears as a clickable globe
+icon below the name, with a descriptive accessible label. Without a link, no icon is shown.
+Leave students who have not submitted new information unchanged.
 
 ## Deploying to GitHub Pages
 

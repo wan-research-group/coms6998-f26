@@ -391,7 +391,7 @@ def hero() -> str:
         <li><a href="mailto:{esc(inst["email"])}">Email</a></li>
         <li><a href="{esc(inst["homepage"])}" target="_blank" rel="noopener">Instructor Webpage</a></li>
         <li><a href="{esc(inst["lab"])}" target="_blank" rel="noopener">Research Group</a></li>
-        <li><a href="{esc(inst["canvas"])}" target="_blank" rel="noopener">Canvas</a></li>
+        <li><a href="{esc(inst["canvas"])}" target="_blank" rel="noopener">CourseWorks</a></li>
       </ul>
       <ul class="tbd-list">
         <li><span>Office hours</span> <span class="oh">{esc(inst["office_hours"])}</span></li>
@@ -1143,13 +1143,25 @@ def students_body() -> str:
         items = []
         for s in students:
             if s.get("photo"):
-                avatar = f'<img class="stu-photo" src="{esc(s["photo"])}" alt="" loading="lazy">'
+                position = f' style="object-position: {esc(s["photo_position"])}"' if s.get("photo_position") else ""
+                avatar = f'<img class="stu-photo" src="{esc(s["photo"])}" alt="" width="72" height="72" loading="lazy"{position}>'
             else:
                 avatar = f'<span class="stu-photo stu-initials" aria-hidden="true">{esc(initials(s["name"]))}</span>'
             name = esc(s["name"])
+            profile = ""
             if s.get("link"):
-                name = f'<a href="{esc(s["link"])}" target="_blank" rel="noopener">{name}</a>'
-            items.append(f'<li class="stu-card">{avatar}<span class="stu-name">{name}</span></li>')
+                label = esc(f'{s["name"]}: profile (opens in a new tab)')
+                profile = (
+                    f'<a class="stu-profile" href="{esc(s["link"])}" target="_blank" rel="noopener" '
+                    f'aria-label="{label}" title="{label}">'
+                    '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" '
+                    'stroke="currentColor" stroke-width="1.6" stroke-linecap="round" '
+                    'aria-hidden="true" focusable="false">'
+                    '<circle cx="12" cy="12" r="9"/>'
+                    '<ellipse cx="12" cy="12" rx="4" ry="9"/>'
+                    '<path d="M3 12h18"/></svg></a>'
+                )
+            items.append(f'<li class="stu-card">{avatar}<span class="stu-name">{name}</span>{profile}</li>')
         cards = f'<ul class="students-grid">{chr(10).join(items)}</ul>'
     return f"""<section class="section" id="students">
   <div class="wrap">
