@@ -4,7 +4,7 @@
 ## *Hardware for AI ⇄ AI for Hardware*
 
 **Columbia University | Department of Computer Science**  
-Instructor: Prof. Zishen Wan · Fridays 10:10 AM - 12:00 PM · 602 Northwest Corner  
+Instructor: Prof. Zishen Wan · Fridays 10:10 AM - 12:00 PM · MUDD Building 825  
 Generated from the canonical course website on Thursday, September 24, 2026.
 
 > **Canonical-source notice.** This syllabus is generated from the same source as the course website. The live website and Canvas announcements govern later schedule or logistics updates.
@@ -27,7 +27,7 @@ This advanced graduate lecture-seminar studies the two directions of AI-native c
 | Instructor | Prof. Zishen Wan · [zishen.wan@columbia.edu](mailto:zishen.wan@columbia.edu) · [webpage](https://zishenwan.github.io/) |
 | Teaching assistants | Sergey Sokolovskiy · [ss7299@columbia.edu](mailto:ss7299@columbia.edu)<br>Priyal Agarwal · [pa2746@columbia.edu](mailto:pa2746@columbia.edu) |
 | Meeting | Fridays 10:10 AM - 12:00 PM |
-| Location | 602 Northwest Corner |
+| Location | MUDD Building 825 |
 | Office hours | Wednesdays 5-6 PM, CSB 522 |
 | Enrollment | Cap 30 |
 | Course platform | [Canvas](https://courseworks2.columbia.edu/courses/sis_course_id:COMSE6998_020_2026_3) |

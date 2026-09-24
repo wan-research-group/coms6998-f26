@@ -2,10 +2,14 @@
 # Keep each item short; the homepage displays the latest three.
 
 announcements:
+  - date: 2026-09-24
+    title: "Classroom update"
+    body: "Our classroom is now MUDD Building 825 (to accommodate more students). We still meet Fridays, 10:10 AM-12:00 PM."
+
   - date: 2026-08-31
     title: "Course website is live"
     body: "The complete schedule and reading list are now available. Material updates will also be announced in CourseWorks."
 
   - date: 2026-08-31
     title: "First meeting"
-    body: "We meet Friday, September 11, 10:10 AM-12:00 PM in 602 Northwest Corner."
+    body: "Our first meeting is Friday, September 11, 10:10 AM-12:00 PM."
