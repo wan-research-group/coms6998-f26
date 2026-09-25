@@ -11,6 +11,7 @@ Deps:   pyyaml
 from __future__ import annotations
 
 import datetime as dt
+import hashlib
 import html
 import os
 import pathlib
@@ -22,6 +23,7 @@ import yaml
 
 ROOT = pathlib.Path(__file__).resolve().parent
 OUT = ROOT / "_site"
+STYLE_VERSION = hashlib.sha256((ROOT / "assets/style.css").read_bytes()).hexdigest()[:12]
 
 def public_site_url() -> str:
     """Resolve the public origin without hard-coding a repository name.
@@ -281,7 +283,7 @@ def page(*, title: str, description: str, body: str, path: str) -> str:
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400..600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/style.css?v={STYLE_VERSION}">
   <script>
     (function () {{
       var t = null;
@@ -1161,7 +1163,20 @@ def students_body() -> str:
                     '<ellipse cx="12" cy="12" rx="4" ry="9"/>'
                     '<path d="M3 12h18"/></svg></a>'
                 )
-            items.append(f'<li class="stu-card">{avatar}<span class="stu-name">{name}</span>{profile}</li>')
+            email = ""
+            if s.get("email"):
+                label = esc(f'Email {s["name"]}: {s["email"]}')
+                email = (
+                    f'<a class="stu-email" href="mailto:{esc(s["email"])}" '
+                    f'aria-label="{label}" title="{label}">'
+                    '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" '
+                    'stroke="currentColor" stroke-width="1.6" stroke-linecap="round" '
+                    'stroke-linejoin="round" aria-hidden="true" focusable="false">'
+                    '<rect x="3" y="5" width="18" height="14" rx="2"/>'
+                    '<path d="m3 7 9 6 9-6"/></svg></a>'
+                )
+            contacts = f'<span class="stu-contacts">{email}{profile}</span>' if email or profile else ""
+            items.append(f'<li class="stu-card">{avatar}<span class="stu-name">{name}</span>{contacts}</li>')
         cards = f'<ul class="students-grid">{chr(10).join(items)}</ul>'
     return f"""<section class="section" id="students">
   <div class="wrap">

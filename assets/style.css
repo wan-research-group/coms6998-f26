@@ -471,13 +471,17 @@ time { font-variant-numeric: tabular-nums; }
   color: var(--text); font-weight: 700; font-size: 1.25rem;
 }
 .stu-name { max-width: 100%; overflow-wrap: anywhere; font-weight: 600; font-size: 0.92rem; }
-.stu-profile {
+.stu-contacts {
+  display: flex; flex-flow: row nowrap; align-items: center;
+  justify-content: center; gap: 4px; margin-top: auto;
+}
+.stu-profile, .stu-email {
   display: grid; place-items: center;
-  width: 36px; height: 36px; margin-top: auto;
+  width: 36px; height: 36px; flex: 0 0 36px;
   border-radius: 50%; color: var(--comp-ink); text-decoration: none;
 }
-.stu-profile:hover { color: var(--comp-ink); background: var(--comp-soft); }
-.stu-profile:focus-visible { outline: 2px solid var(--comp); outline-offset: 2px; }
+.stu-profile:hover, .stu-email:hover { color: var(--comp-ink); background: var(--comp-soft); }
+.stu-profile:focus-visible, .stu-email:focus-visible { outline: 2px solid var(--comp); outline-offset: 2px; }
 .roster-empty p { margin: 0; color: var(--muted); }
 
 /* ---------------------------------------------------------------- schedule */

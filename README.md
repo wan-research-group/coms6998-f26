@@ -86,13 +86,17 @@ relative URL such as `assets/readings/openai-jalapeno-hot-chips-2026.pdf`.
 The build copies these assets unchanged into the published site.
 
 **Students page**: add entries to `data/students.yaml` (`name`, optional
-`link` and `photo`; put photo files under `assets/students/`). While the list
+`email`, `link` and `photo`; put photo files under `assets/students/`). While the list
 is empty the page shows a placeholder.
 Use First name + Last name for `name`, sorted by last name and then first name.
 Without `photo`, a circular avatar shows the first and last initials; adding a
 student-provided photo replaces it automatically. The current list contains 35
 enrolled students from the final September 24 roster, with instructor name corrections.
-Do not include student IDs, email addresses, or the source roster PDF in website assets.
+Do not include student IDs or the source roster PDF in website assets.
+At the instructor's request, the 35 course email addresses from the September 24
+roster are included in `email` fields. Each renders as a blue envelope icon with
+a `mailto:` link below the name, beside the profile icon when present.
+These email addresses are publicly accessible when the site is published.
 Use student-submitted display names when available. Photo filenames use
 `Student Name_photo.jpg`, preserving the displayed name's capitalization,
 spaces, and any middle/preferred name (e.g. `Shufeng Chen_photo.jpg`), with
