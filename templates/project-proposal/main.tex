@@ -1,0 +1,96 @@
+% COMS 6998, Fall 2026 -- Project Proposal
+% Adapted from the official ISCA 2026 IEEE template.
+% Overleaf: upload the ZIP, select main.tex, and use pdfLaTeX.
+% Local: latexmk -pdf main.tex
+%
+% Replace the guidance and bracketed fields with your project content.
+% Use the five sections below and retain the supplied formatting.
+% Main content: two pages, including figures, tables, and the team plan.
+% References are excluded from the two pages.
+
+\documentclass[conference,10pt,letterpaper]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{cite}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{flushend}
+\usepackage[hyphens]{url}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\field}[1]{\textit{[#1]}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\title{\field{Project Title: Identify the Problem and Core Idea}}
+\author{\IEEEauthorblockN{\field{Student 1 (UNI)}, \field{Student 2 (UNI)}, \field{Student 3 (UNI)}}
+\IEEEauthorblockA{COMS 6998: AI-Native Computing $\mid$ Fall 2026\\
+Project Proposal $\mid$ Due October 5, 2026, 11:59 PM ET}}
+
+\begin{document}
+\maketitle
+\thispagestyle{plain}
+\pagestyle{plain}
+
+\noindent\textbf{Track / topic:} \field{A: Computing for AI, or B: AI for Computing; project topic.}
+
+\smallskip
+\noindent\textbf{Format.} Write \textbf{two pages}, excluding references.
+Use the five sections below
+and replace the guidance and bracketed fields with your project content.
+
+\section{Problem and Motivation}
+\textbf{Problem.} Describe the problem you want to address in a specific
+workload, application, or computing system.
+
+\textbf{Motivation.} Explain why it's important and how addressing it
+could benefit the target application or system.
+
+\textbf{Research question.} State the main question your project will
+explore and what you aim to achieve.
+
+\section{Related Work}
+Briefly discuss a few relevant papers or systems and explain how your
+project builds on or differs from them. You can highlight an opportunity
+for improvement or a question worth exploring. Use citations such
+as~\cite{dao2022flashattention}; replace this example with your own references.
+
+\section{Proposed Approach}
+Describe your main idea and how you plan to implement it. You can outline
+the key components, the tools or codebases you will use, and the expected
+contribution. A diagram can help explain the approach.
+
+\section{Evaluation Plan}
+Outline how you plan to evaluate your idea. You can mention potential
+workloads or datasets, methods to compare against, and useful metrics
+such as task quality, latency, or cost. An initial plan is sufficient;
+experiment details can be refined as the project develops.
+
+\section{Timeline and Team Responsibilities}
+Use the course dates below to outline your planned work and expected
+deliverables for each stage.
+
+\begin{center}
+\begin{tabularx}{\columnwidth}{@{}P{0.23\columnwidth}Y@{}}
+\toprule
+\textbf{Date} & \textbf{Planned work and deliverables} \\
+\midrule
+Oct 19 & \field{Your plan.} \\
+Nov 2 & \field{Your plan.} \\
+Nov 23 & \field{Your plan.} \\
+Dec 7 & \field{Your plan.} \\
+Dec 18 & \field{Your plan.} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Presentations.} Midterm presentation: Nov~6. Final poster session: Dec~11.
+
+\textbf{Team roles.} Briefly describe the overall division of work within
+your team.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

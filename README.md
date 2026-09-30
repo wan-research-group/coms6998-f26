@@ -53,7 +53,12 @@ course information, then rebuild.
 
 **Milestones**: each entry in `data/schedule.yaml` has a concise `checklist`.
 When a template is ready, add `template_url` to that milestone; its link appears
-in both the project page and syllabus. No placeholder links are shown.
+in both the project page and syllabus. Optional `template_label` and
+`template_preview_url` provide a descriptive download label and a PDF preview.
+No placeholder links are shown.
+The proposal's editable sources are in `templates/project-proposal/`; published
+ZIP and PDF copies are in `assets/templates/`. After editing the sources, rebuild
+both copies and verify that the ZIP matches the source files before publishing.
 The project proposal (P0) and P1-P4 are due on Mondays at 11:59 PM ET;
 presentation materials, P5, and the final submission follow their listed dates.
 Keep milestone dates and the corresponding weekly `deadlines` aligned. The

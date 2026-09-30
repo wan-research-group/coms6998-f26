@@ -34,6 +34,9 @@ milestones:
     id: Proposal
     name: "Project proposal"
     checklist: ["State the research question, closest work, and testable hypothesis.", "Specify baselines, metrics, resource needs, and team responsibilities."]
+    template_url: "assets/templates/coms6998-project-proposal.zip"
+    template_label: "LaTeX template (ZIP)"
+    template_preview_url: "assets/templates/coms6998-project-proposal.pdf"
   - date: 2026-10-19
     id: P1
     name: "Infrastructure & baselines"

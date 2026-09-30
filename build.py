@@ -1038,9 +1038,11 @@ def project_body() -> str:
         milestone_id = f'<span class="tl-id">{esc(m["id"])}</span>' if m["id"] != "Proposal" else ""
         checklist = ''.join(f'<li>{esc(item)}</li>' for item in m["checklist"])
         template = (
-            f'<a class="milestone-template" href="{esc(m["template_url"])}">Template →</a>'
+            f'<a class="milestone-template" href="{esc(m["template_url"])}">{esc(m.get("template_label", "Template"))} →</a>'
             if m.get("template_url") else ""
         )
+        if m.get("template_preview_url"):
+            template += f' · <a class="milestone-template" href="{esc(m["template_preview_url"])}">PDF preview →</a>'
         tl_items.append(
             f"""<li class="tl-item{cls}">
   <span class="tl-dot" aria-hidden="true"></span>
@@ -1360,7 +1362,8 @@ def syllabus_markdown() -> str:
     ])
     lines.extend(
         f"| {fmt_short(item['date'])} | {md_table_cell(item['name'] if item['id'] == 'Proposal' else item['id'] + ' - ' + item['name'])} | {'<br>'.join(md_table_cell(point) for point in item['checklist'])}"
-        + (f"<br>[Template]({item['template_url']})" if item.get('template_url') else "") + " |"
+        + (f"<br>[{md_table_cell(item.get('template_label', 'Template'))}]({item['template_url']})" if item.get('template_url') else "")
+        + (f" · [PDF preview]({item['template_preview_url']})" if item.get('template_preview_url') else "") + " |"
         for item in milestones
     )
     lines.extend([

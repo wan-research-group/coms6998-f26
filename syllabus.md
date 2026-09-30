@@ -125,7 +125,7 @@ The project is the center of the course: a carefully scoped research effort that
 
 | Date | Milestone | Deliverable checklist |
 |---|---|---|
-| Oct 5 | Project proposal | State the research question, closest work, and testable hypothesis.<br>Specify baselines, metrics, resource needs, and team responsibilities. |
+| Oct 5 | Project proposal | State the research question, closest work, and testable hypothesis.<br>Specify baselines, metrics, resource needs, and team responsibilities.<br>[LaTeX template (ZIP)](assets/templates/coms6998-project-proposal.zip) · [PDF preview](assets/templates/coms6998-project-proposal.pdf) |
 | Oct 19 | P1 - Infrastructure & baselines | Share a runnable repository with setup instructions.<br>Report the first baseline measurement and its configuration. |
 | Nov 2 | P2 - Prototype & pilot results | Run a minimal end-to-end prototype.<br>Include one pilot comparison figure and the main remaining risk. |
 | Nov 6 | Midterm - Midterm presentation (in class) | Present the question, approach, baseline, and early evidence.<br>Identify the feedback needed and the next experiments. |
