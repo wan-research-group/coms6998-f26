@@ -103,7 +103,8 @@ spaces, and any middle/preferred name (e.g. `Shufeng Chen_photo.jpg`), with
 web-sized JPEG copies stripped of metadata; keep the supplied originals unchanged.
 An optional `photo_position` (CSS object-position, e.g. `"50% 0%"`) adjusts the
 circular crop without altering the photograph.
-The September 24 profile submissions add 20 photos and profile links for 18 students.
+The September 30 profile-response snapshot includes 24 photos and profile links for 22 students.
+Zihao Fang's additional photo is from the [Wan Lab people page](https://wan-research-group.github.io/people.html), added at the instructor's request (25 photos total).
 Student names are plain text. A supplied `link` appears as a clickable globe
 icon below the name, with a descriptive accessible label. Without a link, no icon is shown.
 Leave students who have not submitted new information unchanged.

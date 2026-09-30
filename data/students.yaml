@@ -9,7 +9,7 @@
 #     photo: "assets/students/jane.jpg"
 #
 # Based on the final September 24, 2026 enrolled roster, with instructor name corrections.
-# Submitted display names, photos, and profile links updated September 24, 2026.
+# Submitted display names, photos, and profile links updated September 30, 2026.
 # Preserve First name + Last name order. Do not add student IDs.
 # Course email addresses from the roster are published at the instructor's request.
 # Add photo only after a student supplies a photo for the course website.
@@ -19,6 +19,8 @@ students:
     email: "da3232@columbia.edu"
   - name: "Charlotte Chen"
     email: "hc3558@columbia.edu"
+    photo: "assets/students/Charlotte Chen_photo.jpg"
+    link: "https://charlottechen2002.com/"
   - name: "Chi-Yu Chen"
     email: "cc5583@columbia.edu"
   - name: "Shufeng Chen"
@@ -43,19 +45,26 @@ students:
     link: "https://www.linkedin.com/in/pingchuan-dong/"
   - name: "Zihao Fang"
     email: "zf2408@columbia.edu"
+    photo: "assets/students/Zihao Fang_photo.jpg"
     link: "https://fzhwenzhou.github.io/"
   - name: "Lene Gabriels"
     email: "lg3511@columbia.edu"
+    photo: "assets/students/Lene Gabriels_photo.jpg"
+    link: "https://be.linkedin.com/in/lene-gabriels-2a4811337"
   - name: "Alexander Gonzalez"
     email: "aag2204@columbia.edu"
   - name: "Vayun Gupta"
     email: "vg2684@columbia.edu"
+    photo: "assets/students/Vayun Gupta_photo.jpg"
+    link: "https://www.linkedin.com/in/vayun-gupta/"
   - name: "Lingyi He"
     email: "lh3435@columbia.edu"
     photo: "assets/students/Lingyi He_photo.jpg"
     link: "https://www.linkedin.com/in/lingyi-he-a558ba433/"
   - name: "Shurui Hu"
     email: "shurui.hu@columbia.edu"
+    photo: "assets/students/Shurui Hu_photo.jpg"
+    link: "https://shuruihu.github.io"
   - name: "Shawn Hans Kathuria"
     email: "shk2199@columbia.edu"
     photo: "assets/students/Shawn Hans Kathuria_photo.jpg"
