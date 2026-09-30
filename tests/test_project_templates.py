@@ -7,6 +7,21 @@ import build
 
 
 class ProjectTemplatesTest(unittest.TestCase):
+    def test_proposal_deadline_label_and_template(self):
+        week = next(w for w in build.weeks if w['week'] == 4)
+        deadline = week['deadlines'][0]
+        self.assertEqual(deadline, 'Oct 5, 11:59 PM - project proposal')
+        url = build.deadline_template_url(week, deadline)
+        proposal = next(m for m in build.milestones if m['id'] == 'Proposal')
+        self.assertEqual(url, proposal['template_url'])
+        for content in (build.deadline_html(week, deadline), build.short_deadlines_html(week), build.now_html()):
+            self.assertNotIn('team charter', content)
+            self.assertIn(f'href="{url}"', content)
+            self.assertIn('LaTeX template (ZIP)', content)
+        self.assertIn('P0 project proposal', build.short_deadlines_html(week))
+        self.assertNotIn('team charter', build.syllabus_markdown())
+        self.assertIn(f'- {deadline} ([LaTeX template (ZIP)]({url}))', build.syllabus_markdown())
+
     def test_proposal_downloads_are_linked_and_present(self):
         proposal = next(m for m in build.milestones if m['id'] == 'Proposal')
         page = build.project_body()

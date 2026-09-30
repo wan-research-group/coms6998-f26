@@ -376,7 +376,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Oct 5, 11:59 PM - project proposal & team charter
+- Oct 5, 11:59 PM - project proposal ([LaTeX template (ZIP)](assets/templates/coms6998-project-proposal.zip))
 
 ### Week 05 · Friday, October 9, 2026
 

@@ -156,7 +156,9 @@ weeks:
       - {title: "Timeloop: A Systematic Approach to DNN Accelerator Evaluation (ISPASS 2019)", url: "https://doi.org/10.1109/ISPASS.2019.00042"}
       - {title: "NVIDIA H100 Tensor Core GPU Architecture (Whitepaper, 2022)", url: null}
       - {title: "NVIDIA Blackwell Architecture Technical Brief (2024)", url: null}
-    deadlines: ["Oct 5, 11:59 PM - project proposal & team charter"]
+    deadlines: ["Oct 5, 11:59 PM - project proposal"]
+    deadline_templates:
+      project proposal: "assets/templates/coms6998-project-proposal.zip"
     glance_deadline: "P0 project proposal"
 
   - week: 5

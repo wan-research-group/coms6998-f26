@@ -427,15 +427,24 @@ def deadline_note(week: dict, deadline: str) -> str:
     return week.get("deadline_notes", {}).get(label, "")
 
 
-def deadline_html(week: dict, deadline: str, *, short: bool = False) -> str:
+def deadline_template_url(week: dict, deadline: str) -> str | None:
+    label = deadline.split(" - ", 1)[-1].strip()
+    return week.get("deadline_templates", {}).get(label)
+
+
+def deadline_html(week: dict, deadline: str, *, short: bool = False, display_label: str | None = None) -> str:
     label = deadline.split(" - ", 1)[-1].strip()
     prefix = deadline.split(" - ", 1)[0] + " - " if " - " in deadline and not short else ""
     url = deadline_url(week, deadline)
     note = deadline_note(week, deadline)
+    label = display_label or label
     if url:
         content = f'{esc(prefix)}<a href="{esc(url)}" target="_blank" rel="noopener">{esc(label)}</a>'
     else:
-        content = esc(label if short else deadline)
+        content = esc(prefix + label)
+    template_url = deadline_template_url(week, deadline)
+    if template_url:
+        content += f' (<a href="{esc(template_url)}">LaTeX template (ZIP)</a>)'
     if note:
         content += f' <span class="deadline-note">{esc(note)}</span>'
     return content
@@ -608,7 +617,7 @@ def short_deadlines_html(w: dict) -> str:
     """Keep labels concise, but show the due date when it differs from the class date."""
     deadlines = w.get("deadlines", [])
     if w.get("glance_deadline"):
-        labels = [esc(w["glance_deadline"])]
+        labels = [deadline_html(w, deadlines[0], short=True, display_label=w["glance_deadline"])] if deadlines else [esc(w["glance_deadline"])]
     else:
         labels = [deadline_html(w, d, short=True) for d in deadlines]
     for i, label in enumerate(labels):
@@ -1467,6 +1476,9 @@ def syllabus_markdown() -> str:
                     label = prefix + md_link(parts[-1].strip(), url)
                 else:
                     label = deadline
+                template_url = deadline_template_url(week, deadline)
+                if template_url:
+                    label += f" ({md_link('LaTeX template (ZIP)', template_url)})"
                 lines.append(f"- {label}" + (f" — {note}" if note else ""))
         lines.append("")
 
