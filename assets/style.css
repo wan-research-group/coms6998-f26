@@ -407,6 +407,8 @@ time { font-variant-numeric: tabular-nums; }
 .glance-table .g-dl { color: var(--amber-ink); font-size: 0.85rem; width: 32%; }
 .glance-readings { margin: 7px 0 2px; font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
 .glance-label { font-weight: 600; }
+.glance-reading { display: block; margin-top: 3px; }
+.glance-presenters { font-size: 0.8rem; }
 .glance-due { font-weight: 650; }
 .glance-deadline-time { display: block; margin-top: 3px; font-weight: 500; letter-spacing: 0; text-transform: none; }
 .glance-time-mobile { display: none; }
@@ -664,6 +666,8 @@ time { font-variant-numeric: tabular-nums; }
 .p-extra { font-size: 0.8rem; font-weight: 600; margin-left: 8px; white-space: nowrap; }
 .p-extra::before { content: "↗ "; font-size: 0.75em; }
 .focus { display: block; font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+.paper-presentation { margin: 6px 0 0; font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; }
+.paper-presentation a { font-weight: 600; }
 
 .optional { margin-top: 10px; }
 .optional summary {

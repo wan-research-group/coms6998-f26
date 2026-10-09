@@ -653,15 +653,25 @@ def glance_html() -> str:
         )
         required = w.get("papers") or w.get("background") or []
         reading_links = []
+        has_presentations = any(p.get("presentation_slides") for p in required)
         for paper in required:
             short = esc(paper.get("short_title", paper["title"]))
-            reading_links.append(
+            reading_link = (
                 f'<a href="{esc(paper["url"])}" title="{esc(paper["title"])}" target="_blank" rel="noopener">{short}</a>'
                 if paper.get("url") else short
             )
+            if paper.get("presentation_slides"):
+                names = esc(", ".join(paper["presenters"]))
+                reading_link += (
+                    f'<span class="glance-presenters">: {names} · '
+                    f'<a href="{esc(paper["presentation_slides"])}" '
+                    f'aria-label="{esc(paper["title"])}: presentation slides (PPTX) by {names}">'
+                    'Slides (PPTX)</a></span>'
+                )
+            reading_links.append(f'<span class="glance-reading">{reading_link}</span>' if has_presentations else reading_link)
         reading_note = (
             '<p class="glance-readings"><span class="glance-label">Required reading:</span> '
-            + ' · '.join(reading_links) + '</p>'
+            + (''.join(reading_links) if has_presentations else ' · '.join(reading_links)) + '</p>'
             if required else '<p class="glance-readings">No assigned readings.</p>'
         )
         if w.get("optional"):
@@ -718,7 +728,17 @@ def paper_li(p: dict, kind: str) -> str:
         extras.append(f'<a class="p-extra" href="{esc(p["extra_link"])}" target="_blank" rel="noopener">{esc(p.get("extra_label", "project site"))}</a>')
     bits.extend(extras)
     focus = f'<span class="focus">{esc(p["focus"])}</span>' if p.get("focus") else ""
-    return f'<li class="{kind}"><div class="p-head">{" ".join(bits)}</div>{focus}</li>'
+    presentation = ""
+    if p.get("presentation_slides"):
+        names = esc(", ".join(p["presenters"]))
+        presenter_label = "Presenter" if len(p["presenters"]) == 1 else "Presenters"
+        presentation = (
+            f'<p class="paper-presentation"><span>{presenter_label}: {names}</span> · '
+            f'<a href="{esc(p["presentation_slides"])}" '
+            f'aria-label="{esc(p["title"])}: presentation slides (PPTX) by {names}">'
+            'Presentation slides (PPTX)</a></p>'
+        )
+    return f'<li class="{kind}"><div class="p-head">{" ".join(bits)}</div>{focus}{presentation}</li>'
 
 
 def optional_entry(o) -> str:
@@ -1456,6 +1476,9 @@ def syllabus_markdown() -> str:
                 if paper.get("extra_link"):
                     detail += f"; [{paper.get('extra_label', 'project site')}]({paper['extra_link']})"
                 lines.append(f"- {md_link(paper['title'], paper.get('url'))}{detail}")
+                if paper.get("presentation_slides"):
+                    names = ", ".join(paper["presenters"])
+                    lines.append(f"  - Presenters: {names}; {md_link('Presentation slides (PPTX)', paper['presentation_slides'])}")
         if week.get("optional"):
             optional_links = []
             for item in week["optional"]:

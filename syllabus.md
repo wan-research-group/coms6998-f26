@@ -5,7 +5,7 @@
 
 **Columbia University | Department of Computer Science**  
 Instructor: Prof. Zishen Wan · Fridays 10:10 AM - 12:00 PM · MUDD Building 825  
-Generated from the canonical course website on Wednesday, September 30, 2026.
+Generated from the canonical course website on Thursday, October 8, 2026.
 
 > **Canonical-source notice.** This syllabus is generated from the same source as the course website. The live website and Canvas announcements govern later schedule or logistics updates.
 
@@ -329,7 +329,9 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Student-led papers**
 
 - [Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180) - SOSP 2023; focus: KV-cache virtualization, fragmentation, batching, vLLM
+  - Presenters: Aaron Cherian; [Presentation slides (PPTX)](assets/slides/students/week03-pagedattention-aaron-cherian.pptx)
 - [SGLang: Efficient Execution of Structured Language Model Programs](https://arxiv.org/abs/2312.07104) - NeurIPS 2024; focus: RadixAttention, KV reuse across program structure
+  - Presenters: Gavin Zou, Pingchuan Dong; [Presentation slides (PPTX)](assets/slides/students/week03-sglang-gavin-zou-pingchuan-dong.pptx)
 
 **Optional readings**
 
@@ -357,11 +359,14 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Research question of the week:** When does specialization create a lasting advantage, and when does it bind a system too closely to today's workloads?
 
 - **Guest lecture:** [Prof. Tushar Krishna](https://tusharkrishna.ece.gatech.edu/) (Georgia Tech).
+- **Lecture slides:** [Week 4 slides (PDF)](assets/slides/AI-Accelerators_Columbia-GuestLecture_TusharKrishna.pdf)
 
 **Student-led papers**
 
 - [In-Datacenter Performance Analysis of a Tensor Processing Unit](https://doi.org/10.1145/3079856.3080246) - ISCA 2017; focus: read as a ten-year retrospective
+  - Presenters: Lizhong Wang, Jiangrui Xu; [Presentation slides (PPTX)](assets/slides/students/week04-tpu-lizhong-wang-jiangrui-xu.pptx)
 - [Open AI Jalapeño Chip](assets/readings/openai-jalapeno-hot-chips-2026.pdf) - Hot Chips 2026 slides; focus: inference-driven ASIC and system co-design; [OpenAI blog](https://openai.com/index/jalapeno-first-results/)
+  - Presenters: Shen Li, Yichen Xu; [Presentation slides (PPTX)](assets/slides/students/week04-jalapeno-shen-li-yichen-xu.pptx)
 
 **Optional readings**
 
@@ -389,6 +394,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Student-led papers**
 
 - [Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots](https://arxiv.org/abs/2607.02501) - arXiv 2026; focus: deployable embodied-AI runtime across heterogeneous robots
+  - Presenters: Ryan Ma, George Wang; [Presentation slides (PPTX)](assets/slides/students/week05-embodied-cpp-ryan-ma-george-wang.pptx)
 - [How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf](https://arxiv.org/abs/2602.18397) - arXiv 2026; focus: analytical performance model; device/edge/cloud placement
 
 **Optional readings**

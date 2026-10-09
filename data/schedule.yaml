@@ -120,8 +120,8 @@ weeks:
     guest: {label: "Guest Speaker", name: "Prof. Jovan Stojkovic", affiliation: "UT Austin", url: "https://jovans2.github.io/"}
     case_study: "DyServe - a workflow-aware serving layer (instructor's work)"
     papers:
-      - {short_title: "PagedAttention", title: "Efficient Memory Management for Large Language Model Serving with PagedAttention", venue: "SOSP 2023", url: "https://arxiv.org/abs/2309.06180", focus: "KV-cache virtualization, fragmentation, batching, vLLM"}
-      - {short_title: "SGLang", title: "SGLang: Efficient Execution of Structured Language Model Programs", venue: "NeurIPS 2024", url: "https://arxiv.org/abs/2312.07104", focus: "RadixAttention, KV reuse across program structure"}
+      - {short_title: "PagedAttention", title: "Efficient Memory Management for Large Language Model Serving with PagedAttention", venue: "SOSP 2023", url: "https://arxiv.org/abs/2309.06180", focus: "KV-cache virtualization, fragmentation, batching, vLLM", presenters: ["Aaron Cherian"], presentation_slides: "assets/slides/students/week03-pagedattention-aaron-cherian.pptx"}
+      - {short_title: "SGLang", title: "SGLang: Efficient Execution of Structured Language Model Programs", venue: "NeurIPS 2024", url: "https://arxiv.org/abs/2312.07104", focus: "RadixAttention, KV reuse across program structure", presenters: ["Gavin Zou", "Pingchuan Dong"], presentation_slides: "assets/slides/students/week03-sglang-gavin-zou-pingchuan-dong.pptx"}
     optional:
       - {title: "Architectural Implications of Agentic AI Workflows (arXiv 2026)", url: "https://arxiv.org/abs/2608.04458"}
       - {title: "DynamoLLM: Designing LLM Inference Clusters for Performance and Energy Efficiency (HPCA 2025)", url: "https://arxiv.org/abs/2408.00741"}
@@ -144,9 +144,10 @@ weeks:
     research_question: "When does specialization create a lasting advantage, and when does it bind a system too closely to today's workloads?"
     type: seminar
     guest: {label: "Guest Speaker", name: "Prof. Tushar Krishna", affiliation: "Georgia Tech", url: "https://tusharkrishna.ece.gatech.edu/"}
+    slides: "assets/slides/AI-Accelerators_Columbia-GuestLecture_TusharKrishna.pdf"
     papers:
-      - {short_title: "TPU", title: "In-Datacenter Performance Analysis of a Tensor Processing Unit", venue: "ISCA 2017", url: "https://doi.org/10.1145/3079856.3080246", focus: "read as a ten-year retrospective"}
-      - {title: "Open AI Jalapeño Chip", short_title: "Open AI Jalapeño Chip", venue: "Hot Chips 2026 slides", url: "assets/readings/openai-jalapeno-hot-chips-2026.pdf", focus: "inference-driven ASIC and system co-design", extra_link: "https://openai.com/index/jalapeno-first-results/", extra_label: "OpenAI blog"}
+      - {short_title: "TPU", title: "In-Datacenter Performance Analysis of a Tensor Processing Unit", venue: "ISCA 2017", url: "https://doi.org/10.1145/3079856.3080246", focus: "read as a ten-year retrospective", presenters: ["Lizhong Wang", "Jiangrui Xu"], presentation_slides: "assets/slides/students/week04-tpu-lizhong-wang-jiangrui-xu.pptx"}
+      - {title: "Open AI Jalapeño Chip", short_title: "Open AI Jalapeño Chip", venue: "Hot Chips 2026 slides", url: "assets/readings/openai-jalapeno-hot-chips-2026.pdf", focus: "inference-driven ASIC and system co-design", extra_link: "https://openai.com/index/jalapeno-first-results/", extra_label: "OpenAI blog", presenters: ["Shen Li", "Yichen Xu"], presentation_slides: "assets/slides/students/week04-jalapeno-shen-li-yichen-xu.pptx"}
     optional:
       - {short_title: "Open ESP", title: "Agile SoC Development with Open ESP (ICCAD 2020)", venue: "ICCAD 2020", url: "https://arxiv.org/abs/2009.01178", focus: "Columbia's open-source heterogeneous SoC platform; available for course projects", extra_link: "https://www.esp.cs.columbia.edu/"}
       - {title: "Gemmini: Enabling Systematic Deep-Learning Architecture Evaluation via Full-Stack Integration (DAC 2021)", url: "https://arxiv.org/abs/1911.09925"}
@@ -169,7 +170,7 @@ weeks:
     type: seminar
     guest: {label: "Guest Speaker", name: "Prof. Yilun Du", affiliation: "Harvard", url: "https://yilundu.github.io/"}
     papers:
-      - {short_title: "Embodied.cpp", title: "Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots", venue: "arXiv 2026", url: "https://arxiv.org/abs/2607.02501", focus: "deployable embodied-AI runtime across heterogeneous robots"}
+      - {short_title: "Embodied.cpp", title: "Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots", venue: "arXiv 2026", url: "https://arxiv.org/abs/2607.02501", focus: "deployable embodied-AI runtime across heterogeneous robots", presenters: ["Ryan Ma", "George Wang"], presentation_slides: "assets/slides/students/week05-embodied-cpp-ryan-ma-george-wang.pptx"}
       - {short_title: "VLA-Perf", title: "How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf", venue: "arXiv 2026", url: "https://arxiv.org/abs/2602.18397", focus: "analytical performance model; device/edge/cloud placement"}
     optional:
       - {title: "VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference (arXiv 2025)", url: "https://arxiv.org/abs/2512.01031"}
