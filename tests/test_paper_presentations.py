@@ -10,7 +10,7 @@ import build
 class PaperPresentationsTest(unittest.TestCase):
     def test_homepage_presentations_match_each_paper_and_week(self):
         glance = build.glance_html()
-        self.assertEqual(glance.count('class="glance-presenters"'), 5)
+        self.assertEqual(glance.count('class="glance-presenters"'), 6)
         for week in build.weeks:
             for paper in week.get('papers', []):
                 if not paper.get('presentation_slides'):
@@ -55,8 +55,23 @@ class PaperPresentationsTest(unittest.TestCase):
     def test_unsubmitted_papers_have_no_placeholder(self):
         for week in build.weeks:
             for paper in week.get('papers', []):
-                if not paper.get('presentation_slides'):
+                if not paper.get('presenters'):
                     self.assertNotIn('paper-presentation', build.paper_li(paper, 'req'))
+
+    def test_presenters_without_slides(self):
+        paper = next(p for w in build.weeks for p in w.get('papers', [])
+                     if p.get('short_title') == 'VLA-Perf')
+        self.assertEqual(paper['presenters'], ['Shiyao Marcus Lam', 'Pulak Mehrotra'])
+        self.assertNotIn('presentation_slides', paper)
+        item = build.paper_li(paper, 'req')
+        self.assertIn('Presenters: Shiyao Marcus Lam, Pulak Mehrotra', item)
+        self.assertNotIn('Presentation slides', item)
+        glance = build.glance_html()
+        line = next(line for line in re.findall(r'<span class="glance-reading">.*?</span></span>', glance)
+                    if 'VLA-Perf' in line)
+        self.assertIn('Shiyao Marcus Lam, Pulak Mehrotra', line)
+        self.assertNotIn('Slides (PPTX)', line)
+        self.assertIn('Presenters: Shiyao Marcus Lam, Pulak Mehrotra', build.syllabus_markdown())
 
 
 if __name__ == '__main__':

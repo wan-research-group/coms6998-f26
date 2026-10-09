@@ -171,7 +171,7 @@ weeks:
     guest: {label: "Guest Speaker", name: "Prof. Yilun Du", affiliation: "Harvard", url: "https://yilundu.github.io/"}
     papers:
       - {short_title: "Embodied.cpp", title: "Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots", venue: "arXiv 2026", url: "https://arxiv.org/abs/2607.02501", focus: "deployable embodied-AI runtime across heterogeneous robots", presenters: ["Ryan Ma", "George Wang"], presentation_slides: "assets/slides/students/week05-embodied-cpp-ryan-ma-george-wang.pptx"}
-      - {short_title: "VLA-Perf", title: "How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf", venue: "arXiv 2026", url: "https://arxiv.org/abs/2602.18397", focus: "analytical performance model; device/edge/cloud placement"}
+      - {short_title: "VLA-Perf", title: "How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf", venue: "arXiv 2026", url: "https://arxiv.org/abs/2602.18397", focus: "analytical performance model; device/edge/cloud placement", presenters: ["Shiyao Marcus Lam", "Pulak Mehrotra"]}
     optional:
       - {title: "VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference (arXiv 2025)", url: "https://arxiv.org/abs/2512.01031"}
       - {title: "π0: A Vision-Language-Action Flow Model for General Robot Control (RSS 2025)", url: "https://arxiv.org/abs/2410.24164"}

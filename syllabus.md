@@ -396,6 +396,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 - [Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots](https://arxiv.org/abs/2607.02501) - arXiv 2026; focus: deployable embodied-AI runtime across heterogeneous robots
   - Presenters: Ryan Ma, George Wang; [Presentation slides (PPTX)](assets/slides/students/week05-embodied-cpp-ryan-ma-george-wang.pptx)
 - [How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf](https://arxiv.org/abs/2602.18397) - arXiv 2026; focus: analytical performance model; device/edge/cloud placement
+  - Presenters: Shiyao Marcus Lam, Pulak Mehrotra
 
 **Optional readings**
 
