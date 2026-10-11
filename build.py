@@ -630,6 +630,10 @@ def short_deadlines_html(w: dict) -> str:
     return "<br>".join(labels)
 
 
+def presentation_format(paper) -> str:
+    return pathlib.Path(paper["presentation_slides"]).suffix.lstrip(".").upper()
+
+
 def glance_html() -> str:
     rows, holidays, hi = [], sorted(no_class, key=lambda r: r["date"]), 0
     seen_dividers = set()
@@ -666,8 +670,8 @@ def glance_html() -> str:
                 if paper.get("presentation_slides"):
                     reading_link += (
                         f' · <a href="{esc(paper["presentation_slides"])}" '
-                        f'aria-label="{esc(paper["title"])}: presentation slides (PPTX) by {names}">'
-                        'Slides (PPTX)</a>'
+                        f'aria-label="{esc(paper["title"])}: presentation slides ({presentation_format(paper)}) by {names}">'
+                        f'Slides ({presentation_format(paper)})</a>'
                     )
                 reading_link += '</span>'
             reading_links.append(f'<span class="glance-reading">{reading_link}</span>' if has_presentations else reading_link)
@@ -738,8 +742,8 @@ def paper_li(p: dict, kind: str) -> str:
         if p.get("presentation_slides"):
             presentation += (
                 f' · <a href="{esc(p["presentation_slides"])}" '
-                f'aria-label="{esc(p["title"])}: presentation slides (PPTX) by {names}">'
-                'Presentation slides (PPTX)</a>'
+                f'aria-label="{esc(p["title"])}: presentation slides ({presentation_format(p)}) by {names}">'
+                f'Presentation slides ({presentation_format(p)})</a>'
             )
         presentation += '</p>'
     return f'<li class="{kind}"><div class="p-head">{" ".join(bits)}</div>{focus}{presentation}</li>'
@@ -1484,7 +1488,8 @@ def syllabus_markdown() -> str:
                     names = ", ".join(paper["presenters"])
                     presentation = f"  - Presenters: {names}"
                     if paper.get("presentation_slides"):
-                        presentation += f"; {md_link('Presentation slides (PPTX)', paper['presentation_slides'])}"
+                        label = f"Presentation slides ({presentation_format(paper)})"
+                        presentation += f"; {md_link(label, paper['presentation_slides'])}"
                     lines.append(presentation)
         if week.get("optional"):
             optional_links = []

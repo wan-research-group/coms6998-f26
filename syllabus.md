@@ -5,7 +5,7 @@
 
 **Columbia University | Department of Computer Science**  
 Instructor: Prof. Zishen Wan · Fridays 10:10 AM - 12:00 PM · MUDD Building 825  
-Generated from the canonical course website on Thursday, October 8, 2026.
+Generated from the canonical course website on Sunday, October 11, 2026.
 
 > **Canonical-source notice.** This syllabus is generated from the same source as the course website. The live website and Canvas announcements govern later schedule or logistics updates.
 
@@ -324,6 +324,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Research question of the week:** What is the right unit of optimization when an AI application is a workflow rather than a single model?
 
 - **Guest lecture:** [Prof. Jovan Stojkovic](https://jovans2.github.io/) (UT Austin).
+- **Lecture slides:** [Week 3 slides (PDF)](assets/slides/week03-guest-jovan-stojkovic.pdf)
 - **Mini-lecture case study:** DyServe - a workflow-aware serving layer (instructor's work).
 
 **Student-led papers**
@@ -359,7 +360,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Research question of the week:** When does specialization create a lasting advantage, and when does it bind a system too closely to today's workloads?
 
 - **Guest lecture:** [Prof. Tushar Krishna](https://tusharkrishna.ece.gatech.edu/) (Georgia Tech).
-- **Lecture slides:** [Week 4 slides (PDF)](assets/slides/AI-Accelerators_Columbia-GuestLecture_TusharKrishna.pdf)
+- **Lecture slides:** [Week 4 slides (PDF)](assets/slides/week04-guest-tushar-krishna.pdf)
 
 **Student-led papers**
 
@@ -396,7 +397,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 - [Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots](https://arxiv.org/abs/2607.02501) - arXiv 2026; focus: deployable embodied-AI runtime across heterogeneous robots
   - Presenters: Ryan Ma, George Wang; [Presentation slides (PPTX)](assets/slides/students/week05-embodied-cpp-ryan-ma-george-wang.pptx)
 - [How Fast Can I Run My VLA? Demystifying VLA Inference Performance with VLA-Perf](https://arxiv.org/abs/2602.18397) - arXiv 2026; focus: analytical performance model; device/edge/cloud placement
-  - Presenters: Shiyao Marcus Lam, Pulak Mehrotra
+  - Presenters: Shiyao Marcus Lam, Pulak Mehrotra; [Presentation slides (PDF)](assets/slides/students/week05-vla-perf-shiyao-marcus-lam-pulak-mehrotra.pdf)
 
 **Optional readings**
 

@@ -3,6 +3,7 @@ import unittest
 import re
 from pathlib import Path
 from zipfile import ZipFile
+from unittest.mock import patch
 
 import build
 
@@ -31,6 +32,7 @@ class PaperPresentationsTest(unittest.TestCase):
             (4, 'TPU'): ['Lizhong Wang', 'Jiangrui Xu'],
             (4, 'Open AI Jalapeño Chip'): ['Shen Li', 'Yichen Xu'],
             (5, 'Embodied.cpp'): ['Ryan Ma', 'George Wang'],
+            (5, 'VLA-Perf'): ['Shiyao Marcus Lam', 'Pulak Mehrotra'],
         }
         roster = {s['name'] for s in build.students}
         found = {}
@@ -39,13 +41,19 @@ class PaperPresentationsTest(unittest.TestCase):
                 if not paper.get('presentation_slides'):
                     continue
                 found[week['week'], paper['short_title']] = paper['presenters']
-                self.assertTrue(set(paper['presenters']) <= roster)
+                roster_names = {'Shiyao Marcus Lam': 'Marcus Lam'}
+                self.assertTrue({roster_names.get(name, name) for name in paper['presenters']} <= roster)
                 path = Path(paper['presentation_slides'])
                 self.assertEqual(path.parent.as_posix(), 'assets/slides/students')
                 self.assertNotRegex(path.name, r'LATE|\d{6,}')
-                with ZipFile(build.ROOT / path) as deck:
-                    self.assertIsNone(deck.testzip())
+                if path.suffix == '.pptx':
+                    with ZipFile(build.ROOT / path) as deck:
+                        self.assertIsNone(deck.testzip())
+                else:
+                    self.assertEqual(path.suffix, '.pdf')
+                    self.assertTrue((build.ROOT / path).read_bytes().startswith(b'%PDF-'))
                 item = build.paper_li(paper, 'req')
+                self.assertIn(f'Presentation slides ({path.suffix[1:].upper()})', item)
                 self.assertIn(f'href="{path.as_posix()}"', item)
                 for name in paper['presenters']:
                     self.assertIn(name, item)
@@ -61,17 +69,31 @@ class PaperPresentationsTest(unittest.TestCase):
     def test_presenters_without_slides(self):
         paper = next(p for w in build.weeks for p in w.get('papers', [])
                      if p.get('short_title') == 'VLA-Perf')
+        paper = dict(paper)
+        paper.pop('presentation_slides')
         self.assertEqual(paper['presenters'], ['Shiyao Marcus Lam', 'Pulak Mehrotra'])
         self.assertNotIn('presentation_slides', paper)
         item = build.paper_li(paper, 'req')
         self.assertIn('Presenters: Shiyao Marcus Lam, Pulak Mehrotra', item)
         self.assertNotIn('Presentation slides', item)
-        glance = build.glance_html()
+        week = next(w for w in build.weeks if w['week'] == 5)
+        with patch.object(build, 'weeks', [dict(week, papers=[paper])]):
+            glance = build.glance_html()
         line = next(line for line in re.findall(r'<span class="glance-reading">.*?</span></span>', glance)
                     if 'VLA-Perf' in line)
         self.assertIn('Shiyao Marcus Lam, Pulak Mehrotra', line)
         self.assertNotIn('Slides (PPTX)', line)
         self.assertIn('Presenters: Shiyao Marcus Lam, Pulak Mehrotra', build.syllabus_markdown())
+
+    def test_vla_perf_pdf_labels(self):
+        paper = next(p for w in build.weeks for p in w.get('papers', [])
+                     if p.get('short_title') == 'VLA-Perf')
+        self.assertEqual(build.presentation_format(paper), 'PDF')
+        line = next(line for line in re.findall(r'<span class="glance-reading">.*?</span></span>', build.glance_html())
+                    if 'VLA-Perf' in line)
+        self.assertIn('Slides (PDF)', line)
+        self.assertNotIn('PPTX', line)
+        self.assertIn(f"[Presentation slides (PDF)]({paper['presentation_slides']})", build.syllabus_markdown())
 
 
 if __name__ == '__main__':
