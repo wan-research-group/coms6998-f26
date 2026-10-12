@@ -391,6 +391,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Research question of the week:** How should computation be organized when the value of a prediction depends on when an action is taken?
 
 - **Guest lecture:** [Prof. Yilun Du](https://yilundu.github.io/) (Harvard).
+- **Lecture slides:** [Week 5 slides (PDF)](assets/slides/week05-guest-yilun-du.pdf)
 
 **Student-led papers**
 
