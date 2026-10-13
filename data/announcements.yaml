@@ -2,6 +2,12 @@
 # Keep each item short; the homepage displays the latest three.
 
 announcements:
+  - date: 2026-10-12
+    title: "Project office hours"
+    body: 'Discuss your project proposal, current progress, and next steps, and get feedback on any questions or challenges. Oct 14, 4-6 PM; Oct 15, 11 AM-12 PM & 3-5 PM (ET). CSB 522.'
+    link_url: "https://docs.google.com/spreadsheets/d/1Onq9G_wzRuuEnGHdQXAT3Vg-At6H93aN8mkit25Xwoo/edit?gid=0#gid=0"
+    link_label: "Sign up"
+
   - date: 2026-09-24
     title: "Classroom update"
     body: "Our classroom is now MUDD Building 825 (to accommodate more students). We still meet Fridays, 10:10 AM-12:00 PM."

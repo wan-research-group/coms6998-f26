@@ -545,13 +545,18 @@ def now_html() -> str:
     if not deadline_items:
         deadline_items.append('<p class="now-empty">No upcoming deadlines.</p>')
 
-    news_items = "\n".join(
-        f"""<li>
+    news_items = []
+    for item in announcements[:3]:
+        signup_link = (
+            f' <a href="{esc(item["link_url"])}" target="_blank" rel="noopener">'
+            f'{esc(item.get("link_label", "Details"))}</a>'
+            if item.get("link_url") else ""
+        )
+        news_items.append(f"""<li>
   <time datetime="{item['date'].isoformat()}">{esc(fmt_short(item['date']))}</time>
-  <div><strong>{esc(item['title'])}</strong><p>{esc(item['body'])}</p></div>
-</li>"""
-        for item in announcements[:3]
-    )
+  <div><strong>{esc(item['title'])}</strong><p>{esc(item['body'])}{signup_link}</p></div>
+</li>""")
+    news_items = "\n".join(news_items)
 
     return f"""<section class="now-section" id="now" aria-labelledby="now-h">
   <div class="wrap">
