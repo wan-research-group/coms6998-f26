@@ -57,11 +57,16 @@ When a template is ready, add `template_url` to that milestone; its link appears
 in both the project page and syllabus. Optional `template_label` and
 `template_preview_url` provide a descriptive download label and a PDF preview.
 No placeholder links are shown.
-The proposal's editable sources are in `templates/project-proposal/`; published
-ZIP and PDF copies are in `assets/templates/`. After editing the sources, rebuild
-both copies and verify that the ZIP matches the source files before publishing.
+Editable sources are in `templates/project-proposal/` and `templates/project-p1/`;
+published ZIP and PDF copies are in `assets/templates/`. After editing the sources,
+rebuild both copies and verify that the ZIP matches the source files before publishing.
+P1-P4 require two-page progress reports, including figures and tables and excluding
+references. P1 focuses on exploration, project updates, and implementation progress.
+Organized code and reproduction instructions are submitted with the final report.
 The project proposal (P0) and P1-P4 are due on Mondays at 11:59 PM ET;
-presentation materials, P5, and the final submission follow their listed dates.
+presentation materials and the final submission follow their listed dates.
+The December 11 class is the final poster presentation; the final paper and
+artifact are due December 18.
 Keep milestone dates and the corresponding weekly `deadlines` aligned. The
 home-page table explicitly shows due dates that differ from the Friday class date.
 

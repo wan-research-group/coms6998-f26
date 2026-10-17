@@ -24,7 +24,7 @@ grading:
   - {component: "Paper presentation & discussion leadership", weight: 15}
   - {component: "Engagement & participation", weight: 10}
   - {component: "Project proposal", weight: 10}
-  - {component: "Project check-ins P1-P5 (completion-based)", weight: 15}
+  - {component: "Project check-ins P1-P4 (completion-based)", weight: 15}
   - {component: "Midterm presentation", weight: 10}
   - {component: "Final poster", weight: 10}
   - {component: "Final paper & artifact", weight: 30}
@@ -39,8 +39,11 @@ milestones:
     template_preview_url: "assets/templates/coms6998-project-proposal.pdf"
   - date: 2026-10-26
     id: P1
-    name: "Infrastructure & baselines"
-    checklist: ["Share a runnable repository with setup instructions.", "Report the first baseline measurement and its configuration."]
+    name: "Exploration & progress"
+    checklist: ["Submit a two-page PDF report, including figures and tables and excluding references.", "State your project goal and research problem, why it is important and challenging, and any updates since the proposal.", "Summarize your exploration, key findings, implementation and infrastructure progress, and next steps for the midterm and Milestone 2."]
+    template_url: "assets/templates/coms6998-project-p1.zip"
+    template_label: "LaTeX template (ZIP)"
+    template_preview_url: "assets/templates/coms6998-project-p1.pdf"
   - date: 2026-11-06
     id: Midterm
     name: "Midterm presentation (in class)"
@@ -58,13 +61,13 @@ milestones:
     name: "Main results & ablations"
     checklist: ["Submit main results, an ablation, and a failure or boundary case.", "Include repeated measurements or uncertainty where relevant."]
   - date: 2026-12-11
-    id: P5
-    name: "Complete draft, artifact & poster; final poster session (in class)"
-    checklist: ["Submit a complete paper draft and a runnable artifact.", "Upload the poster by Dec 10 and present it in class on Dec 11."]
+    id: Poster
+    name: "Final poster presentation (in class)"
+    checklist: ["Upload the poster by Dec 10.", "Present your project in class on Dec 11."]
   - date: 2026-12-18
     id: Final
     name: "Final paper & artifact"
-    checklist: ["Submit the revised paper, artifact, and figure-generation scripts.", "Include responses to feedback and individual contributions."]
+    checklist: ["Submit the final paper, artifact, and figure-generation scripts.", "Include responses to feedback and individual contributions."]
 
 registrar_dates:
   - {date: 2026-09-18, note: "Last day to add (Change of Program)"}
@@ -218,7 +221,7 @@ weeks:
       - {title: "DeepProbLog: Neural Probabilistic Logic Programming (NeurIPS 2018)", url: "https://arxiv.org/abs/1805.10872"}
       - {title: "NSFlow: An End-to-End FPGA Framework with Scalable Dataflow Architecture for Neuro-Symbolic AI (DAC 2025)", url: "https://arxiv.org/abs/2504.19323"}
       - {title: "Towards Cognitive AI Systems: A Survey and Prospective on Neuro-Symbolic AI (ISPASS 2024)", url: "https://arxiv.org/abs/2401.01040"}
-    deadlines: ["Oct 26, 11:59 PM - P1 infrastructure & baselines"]
+    deadlines: ["Oct 26, 11:59 PM - P1 exploration & progress"]
 
   - week: 8
     date: 2026-10-30
@@ -314,4 +317,4 @@ weeks:
     title: "Final Project Poster Session"
     research_question: "What general principle does a research result establish, and where does that principle stop applying?"
     type: poster
-    deadlines: ["Dec 10, 11:59 PM - posters in shared folder", "Dec 11, 11:59 PM - P5 complete draft & artifact", "Dec 18, 11:59 PM - final paper & artifact"]
+    deadlines: ["Dec 10, 11:59 PM - posters in shared folder", "Dec 18, 11:59 PM - final paper & artifact"]

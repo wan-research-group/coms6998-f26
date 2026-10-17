@@ -15,14 +15,14 @@ class ProjectTimelineTest(unittest.TestCase):
             'P2': dt.date(2026, 11, 9),
             'P3': dt.date(2026, 11, 23),
             'P4': dt.date(2026, 12, 7),
-            'P5': dt.date(2026, 12, 11),
+            'Poster': dt.date(2026, 12, 11),
             'Final': dt.date(2026, 12, 18),
         })
         self.assertEqual(list(dates.values()), sorted(dates.values()))
 
     def test_weekly_deadlines_and_rendered_dates(self):
         weeks = {w['week']: w for w in build.weeks}
-        self.assertEqual(weeks[7]['deadlines'], ['Oct 26, 11:59 PM - P1 infrastructure & baselines'])
+        self.assertEqual(weeks[7]['deadlines'], ['Oct 26, 11:59 PM - P1 exploration & progress'])
         self.assertEqual(weeks[9]['deadlines'], [
             'Nov 5, 11:59 PM - midterm slides',
             'Nov 9, 11:59 PM - P2 prototype & pilot results',

@@ -86,7 +86,7 @@ Presenters read the full paper, appendices, and artifact documentation. Everyone
 | Paper presentation & discussion leadership | 15% |
 | Engagement & participation | 10% |
 | Project proposal | 10% |
-| Project check-ins P1-P5 (completion-based) | 15% |
+| Project check-ins P1-P4 (completion-based) | 15% |
 | Midterm presentation | 10% |
 | Final poster | 10% |
 | Final paper & artifact | 30% |
@@ -126,15 +126,15 @@ The project is the center of the course: a carefully scoped research effort that
 | Date | Milestone | Deliverable checklist |
 |---|---|---|
 | Oct 5 | Project proposal | State the research question, closest work, and testable hypothesis.<br>Specify baselines, metrics, resource needs, and team responsibilities.<br>[LaTeX template (ZIP)](assets/templates/coms6998-project-proposal.zip) · [PDF preview](assets/templates/coms6998-project-proposal.pdf) |
-| Oct 26 | P1 - Infrastructure & baselines | Share a runnable repository with setup instructions.<br>Report the first baseline measurement and its configuration. |
+| Oct 26 | P1 - Exploration & progress | Submit a two-page PDF report, including figures and tables and excluding references.<br>State your project goal and research problem, why it is important and challenging, and any updates since the proposal.<br>Summarize your exploration, key findings, implementation and infrastructure progress, and next steps for the midterm and Milestone 2.<br>[LaTeX template (ZIP)](assets/templates/coms6998-project-p1.zip) · [PDF preview](assets/templates/coms6998-project-p1.pdf) |
 | Nov 6 | Midterm - Midterm presentation (in class) | Present the question, approach, baseline, current prototype, and preliminary results.<br>Gather feedback to incorporate into the Nov 9 P2 submission. |
 | Nov 9 | P2 - Prototype & pilot results | Run a minimal end-to-end prototype.<br>Include one pilot comparison figure, the main remaining risk, and a response to midterm feedback. |
 | Nov 23 | P3 - Evaluation plan & initial results | Fix the workloads, metrics, baselines, and experiment budget.<br>Submit initial comparisons and the planned ablations. |
 | Dec 7 | P4 - Main results & ablations | Submit main results, an ablation, and a failure or boundary case.<br>Include repeated measurements or uncertainty where relevant. |
-| Dec 11 | P5 - Complete draft, artifact & poster; final poster session (in class) | Submit a complete paper draft and a runnable artifact.<br>Upload the poster by Dec 10 and present it in class on Dec 11. |
-| Dec 18 | Final - Final paper & artifact | Submit the revised paper, artifact, and figure-generation scripts.<br>Include responses to feedback and individual contributions. |
+| Dec 11 | Poster - Final poster presentation (in class) | Upload the poster by Dec 10.<br>Present your project in class on Dec 11. |
+| Dec 18 | Final - Final paper & artifact | Submit the final paper, artifact, and figure-generation scripts.<br>Include responses to feedback and individual contributions. |
 
-All written deliverables are due at 11:59 PM ET. The project proposal (P0) and P1-P4 are due on Mondays after the corresponding Friday class. Presentation materials remain due before class; P5 and the final submission keep their listed dates. Check-ins P1-P5 are pacing devices, graded on completeness. No course deadline falls on the Thanksgiving holiday.
+All written deliverables are due at 11:59 PM ET. The project proposal (P0) and P1-P4 are due on Mondays after the corresponding Friday class. Presentation materials remain due before class; the final submission follows its listed date. Check-ins P1-P4 are pacing devices, graded on completeness. P1-P4 are two-page progress reports (including figures and tables, excluding references) that build on prior work and reflect updates to the project direction. Submit organized code and reproduction instructions with the final report. No course deadline falls on the Thanksgiving holiday.
 
 ### Final submission
 
@@ -456,7 +456,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Oct 26, 11:59 PM - P1 infrastructure & baselines
+- Oct 26, 11:59 PM - P1 exploration & progress
 
 ### Week 08 · Friday, October 30, 2026
 
@@ -584,7 +584,6 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Deadlines**
 
 - Dec 10, 11:59 PM - posters in shared folder
-- Dec 11, 11:59 PM - P5 complete draft & artifact
 - Dec 18, 11:59 PM - final paper & artifact
 
 ## Policies

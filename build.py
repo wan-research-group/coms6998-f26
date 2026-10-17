@@ -145,8 +145,11 @@ PROJECT_TRACKS = [
 PROJECT_DEADLINE_POLICY = (
     "All written deliverables are due at 11:59 PM ET. The project proposal (P0) and P1-P4 "
     "are due on Mondays after the corresponding Friday class. Presentation materials remain "
-    "due before class; P5 and the final submission keep their listed dates. Check-ins P1-P5 "
-    "are pacing devices, graded on completeness. No course deadline falls on the Thanksgiving holiday."
+    "due before class; the final submission follows its listed date. Check-ins P1-P4 "
+    "are pacing devices, graded on completeness. P1-P4 are two-page progress reports (including "
+    "figures and tables, excluding references) that build on prior work and reflect updates to "
+    "the project direction. Submit organized code and reproduction "
+    "instructions with the final report. No course deadline falls on the Thanksgiving holiday."
 )
 
 FINAL_SUBMISSION = (
@@ -1076,7 +1079,7 @@ def project_candidates_html() -> str:
 def project_body() -> str:
     tl_items = []
     for m in milestones:
-        cls = " tl-major" if m["id"] in ("Midterm", "P5", "Final") else ""
+        cls = " tl-major" if m["id"] in ("Midterm", "Poster", "Final") else ""
         milestone_id = f'<span class="tl-id">{esc(m["id"])}</span>' if m["id"] != "Proposal" else ""
         checklist = ''.join(f'<li>{esc(item)}</li>' for item in m["checklist"])
         template = (
