@@ -456,7 +456,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Oct 26, 11:59 PM - P1 exploration & progress
+- Oct 26, 11:59 PM - P1 exploration & progress ([LaTeX template (ZIP)](assets/templates/coms6998-project-p1.zip))
 
 ### Week 08 · Friday, October 30, 2026
 

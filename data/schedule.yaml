@@ -222,6 +222,8 @@ weeks:
       - {title: "NSFlow: An End-to-End FPGA Framework with Scalable Dataflow Architecture for Neuro-Symbolic AI (DAC 2025)", url: "https://arxiv.org/abs/2504.19323"}
       - {title: "Towards Cognitive AI Systems: A Survey and Prospective on Neuro-Symbolic AI (ISPASS 2024)", url: "https://arxiv.org/abs/2401.01040"}
     deadlines: ["Oct 26, 11:59 PM - P1 exploration & progress"]
+    deadline_templates:
+      "P1 exploration & progress": "assets/templates/coms6998-project-p1.zip"
 
   - week: 8
     date: 2026-10-30

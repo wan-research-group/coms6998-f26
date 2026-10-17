@@ -34,6 +34,7 @@ Fields a week entry understands:
 | `case_study:`, `exercise:` | Extra mini-lecture lines |
 | `deadlines:` | List of strings, rendered as highlighted chips. The home-page table shows the part after the "-" |
 | `deadline_links:` | Optional mapping from a deadline label (the text after " - ") to its form/submission URL; makes the deadline clickable in Now, the home-page table, Schedule, and syllabus. |
+| `deadline_templates:` | Optional mapping from a deadline label to its LaTeX ZIP URL; adds a template download beside the deadline in Now, the home-page table, Schedule, and syllabus. Keep it aligned with the milestone's `template_url`. |
 | `deadline_notes:` | Optional mapping from a deadline label to a plain-text reminder; displayed beside the deadline, outside its link, in all the same views. |
 | `glance_deadline:` | Optional concise deadline label for the home-page table only |
 
