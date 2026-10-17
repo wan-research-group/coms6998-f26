@@ -37,18 +37,18 @@ milestones:
     template_url: "assets/templates/coms6998-project-proposal.zip"
     template_label: "LaTeX template (ZIP)"
     template_preview_url: "assets/templates/coms6998-project-proposal.pdf"
-  - date: 2026-10-19
+  - date: 2026-10-26
     id: P1
     name: "Infrastructure & baselines"
     checklist: ["Share a runnable repository with setup instructions.", "Report the first baseline measurement and its configuration."]
-  - date: 2026-11-02
-    id: P2
-    name: "Prototype & pilot results"
-    checklist: ["Run a minimal end-to-end prototype.", "Include one pilot comparison figure and the main remaining risk."]
   - date: 2026-11-06
     id: Midterm
     name: "Midterm presentation (in class)"
-    checklist: ["Present the question, approach, baseline, and early evidence.", "Identify the feedback needed and the next experiments."]
+    checklist: ["Present the question, approach, baseline, current prototype, and preliminary results.", "Gather feedback to incorporate into the Nov 9 P2 submission."]
+  - date: 2026-11-09
+    id: P2
+    name: "Prototype & pilot results"
+    checklist: ["Run a minimal end-to-end prototype.", "Include one pilot comparison figure, the main remaining risk, and a response to midterm feedback."]
   - date: 2026-11-23
     id: P3
     name: "Evaluation plan & initial results"
@@ -202,7 +202,6 @@ weeks:
       - {title: "DaDu Series: Fast and Efficient Robot Accelerators (ICCAD 2020)", url: null}
       - {title: "NVIDIA Jetson AGX Orin Series Technical Brief (2022)", url: "https://www.nvidia.com/content/dam/en-zz/Solutions/gtcf21/jetson-orin/nvidia-jetson-agx-orin-technical-brief.pdf"}
       - {title: "NVIDIA Jetson AGX Thor Developer Kit User Guide (2026)", url: "https://docs.nvidia.com/jetson/agx-thor-devkit/user-guide/latest/"}
-    deadlines: ["Oct 19, 11:59 PM - P1 infrastructure & baselines"]
 
   - week: 7
     date: 2026-10-23
@@ -219,6 +218,7 @@ weeks:
       - {title: "DeepProbLog: Neural Probabilistic Logic Programming (NeurIPS 2018)", url: "https://arxiv.org/abs/1805.10872"}
       - {title: "NSFlow: An End-to-End FPGA Framework with Scalable Dataflow Architecture for Neuro-Symbolic AI (DAC 2025)", url: "https://arxiv.org/abs/2504.19323"}
       - {title: "Towards Cognitive AI Systems: A Survey and Prospective on Neuro-Symbolic AI (ISPASS 2024)", url: "https://arxiv.org/abs/2401.01040"}
+    deadlines: ["Oct 26, 11:59 PM - P1 infrastructure & baselines"]
 
   - week: 8
     date: 2026-10-30
@@ -236,7 +236,6 @@ weeks:
       - {title: "Kevin: Multi-Turn RL for Generating CUDA Kernels (2025)", url: "https://arxiv.org/abs/2507.11948"}
       - {title: "Towards Robust Agentic CUDA Kernel Benchmarking, Verification, and Optimization (Sakana AI, 2025)", url: "https://sakana.ai/ai-cuda-engineer/"}
       - {title: "ECO: An LLM-Driven Efficient Code Optimizer for Warehouse Scale Computers (2025)", url: "https://arxiv.org/abs/2503.15669"}
-    deadlines: ["Nov 2, 11:59 PM - P2 prototype & pilot results"]
 
   - week: 9
     date: 2026-11-06
@@ -244,7 +243,7 @@ weeks:
     title: "Midterm Project Presentations"
     research_question: "Which uncertainty is most worth resolving before investing further in a research direction?"
     type: midterm
-    deadlines: ["Nov 5, 11:59 PM - midterm slides"]
+    deadlines: ["Nov 5, 11:59 PM - midterm slides", "Nov 9, 11:59 PM - P2 prototype & pilot results"]
 
   - week: 10
     date: 2026-11-13

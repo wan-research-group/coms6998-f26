@@ -61,7 +61,7 @@ MODULE_DIVIDERS = {
 }
 
 TYPE_NOTE = {
-    "midterm": "Team presentations; no mini-lecture and no assigned papers.",
+    "midterm": "Present your current prototype and preliminary results on Nov 6, then incorporate class feedback into your P2 submission due Nov 9. No mini-lecture or assigned papers.",
     "poster": "Poster showcase; no mini-lecture and no assigned papers.",
 }
 

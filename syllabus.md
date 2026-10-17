@@ -5,7 +5,7 @@
 
 **Columbia University | Department of Computer Science**  
 Instructor: Prof. Zishen Wan · Fridays 10:10 AM - 12:00 PM · MUDD Building 825  
-Generated from the canonical course website on Monday, October 12, 2026.
+Generated from the canonical course website on Saturday, October 17, 2026.
 
 > **Canonical-source notice.** This syllabus is generated from the same source as the course website. The live website and Canvas announcements govern later schedule or logistics updates.
 
@@ -126,9 +126,9 @@ The project is the center of the course: a carefully scoped research effort that
 | Date | Milestone | Deliverable checklist |
 |---|---|---|
 | Oct 5 | Project proposal | State the research question, closest work, and testable hypothesis.<br>Specify baselines, metrics, resource needs, and team responsibilities.<br>[LaTeX template (ZIP)](assets/templates/coms6998-project-proposal.zip) · [PDF preview](assets/templates/coms6998-project-proposal.pdf) |
-| Oct 19 | P1 - Infrastructure & baselines | Share a runnable repository with setup instructions.<br>Report the first baseline measurement and its configuration. |
-| Nov 2 | P2 - Prototype & pilot results | Run a minimal end-to-end prototype.<br>Include one pilot comparison figure and the main remaining risk. |
-| Nov 6 | Midterm - Midterm presentation (in class) | Present the question, approach, baseline, and early evidence.<br>Identify the feedback needed and the next experiments. |
+| Oct 26 | P1 - Infrastructure & baselines | Share a runnable repository with setup instructions.<br>Report the first baseline measurement and its configuration. |
+| Nov 6 | Midterm - Midterm presentation (in class) | Present the question, approach, baseline, current prototype, and preliminary results.<br>Gather feedback to incorporate into the Nov 9 P2 submission. |
+| Nov 9 | P2 - Prototype & pilot results | Run a minimal end-to-end prototype.<br>Include one pilot comparison figure, the main remaining risk, and a response to midterm feedback. |
 | Nov 23 | P3 - Evaluation plan & initial results | Fix the workloads, metrics, baselines, and experiment budget.<br>Submit initial comparisons and the planned ablations. |
 | Dec 7 | P4 - Main results & ablations | Submit main results, an ablation, and a failure or boundary case.<br>Include repeated measurements or uncertainty where relevant. |
 | Dec 11 | P5 - Complete draft, artifact & poster; final poster session (in class) | Submit a complete paper draft and a runnable artifact.<br>Upload the poster by Dec 10 and present it in class on Dec 11. |
@@ -434,10 +434,6 @@ Required readings appear first. Optional readings are listed separately, one pap
 - [NVIDIA Jetson AGX Orin Series Technical Brief (2022)](https://www.nvidia.com/content/dam/en-zz/Solutions/gtcf21/jetson-orin/nvidia-jetson-agx-orin-technical-brief.pdf)
 - [NVIDIA Jetson AGX Thor Developer Kit User Guide (2026)](https://docs.nvidia.com/jetson/agx-thor-devkit/user-guide/latest/)
 
-**Deadlines**
-
-- Oct 19, 11:59 PM - P1 infrastructure & baselines
-
 ### Week 07 · Friday, October 23, 2026
 
 **Accelerating Neuro-Symbolic and Compositional AI** · Computing for AI
@@ -457,6 +453,10 @@ Required readings appear first. Optional readings are listed separately, one pap
 - [DeepProbLog: Neural Probabilistic Logic Programming (NeurIPS 2018)](https://arxiv.org/abs/1805.10872)
 - [NSFlow: An End-to-End FPGA Framework with Scalable Dataflow Architecture for Neuro-Symbolic AI (DAC 2025)](https://arxiv.org/abs/2504.19323)
 - [Towards Cognitive AI Systems: A Survey and Prospective on Neuro-Symbolic AI (ISPASS 2024)](https://arxiv.org/abs/2401.01040)
+
+**Deadlines**
+
+- Oct 26, 11:59 PM - P1 infrastructure & baselines
 
 ### Week 08 · Friday, October 30, 2026
 
@@ -479,21 +479,18 @@ Required readings appear first. Optional readings are listed separately, one pap
 - [Towards Robust Agentic CUDA Kernel Benchmarking, Verification, and Optimization (Sakana AI, 2025)](https://sakana.ai/ai-cuda-engineer/)
 - [ECO: An LLM-Driven Efficient Code Optimizer for Warehouse Scale Computers (2025)](https://arxiv.org/abs/2503.15669)
 
-**Deadlines**
-
-- Nov 2, 11:59 PM - P2 prototype & pilot results
-
 ### Week 09 · Friday, November 6, 2026
 
 **Midterm Project Presentations** · Project
 
 **Research question of the week:** Which uncertainty is most worth resolving before investing further in a research direction?
 
-- **Format note:** Team presentations; no mini-lecture and no assigned papers.
+- **Format note:** Present your current prototype and preliminary results on Nov 6, then incorporate class feedback into your P2 submission due Nov 9. No mini-lecture or assigned papers.
 
 **Deadlines**
 
 - Nov 5, 11:59 PM - midterm slides
+- Nov 9, 11:59 PM - P2 prototype & pilot results
 
 ### Week 10 · Friday, November 13, 2026
 
