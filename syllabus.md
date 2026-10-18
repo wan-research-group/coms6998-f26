@@ -561,6 +561,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Research question of the week:** How should exploration and verification work together when AI makes consequential design decisions?
 
+- **Guest lecture:** [Dr. Zhengqi Gao](https://zhengqigao.github.io/) (Google DeepMind / Anthropic).
 - **In-class exercise:** In-class critical reading: the RedWood white paper (Architect Labs 2026) audited with the evidence-centered checklist.
 
 **Student-led papers**

@@ -302,6 +302,7 @@ weeks:
     title: "AI for RTL and Chip Physical Design"
     research_question: "How should exploration and verification work together when AI makes consequential design decisions?"
     type: seminar
+    guest: {label: "Guest Speaker", name: "Dr. Zhengqi Gao", affiliation: "Google DeepMind / Anthropic", url: "https://zhengqigao.github.io/"}
     exercise: "In-class critical reading: the RedWood white paper (Architect Labs 2026) audited with the evidence-centered checklist"
     papers:
       - {short_title: "AlphaChip", title: "A Graph Placement Methodology for Fast Chip Design (AlphaChip)", venue: "Nature 2021 (+2024 addendum)", url: "https://www.nature.com/articles/s41586-021-03544-w", focus: "reinforcement learning for chip placement; co-led by a pair", co_led: true}
