@@ -31,6 +31,8 @@ Fields a week entry understands:
 | `research_question:` | One concise research question per week; shared by Schedule, Papers, Now, and the syllabus |
 | `slides:` | Optional lecture PDF URL; shown in Now, the home-page schedule, full Schedule, and syllabus. Store local slides under `assets/slides/`. Name guest lecture files `weekNN-guest-firstname-lastname.pdf` (two-digit week, lowercase, hyphens; preserve the original file extension), e.g. `week03-guest-jovan-stojkovic.pdf`. |
 | `papers[].presenters`, `papers[].presentation_slides` | Student presenter names and the corresponding paper's PDF or PPTX download; shown with that required reading in the home-page schedule, Schedule, Papers, and syllabus. Store unchanged decks under `assets/slides/students/`, using descriptive filenames without submission IDs or grading markers. |
+| `slides_label`, `slides_note` | Optional custom link label and access note. For restricted slides, link directly to CourseWorks and do not copy the file into public assets. |
+| `guest_readings` | Papers covered by the guest lecture (`title`, `venue`, `url`), listed separately from required and optional readings in Schedule, Papers, and syllabus, with a link from the homepage schedule. |
 | `case_study:`, `exercise:` | Extra mini-lecture lines |
 | `deadlines:` | List of strings, rendered as highlighted chips. The home-page table shows the part after the "-" |
 | `deadline_links:` | Optional mapping from a deadline label (the text after " - ") to its form/submission URL; makes the deadline clickable in Now, the home-page table, Schedule, and syllabus. |

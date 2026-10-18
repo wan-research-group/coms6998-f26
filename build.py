@@ -456,9 +456,11 @@ def deadline_html(week: dict, deadline: str, *, short: bool = False, display_lab
 def slides_html(week: dict) -> str:
     if not week.get("slides"):
         return ""
+    label = esc(week.get("slides_label", "Lecture slides (PDF)"))
+    note = f' <span class="slides-note">{esc(week["slides_note"])}</span>' if week.get("slides_note") else ""
     return (
         f'<p class="week-materials"><a href="{esc(week["slides"])}" target="_blank" '
-        f'rel="noopener" aria-label="Week {week["week"]} lecture slides (PDF)">Lecture slides (PDF)</a></p>'
+        f'rel="noopener" aria-label="Week {week["week"]}: {label}">{label}</a>{note}</p>'
     )
 
 
@@ -663,6 +665,15 @@ def glance_html() -> str:
             f'<p class="fine">Guest lecture: {guest_html(w["guest"])}</p>'
             if w.get("guest") else ""
         )
+        if w.get("guest_readings"):
+            guest_links = ' · '.join(
+                f'<a href="{esc(p["url"])}" title="{esc(p["title"])}" target="_blank" rel="noopener">'
+                f'{esc(p.get("short_title", p["title"]))}</a>' for p in w["guest_readings"]
+            )
+            guest_note += (
+                f'<p class="fine"><a href="schedule.html#guest-readings-week-{w["week"]}">'
+                f'Guest lecture readings</a>: {guest_links}</p>'
+            )
         required = w.get("papers") or w.get("background") or []
         reading_links = []
         has_presentations = any(p.get("presenters") for p in required)
@@ -724,9 +735,10 @@ def glance_html() -> str:
 # ---------------------------------------------------------------- schedule
 
 def paper_li(p: dict, kind: str) -> str:
-    title = esc(p["title"])
+    title = esc(p.get("short_title", p["title"]) if kind == "guest-reading" else p["title"])
+    title_hint = f' title="{esc(p["title"])}"' if kind == "guest-reading" else ""
     if p.get("url"):
-        title_html = f'<a href="{esc(p["url"])}" target="_blank" rel="noopener">{title}</a>'
+        title_html = f'<a href="{esc(p["url"])}"{title_hint} target="_blank" rel="noopener">{title}</a>'
         note = ""
     else:
         title_html = title
@@ -755,6 +767,17 @@ def paper_li(p: dict, kind: str) -> str:
             )
         presentation += '</p>'
     return f'<li class="{kind}"><div class="p-head">{" ".join(bits)}</div>{focus}{presentation}</li>'
+
+
+def guest_readings_html(week: dict) -> str:
+    if not week.get("guest_readings"):
+        return ""
+    items = "\n".join(paper_li(p, "guest-reading") for p in week["guest_readings"])
+    return (
+        f'<div id="guest-readings-week-{week["week"]}">'
+        '<p class="p-label">Guest lecture readings</p>'
+        f'<ul class="papers">{items}</ul></div>'
+    )
 
 
 def optional_entry(o) -> str:
@@ -790,6 +813,7 @@ def week_article(w: dict) -> str:
         body.append(f'<p class="week-note"><strong>In-class exercise:</strong> {esc(w["exercise"])}</p>')
     if w["type"] in TYPE_NOTE:
         body.append(f'<p class="week-note">{TYPE_NOTE[w["type"]]}</p>')
+    body.append(guest_readings_html(w))
 
     if w.get("papers"):
         lis = "\n".join(paper_li(p, "req") for p in w["papers"])
@@ -1240,9 +1264,10 @@ def papers_body() -> str:
     blocks = []
     n_req = sum(len(w.get("papers", []) or w.get("background", [])) for w in weeks)
     n_opt = sum(len(w.get("optional", [])) for w in weeks)
+    n_guest = sum(len(w.get("guest_readings", [])) for w in weeks)
     for w in weeks:
         req = w.get("papers") or w.get("background")
-        if not req and not w.get("optional"):
+        if not req and not w.get("optional") and not w.get("guest_readings"):
             continue
         label = "Student-led papers" if w.get("papers") else "Instructor-selected background"
         lis = "\n".join(paper_li(p, "req") for p in (req or []))
@@ -1257,13 +1282,14 @@ def papers_body() -> str:
   {research_question_html(w)}
   <p class="p-label">{label}</p>
   <ol class="papers">{lis}</ol>
+  {guest_readings_html(w)}
   {opt}
 </article>"""
         )
     return f"""<section class="section papers-index">
   <div class="wrap">
     {page_head("Reading list",
-               f'All {n_req} required readings and {n_opt} optional readings, by week. <a href="schedule.html">Back to the schedule.</a>')}
+               f'All {n_req} required readings, {n_opt} optional readings, and {n_guest} guest lecture readings, by week. <a href="schedule.html">Back to the schedule.</a>')}
     <div class="sched-tools papers-legend">
       <span class="legend"><span class="dot dot-comp" aria-hidden="true"></span>Computing for AI</span>
       <span class="legend"><span class="dot dot-ai" aria-hidden="true"></span>AI for Computing</span>
@@ -1472,7 +1498,9 @@ def syllabus_markdown() -> str:
             speaker = md_link(guest["name"], guest["url"])
             lines.append(f"- **Guest lecture:** {speaker} ({guest['affiliation']}).")
         if week.get("slides"):
-            lines.append(f"- **Lecture slides:** {md_link('Week ' + str(week['week']) + ' slides (PDF)', week['slides'])}")
+            label = week.get("slides_label", 'Week ' + str(week['week']) + ' slides (PDF)')
+            note = ' ' + week['slides_note'] if week.get('slides_note') else ''
+            lines.append(f"- **Lecture slides:** {md_link(label, week['slides'])}{note}")
         if week.get("case_study"):
             lines.append(f"- **Mini-lecture case study:** {week['case_study']}.")
         if week.get("exercise"):
@@ -1499,6 +1527,9 @@ def syllabus_markdown() -> str:
                         label = f"Presentation slides ({presentation_format(paper)})"
                         presentation += f"; {md_link(label, paper['presentation_slides'])}"
                     lines.append(presentation)
+        if week.get("guest_readings"):
+            lines.extend(["", "**Guest lecture readings**", ""])
+            lines.extend(f"- {md_link(p['title'], p['url'])} - {p['venue']}" for p in week['guest_readings'])
         if week.get("optional"):
             optional_links = []
             for item in week["optional"]:

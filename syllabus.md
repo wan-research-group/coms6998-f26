@@ -5,7 +5,7 @@
 
 **Columbia University | Department of Computer Science**  
 Instructor: Prof. Zishen Wan · Fridays 10:10 AM - 12:00 PM · MUDD Building 825  
-Generated from the canonical course website on Saturday, October 17, 2026.
+Generated from the canonical course website on Sunday, October 18, 2026.
 
 > **Canonical-source notice.** This syllabus is generated from the same source as the course website. The live website and Canvas announcements govern later schedule or logistics updates.
 
@@ -417,11 +417,20 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Research question of the week:** Where should the boundary between algorithm and hardware move when latency, energy, and task success must be optimized together?
 
 - **Guest lecture:** [Prof. Luca Carloni](https://www.cs.columbia.edu/~luca/) (Columbia).
+- **Lecture slides:** [Lecture slides (CourseWorks)](https://courseworks2.columbia.edu/courses/258448/files/folder/Lecture%20Slides?preview=28705076)
 
 **Student-led papers**
 
 - [ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents](https://doi.org/10.1145/3676641.3716016) - ASPLOS 2025; focus: cross-layer co-design for cooperative embodied agents
+  - Presenters: Yishan Song, Shurui Hu; [Presentation slides (PDF)](assets/slides/students/week06-reca-yishan-song-shurui-hu.pdf)
 - [DiTPA: A DiT-Based Action Planner Accelerator Exploiting Action-Denoising-Multimodality Redundancy for Embodied Artificial Intelligence](https://ieeexplore.ieee.org/document/11617959) - ISCA 2026; focus: exploiting action, denoising, and multimodality redundancy for embodied-AI action planning
+  - Presenters: Wenjuan Zheng
+
+**Guest lecture readings**
+
+- [The Case for Embedded Scalable Platforms](https://ieeexplore.ieee.org/document/7544261) - DAC 2016
+- [Agile SoC Development with Open ESP](https://ieeexplore.ieee.org/document/9256819) - ICCAD 2020
+- [A 12nm Linux-SMP-Capable RISC-V SoC with 14 Accelerator Types, Distributed Hardware Power Management and Flexible NoC-Based Data Orchestration](https://ieeexplore.ieee.org/document/10454572) - ISSCC 2024
 
 **Optional readings**
 
@@ -444,8 +453,11 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Student-led papers**
 
 - [CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design](https://research.ibm.com/publications/cogsys-efficient-and-scalable-neurosymbolic-cognition-system-via-algorithm-hardware-co-design) - HPCA 2025; focus: workload characterization, reconfigurable processing
+  - Presenters: Vayun Gupta
 - [REASON: Accelerating Probabilistic Logical Reasoning for Scalable Neuro-Symbolic Intelligence](https://arxiv.org/abs/2601.20784) - HPCA 2026; focus: unified DAGs, irregular reasoning acceleration
+  - Presenters: Charlotte Chen
 - [Lobster: A GPU-Accelerated Framework for Neurosymbolic Programming](https://arxiv.org/abs/2503.21937) - ASPLOS 2026; focus: compiling Datalog-based neurosymbolic programs to GPUs
+  - Presenters: Dakshinamoorthy Amirthaganesan
 
 **Optional readings**
 

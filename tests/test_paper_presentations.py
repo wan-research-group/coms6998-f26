@@ -11,7 +11,7 @@ import build
 class PaperPresentationsTest(unittest.TestCase):
     def test_homepage_presentations_match_each_paper_and_week(self):
         glance = build.glance_html()
-        self.assertEqual(glance.count('class="glance-presenters"'), 6)
+        self.assertEqual(glance.count('class="glance-presenters"'), 11)
         for week in build.weeks:
             for paper in week.get('papers', []):
                 if not paper.get('presentation_slides'):
@@ -33,6 +33,7 @@ class PaperPresentationsTest(unittest.TestCase):
             (4, 'Open AI Jalapeño Chip'): ['Shen Li', 'Yichen Xu'],
             (5, 'Embodied.cpp'): ['Ryan Ma', 'George Wang'],
             (5, 'VLA-Perf'): ['Shiyao Marcus Lam', 'Pulak Mehrotra'],
+            (6, 'ReCA'): ['Yishan Song', 'Shurui Hu'],
         }
         roster = {s['name'] for s in build.students}
         found = {}
@@ -94,6 +95,40 @@ class PaperPresentationsTest(unittest.TestCase):
         self.assertIn('Slides (PDF)', line)
         self.assertNotIn('PPTX', line)
         self.assertIn(f"[Presentation slides (PDF)]({paper['presentation_slides']})", build.syllabus_markdown())
+
+    def test_week_six_and_seven_presenter_assignments(self):
+        expected = {
+            (6, 'ReCA'): ['Yishan Song', 'Shurui Hu'],
+            (6, 'DiTPA'): ['Wenjuan Zheng'],
+            (7, 'CogSys'): ['Vayun Gupta'],
+            (7, 'REASON'): ['Charlotte Chen'],
+            (7, 'Lobster'): ['Dakshinamoorthy Amirthaganesan'],
+        }
+        roster = {s['name'] for s in build.students}
+        glance = build.glance_html()
+        for (week_num, title), names in expected.items():
+            week = next(w for w in build.weeks if w['week'] == week_num)
+            paper = next(p for p in week['papers'] if p['short_title'] == title)
+            self.assertEqual(paper['presenters'], names)
+            self.assertTrue(set(names) <= roster)
+            if title == 'ReCA':
+                self.assertEqual(paper['presentation_slides'],
+                                 'assets/slides/students/week06-reca-yishan-song-shurui-hu.pdf')
+            else:
+                self.assertNotIn('presentation_slides', paper)
+            row = next(row for row in re.findall(r'<tr>.*?</tr>', glance, re.S)
+                       if f'schedule.html#week-{week_num}"' in row)
+            line = next(line for line in re.findall(r'<span class="glance-reading">.*?</span></span>', row)
+                        if f'>{title}</a>' in line)
+            for name in names:
+                self.assertIn(name, line)
+                self.assertIn(name, build.paper_li(paper, 'req'))
+                self.assertIn(name, build.syllabus_markdown())
+            if title == 'ReCA':
+                self.assertIn('Slides (PDF)', line)
+                self.assertIn(paper['presentation_slides'], line)
+            else:
+                self.assertNotIn('Slides (', line)
 
 
 if __name__ == '__main__':

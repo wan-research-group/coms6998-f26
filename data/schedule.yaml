@@ -193,9 +193,15 @@ weeks:
     research_question: "Where should the boundary between algorithm and hardware move when latency, energy, and task success must be optimized together?"
     type: seminar
     guest: {label: "Guest Speaker", name: "Prof. Luca Carloni", affiliation: "Columbia", url: "https://www.cs.columbia.edu/~luca/"}
+    slides: "https://courseworks2.columbia.edu/courses/258448/files/folder/Lecture%20Slides?preview=28705076"
+    slides_label: "Lecture slides (CourseWorks)"
+    guest_readings:
+      - {short_title: "ESP", title: "The Case for Embedded Scalable Platforms", venue: "DAC 2016", url: "https://ieeexplore.ieee.org/document/7544261"}
+      - {short_title: "Open ESP", title: "Agile SoC Development with Open ESP", venue: "ICCAD 2020", url: "https://ieeexplore.ieee.org/document/9256819"}
+      - {short_title: "12nm RISC-V SoC", title: "A 12nm Linux-SMP-Capable RISC-V SoC with 14 Accelerator Types, Distributed Hardware Power Management and Flexible NoC-Based Data Orchestration", venue: "ISSCC 2024", url: "https://ieeexplore.ieee.org/document/10454572"}
     papers:
-      - {short_title: "ReCA", title: "ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents", venue: "ASPLOS 2025", url: "https://doi.org/10.1145/3676641.3716016", focus: "cross-layer co-design for cooperative embodied agents"}
-      - {short_title: "DiTPA", title: "DiTPA: A DiT-Based Action Planner Accelerator Exploiting Action-Denoising-Multimodality Redundancy for Embodied Artificial Intelligence", venue: "ISCA 2026", url: "https://ieeexplore.ieee.org/document/11617959", focus: "exploiting action, denoising, and multimodality redundancy for embodied-AI action planning"}
+      - {short_title: "ReCA", title: "ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents", venue: "ASPLOS 2025", url: "https://doi.org/10.1145/3676641.3716016", focus: "cross-layer co-design for cooperative embodied agents", presenters: ["Yishan Song", "Shurui Hu"], presentation_slides: "assets/slides/students/week06-reca-yishan-song-shurui-hu.pdf"}
+      - {short_title: "DiTPA", title: "DiTPA: A DiT-Based Action Planner Accelerator Exploiting Action-Denoising-Multimodality Redundancy for Embodied Artificial Intelligence", venue: "ISCA 2026", url: "https://ieeexplore.ieee.org/document/11617959", focus: "exploiting action, denoising, and multimodality redundancy for embodied-AI action planning", presenters: ["Wenjuan Zheng"]}
     optional:
       - {title: "DaDu-Corki: Algorithm-Architecture Co-Design for Embodied AI-Powered Robotic Manipulation (ISCA 2025)", url: "https://arxiv.org/abs/2407.04292"}
       - {title: "Deltoris: Enabling Real-Time VLA Inference in Embodied AI via Bit-Level Sparsity and Speculative Inference (MICRO 2026)", url: "https://arxiv.org/abs/2608.04428"}
@@ -213,9 +219,9 @@ weeks:
     research_question: "How should computing abstractions change when intelligence combines learning, search, and symbolic reasoning?"
     type: seminar
     papers:
-      - {short_title: "CogSys", title: "CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design", venue: "HPCA 2025", url: "https://research.ibm.com/publications/cogsys-efficient-and-scalable-neurosymbolic-cognition-system-via-algorithm-hardware-co-design", focus: "workload characterization, reconfigurable processing"}
-      - {short_title: "REASON", title: "REASON: Accelerating Probabilistic Logical Reasoning for Scalable Neuro-Symbolic Intelligence", venue: "HPCA 2026", url: "https://arxiv.org/abs/2601.20784", focus: "unified DAGs, irregular reasoning acceleration"}
-      - {short_title: "Lobster", title: "Lobster: A GPU-Accelerated Framework for Neurosymbolic Programming", venue: "ASPLOS 2026", url: "https://arxiv.org/abs/2503.21937", focus: "compiling Datalog-based neurosymbolic programs to GPUs"}
+      - {short_title: "CogSys", title: "CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design", venue: "HPCA 2025", url: "https://research.ibm.com/publications/cogsys-efficient-and-scalable-neurosymbolic-cognition-system-via-algorithm-hardware-co-design", focus: "workload characterization, reconfigurable processing", presenters: ["Vayun Gupta"]}
+      - {short_title: "REASON", title: "REASON: Accelerating Probabilistic Logical Reasoning for Scalable Neuro-Symbolic Intelligence", venue: "HPCA 2026", url: "https://arxiv.org/abs/2601.20784", focus: "unified DAGs, irregular reasoning acceleration", presenters: ["Charlotte Chen"]}
+      - {short_title: "Lobster", title: "Lobster: A GPU-Accelerated Framework for Neurosymbolic Programming", venue: "ASPLOS 2026", url: "https://arxiv.org/abs/2503.21937", focus: "compiling Datalog-based neurosymbolic programs to GPUs", presenters: ["Dakshinamoorthy Amirthaganesan"]}
     optional:
       - {title: "Scallop: A Language for Neurosymbolic Programming (PLDI 2023)", url: "https://arxiv.org/abs/2304.04812"}
       - {title: "DeepProbLog: Neural Probabilistic Logic Programming (NeurIPS 2018)", url: "https://arxiv.org/abs/1805.10872"}
