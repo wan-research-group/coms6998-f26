@@ -507,6 +507,8 @@ def guest_html(guest: dict) -> str:
 
 
 def research_question_html(week: dict) -> str:
+    if not week.get("research_question"):
+        return ""
     return (
         '<p class="research-question"><strong>Research question of the week</strong>'
         f'<span>{esc(week["research_question"])}</span></p>'
@@ -1505,9 +1507,9 @@ def syllabus_markdown() -> str:
             "",
             f"**{week['title']}** · {week['module']}",
             "",
-            f"**Research question of the week:** {week['research_question']}",
-            "",
         ])
+        if week.get("research_question"):
+            lines.extend([f"**Research question of the week:** {week['research_question']}", ""])
         if week.get("guest"):
             guest = week["guest"]
             speaker = md_link(guest["name"], guest["url"])

@@ -255,7 +255,6 @@ weeks:
     date: 2026-11-06
     module: "Project"
     title: "Midterm Project Presentations"
-    research_question: "Which uncertainty is most worth resolving before investing further in a research direction?"
     type: midterm
     presentation_order_url: "https://docs.google.com/spreadsheets/d/1Onq9G_wzRuuEnGHdQXAT3Vg-At6H93aN8mkit25Xwoo/edit?usp=sharing"
     deadlines: ["Nov 5, 11:59 PM - midterm slides", "Nov 9, 11:59 PM - P2 prototype & pilot results"]

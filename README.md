@@ -28,7 +28,7 @@ Fields a week entry understands:
 | `papers:` / `background:` | Required readings (seminar weeks use `papers`, lecture weeks use `background`). Each item: `title`, `short_title` (home-page label), `venue`, `url`, optional `focus`, `extra_link`, `extra_label`, `co_led` |
 | `optional:` | Optional readings: either `{title, url}` maps or plain strings (rendered without a link) |
 | `guest:` | Confirmed speakers only: `{label, name, affiliation, url}`. Omit until confirmed; `url` links to the speaker's homepage. |
-| `research_question:` | One concise research question per week; shared by Schedule, Papers, Now, and the syllabus |
+| `research_question:` | Optional concise research question; shared by Schedule, Papers, Now, and the syllabus. Omit for weeks that do not need one. |
 | `slides:` | Optional lecture PDF URL; shown in Now, the home-page schedule, full Schedule, and syllabus. Store local slides under `assets/slides/`. Name guest lecture files `weekNN-guest-firstname-lastname.pdf` (two-digit week, lowercase, hyphens; preserve the original file extension), e.g. `week03-guest-jovan-stojkovic.pdf`. |
 | `papers[].presenters`, `papers[].presentation_slides` | Student presenter names and the corresponding paper's PDF or PPTX download; shown with that required reading in the home-page schedule, Schedule, Papers, and syllabus. Store unchanged decks under `assets/slides/students/`, using descriptive filenames without submission IDs or grading markers. |
 | `slides_label`, `slides_note` | Optional custom link label and access note. For restricted slides, link directly to CourseWorks and do not copy the file into public assets. |
