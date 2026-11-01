@@ -454,11 +454,11 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Student-led papers**
 
 - [CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design](https://research.ibm.com/publications/cogsys-efficient-and-scalable-neurosymbolic-cognition-system-via-algorithm-hardware-co-design) - HPCA 2025; focus: workload characterization, reconfigurable processing
-  - Presenters: Vayun Gupta
+  - Presenters: Vayun Gupta; [Presentation slides (PPTX)](assets/slides/students/week07-cogsys-vayun-gupta.pptx)
 - [REASON: Accelerating Probabilistic Logical Reasoning for Scalable Neuro-Symbolic Intelligence](https://arxiv.org/abs/2601.20784) - HPCA 2026; focus: unified DAGs, irregular reasoning acceleration
   - Presenters: Charlotte Chen
 - [Lobster: A GPU-Accelerated Framework for Neurosymbolic Programming](https://arxiv.org/abs/2503.21937) - ASPLOS 2026; focus: compiling Datalog-based neurosymbolic programs to GPUs
-  - Presenters: Dakshinamoorthy Amirthaganesan
+  - Presenters: Dakshinamoorthy Amirthaganesan; [Presentation slides (PPTX)](assets/slides/students/week07-lobster-dakshinamoorthy-amirthaganesan.pptx)
 
 **Optional readings**
 
@@ -481,8 +481,11 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Student-led papers**
 
 - [Faster Sorting Algorithms Discovered Using Deep Reinforcement Learning (AlphaDev)](https://www.nature.com/articles/s41586-023-06004-9) - Nature 2023; focus: algorithm discovery, reward design, validation
+  - Presenters: Baichuan Xiang, Zixin (Stan) Wan; [Presentation slides, Part 1 (PPTX)](assets/slides/students/week08-alphadev-part1-baichuan-xiang.pptx); [Presentation slides, Part 2 (PPTX)](assets/slides/students/week08-alphadev-part2-zixin-wan.pptx)
 - [AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery](https://arxiv.org/abs/2506.13131) - DeepMind 2025; focus: evolutionary LLM code search across scheduling, TPU circuits, kernels
+  - Presenters: Lei Chi; [Presentation slides (PPTX)](assets/slides/students/week08-alphaevolve-lei-chi.pptx)
 - [KernelBench: Can LLMs Write Efficient GPU Kernels?](https://arxiv.org/abs/2502.10517) - ICML 2025; focus: benchmark design; discussed with the Sakana AI CUDA Engineer episode
+  - Presenters: Mingkai Li, Shufeng Chen; [Presentation slides (PPTX)](assets/slides/students/week08-kernelbench-mingkai-li-shufeng-chen.pptx)
 
 **Optional readings**
 
@@ -515,7 +518,9 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Student-led papers**
 
 - [ArchEval: Measuring AI Agents as Computer Architects](https://arxiv.org/abs/2607.03601) - arXiv 2026; focus: benchmarking LLM agents on architecture tasks
+  - Presenters: Mikul Saravanan, Samay Lakhani
 - [CHIA: An Open-Source Framework for Principled, Agentic AI-Driven Hardware/Software Co-Design Research](https://arxiv.org/abs/2606.27350) - arXiv 2026; focus: composable design loops for agent-driven HW/SW co-design
+  - Presenters: Chi-Yu Chen, Zihao Fang
 
 **Optional readings**
 
@@ -539,7 +544,9 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Student-led papers**
 
 - [ArchOrchestra: End-to-End Agentic Accelerator Design](https://drive.google.com/file/d/1ItrBZMEXQfmqdBGqyGa-gCUz5ANGgoNj/view?usp=sharing) - Forthcoming 2026; focus: end-to-end agentic accelerator design
+  - Presenters: Genhao Zhang, David Yang
 - [Architecture 2.0: Principles of AI-Native System and Chip Design](https://arch2.mlsysbook.ai/book/index.html) - Online book, 2026; focus: Read one chapter.
+  - Presenters: Yiwen Chen, Charlotte Chen
 
 **Optional readings**
 
@@ -567,8 +574,11 @@ Required readings appear first. Optional readings are listed separately, one pap
 **Student-led papers**
 
 - [A Graph Placement Methodology for Fast Chip Design (AlphaChip)](https://www.nature.com/articles/s41586-021-03544-w) - Nature 2021 (+2024 addendum); focus: reinforcement learning for chip placement; co-led by a pair
+  - Presenters: Alexander Gonzalez, Stephen Ogunmwonyi
 - [ChipNeMo: Domain-Adapted LLMs for Chip Design](https://arxiv.org/abs/2311.00176) - NVIDIA 2024; focus: domain adaptation, retrieval, EDA scripts
+  - Presenters: Mingyuan Zheng, Lingyi He
 - [Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification](https://arxiv.org/abs/2506.14074) - arXiv 2025; focus: RTL benchmarks and their limitations
+  - Presenters: Shawn Hans Kathuria, Lene Gabriels
 
 **Optional readings**
 

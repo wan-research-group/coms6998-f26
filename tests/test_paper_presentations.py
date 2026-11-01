@@ -11,19 +11,22 @@ import build
 class PaperPresentationsTest(unittest.TestCase):
     def test_homepage_presentations_match_each_paper_and_week(self):
         glance = build.glance_html()
-        self.assertEqual(glance.count('class="glance-presenters"'), 11)
+        self.assertEqual(glance.count('class="glance-presenters"'), 21)
         for week in build.weeks:
             for paper in week.get('papers', []):
                 if not paper.get('presentation_slides'):
                     continue
                 row = next(row for row in re.findall(r'<tr>.*?</tr>', glance, re.S)
                            if f'schedule.html#week-{week["week"]}"' in row)
+                downloads = build.presentation_slide_links(paper, compact=True)
                 line = next(line for line in re.findall(r'<span class="glance-reading">.*?</span></span>', row)
-                            if paper['presentation_slides'] in line)
+                            if downloads[0][0] in line)
                 self.assertIn(paper['short_title'], line)
                 for name in paper['presenters']:
                     self.assertIn(name, line)
-                self.assertIn(f'href="{paper["presentation_slides"]}"', line)
+                for url, label in downloads:
+                    self.assertIn(f'href="{url}"', line)
+                    self.assertIn(label, line)
 
     def test_paper_presenters_and_assets(self):
         expected = {
@@ -34,6 +37,11 @@ class PaperPresentationsTest(unittest.TestCase):
             (5, 'Embodied.cpp'): ['Ryan Ma', 'George Wang'],
             (5, 'VLA-Perf'): ['Shiyao Marcus Lam', 'Pulak Mehrotra'],
             (6, 'ReCA'): ['Yishan Song', 'Shurui Hu'],
+            (7, 'CogSys'): ['Vayun Gupta'],
+            (7, 'Lobster'): ['Dakshinamoorthy Amirthaganesan'],
+            (8, 'AlphaDev'): ['Baichuan Xiang', 'Zixin (Stan) Wan'],
+            (8, 'AlphaEvolve'): ['Lei Chi'],
+            (8, 'KernelBench'): ['Mingkai Li', 'Shufeng Chen'],
         }
         roster = {s['name'] for s in build.students}
         found = {}
@@ -44,21 +52,22 @@ class PaperPresentationsTest(unittest.TestCase):
                 found[week['week'], paper['short_title']] = paper['presenters']
                 roster_names = {'Shiyao Marcus Lam': 'Marcus Lam'}
                 self.assertTrue({roster_names.get(name, name) for name in paper['presenters']} <= roster)
-                path = Path(paper['presentation_slides'])
-                self.assertEqual(path.parent.as_posix(), 'assets/slides/students')
-                self.assertNotRegex(path.name, r'LATE|\d{6,}')
-                if path.suffix == '.pptx':
-                    with ZipFile(build.ROOT / path) as deck:
-                        self.assertIsNone(deck.testzip())
-                else:
-                    self.assertEqual(path.suffix, '.pdf')
-                    self.assertTrue((build.ROOT / path).read_bytes().startswith(b'%PDF-'))
                 item = build.paper_li(paper, 'req')
-                self.assertIn(f'Presentation slides ({path.suffix[1:].upper()})', item)
-                self.assertIn(f'href="{path.as_posix()}"', item)
+                for url, label in build.presentation_slide_links(paper):
+                    path = Path(url)
+                    self.assertEqual(path.parent.as_posix(), 'assets/slides/students')
+                    self.assertNotRegex(path.name, r'LATE|\d{6,}')
+                    if path.suffix == '.pptx':
+                        with ZipFile(build.ROOT / path) as deck:
+                            self.assertIsNone(deck.testzip())
+                    else:
+                        self.assertEqual(path.suffix, '.pdf')
+                        self.assertTrue((build.ROOT / path).read_bytes().startswith(b'%PDF-'))
+                    self.assertIn(label, item)
+                    self.assertIn(f'href="{url}"', item)
+                    self.assertIn(url, build.syllabus_markdown())
                 for name in paper['presenters']:
                     self.assertIn(name, item)
-                self.assertIn(path.as_posix(), build.syllabus_markdown())
         self.assertEqual(found, expected)
 
     def test_unsubmitted_papers_have_no_placeholder(self):
@@ -111,9 +120,13 @@ class PaperPresentationsTest(unittest.TestCase):
             paper = next(p for p in week['papers'] if p['short_title'] == title)
             self.assertEqual(paper['presenters'], names)
             self.assertTrue(set(names) <= roster)
-            if title == 'ReCA':
-                self.assertEqual(paper['presentation_slides'],
-                                 'assets/slides/students/week06-reca-yishan-song-shurui-hu.pdf')
+            downloads = {
+                'ReCA': 'assets/slides/students/week06-reca-yishan-song-shurui-hu.pdf',
+                'CogSys': 'assets/slides/students/week07-cogsys-vayun-gupta.pptx',
+                'Lobster': 'assets/slides/students/week07-lobster-dakshinamoorthy-amirthaganesan.pptx',
+            }
+            if title in downloads:
+                self.assertEqual(paper['presentation_slides'], downloads[title])
             else:
                 self.assertNotIn('presentation_slides', paper)
             row = next(row for row in re.findall(r'<tr>.*?</tr>', glance, re.S)
@@ -124,11 +137,36 @@ class PaperPresentationsTest(unittest.TestCase):
                 self.assertIn(name, line)
                 self.assertIn(name, build.paper_li(paper, 'req'))
                 self.assertIn(name, build.syllabus_markdown())
-            if title == 'ReCA':
-                self.assertIn('Slides (PDF)', line)
+            if title in downloads:
+                self.assertIn('Slides (PDF)' if title == 'ReCA' else 'Slides (PPTX)', line)
                 self.assertIn(paper['presentation_slides'], line)
             else:
                 self.assertNotIn('Slides (', line)
+
+    def test_alphadev_parts_have_distinct_ordered_download_links(self):
+        paper = next(p for w in build.weeks for p in w.get('papers', [])
+                     if p.get('short_title') == 'AlphaDev')
+        urls = [
+            'assets/slides/students/week08-alphadev-part1-baichuan-xiang.pptx',
+            'assets/slides/students/week08-alphadev-part2-zixin-wan.pptx',
+        ]
+        self.assertEqual(paper['presentation_slides'], urls)
+        full_labels = ['Presentation slides, Part 1 (PPTX)', 'Presentation slides, Part 2 (PPTX)']
+        compact_labels = ['Slides, Part 1 (PPTX)', 'Slides, Part 2 (PPTX)']
+        self.assertEqual(build.presentation_slide_links(paper), list(zip(urls, full_labels)))
+        self.assertEqual(build.presentation_slide_links(paper, compact=True),
+                         list(zip(urls, compact_labels)))
+        item = build.paper_li(paper, 'req')
+        glance = build.glance_html()
+        syllabus = build.syllabus_markdown()
+        for url, full, compact in zip(urls, full_labels, compact_labels):
+            self.assertIn(f'href="{url}"', item)
+            self.assertIn(full, item)
+            self.assertIn(f'href="{url}"', glance)
+            self.assertIn(compact, glance)
+            self.assertIn(f'[{full}]({url})', syllabus)
+        for rendered in (item, glance, syllabus):
+            self.assertLess(rendered.index(urls[0]), rendered.index(urls[1]))
 
 
 if __name__ == '__main__':

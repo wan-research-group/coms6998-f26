@@ -223,9 +223,9 @@ weeks:
     type: seminar
     slides: "assets/slides/COMS6998_F26_Week7.pdf"
     papers:
-      - {short_title: "CogSys", title: "CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design", venue: "HPCA 2025", url: "https://research.ibm.com/publications/cogsys-efficient-and-scalable-neurosymbolic-cognition-system-via-algorithm-hardware-co-design", focus: "workload characterization, reconfigurable processing", presenters: ["Vayun Gupta"]}
+      - {short_title: "CogSys", title: "CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design", venue: "HPCA 2025", url: "https://research.ibm.com/publications/cogsys-efficient-and-scalable-neurosymbolic-cognition-system-via-algorithm-hardware-co-design", focus: "workload characterization, reconfigurable processing", presenters: ["Vayun Gupta"], presentation_slides: "assets/slides/students/week07-cogsys-vayun-gupta.pptx"}
       - {short_title: "REASON", title: "REASON: Accelerating Probabilistic Logical Reasoning for Scalable Neuro-Symbolic Intelligence", venue: "HPCA 2026", url: "https://arxiv.org/abs/2601.20784", focus: "unified DAGs, irregular reasoning acceleration", presenters: ["Charlotte Chen"]}
-      - {short_title: "Lobster", title: "Lobster: A GPU-Accelerated Framework for Neurosymbolic Programming", venue: "ASPLOS 2026", url: "https://arxiv.org/abs/2503.21937", focus: "compiling Datalog-based neurosymbolic programs to GPUs", presenters: ["Dakshinamoorthy Amirthaganesan"]}
+      - {short_title: "Lobster", title: "Lobster: A GPU-Accelerated Framework for Neurosymbolic Programming", venue: "ASPLOS 2026", url: "https://arxiv.org/abs/2503.21937", focus: "compiling Datalog-based neurosymbolic programs to GPUs", presenters: ["Dakshinamoorthy Amirthaganesan"], presentation_slides: "assets/slides/students/week07-lobster-dakshinamoorthy-amirthaganesan.pptx"}
     optional:
       - {title: "Scallop: A Language for Neurosymbolic Programming (PLDI 2023)", url: "https://arxiv.org/abs/2304.04812"}
       - {title: "DeepProbLog: Neural Probabilistic Logic Programming (NeurIPS 2018)", url: "https://arxiv.org/abs/1805.10872"}
@@ -242,9 +242,9 @@ weeks:
     research_question: "What should an AI optimizer be free to change, and which properties must remain invariant?"
     type: seminar
     papers:
-      - {short_title: "AlphaDev", title: "Faster Sorting Algorithms Discovered Using Deep Reinforcement Learning (AlphaDev)", venue: "Nature 2023", url: "https://www.nature.com/articles/s41586-023-06004-9", focus: "algorithm discovery, reward design, validation"}
-      - {short_title: "AlphaEvolve", title: "AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery", venue: "DeepMind 2025", url: "https://arxiv.org/abs/2506.13131", focus: "evolutionary LLM code search across scheduling, TPU circuits, kernels"}
-      - {short_title: "KernelBench", title: "KernelBench: Can LLMs Write Efficient GPU Kernels?", venue: "ICML 2025", url: "https://arxiv.org/abs/2502.10517", focus: "benchmark design; discussed with the Sakana AI CUDA Engineer episode"}
+      - {short_title: "AlphaDev", title: "Faster Sorting Algorithms Discovered Using Deep Reinforcement Learning (AlphaDev)", venue: "Nature 2023", url: "https://www.nature.com/articles/s41586-023-06004-9", focus: "algorithm discovery, reward design, validation", presenters: ["Baichuan Xiang", "Zixin (Stan) Wan"], presentation_slides: ["assets/slides/students/week08-alphadev-part1-baichuan-xiang.pptx", "assets/slides/students/week08-alphadev-part2-zixin-wan.pptx"]}
+      - {short_title: "AlphaEvolve", title: "AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery", venue: "DeepMind 2025", url: "https://arxiv.org/abs/2506.13131", focus: "evolutionary LLM code search across scheduling, TPU circuits, kernels", presenters: ["Lei Chi"], presentation_slides: "assets/slides/students/week08-alphaevolve-lei-chi.pptx"}
+      - {short_title: "KernelBench", title: "KernelBench: Can LLMs Write Efficient GPU Kernels?", venue: "ICML 2025", url: "https://arxiv.org/abs/2502.10517", focus: "benchmark design; discussed with the Sakana AI CUDA Engineer episode", presenters: ["Mingkai Li", "Shufeng Chen"], presentation_slides: "assets/slides/students/week08-kernelbench-mingkai-li-shufeng-chen.pptx"}
     optional:
       - {title: "CompilerGym: Robust, Performant Compiler Optimization Environments for AI Research (CGO 2022)", url: "https://arxiv.org/abs/2109.08267"}
       - {title: "Large Language Models for Compiler Optimization (2023)", url: "https://arxiv.org/abs/2309.07062"}
@@ -270,8 +270,8 @@ weeks:
     type: seminar
     guest: {label: "Guest Speaker", name: "Prof. Sagar Karandikar", affiliation: "UC Berkeley", url: "https://sagark.org/"}
     papers:
-      - {short_title: "ArchEval", title: "ArchEval: Measuring AI Agents as Computer Architects", venue: "arXiv 2026", url: "https://arxiv.org/abs/2607.03601", focus: "benchmarking LLM agents on architecture tasks"}
-      - {short_title: "CHIA", title: "CHIA: An Open-Source Framework for Principled, Agentic AI-Driven Hardware/Software Co-Design Research", venue: "arXiv 2026", url: "https://arxiv.org/abs/2606.27350", focus: "composable design loops for agent-driven HW/SW co-design"}
+      - {short_title: "ArchEval", title: "ArchEval: Measuring AI Agents as Computer Architects", venue: "arXiv 2026", url: "https://arxiv.org/abs/2607.03601", focus: "benchmarking LLM agents on architecture tasks", presenters: ["Mikul Saravanan", "Samay Lakhani"]}
+      - {short_title: "CHIA", title: "CHIA: An Open-Source Framework for Principled, Agentic AI-Driven Hardware/Software Co-Design Research", venue: "arXiv 2026", url: "https://arxiv.org/abs/2606.27350", focus: "composable design loops for agent-driven HW/SW co-design", presenters: ["Chi-Yu Chen", "Zihao Fang"]}
     optional:
       - {title: "ArchAgent: Agentic AI-driven Computer Architecture Discovery (arXiv 2026)", url: "https://arxiv.org/pdf/2602.22425"}
       - {title: "ArchGym: An Open-Source Gymnasium for Machine Learning Assisted Architecture Design (ISCA 2023)", url: "https://arxiv.org/abs/2306.08888"}
@@ -290,8 +290,8 @@ weeks:
     type: seminar
     guest: {label: "Guest Speaker", name: "Prof. Vijay Janapa Reddi", affiliation: "Harvard", url: "https://vijay.seas.harvard.edu/"}
     papers:
-      - {short_title: "ArchOrchestra", title: "ArchOrchestra: End-to-End Agentic Accelerator Design", venue: "Forthcoming 2026", url: "https://drive.google.com/file/d/1ItrBZMEXQfmqdBGqyGa-gCUz5ANGgoNj/view?usp=sharing", focus: "end-to-end agentic accelerator design"}
-      - {short_title: "Architecture 2.0 (one chapter)", title: "Architecture 2.0: Principles of AI-Native System and Chip Design", venue: "Online book, 2026", url: "https://arch2.mlsysbook.ai/book/index.html", focus: "Read one chapter."}
+      - {short_title: "ArchOrchestra", title: "ArchOrchestra: End-to-End Agentic Accelerator Design", venue: "Forthcoming 2026", url: "https://drive.google.com/file/d/1ItrBZMEXQfmqdBGqyGa-gCUz5ANGgoNj/view?usp=sharing", focus: "end-to-end agentic accelerator design", presenters: ["Genhao Zhang", "David Yang"]}
+      - {short_title: "Architecture 2.0 (one chapter)", title: "Architecture 2.0: Principles of AI-Native System and Chip Design", venue: "Online book, 2026", url: "https://arch2.mlsysbook.ai/book/index.html", focus: "Read one chapter.", presenters: ["Yiwen Chen", "Charlotte Chen"]}
     optional:
       - {short_title: "PF-LLM", title: "PF-LLM: Large Language Model Hinted Hardware Prefetching (ASPLOS 2026)", venue: "ASPLOS 2026", url: "https://doi.org/10.1145/3779212.3790202", focus: "AI inside the microarchitecture"}
       - {short_title: "Architecture’s AlphaZero Moment", title: "Computer Architecture's AlphaZero Moment: Automated Discovery in an Encircled World (arXiv 2026)", venue: "arXiv 2026", url: "https://arxiv.org/abs/2604.03312", focus: "automated architecture discovery and multi-tier evaluation pipelines"}
@@ -311,9 +311,9 @@ weeks:
     guest: {label: "Guest Speaker", name: "Dr. Zhengqi Gao", affiliation: "Google DeepMind / Anthropic", url: "https://zhengqigao.github.io/"}
     exercise: "In-class critical reading: the RedWood white paper (Architect Labs 2026) audited with the evidence-centered checklist"
     papers:
-      - {short_title: "AlphaChip", title: "A Graph Placement Methodology for Fast Chip Design (AlphaChip)", venue: "Nature 2021 (+2024 addendum)", url: "https://www.nature.com/articles/s41586-021-03544-w", focus: "reinforcement learning for chip placement; co-led by a pair", co_led: true}
-      - {short_title: "ChipNeMo", title: "ChipNeMo: Domain-Adapted LLMs for Chip Design", venue: "NVIDIA 2024", url: "https://arxiv.org/abs/2311.00176", focus: "domain adaptation, retrieval, EDA scripts"}
-      - {short_title: "Comprehensive Verilog Design Problems", title: "Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification", venue: "arXiv 2025", url: "https://arxiv.org/abs/2506.14074", focus: "RTL benchmarks and their limitations"}
+      - {short_title: "AlphaChip", title: "A Graph Placement Methodology for Fast Chip Design (AlphaChip)", venue: "Nature 2021 (+2024 addendum)", url: "https://www.nature.com/articles/s41586-021-03544-w", focus: "reinforcement learning for chip placement; co-led by a pair", co_led: true, presenters: ["Alexander Gonzalez", "Stephen Ogunmwonyi"]}
+      - {short_title: "ChipNeMo", title: "ChipNeMo: Domain-Adapted LLMs for Chip Design", venue: "NVIDIA 2024", url: "https://arxiv.org/abs/2311.00176", focus: "domain adaptation, retrieval, EDA scripts", presenters: ["Mingyuan Zheng", "Lingyi He"]}
+      - {short_title: "Comprehensive Verilog Design Problems", title: "Comprehensive Verilog Design Problems: A Next-Generation Benchmark Dataset for Evaluating Large Language Models and Agents on RTL Design and Verification", venue: "arXiv 2025", url: "https://arxiv.org/abs/2506.14074", focus: "RTL benchmarks and their limitations", presenters: ["Shawn Hans Kathuria", "Lene Gabriels"]}
     optional:
       - {title: "AssertLLM: Generating and Evaluating Hardware Verification Assertions from Design Specifications via Multi-LLMs (2024)", url: "https://arxiv.org/abs/2402.00386"}
       - {title: "Using LLMs to Facilitate Formal Verification of RTL (2023)", url: "https://arxiv.org/abs/2309.09437"}

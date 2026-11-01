@@ -656,7 +656,31 @@ def short_deadlines_html(w: dict) -> str:
 
 
 def presentation_format(paper) -> str:
-    return pathlib.Path(paper["presentation_slides"]).suffix.lstrip(".").upper()
+    slides = paper["presentation_slides"]
+    url = slides if isinstance(slides, str) else slides[0]
+    return pathlib.Path(url).suffix.lstrip(".").upper()
+
+
+def presentation_slide_links(paper, compact=False) -> list[tuple[str, str]]:
+    """Label a single slide download or the ordered parts of a presentation."""
+    slides = paper.get("presentation_slides") or []
+    urls = [slides] if isinstance(slides, str) else slides
+    prefix = "Slides" if compact else "Presentation slides"
+    links = []
+    for i, url in enumerate(urls, 1):
+        part = f", Part {i}" if len(urls) > 1 else ""
+        file_format = pathlib.Path(url).suffix.lstrip(".").upper()
+        links.append((url, f"{prefix}{part} ({file_format})"))
+    return links
+
+
+def presentation_links_html(paper, compact=False) -> str:
+    names = esc(", ".join(paper.get("presenters", [])))
+    return " · ".join(
+        f'<a href="{esc(url)}" '
+        f'aria-label="{esc(paper["title"])}: {esc(label)} by {names}">{esc(label)}</a>'
+        for url, label in presentation_slide_links(paper, compact=compact)
+    )
 
 
 def glance_html() -> str:
@@ -702,11 +726,7 @@ def glance_html() -> str:
                 names = esc(", ".join(paper["presenters"]))
                 reading_link += f'<span class="glance-presenters">: {names}'
                 if paper.get("presentation_slides"):
-                    reading_link += (
-                        f' · <a href="{esc(paper["presentation_slides"])}" '
-                        f'aria-label="{esc(paper["title"])}: presentation slides ({presentation_format(paper)}) by {names}">'
-                        f'Slides ({presentation_format(paper)})</a>'
-                    )
+                    reading_link += ' · ' + presentation_links_html(paper, compact=True)
                 reading_link += '</span>'
             reading_links.append(f'<span class="glance-reading">{reading_link}</span>' if has_presentations else reading_link)
         reading_note = (
@@ -775,11 +795,7 @@ def paper_li(p: dict, kind: str) -> str:
         presenter_label = "Presenter" if len(p["presenters"]) == 1 else "Presenters"
         presentation = f'<p class="paper-presentation"><span>{presenter_label}: {names}</span>'
         if p.get("presentation_slides"):
-            presentation += (
-                f' · <a href="{esc(p["presentation_slides"])}" '
-                f'aria-label="{esc(p["title"])}: presentation slides ({presentation_format(p)}) by {names}">'
-                f'Presentation slides ({presentation_format(p)})</a>'
-            )
+            presentation += ' · ' + presentation_links_html(p)
         presentation += '</p>'
     return f'<li class="{kind}"><div class="p-head">{" ".join(bits)}</div>{focus}{presentation}</li>'
 
@@ -1543,8 +1559,9 @@ def syllabus_markdown() -> str:
                     names = ", ".join(paper["presenters"])
                     presentation = f"  - Presenters: {names}"
                     if paper.get("presentation_slides"):
-                        label = f"Presentation slides ({presentation_format(paper)})"
-                        presentation += f"; {md_link(label, paper['presentation_slides'])}"
+                        presentation += '; ' + '; '.join(
+                            md_link(label, url) for url, label in presentation_slide_links(paper)
+                        )
                     lines.append(presentation)
         if week.get("guest_readings"):
             lines.extend(["", "**Guest lecture readings**", ""])
