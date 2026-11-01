@@ -497,7 +497,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Research question of the week:** Which uncertainty is most worth resolving before investing further in a research direction?
 
-- [Presentation order & Q&A assignments](https://docs.google.com/spreadsheets/d/1Onq9G_wzRuuEnGHdQXAT3Vg-At6H93aN8mkit25Xwoo/edit?usp=sharing)
+- [Presentation order](https://docs.google.com/spreadsheets/d/1Onq9G_wzRuuEnGHdQXAT3Vg-At6H93aN8mkit25Xwoo/edit?usp=sharing)
 - **Format note:** Present your current prototype and preliminary results on Nov 6, then incorporate class feedback into your P2 submission due Nov 9. No mini-lecture or assigned papers.
 
 **Deadlines**

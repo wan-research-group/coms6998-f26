@@ -470,8 +470,8 @@ def presentation_order_html(week: dict) -> str:
         return ""
     return (
         f'<p class="week-materials"><a href="{esc(url)}" target="_blank" '
-        f'rel="noopener" aria-label="Week {week["week"]}: Presentation order and Q&amp;A assignments">'
-        'Presentation order &amp; Q&amp;A assignments</a></p>'
+        f'rel="noopener" aria-label="Week {week["week"]}: Presentation order">'
+        'Presentation order</a></p>'
     )
 
 
@@ -1517,7 +1517,7 @@ def syllabus_markdown() -> str:
             note = ' ' + week['slides_note'] if week.get('slides_note') else ''
             lines.append(f"- **Lecture slides:** {md_link(label, week['slides'])}{note}")
         if week.get("presentation_order_url"):
-            lines.append(f"- {md_link('Presentation order & Q&A assignments', week['presentation_order_url'])}")
+            lines.append(f"- {md_link('Presentation order', week['presentation_order_url'])}")
         if week.get("case_study"):
             lines.append(f"- **Mini-lecture case study:** {week['case_study']}.")
         if week.get("exercise"):
