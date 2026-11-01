@@ -93,7 +93,14 @@
         break;
       }
     }
-    if (selectedDeadline) selectedDeadline.hidden = false;
+    if (selectedDeadline) {
+      var deadlineWeek = selectedDeadline.getAttribute("data-week");
+      deadlineItems.forEach(function (item) {
+        if (item.getAttribute("data-week") === deadlineWeek && new Date(item.getAttribute("data-due")) >= nowMoment) {
+          item.hidden = false;
+        }
+      });
+    }
     var noDeadline = document.getElementById("now-no-deadline");
     if (noDeadline) noDeadline.hidden = !!selectedDeadline;
   }

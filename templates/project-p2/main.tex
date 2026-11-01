@@ -1,0 +1,67 @@
+% COMS 6998, Fall 2026 -- P2: Prototype & Pilot Results
+% Based on the course proposal and P1 templates and the official ISCA 2026 IEEE class.
+% Overleaf: upload the ZIP, select main.tex, and use pdfLaTeX.
+% Local: latexmk -pdf main.tex
+%
+% Replace the guidance and bracketed fields with your project content.
+% Write two pages, excluding references; retain the supplied formatting.
+% Optional bibliography instructions appear at the end of this file.
+
+\documentclass[conference,10pt,letterpaper]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{flushend}
+\usepackage[hyphens]{url}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\field}[1]{\textit{[#1]}}
+
+\title{\field{Project Title}}
+\author{\IEEEauthorblockN{\field{Student 1 (UNI)}, \field{Student 2 (UNI)}, \field{Student 3 (UNI)}}
+\IEEEauthorblockA{COMS 6998: AI-Native Computing $\mid$ Fall 2026\\
+P2: Prototype \& Pilot Results $\mid$ Due November 9, 2026, 11:59 PM ET}}
+
+\begin{document}
+\maketitle
+\thispagestyle{plain}
+\pagestyle{plain}
+
+\noindent\textbf{Format.} Write \textbf{two pages}, excluding references.
+Figures and tables count toward the two pages.
+Use the four sections below and replace the guidance and bracketed fields
+with your project content.
+
+\smallskip
+\noindent\textbf{Submission.} Submit this report as a PDF.
+
+\section{Project Goal and Updates}
+Briefly state your project goal and the research problem it addresses.
+Summarize any updates to your scope or direction since Milestone~1 and
+explain the reasons for these changes.
+
+\section{Method Overview}
+Briefly describe your current approach, its main components, and how they
+work together. Explain your key design choices and how they address the
+research problem. A diagram can help illustrate your method.
+
+\section{Prototype and Pilot Results}
+Describe your current prototype and what runs end to end.
+Summarize implementation progress and any components still under development.
+Include at least one pilot comparison figure, stating the workload,
+baseline, metric, and key configuration. Explain what the results suggest
+and what you learned.
+
+\section{Next Steps}
+Outline your next steps toward \textbf{Milestone~3 on Nov~23}.
+Identify the main remaining risk and how you plan to investigate it.
+State the comparisons and experiments you aim to complete.
+
+% Optional references: add your sources to references.bib, cite them in the
+% text using \cite{your_key}, and uncomment the two lines below.
+% \bibliographystyle{IEEEtran}
+% \bibliography{references}
+
+\end{document}

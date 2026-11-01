@@ -5,7 +5,7 @@
 
 **Columbia University | Department of Computer Science**  
 Instructor: Prof. Zishen Wan · Fridays 10:10 AM - 12:00 PM · MUDD Building 825  
-Generated from the canonical course website on Sunday, October 18, 2026.
+Generated from the canonical course website on Sunday, November 1, 2026.
 
 > **Canonical-source notice.** This syllabus is generated from the same source as the course website. The live website and Canvas announcements govern later schedule or logistics updates.
 
@@ -128,7 +128,7 @@ The project is the center of the course: a carefully scoped research effort that
 | Oct 5 | Project proposal | State the research question, closest work, and testable hypothesis.<br>Specify baselines, metrics, resource needs, and team responsibilities.<br>[LaTeX template (ZIP)](assets/templates/coms6998-project-proposal.zip) · [PDF preview](assets/templates/coms6998-project-proposal.pdf) |
 | Oct 26 | P1 - Exploration & progress | Submit a two-page PDF report, including figures and tables and excluding references.<br>State your project goal and research problem, why it is important and challenging, and any updates since the proposal.<br>Summarize your exploration, key findings, implementation and infrastructure progress, and next steps for the midterm and Milestone 2.<br>[LaTeX template (ZIP)](assets/templates/coms6998-project-p1.zip) · [PDF preview](assets/templates/coms6998-project-p1.pdf) |
 | Nov 6 | Midterm - Midterm presentation (in class) | Present the question, approach, baseline, current prototype, and preliminary results.<br>Gather feedback to incorporate into the Nov 9 P2 submission. |
-| Nov 9 | P2 - Prototype & pilot results | Run a minimal end-to-end prototype.<br>Include one pilot comparison figure, the main remaining risk, and a response to midterm feedback. |
+| Nov 9 | P2 - Prototype & pilot results | Submit a two-page PDF report, including figures and tables and excluding references.<br>Briefly describe your method and current end-to-end prototype.<br>Include one pilot comparison figure, explain your findings, and outline next steps and the main remaining risk.<br>[LaTeX template (ZIP)](assets/templates/coms6998-project-p2.zip) · [PDF preview](assets/templates/coms6998-project-p2.pdf) |
 | Nov 23 | P3 - Evaluation plan & initial results | Fix the workloads, metrics, baselines, and experiment budget.<br>Submit initial comparisons and the planned ablations. |
 | Dec 7 | P4 - Main results & ablations | Submit main results, an ablation, and a failure or boundary case.<br>Include repeated measurements or uncertainty where relevant. |
 | Dec 11 | Poster - Final poster presentation (in class) | Upload the poster by Dec 10.<br>Present your project in class on Dec 11. |
@@ -497,12 +497,13 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Research question of the week:** Which uncertainty is most worth resolving before investing further in a research direction?
 
+- [Presentation order & Q&A assignments](https://docs.google.com/spreadsheets/d/1Onq9G_wzRuuEnGHdQXAT3Vg-At6H93aN8mkit25Xwoo/edit?usp=sharing)
 - **Format note:** Present your current prototype and preliminary results on Nov 6, then incorporate class feedback into your P2 submission due Nov 9. No mini-lecture or assigned papers.
 
 **Deadlines**
 
 - Nov 5, 11:59 PM - midterm slides
-- Nov 9, 11:59 PM - P2 prototype & pilot results
+- Nov 9, 11:59 PM - P2 prototype & pilot results ([LaTeX template (ZIP)](assets/templates/coms6998-project-p2.zip))
 
 ### Week 10 · Friday, November 13, 2026
 

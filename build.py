@@ -464,6 +464,17 @@ def slides_html(week: dict) -> str:
     )
 
 
+def presentation_order_html(week: dict) -> str:
+    url = week.get("presentation_order_url")
+    if not url:
+        return ""
+    return (
+        f'<p class="week-materials"><a href="{esc(url)}" target="_blank" '
+        f'rel="noopener" aria-label="Week {week["week"]}: Presentation order and Q&amp;A assignments">'
+        'Presentation order &amp; Q&amp;A assignments</a></p>'
+    )
+
+
 def dated_deadlines() -> list[dict]:
     """Return display deadlines with machine-readable local timestamps."""
     pattern = re.compile(
@@ -483,7 +494,7 @@ def dated_deadlines() -> list[dict]:
             display = match.group("date")
             if match.group("time"):
                 display += f', {match.group("time")}'
-            records.append({"due": due, "display": display, "label": match.group("label"),
+            records.append({"due": due, "week": week["week"], "display": display, "label": match.group("label"),
                             "url": deadline_url(week, raw),
                             "label_html": deadline_html(week, raw, short=True)})
     return sorted(records, key=lambda item: item["due"])
@@ -528,6 +539,7 @@ def now_html() -> str:
   <p class="now-label"><span class="now-state">Next class</span> · Week {week['week']:02d} · <time datetime="{week['date'].isoformat()}">{esc(fmt_short(week['date']))}</time></p>
   <h3><a href="schedule.html#week-{week['week']}">{esc(week['title'])}</a></h3>
   {slides_html(week)}
+  {presentation_order_html(week)}
   {guest_note}
   {research_question_html(week)}
   <p class="now-subhead">Required reading</p>
@@ -540,9 +552,10 @@ def now_html() -> str:
     visible_deadline = next((item for item in deadlines if item["due"] >= now), None)
     deadline_items = []
     for item in deadlines:
-        hidden = "" if item is visible_deadline else " hidden"
+        visible = visible_deadline and item["week"] == visible_deadline["week"] and item["due"] >= now
+        hidden = "" if visible else " hidden"
         deadline_items.append(
-            f"""<div class="now-deadline-item" data-due="{item['due'].isoformat()}"{hidden}>
+            f"""<div class="now-deadline-item" data-due="{item['due'].isoformat()}" data-week="{item['week']}"{hidden}>
   <time datetime="{item['due'].isoformat()}">{esc(item['display'])}</time>
   <p>{item['label_html']}</p>
 </div>"""
@@ -706,7 +719,7 @@ def glance_html() -> str:
             )
         rows.append(
             f'<tr><td>{w["week"]}</td><td>{esc(fmt_short(w["date"]))}</td>'
-            f'<td>{dot}<a href="schedule.html#week-{w["week"]}">{esc(w["title"])}</a>{slides_html(w)}{guest_note}{reading_note}</td>'
+            f'<td>{dot}<a href="schedule.html#week-{w["week"]}">{esc(w["title"])}</a>{slides_html(w)}{presentation_order_html(w)}{guest_note}{reading_note}</td>'
             f'<td class="g-dl">{dl or "-"}</td></tr>'
         )
     return f"""<section class="section" id="glance" aria-labelledby="glance-h">
@@ -802,6 +815,8 @@ def week_article(w: dict) -> str:
             f'<h2 class="week-title">{esc(w["title"])}</h2>']
     if w.get("slides"):
         body.append(slides_html(w))
+    if w.get("presentation_order_url"):
+        body.append(presentation_order_html(w))
 
     if w.get("guest"):
         body.append(f'<p class="week-note"><strong>Guest lecture:</strong> {guest_html(w["guest"])}</p>')
@@ -1501,6 +1516,8 @@ def syllabus_markdown() -> str:
             label = week.get("slides_label", 'Week ' + str(week['week']) + ' slides (PDF)')
             note = ' ' + week['slides_note'] if week.get('slides_note') else ''
             lines.append(f"- **Lecture slides:** {md_link(label, week['slides'])}{note}")
+        if week.get("presentation_order_url"):
+            lines.append(f"- {md_link('Presentation order & Q&A assignments', week['presentation_order_url'])}")
         if week.get("case_study"):
             lines.append(f"- **Mini-lecture case study:** {week['case_study']}.")
         if week.get("exercise"):

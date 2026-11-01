@@ -51,7 +51,10 @@ milestones:
   - date: 2026-11-09
     id: P2
     name: "Prototype & pilot results"
-    checklist: ["Run a minimal end-to-end prototype.", "Include one pilot comparison figure, the main remaining risk, and a response to midterm feedback."]
+    checklist: ["Submit a two-page PDF report, including figures and tables and excluding references.", "Briefly describe your method and current end-to-end prototype.", "Include one pilot comparison figure, explain your findings, and outline next steps and the main remaining risk."]
+    template_url: "assets/templates/coms6998-project-p2.zip"
+    template_label: "LaTeX template (ZIP)"
+    template_preview_url: "assets/templates/coms6998-project-p2.pdf"
   - date: 2026-11-23
     id: P3
     name: "Evaluation plan & initial results"
@@ -254,7 +257,10 @@ weeks:
     title: "Midterm Project Presentations"
     research_question: "Which uncertainty is most worth resolving before investing further in a research direction?"
     type: midterm
+    presentation_order_url: "https://docs.google.com/spreadsheets/d/1Onq9G_wzRuuEnGHdQXAT3Vg-At6H93aN8mkit25Xwoo/edit?usp=sharing"
     deadlines: ["Nov 5, 11:59 PM - midterm slides", "Nov 9, 11:59 PM - P2 prototype & pilot results"]
+    deadline_templates:
+      "P2 prototype & pilot results": "assets/templates/coms6998-project-p2.zip"
 
   - week: 10
     date: 2026-11-13

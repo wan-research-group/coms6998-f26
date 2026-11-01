@@ -32,6 +32,7 @@ Fields a week entry understands:
 | `slides:` | Optional lecture PDF URL; shown in Now, the home-page schedule, full Schedule, and syllabus. Store local slides under `assets/slides/`. Name guest lecture files `weekNN-guest-firstname-lastname.pdf` (two-digit week, lowercase, hyphens; preserve the original file extension), e.g. `week03-guest-jovan-stojkovic.pdf`. |
 | `papers[].presenters`, `papers[].presentation_slides` | Student presenter names and the corresponding paper's PDF or PPTX download; shown with that required reading in the home-page schedule, Schedule, Papers, and syllabus. Store unchanged decks under `assets/slides/students/`, using descriptive filenames without submission IDs or grading markers. |
 | `slides_label`, `slides_note` | Optional custom link label and access note. For restricted slides, link directly to CourseWorks and do not copy the file into public assets. |
+| `presentation_order_url` | Optional presentation schedule and Q&A assignment URL; shown in Now, the home-page schedule, Schedule, and syllabus. |
 | `guest_readings` | Papers covered by the guest lecture (`title`, `venue`, `url`), listed separately from required and optional readings in Schedule, Papers, and syllabus, with a link from the homepage schedule. |
 | `case_study:`, `exercise:` | Extra mini-lecture lines |
 | `deadlines:` | List of strings, rendered as highlighted chips. The home-page table shows the part after the "-" |
@@ -60,11 +61,13 @@ When a template is ready, add `template_url` to that milestone; its link appears
 in both the project page and syllabus. Optional `template_label` and
 `template_preview_url` provide a descriptive download label and a PDF preview.
 No placeholder links are shown.
-Editable sources are in `templates/project-proposal/` and `templates/project-p1/`;
+Editable sources are in `templates/project-proposal/`, `templates/project-p1/`,
+and `templates/project-p2/`;
 published ZIP and PDF copies are in `assets/templates/`. After editing the sources,
 rebuild both copies and verify that the ZIP matches the source files before publishing.
 P1-P4 require two-page progress reports, including figures and tables and excluding
 references. P1 focuses on exploration, project updates, and implementation progress.
+P2 focuses on the method, prototype, a pilot comparison, and next steps.
 Organized code and reproduction instructions are submitted with the final report.
 The project proposal (P0) and P1-P4 are due on Mondays at 11:59 PM ET;
 presentation materials and the final submission follow their listed dates.
@@ -72,6 +75,8 @@ The December 11 class is the final poster presentation; the final paper and
 artifact are due December 18.
 Keep milestone dates and the corresponding weekly `deadlines` aligned. The
 home-page table explicitly shows due dates that differ from the Friday class date.
+The Now deadline card shows all unexpired deadlines belonging to the same week
+as the nearest upcoming deadline; expired items disappear automatically.
 
 **Teaching assistants**: edit `course.teaching_assistants` in `data/schedule.yaml`
 with each TA's `name` and `email`. They appear below the instructor information on
