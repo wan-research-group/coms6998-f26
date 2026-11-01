@@ -221,6 +221,7 @@ weeks:
     title: "Accelerating Neuro-Symbolic and Compositional AI"
     research_question: "How should computing abstractions change when intelligence combines learning, search, and symbolic reasoning?"
     type: seminar
+    slides: "assets/slides/COMS6998_F26_Week7.pdf"
     papers:
       - {short_title: "CogSys", title: "CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design", venue: "HPCA 2025", url: "https://research.ibm.com/publications/cogsys-efficient-and-scalable-neurosymbolic-cognition-system-via-algorithm-hardware-co-design", focus: "workload characterization, reconfigurable processing", presenters: ["Vayun Gupta"]}
       - {short_title: "REASON", title: "REASON: Accelerating Probabilistic Logical Reasoning for Scalable Neuro-Symbolic Intelligence", venue: "HPCA 2026", url: "https://arxiv.org/abs/2601.20784", focus: "unified DAGs, irregular reasoning acceleration", presenters: ["Charlotte Chen"]}

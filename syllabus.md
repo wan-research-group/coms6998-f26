@@ -449,6 +449,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Research question of the week:** How should computing abstractions change when intelligence combines learning, search, and symbolic reasoning?
 
+- **Lecture slides:** [Week 7 slides (PDF)](assets/slides/COMS6998_F26_Week7.pdf)
 
 **Student-led papers**
 
