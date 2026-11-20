@@ -1,0 +1,84 @@
+% COMS 6998, Fall 2026 -- P3: Evaluation Plan & Initial Results
+% Based on the course proposal, P1, and P2 templates and the official ISCA 2026 IEEE class.
+% Overleaf: upload the ZIP, select main.tex, and use pdfLaTeX.
+% Local: latexmk -pdf main.tex
+%
+% Replace the guidance and bracketed fields with your project content.
+% Write two pages, excluding references; retain the supplied formatting.
+% Optional bibliography instructions appear at the end of this file.
+
+\documentclass[conference,10pt,letterpaper]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{flushend}
+\usepackage[hyphens]{url}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\field}[1]{\textit{[#1]}}
+
+\title{\field{Project Title}}
+\author{\IEEEauthorblockN{\field{Student 1 (UNI)}, \field{Student 2 (UNI)}, \field{Student 3 (UNI)}}
+\IEEEauthorblockA{COMS 6998: AI-Native Computing $\mid$ Fall 2026\\
+P3: Evaluation Plan \& Initial Results $\mid$ Due November 25, 2026, 11:59 PM ET}}
+
+\begin{document}
+\maketitle
+\thispagestyle{plain}
+\pagestyle{plain}
+
+\noindent\textbf{Format.} Write \textbf{two pages}, excluding references.
+Figures and tables count toward the two pages.
+Use the four sections below and replace the guidance and bracketed fields
+with your project content.
+
+\smallskip
+\noindent\textbf{Submission.} Submit this report as a PDF.
+
+\section{Project Goal and Updates}
+Briefly state your project goal, the research question, and the main
+claim you intend to test. Summarize any updates to your scope or direction
+since Milestone~2, including changes made in response to midterm and P2
+feedback, and explain the reasons for these changes.
+
+\section{Evaluation Setup}
+Describe the evaluation setup you will use for your main results and
+briefly justify your choices. Depending on your project, this may include:
+\begin{itemize}
+\item \textbf{Workloads:} the workloads, datasets, models, or design tasks
+you evaluate on, including at least one held-out workload, configuration,
+or system scale.
+\item \textbf{Baselines:} at least two meaningful baselines, with a
+classical or non-agentic baseline where applicable, and what each
+represents.
+\item \textbf{Metrics:} task quality or success, reported together with
+the relevant systems metrics.
+\item \textbf{Platform:} the hardware, simulators, models, and tools you
+use.
+\end{itemize}
+Organize this section in the way that best fits your project, for example
+as paragraphs, a list, or a table.
+
+\section{Initial Results}
+Present initial comparisons between your method and the baselines on the
+setup above. Include at least one figure or table, stating the workload,
+baselines, metrics, configuration, and number of runs. Explain what the
+results suggest, whether they support your intended claim so far, and any
+results that differ from your expectations.
+
+\section{Planned Ablations and Next Steps}
+List the ablations or controlled interventions you plan to run. For each,
+state the component you will remove or vary, the part of your claim it
+tests, and the outcome you expect. Identify a failure or boundary case
+you plan to study. Outline your plan for \textbf{Milestone~4 on Dec~7}:
+main results, at least one ablation, a failure or boundary case, and
+repeated measurements or uncertainty where relevant.
+
+% Optional references: add your sources to references.bib, cite them in the
+% text using \cite{your_key}, and uncomment the two lines below.
+% \bibliographystyle{IEEEtran}
+% \bibliography{references}
+
+\end{document}

@@ -13,7 +13,7 @@ class ProjectTimelineTest(unittest.TestCase):
             'P1': dt.date(2026, 10, 26),
             'Midterm': dt.date(2026, 11, 6),
             'P2': dt.date(2026, 11, 9),
-            'P3': dt.date(2026, 11, 23),
+            'P3': dt.date(2026, 11, 25),
             'P4': dt.date(2026, 12, 7),
             'Poster': dt.date(2026, 12, 11),
             'Final': dt.date(2026, 12, 18),

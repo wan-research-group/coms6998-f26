@@ -144,7 +144,8 @@ PROJECT_TRACKS = [
 
 PROJECT_DEADLINE_POLICY = (
     "All written deliverables are due at 11:59 PM ET. The project proposal (P0) and P1-P4 "
-    "are due on Mondays after the corresponding Friday class. Presentation materials remain "
+    "are due on Mondays after the corresponding Friday class, except P3, which is due "
+    "Wednesday, Nov 25, before the Thanksgiving break. Presentation materials remain "
     "due before class; the final submission follows its listed date. Check-ins P1-P4 "
     "are pacing devices, graded on completeness. P1-P4 are two-page progress reports (including "
     "figures and tables, excluding references) that build on prior work and reflect updates to "

@@ -67,7 +67,7 @@ function nowHarness(moment) {
     {id: 'p1', due: '2026-10-26T23:59:00-04:00', week: '7'},
     {id: 'midterm-slides', due: '2026-11-05T23:59:00-05:00', week: '9'},
     {id: 'p2', due: '2026-11-09T23:59:00-05:00', week: '9'},
-    {id: 'p3', due: '2026-11-23T23:59:00-05:00', week: '11'},
+    {id: 'p3', due: '2026-11-25T23:59:00-05:00', week: '11'},
     {id: 'final', due: '2026-12-18T23:59:00-05:00', week: '13'},
   ].map(record => ({
     ...record,

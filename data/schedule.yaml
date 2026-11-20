@@ -55,10 +55,13 @@ milestones:
     template_url: "assets/templates/coms6998-project-p2.zip"
     template_label: "LaTeX template (ZIP)"
     template_preview_url: "assets/templates/coms6998-project-p2.pdf"
-  - date: 2026-11-23
+  - date: 2026-11-25
     id: P3
     name: "Evaluation plan & initial results"
-    checklist: ["Fix the workloads, metrics, baselines, and experiment budget.", "Submit initial comparisons and the planned ablations."]
+    checklist: ["Submit a two-page PDF report, including figures and tables and excluding references.", "Fix the workloads, held-out condition, baselines, and metrics.", "Submit initial comparisons against the baselines, the planned ablations, and a failure or boundary case to study."]
+    template_url: "assets/templates/coms6998-project-p3.zip"
+    template_label: "LaTeX template (ZIP)"
+    template_preview_url: "assets/templates/coms6998-project-p3.pdf"
   - date: 2026-12-07
     id: P4
     name: "Main results & ablations"
@@ -300,7 +303,9 @@ weeks:
       - {title: "LLM-DSE: Searching Accelerator Parameters with LLM Agents (2025)", url: "https://arxiv.org/abs/2505.12188"}
       - {title: "FireSim: FPGA-Accelerated Cycle-Exact Scale-Out System Simulation in the Public Cloud (ISCA 2018)", url: "https://fires.im/"}
       - {title: "Chipyard: Integrated Design, Simulation, and Implementation Framework for Custom SoCs (IEEE Micro 2020)", url: "https://github.com/ucb-bar/chipyard"}
-    deadlines: ["Nov 23, 11:59 PM - P3 evaluation plan & initial results"]
+    deadlines: ["Nov 25, 11:59 PM - P3 evaluation plan & initial results"]
+    deadline_templates:
+      "P3 evaluation plan & initial results": "assets/templates/coms6998-project-p3.zip"
 
   - week: 12
     date: 2026-12-04

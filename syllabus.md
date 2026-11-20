@@ -5,7 +5,7 @@
 
 **Columbia University | Department of Computer Science**  
 Instructor: Prof. Zishen Wan · Fridays 10:10 AM - 12:00 PM · MUDD Building 825  
-Generated from the canonical course website on Sunday, November 1, 2026.
+Generated from the canonical course website on Thursday, November 19, 2026.
 
 > **Canonical-source notice.** This syllabus is generated from the same source as the course website. The live website and Canvas announcements govern later schedule or logistics updates.
 
@@ -129,12 +129,12 @@ The project is the center of the course: a carefully scoped research effort that
 | Oct 26 | P1 - Exploration & progress | Submit a two-page PDF report, including figures and tables and excluding references.<br>State your project goal and research problem, why it is important and challenging, and any updates since the proposal.<br>Summarize your exploration, key findings, implementation and infrastructure progress, and next steps for the midterm and Milestone 2.<br>[LaTeX template (ZIP)](assets/templates/coms6998-project-p1.zip) · [PDF preview](assets/templates/coms6998-project-p1.pdf) |
 | Nov 6 | Midterm - Midterm presentation (in class) | Present the question, approach, baseline, current prototype, and preliminary results.<br>Gather feedback to incorporate into the Nov 9 P2 submission. |
 | Nov 9 | P2 - Prototype & pilot results | Submit a two-page PDF report, including figures and tables and excluding references.<br>Briefly describe your method and current end-to-end prototype.<br>Include one pilot comparison figure, explain your findings, and outline next steps and the main remaining risk.<br>[LaTeX template (ZIP)](assets/templates/coms6998-project-p2.zip) · [PDF preview](assets/templates/coms6998-project-p2.pdf) |
-| Nov 23 | P3 - Evaluation plan & initial results | Fix the workloads, metrics, baselines, and experiment budget.<br>Submit initial comparisons and the planned ablations. |
+| Nov 25 | P3 - Evaluation plan & initial results | Submit a two-page PDF report, including figures and tables and excluding references.<br>Fix the workloads, held-out condition, baselines, and metrics.<br>Submit initial comparisons against the baselines, the planned ablations, and a failure or boundary case to study.<br>[LaTeX template (ZIP)](assets/templates/coms6998-project-p3.zip) · [PDF preview](assets/templates/coms6998-project-p3.pdf) |
 | Dec 7 | P4 - Main results & ablations | Submit main results, an ablation, and a failure or boundary case.<br>Include repeated measurements or uncertainty where relevant. |
 | Dec 11 | Poster - Final poster presentation (in class) | Upload the poster by Dec 10.<br>Present your project in class on Dec 11. |
 | Dec 18 | Final - Final paper & artifact | Submit the final paper, artifact, and figure-generation scripts.<br>Include responses to feedback and individual contributions. |
 
-All written deliverables are due at 11:59 PM ET. The project proposal (P0) and P1-P4 are due on Mondays after the corresponding Friday class. Presentation materials remain due before class; the final submission follows its listed date. Check-ins P1-P4 are pacing devices, graded on completeness. P1-P4 are two-page progress reports (including figures and tables, excluding references) that build on prior work and reflect updates to the project direction. Submit organized code and reproduction instructions with the final report. No course deadline falls on the Thanksgiving holiday.
+All written deliverables are due at 11:59 PM ET. The project proposal (P0) and P1-P4 are due on Mondays after the corresponding Friday class, except P3, which is due Wednesday, Nov 25, before the Thanksgiving break. Presentation materials remain due before class; the final submission follows its listed date. Check-ins P1-P4 are pacing devices, graded on completeness. P1-P4 are two-page progress reports (including figures and tables, excluding references) that build on prior work and reflect updates to the project direction. Submit organized code and reproduction instructions with the final report. No course deadline falls on the Thanksgiving holiday.
 
 ### Final submission
 
@@ -560,7 +560,7 @@ Required readings appear first. Optional readings are listed separately, one pap
 
 **Deadlines**
 
-- Nov 23, 11:59 PM - P3 evaluation plan & initial results
+- Nov 25, 11:59 PM - P3 evaluation plan & initial results ([LaTeX template (ZIP)](assets/templates/coms6998-project-p3.zip))
 
 ### Week 12 · Friday, December 4, 2026
 
